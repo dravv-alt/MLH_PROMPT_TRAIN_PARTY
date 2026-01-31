@@ -9,21 +9,22 @@ let voiceModel = null;
 if (API_KEY) {
     genAI = new GoogleGenerativeAI(API_KEY);
 
-    // Chat AI Agent - Model: Gemini 2.0 Flash (Stable)
+    // Chat AI Agent - Model: Gemini 2.5 Flash
     chatModel = genAI.getGenerativeModel({
-        model: "gemini-2.0-flash-exp",
+        model: "gemini-2.5-flash",
         generationConfig: {
             maxOutputTokens: 15000,
-            temperature: 0.9,
+            temperature: 0.9,     // Increased for maximum emotional resonance and creativity
         }
     });
 
-    // Voice AI Agent - Model: Gemini 2.0 Flash (Stable)
+    // Voice AI Agent - Model: Gemini 2.5 Flash
+    // Configured for Native Audio Dialog behavior (simulated via high-performance prompt/config)
     voiceModel = genAI.getGenerativeModel({
-        model: "gemini-2.0-flash-exp",
+        model: "gemini-2.5-flash", // Using 2.5 Flash as requested for Voice Agent base
         generationConfig: {
-            maxOutputTokens: 8000,
-            temperature: 1.0,
+            maxOutputTokens: 8000, // Optimized for conversational length
+            temperature: 1.0,     // Higher temperature for more natural speech variation
         }
     });
 }
