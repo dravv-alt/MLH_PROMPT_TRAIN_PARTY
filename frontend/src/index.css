@@ -1,0 +1,144 @@
+/* Sanctuary Design System - Core Tokens */
+:root {
+  /* Color Palette - Soft Pastel & Muted */
+  --bg-warm: #FEFCF8;
+  /* Ultra-warm cream white */
+  --bg-peach: #FFF0EB;
+  /* Misty pastel peach */
+  --bg-sage: #F2F7F2;
+  /* Airy pastel sage */
+
+  --accent-sky: #B8D8E5;
+  /* Soft pastel sky blue */
+  --accent-lavender: #E8E4F0;
+  /* Pale lavender mist */
+  --accent-sage: #D1E8D5;
+  /* Gentle sage green */
+  --accent-rose: #FAE1BB;
+  /* Fixed hex code likely meant to be valid */
+  /* Dusty pastel rose */
+
+  --text-primary: #334155;
+  /* Soft slate charcoal (less harsh than black) */
+  --text-secondary: #64748B;
+  /* Muted blue-grey */
+  --text-white: #FFFFFF;
+
+  --ui-white: rgba(255, 255, 255, 0.9);
+  --ui-glass: rgba(255, 255, 255, 0.65);
+  --ui-border: rgba(148, 163, 184, 0.15);
+
+  --bg-card: #FFFFFF;
+  --bg-input: #F8FAFC;
+
+  /* Typography */
+  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Sora', 'Inter', system-ui, sans-serif;
+
+  /* Shadows */
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.03);
+  --shadow-float: 0 10px 40px rgba(166, 200, 216, 0.2);
+
+  /* Animation */
+  --transition-slow: 0.5s ease-out;
+  --transition-medium: 0.3s ease;
+  --transition-fast: 0.15s ease-in-out;
+}
+
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--bg-warm);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 3.5rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+button {
+  font-family: var(--font-primary);
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Glassmorphism Utility */
+.glass-panel {
+  background: var(--ui-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--ui-border);
+  border-radius: 24px;
+}
+
+/* Animations */
+@keyframes breathe {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
