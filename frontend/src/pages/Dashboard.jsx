@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { MessageCircle, PenTool, Wind, BookOpen, AlertCircle, Heart, User, Settings, LogOut, Sun, Moon, Activity, Mic, X, Loader, Zap } from 'lucide-react';
+import { MessageCircle, PenTool, Wind, BookOpen, AlertCircle, Heart, User, Settings, LogOut, Sun, Moon, Activity, Mic, X, Loader, Zap, Coffee } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { sendMessageToGemini } from '../services/gemini';
-import { startContinuousRecognition, speakText, playAudio } from '../services/voice';
+import { startContinuousRecognition, speakTextBackup, playAudio } from '../services/voice';
+import { liveGemini } from '../services/liveGemini';
 import logo from '../assets/logo.png'; // Make sure this path is correct
 
 // --- Components ---
@@ -282,6 +283,31 @@ const PulseCircle = styled(motion.div)`
   }
 `;
 
+const ToneToggle = styled.button`
+  background: ${props => props.$active ? 'rgba(255,255,255,0.2)' : 'transparent'};
+  border: 1px solid ${props => props.$active ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.1)'};
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: white;
+  transition: all 0.2s;
+  
+  &:hover {
+    background: rgba(255,255,255,0.1);
+  }
+`;
+
+const ToneContainer = styled.div`
+  display: flex;
+  gap: 12px;
+  margin-bottom: 2rem;
+`;
+
 export default function Dashboard() {
   const navigate = useNavigate();
   const [selectedMood, setSelectedMood] = useState(() => {
@@ -313,6 +339,7 @@ export default function Dashboard() {
   const [isVoiceMode, setIsVoiceMode] = useState(false);
   const [voiceStatus, setVoiceStatus] = useState('idle'); // idle, listening, processing, speaking
   const [transcript, setTranscript] = useState('');
+  const [chatTone, setChatTone] = useState(() => sessionStorage.getItem('chatTone') || 'calm');
   const stopRef = React.useRef(null); // Function to stop current recognition
   const loopRef = React.useRef(false); // Flag for loop active
 
@@ -322,6 +349,7 @@ export default function Dashboard() {
       loopRef.current = false;
       if (stopRef.current) stopRef.current();
       window.speechSynthesis.cancel();
+      liveGemini.disconnect();
     };
   }, []);
 
@@ -329,8 +357,23 @@ export default function Dashboard() {
     setIsVoiceMode(true);
     setVoiceStatus('listening');
     setTranscript('Listening...');
-    loopRef.current = true;
-    startLoop();
+
+    if (chatTone === 'live') {
+      liveGemini.connect(
+        (textChunk) => { },
+        (err) => {
+          console.error("Live Error", err);
+          setTranscript("Connection Error. Switching to Standard.");
+          setChatTone('calm');
+        }
+      );
+      liveGemini.onAudioData = (data) => {
+        setVoiceStatus('speaking');
+      };
+    } else {
+      loopRef.current = true;
+      startLoop();
+    }
   };
 
   const startLoop = () => {
@@ -340,12 +383,7 @@ export default function Dashboard() {
     const recognition = startContinuousRecognition(
       (interim) => setTranscript(interim), // onInterim
       async (final) => { // onFinal
-        // Stop recognition ref is useless now as it stopped itself
         if (!final.trim()) {
-          // If silence/empty, restart loop? OR just wait? 
-          // Logic: if users starts session they usually speak. 
-          // If silence, maybe ask "Are you there?" or just listen again?
-          // For now, listen again.
           if (loopRef.current) startLoop();
           return;
         }
@@ -355,32 +393,32 @@ export default function Dashboard() {
         setVoiceStatus('processing');
         setTranscript('Thinking...');
 
-        const response = await sendMessageToGemini([], final); // No history for now in dashboard context? Or simple history?
+        const response = await sendMessageToGemini([], final, chatTone, true);
 
         if (!loopRef.current) return;
 
-        setVoiceStatus('speaking');
-        setTranscript(response);
+        // Crisis check
+        if (response.includes('[CRISIS_FLAG]')) {
+          setChatTone('calm');
+        }
 
-        const audioBlob = await speakText(response);
+        const cleanText = response.replace('[CRISIS_FLAG]', '').trim();
+
+        setVoiceStatus('speaking');
+        setTranscript(cleanText);
+
+        const audioBlob = await speakTextBackup(cleanText);
         if (audioBlob) {
           const audio = playAudio(audioBlob);
           audio.onended = () => {
-            // Loop back to listening
             if (loopRef.current) startLoop();
           };
         } else {
-          // Fallback if no audio (browser TTS blocks until done in my helper? No, my helper promise resolves when done)
-          // Check voice.js: wait, my voice.js promise resolves when ONEND fires.
-          // So await speakText(response) works perfect for Browser TTS too.
           if (loopRef.current) startLoop();
         }
       },
       (error) => {
         console.error(error);
-        // setTranscript("I didn't catch that. Tap to try again.");
-        // setVoiceStatus('idle');
-        // Retry on error if loop active? Be careful of infinite loops.
         if (loopRef.current) {
           setTimeout(() => startLoop(), 1000);
         }
@@ -396,6 +434,7 @@ export default function Dashboard() {
     setVoiceStatus('idle');
     if (stopRef.current) stopRef.current();
     window.speechSynthesis.cancel();
+    liveGemini.disconnect();
   };
 
   const moodOptions = [
@@ -515,23 +554,7 @@ export default function Dashboard() {
         ))}
       </GridContainer>
 
-      <InsightBanner
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8 }}
-      >
-        <InsightContent>
-          <div>
-            <Heart size={32} color="#D66D6D" fill="#D66D6D" style={{ opacity: 0.6 }} />
-          </div>
-          <div style={{ textAlign: 'left' }}>
-            <h4 style={{ margin: '0 0 0.5rem', color: '#2D3E50' }}>Weekly Insight</h4>
-            <p style={{ margin: 0, color: '#64748B', fontSize: '0.95rem' }}>
-              You've logged "Great" mood 3 times this week. Morning check-ins seem to correlate with your positive days. Keep it up!
-            </p>
-          </div>
-        </InsightContent>
-      </InsightBanner>
+
 
       <VoiceFab
         whileTap={{ scale: 0.9 }}
@@ -573,9 +596,34 @@ export default function Dashboard() {
                 voiceStatus === 'speaking' ? "Speaking..." : "Tap to Speak"}
           </h2>
 
-          <p style={{ textAlign: 'center', maxWidth: '600px', opacity: 0.8, lineHeight: 1.6 }}>
+          <p style={{ textAlign: 'center', maxWidth: '600px', opacity: 0.8, lineHeight: 1.6, marginBottom: '2rem' }}>
             {transcript}
           </p>
+
+          <ToneContainer>
+            <ToneToggle
+              $active={chatTone === 'calm'}
+              onClick={() => { setChatTone('calm'); sessionStorage.setItem('chatTone', 'calm'); }}
+            >
+              <Coffee size={16} /> Calm Mode
+            </ToneToggle>
+            <ToneToggle
+              $active={chatTone === 'genz'}
+              onClick={() => { setChatTone('genz'); sessionStorage.setItem('chatTone', 'genz'); }}
+            >
+              <Zap size={16} /> Gen-Z Mode
+            </ToneToggle>
+            <ToneToggle
+              $active={chatTone === 'live'}
+              onClick={() => { setChatTone('live'); sessionStorage.setItem('chatTone', 'live'); }}
+            >
+              <Activity size={16} /> Live Mode
+            </ToneToggle>
+          </ToneContainer>
+
+          <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', textAlign: 'center' }}>
+            Changes how the assistant talks — not the kind of support you receive.
+          </span>
 
           {voiceStatus === 'speaking' && (
             <div style={{ display: 'flex', gap: '4px', marginTop: '2rem', height: '20px', alignItems: 'center' }}>

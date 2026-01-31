@@ -65,7 +65,7 @@ export const startContinuousRecognition = (onInterim, onFinal, onError) => {
 const ELEVENLABS_API_KEY = import.meta.env.VITE_ELEVENLABS_API_KEY;
 const VOICE_ID = 'EXAVITQu4vr4xnSDxMaL'; // Rachel - warm, empathetic voice
 
-export const speakText = async (text) => {
+export const speakTextBackup = async (text) => {
     if (!ELEVENLABS_API_KEY) {
         console.error('Missing VITE_ELEVENLABS_API_KEY');
         // Fallback to browser's built-in TTS
@@ -83,10 +83,12 @@ export const speakText = async (text) => {
                 },
                 body: JSON.stringify({
                     text,
-                    model_id: 'eleven_monolingual_v1',
+                    model_id: 'eleven_multilingual_v2', // Enhanced for emotion
                     voice_settings: {
-                        stability: 0.75,
-                        similarity_boost: 0.75
+                        stability: 0.5,       // Lower = more variability/emotion
+                        similarity_boost: 0.8, // Clarity
+                        style: 0.5,           // Exaggeration of style
+                        use_speaker_boost: true
                     }
                 })
             }

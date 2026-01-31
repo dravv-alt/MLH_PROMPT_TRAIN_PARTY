@@ -1,13 +1,40 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Send, Mic, MoreVertical, Phone, ShieldAlert } from 'lucide-react';
+import { ArrowLeft, Send, Mic, MoreVertical, Phone, ShieldAlert, Sparkles } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 import { useNavigate } from 'react-router-dom';
-import { sendMessageToGemini } from '../services/gemini';
-import { startContinuousRecognition, speakText, playAudio } from '../services/voice';
+import { sendMessageToGemini, generateReflection } from '../services/gemini';
+import { startContinuousRecognition, speakTextBackup, playAudio } from '../services/voice';
 import { useAuth } from '../context/AuthContext';
+import { Settings, Zap, Coffee } from 'lucide-react';
 
 // --- Styled Components ---
+
+const ToneToggle = styled.button`
+  background: ${props => props.$active ? 'var(--bg-sage)' : 'transparent'};
+  border: 1px solid ${props => props.$active ? '#CBD5E1' : '#E2E8F0'};
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: ${props => props.$active ? '#2D3E50' : '#64748B'};
+  transition: all 0.2s;
+  
+  &:hover {
+    background: var(--bg-sage);
+  }
+`;
+
+const ToneContainer = styled.div`
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+`;
 
 const ChatContainer = styled.div`
   background: var(--bg-warm);
@@ -106,6 +133,33 @@ const MessageBubble = styled(motion.div)`
   `}
 `;
 
+const ReflectionBubble = styled(motion.div)`
+  align-self: flex-start;
+  background: linear-gradient(135deg, #FFFBEB 0%, #FFF7ED 100%);
+  color: #78350F;
+  padding: 1.5rem;
+  border-radius: 20px;
+  border: 1px solid #FEF3C7;
+  font-size: 1rem;
+  line-height: 1.6;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  margin-bottom: 1rem;
+  width: 90%;
+  position: relative;
+  
+  &::before {
+    content: '✨ Sanctuary Reflection';
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+    color: #B45309;
+    opacity: 0.8;
+  }
+`;
+
 const InputArea = styled.footer`
   position: fixed;
   bottom: 0;
@@ -157,17 +211,39 @@ const SendButton = styled(motion.button)`
   }
 `;
 
-const CrisisBanner = styled(motion.div)`
-  background: #FEF2F2;
-  border: 1px solid #FECACA;
-  padding: 1rem;
-  margin: 0 1.5rem 1rem;
-  border-radius: 12px;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  color: #991B1B;
+const ActionButton = styled(motion.button)`
+  background: white;
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
   font-size: 0.9rem;
+  color: #64748B;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  margin: 0 auto 1rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+  transition: all 0.2s;
+  
+  &:hover {
+    background: #FEF9C3;
+    color: #B45309;
+    border-color: #FCD34D;
+  }
+`;
+
+const CrisisBanner = styled(motion.div)`
+background: #FEF2F2;
+border: 1px solid #FECACA;
+padding: 1rem;
+margin: 0 1.5rem 1rem;
+border - radius: 12px;
+display: flex;
+gap: 1rem;
+align - items: center;
+color: #991B1B;
+font - size: 0.9rem;
 `;
 
 export default function Chat() {
@@ -178,9 +254,11 @@ export default function Chat() {
     { id: 1, text: `Hi ${user?.name || 'there'}. I'm here to listen. How are you feeling right now?`, sender: 'ai' }
   ]);
   const [loading, setLoading] = useState(false);
+  const [reflecting, setReflecting] = useState(false);
   const [showCrisis, setShowCrisis] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
-  // const [isSpeaking, setIsSpeaking] = useState(false); // Removed unused state
+  const [chatTone, setChatTone] = useState(() => sessionStorage.getItem('chatTone') || 'calm');
+  const [showSettings, setShowSettings] = useState(false);
   const messagesEndRef = useRef(null);
   const voiceUsedRef = useRef(false);
   const recognitionRef = useRef(null);
@@ -191,7 +269,71 @@ export default function Chat() {
 
   useEffect(() => {
     scrollToBottom();
+    // Cleanup STT on unmount
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+      window.speechSynthesis.cancel();
+    };
   }, [messages]);
+
+  const handleReflection = async () => {
+    setReflecting(true);
+
+    // 1. Gather Signals (LocalStorage)
+    const journalData = JSON.parse(localStorage.getItem('mlh_journal') || '{}');
+    const journalEntries = Object.values(journalData);
+    const breatheData = JSON.parse(localStorage.getItem('mlh_breathe_stats') || '[]');
+
+    // Calculate simple stats (Last 7 days for better context)
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+    const recentJournal = journalEntries.filter(e => new Date(e.date) >= sevenDaysAgo);
+    const recentBreathe = breatheData.filter(e => new Date(e.date) >= sevenDaysAgo);
+
+    const avgSleep = recentJournal.length > 0
+      ? (recentJournal.reduce((acc, curr) => acc + (Number(curr.sleep) || 0), 0) / recentJournal.length).toFixed(1)
+      : "Not logged";
+
+    const avgStress = recentJournal.length > 0
+      ? (recentJournal.reduce((acc, curr) => acc + (Number(curr.stress) || 0), 0) / recentJournal.length).toFixed(1)
+      : "Not logged";
+
+    const moods = recentJournal.map(e => e.mood).filter(Boolean);
+    const commonMood = moods.length > 0
+      ? moods.sort((a, b) => moods.filter(v => v === a).length - moods.filter(v => v === b).length).pop()
+      : "Not logged";
+
+    const breatheCount = recentBreathe.length;
+    const commonTechnique = recentBreathe.length > 0
+      ? recentBreathe.sort((a, b) => recentBreathe.filter(v => v.technique === a.technique).length - recentBreathe.filter(v => v.technique === b.technique).length).pop()?.technique
+      : "None";
+
+    const summaryData = {
+      metrics: {
+        sleep: avgSleep,
+        stress: avgStress, // 1-5 scale usually
+        mood: commonMood,
+        breathing_sessions: breatheCount,
+        preferred_technique: commonTechnique
+      },
+      journal_content_summary: recentJournal.map(e => e.text).join(" ").slice(0, 800), // First 500 chars of recent logs
+      current_chat_context: messages.slice(-8).map(m => `${m.sender}: ${m.text}`).join("\n") // Last 4 turns of chat with sender info
+    };
+
+    const reflectionText = await generateReflection(summaryData);
+
+    const reflectionMsg = {
+      id: Date.now(),
+      text: reflectionText,
+      sender: 'reflection'
+    };
+
+    setMessages(prev => [...prev, reflectionMsg]);
+    setReflecting(false);
+  };
 
   const handleSend = async (textOverride = null) => {
     const textToSend = textOverride || input;
@@ -201,20 +343,31 @@ export default function Chat() {
     setMessages(prev => [...prev, userMsg]);
     setInput('');
     setLoading(true);
+    scrollToBottom();
+
+    // Crisis detected? Force calm tone
+    const activeTone = showCrisis ? 'calm' : chatTone;
 
     // Call Gemini
-    const responseText = await sendMessageToGemini(
+    const aiResponse = await sendMessageToGemini(
       messages.filter(m => m.id !== 1),
-      textToSend
+      textToSend,
+      activeTone
     );
 
-    // Crisis Check (Simple)
-    if (responseText.includes('[CRISIS_FLAG]') || responseText.toLowerCase().includes('help line') || responseText.toLowerCase().includes('988')) {
+    // Check for crisis in response
+    if (aiResponse.includes('[REDIRECT_SOS]')) {
+      navigate('/emergency');
+      return;
+    }
+
+    if (aiResponse.includes('[CRISIS_FLAG]') || aiResponse.toLowerCase().includes('help line') || aiResponse.toLowerCase().includes('988')) {
       setShowCrisis(true);
+      setChatTone('calm'); // Safety reset
     }
 
     // Clean flag from text
-    const cleanText = responseText.replace('[CRISIS_FLAG]', '').trim();
+    const cleanText = aiResponse.replace('[CRISIS_FLAG]', '').trim();
 
     const aiMsg = { id: Date.now() + 1, text: cleanText, sender: 'ai' };
     setMessages(prev => [...prev, aiMsg]);
@@ -284,7 +437,7 @@ export default function Chat() {
   // Text-to-Speech
   const speakResponse = async (text) => {
     // setIsSpeaking(true);
-    const audioBlob = await speakText(text);
+    const audioBlob = await speakTextBackup(text);
     if (audioBlob) {
       const audio = playAudio(audioBlob);
       // audio.onended = () => setIsSpeaking(false);
@@ -301,10 +454,29 @@ export default function Chat() {
         </IconButton>
         <HeaderTitle>
           <h2>Sanctuary Companion</h2>
-          <p>Online</p>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <p>Online</p>
+            <ToneContainer>
+              <ToneToggle
+                $active={chatTone === 'calm'}
+                onClick={() => { setChatTone('calm'); sessionStorage.setItem('chatTone', 'calm'); }}
+              >
+                <Coffee size={12} /> Calm
+              </ToneToggle>
+              <ToneToggle
+                $active={chatTone === 'genz'}
+                onClick={() => { setChatTone('genz'); sessionStorage.setItem('chatTone', 'genz'); }}
+              >
+                <Zap size={12} /> Gen-Z
+              </ToneToggle>
+            </ToneContainer>
+            <span style={{ fontSize: '0.6rem', color: '#94A3B8', marginTop: '4px' }}>
+              Changes how the assistant talks — not the kind of support you receive.
+            </span>
+          </div>
         </HeaderTitle>
-        <IconButton>
-          <MoreVertical size={24} />
+        <IconButton onClick={handleReflection} disabled={reflecting} title="Reflect on patterns">
+          <Sparkles size={20} color={reflecting ? "#F59E0B" : "#64748B"} />
         </IconButton>
       </Header>
 
@@ -323,15 +495,25 @@ export default function Chat() {
           )}
 
           {messages.map((msg) => (
-            <MessageBubble
-              key={msg.id}
-              sender={msg.sender}
-              initial={{ opacity: 0, y: 10, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              {msg.text}
-            </MessageBubble>
+            msg.sender === 'reflection' ? (
+              <ReflectionBubble
+                key={msg.id}
+                initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+              >
+                <ReactMarkdown>{msg.text}</ReactMarkdown>
+              </ReflectionBubble>
+            ) : (
+              <MessageBubble
+                key={msg.id}
+                sender={msg.sender}
+                initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                <ReactMarkdown>{msg.text}</ReactMarkdown>
+              </MessageBubble>
+            )
           ))}
 
           {loading && (
@@ -358,6 +540,22 @@ export default function Chat() {
         </AnimatePresence>
         <div ref={messagesEndRef} />
       </MessagesArea>
+
+      {!reflecting && (
+        <div style={{ position: 'fixed', bottom: '100px', left: 0, right: 0, display: 'flex', justifyContent: 'center', pointerEvents: 'none', zIndex: 60 }}>
+          <ActionButton
+            onClick={handleReflection}
+            style={{ pointerEvents: 'auto' }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Sparkles size={16} />
+            Show possible connections
+          </ActionButton>
+        </div>
+      )}
 
       <InputArea>
         <IconButton
