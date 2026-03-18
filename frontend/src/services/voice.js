@@ -62,10 +62,43 @@ export const startContinuousRecognition = (onInterim, onFinal, onError) => {
 };
 
 // Text-to-Speech using ElevenLabs
+const ELEVENLABS_API_KEY = import.meta.env.VITE_ELEVENLABS_API_KEY;
+const ELEVENLABS_VOICE_ID = '21m00Tcm4TlvDq8ikWAM'; // Rachel (calm, warm female voice)
+
 export const speakTextBackup = async (text) => {
-    // ElevenLabs completely removed as requested.
-    // Using standard Browser TTS.
-    return triggerBrowserTTS(text);
+    if (!ELEVENLABS_API_KEY) {
+        console.warn('ElevenLabs API key not found. Using standard Browser TTS fallback.');
+        return triggerBrowserTTS(text);
+    }
+    
+    try {
+        const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${ELEVENLABS_VOICE_ID}`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'audio/mpeg',
+                'Content-Type': 'application/json',
+                'xi-api-key': ELEVENLABS_API_KEY
+            },
+            body: JSON.stringify({
+                text: text,
+                model_id: 'eleven_monolingual_v1',
+                voice_settings: {
+                    stability: 0.5,
+                    similarity_boost: 0.75
+                }
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error(`ElevenLabs API error: ${response.status} ${response.statusText}`);
+        }
+        
+        const blob = await response.blob();
+        return blob;
+    } catch (error) {
+        console.error('ElevenLabs TTS failed, falling back to browser TTS:', error);
+        return triggerBrowserTTS(text);
+    }
 };
 
 // Fallback: Browser's built-in Text-to-Speech
