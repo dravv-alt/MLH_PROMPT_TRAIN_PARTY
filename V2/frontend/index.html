@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en" class="h-full scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sanctuary — Monograph & Contemplative Journal</title>
+    <!-- Fonts: Literata (Serif) & Atkinson Hyperlegible Next (Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,300;1,7..72,400&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Material Symbols Outlined -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <!-- Tailwind CSS with custom Sanctuary Design Tokens -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-bright": "#f7faf5",
+              "surface": "#f7faf5",
+              "on-primary": "#ffffff",
+              "surface-container-low": "#f2f4ef",
+              "on-surface": "#191c1a",
+              "outline-variant": "#c1c8c3",
+              "tertiary-container": "#3a483f",
+              "error": "#ba1a1a",
+              "surface-variant": "#e0e3de",
+              "on-secondary": "#ffffff",
+              "primary-fixed": "#c9ead9",
+              "on-tertiary-fixed-variant": "#3c4a41",
+              "on-error": "#ffffff",
+              "inverse-primary": "#adcebe",
+              "on-error-container": "#93000a",
+              "on-tertiary-container": "#a7b6ab",
+              "on-surface-variant": "#424844",
+              "surface-container": "#ecefea",
+              "on-tertiary": "#ffffff",
+              "on-secondary-fixed": "#0c1f17",
+              "surface-container-highest": "#e0e3de",
+              "surface-tint": "#476558",
+              "outline": "#727974",
+              "inverse-on-surface": "#eff2ed",
+              "surface-dim": "#d8dbd6",
+              "primary": "#173429",
+              "secondary-container": "#d2e8da",
+              "primary-container": "#2e4b3f",
+              "on-primary-container": "#9abaab",
+              "tertiary-fixed": "#d7e6da",
+              "secondary": "#4f6358",
+              "on-secondary-container": "#55695e",
+              "tertiary": "#243229",
+              "error-container": "#ffdad6",
+              "background": "#f7faf5",
+              "inverse-surface": "#2d312e",
+              "secondary-fixed-dim": "#b6ccbe",
+              "on-secondary-fixed-variant": "#384b41",
+              "on-tertiary-fixed": "#111e17",
+              "primary-fixed-dim": "#adcebe",
+              "secondary-fixed": "#d2e8da",
+              "on-background": "#191c1a",
+              "tertiary-fixed-dim": "#bbcabe",
+              "on-primary-fixed": "#022016",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-high": "#e6e9e4",
+              "on-primary-fixed-variant": "#304d40",
+              "lichen": "#c4cf5a",
+              "mineral": "#e9ece7",
+              "sand": "#D5DAD2"
+            },
+            fontFamily: {
+              "display-lg": ["Literata", "serif"],
+              "headline-lg": ["Literata", "serif"],
+              "headline-md": ["Literata", "serif"],
+              "headline-sm": ["Literata", "serif"],
+              "body-lg": ["Atkinson Hyperlegible Next", "sans-serif"],
+              "body-md": ["Atkinson Hyperlegible Next", "sans-serif"],
+              "body-sm": ["Atkinson Hyperlegible Next", "sans-serif"],
+              "label-md": ["Atkinson Hyperlegible Next", "sans-serif"],
+              "label-sm": ["Atkinson Hyperlegible Next", "sans-serif"],
+              "serif": ["Literata", "serif"],
+              "sans": ["Atkinson Hyperlegible Next", "sans-serif"]
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      body {
+        background-color: #f7faf5;
+        color: #191c1a;
+        -webkit-font-smoothing: antialiased;
+        font-family: "Atkinson Hyperlegible Next", sans-serif;
+      }
+      .material-symbols-outlined {
+        font-family: 'Material Symbols Outlined';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 20px;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-feature-settings: 'liga';
+        -webkit-font-smoothing: antialiased;
+      }
+      /* Zen sand rake pattern for Cairns view */
+      .zen-sand-pattern {
+        background-color: #E9ECE7;
+        background-image: radial-gradient(#D5DAD2 0.75px, transparent 0.75px), radial-gradient(#D5DAD2 0.75px, #E9ECE7 0.75px);
+        background-size: 32px 32px;
+        background-position: 0 0, 16px 16px;
+      }
+      .stone-hover-transition {
+        transition: transform 0.28s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.28s cubic-bezier(0.2, 0, 0, 1);
+      }
+    </style>
+  </head>
+  <body class="min-h-full flex flex-col font-body-md antialiased selection:bg-secondary-container selection:text-primary">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
