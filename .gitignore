@@ -59,6 +59,10 @@ sanctuary_v2/models/dmrst_parser/
 # Documentation (as per repo configuration)
 *.md
 !README.md
+!docs/SCOPE.md
+!**/evaluation/DEPENDENCY_AND_MODEL_HASHES.md
+!**/evaluation/THRESHOLDS.md
+!**/evaluation/gold/**
 
 # Logs
 npm-debug.log*

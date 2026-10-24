@@ -8,3 +8,4 @@ data/neural-benchmark.json
 submission-output/
 /models/
 .tmp_*
+.pytest_tmp/
