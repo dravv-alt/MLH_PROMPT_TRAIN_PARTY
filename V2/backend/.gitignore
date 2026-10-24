@@ -1,0 +1,10 @@
+data/*.db
+data/.nlp_alias_key
+.testdeps/
+.pytest-nlp-tmp/
+.pytest-neural*/
+data/neural-benchmark.json
+.venv_nlp/
+submission-output/
+/models/
+.tmp_*
