@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,600;0,700;1,400&amp;family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary-fixed": "#111e17", "outline-variant": "#c1c8c3", "secondary-fixed-dim": "#b6ccbe", "primary-fixed-dim": "#adcebe", "surface-container": "#ecefea", "surface-tint": "#476558", "outline": "#727974", "on-secondary-fixed": "#0c1f17", "tertiary-fixed": "#d7e6da", "on-tertiary": "#ffffff", "on-primary-fixed": "#022016", "inverse-on-surface": "#eff2ed", "error-container": "#ffdad6", "secondary-fixed": "#d2e8da", "error": "#ba1a1a", "tertiary-container": "#3a483f", "on-secondary-container": "#55695e", "on-background": "#191c1a", "on-secondary-fixed-variant": "#384b41", "surface-container-high": "#e6e9e4", "on-tertiary-fixed-variant": "#3c4a41", "on-surface-variant": "#424844", "background": "#f7faf5", "surface-variant": "#e0e3de", "surface": "#f7faf5", "on-primary-fixed-variant": "#304d40", "surface-dim": "#d8dbd6", "tertiary-fixed-dim": "#bbcabe", "primary-fixed": "#c9ead9", "surface-container-low": "#f2f4ef", "inverse-surface": "#2d312e", "secondary": "#4f6358", "on-error-container": "#93000a", "on-primary-container": "#9abaab", "tertiary": "#243229", "secondary-container": "#d2e8da", "on-tertiary-container": "#a7b6ab", "surface-container-highest": "#e0e3de", "surface-bright": "#f7faf5", "on-surface": "#191c1a", "on-error": "#ffffff", "primary": "#173429", "surface-container-lowest": "#ffffff", "on-primary": "#ffffff", "primary-container": "#2e4b3f", "inverse-primary": "#adcebe", "on-secondary": "#ffffff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-lg": "2.25rem", "margin-lg": "5rem", "margin-md": "3rem", "space-sm": "0.75rem", "margin": "1.5rem", "gutter": "1.5rem", "space-md": "1.25rem", "space-xs": "0.375rem", "space-xl": "3.5rem", "gutter-lg": "2.5rem" }, "fontFamily": { "display-lg-mobile": [ "Literata" ], "label-sm": [ "Atkinson Hyperlegible Next" ], "headline-lg": [ "Literata" ], "body-md": [ "Atkinson Hyperlegible Next" ], "body-sm": [ "Atkinson Hyperlegible Next" ], "body-lg": [ "Atkinson Hyperlegible Next" ], "label-md": [ "Atkinson Hyperlegible Next" ], "headline-sm": [ "Literata" ], "display-lg": [ "Literata" ], "headline-lg-mobile": [ "Literata" ], "headline-md": [ "Literata" ] }, "fontSize": { "display-lg-mobile": [ "2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.015em", "fontWeight": "400" } ], "label-sm": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.05em", "fontWeight": "500" } ], "headline-lg": [ "2.5rem", { "lineHeight": "3rem", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "body-md": [ "1rem", { "lineHeight": "1.625rem", "fontWeight": "400" } ], "body-sm": [ "0.875rem", { "lineHeight": "1.375rem", "fontWeight": "400" } ], "body-lg": [ "1.125rem", { "lineHeight": "1.875rem", "fontWeight": "400" } ], "label-md": [ "0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.04em", "fontWeight": "600" } ], "headline-sm": [ "1.25rem", { "lineHeight": "1.75rem", "fontWeight": "500" } ], "display-lg": [ "3.5rem", { "lineHeight": "4rem", "letterSpacing": "-0.02em", "fontWeight": "400" } ], "headline-lg-mobile": [ "1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "headline-md": [ "1.75rem", { "lineHeight": "2.25rem", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-20 bg-surface-container-low z-50 flex flex-col items-center justify-between py-space-md"><div class="flex flex-col items-center w-full gap-space-md"><div class="flex items-center justify-center w-12 h-12 bg-surface-container rounded-lg"><img alt="A strictly non-emotive, minimalist river-stone brand symbol with smooth organic pebbles stacked or resting side-by-side in deep spruce-green #2E4B3F.. Brand logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WLwibH1a6D15VoiRi40MEKlos8GegiuItKrt-nnXqcEc_aCHsbgoj3DVuaHkQGecWCgpAhoYH5W6-l8uBI6uePZSGNY6mpj3CIVYAXgeYNggzpPiMSE8cOACJFLztsVLQCUKRwDSPociCu_GNBRdax3K64Osa90uxjPgFweYcdtgg5dBSirFSlzt6GQ0mROb9T4sq70C_JA3AZhI9qZgqrPPcDfqzNWHoeZ8tEHfurmSNaVrtujgQO1Sk"/></div><nav class="flex flex-col items-center w-full px-space-xs gap-space-xs" data-active-classes="bg-primary-container text-on-primary font-label-md text-label-md rounded-lg"><a class="flex flex-col items-center justify-center w-full py-space-xs px-1 text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-sm text-label-sm rounded-lg" data-path="talk" href="#"><span class="material-symbols-outlined text-[20px] mb-0.5">chat_bubble_outline</span>Talk</a><a aria-current="page" class="flex flex-col items-center justify-center w-full py-space-xs px-1 transition-colors bg-primary-container text-on-primary font-label-md text-label-md rounded-lg" data-path="moments" href="#"><span class="material-symbols-outlined text-[20px] mb-0.5">auto_stories</span>Moments</a><a class="flex flex-col items-center justify-center w-full py-space-xs px-1 text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-sm text-label-sm rounded-lg" data-path="remembered" href="#"><span class="material-symbols-outlined text-[20px] mb-0.5">history_edu</span>Remembered</a><a class="flex flex-col items-center justify-center w-full py-space-xs px-1 text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-sm text-label-sm rounded-lg" data-path="calm" href="#"><span class="material-symbols-outlined text-[20px] mb-0.5">spa</span>Calm</a><a class="flex flex-col items-center justify-center w-full py-space-xs px-1 text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-sm text-label-sm rounded-lg" data-path="privacy" href="#"><span class="material-symbols-outlined text-[20px] mb-0.5">lock</span>Privacy</a></nav></div><div class="flex flex-col items-center w-full px-space-xs gap-space-xs"><button class="flex flex-col items-center justify-center w-full py-space-xs px-1 text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-sm text-label-sm rounded-lg" title="Earth Ambiance" type="button"><span class="material-symbols-outlined text-[20px] mb-0.5">graphic_eq</span>Ambiance</button><button class="flex flex-col items-center justify-center w-full py-space-xs px-1 text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-sm text-label-sm rounded-lg" title="Support" type="button"><span class="material-symbols-outlined text-[20px] mb-0.5">help_outline</span>Support</button><button class="flex flex-col items-center justify-center w-full py-space-xs px-1 text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-sm text-label-sm rounded-lg" title="Hide Screen" type="button"><span class="material-symbols-outlined text-[20px] mb-0.5">visibility_off</span><span class="font-label-sm text-label-sm">Esc</span></button><div class="pt-space-xs flex flex-col items-center"><div class="w-3 h-3 rounded-full bg-secondary" title="Pebble Sanctuary Status"></div></div></div></aside><div class="pl-20"><header class="fixed top-0 left-20 right-0 h-16 bg-surface z-40 flex items-center justify-between px-gutter-lg"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-primary tracking-tight">Sanctuary</span><span class="w-1 h-1 rounded-full bg-outline-variant"></span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Quiet Space</span></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-space-xs rounded-full"><span class="material-symbols-outlined text-[16px] text-secondary">shield</span><span class="font-label-sm text-label-sm text-on-surface-variant">Zero Cloud Logging</span></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1Wg222OZpNx3_SAHVewrDRW6sPgjXMo4NZgmb0M-85c33lOys1hG-vxgEAFRM0clvzQesUKlMd6qgV7tMOFuYyOHgQ-sfqhH1-7cYn8rgwy4jBwI07W0CIJJ7SEAYKVq-vSgsNd29fvkNuYIyCel90bIqD0LVFLNndn-kN4Y5vSr887J-s16XYYeIyYyixoCRL80X9k_S79C8enqiW6kavwAbCpQQ_wxee9On-QBrMREFR5TbVHL5jV_Yg"/></div></header><main class="relative pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<div class="w-full max-w-4xl mx-auto px-margin md:px-margin-md py-space-xl flex flex-col gap-space-lg">
+<!-- Top Header Block: Monastic & Grounded -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-2 mb-1.5">
+<span class="inline-block w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Archived Reflections</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Moments</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">A few words worth keeping.</p>
+</div>
+<!-- Riverstone View Switcher -->
+<div class="flex items-center bg-surface-container p-1 rounded-xl self-start md:self-auto">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-md text-label-md" type="button">
+<span class="material-symbols-outlined text-[18px]">grain</span>
+<span>Cairns</span>
+</button>
+<button class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-surface-container-lowest text-primary font-label-md text-label-md shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">view_agenda</span>
+<span>List</span>
+</button>
+</div>
+</header>
+<!-- Controls Bar -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm bg-surface-container-low px-space-md py-space-sm rounded-xl">
+<div class="relative flex-1 max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-outline">search</span>
+<input class="w-full pl-9 pr-8 py-2 bg-surface-container-lowest rounded-lg font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary-container" id="moments-search" placeholder="Search kept words or titles..." type="text" value=""/>
+<button class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface" id="clear-search-btn" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[15px] text-secondary">encrypted</span>
+<span>4 moments preserved locally · End-to-end encrypted</span>
+</div>
+</div>
+<!-- Archival List -->
+<section class="flex flex-col gap-space-lg mt-space-sm">
+<!-- Chronological Group: October 2024 -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center gap-space-sm px-1">
+<h2 class="font-headline-sm text-headline-sm text-primary tracking-tight">October 2024</h2>
+<div class="h-[1px] flex-1 bg-surface-container-highest"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">4 Preserved</span>
+</div>
+<div class="flex flex-col gap-space-md">
+<!-- ITEM 1: Rain on the side mirror -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col gap-space-sm transition-all hover:bg-surface-container-low" id="moment-card-1">
+<div class="flex items-start gap-space-md">
+<!-- Miniature Pebble Glyph matching reference -->
+<div class="hidden sm:flex shrink-0 w-12 h-12 rounded-full bg-surface-container items-center justify-center pt-1" title="Weathered Granitic Stone">
+<svg aria-label="Stone glyph" class="overflow-visible" height="34" viewbox="0 0 100 100" width="34">
+<!-- Small green sprout at top -->
+<path d="M48 20 C46 8, 40 4, 38 6 C36 8, 42 16, 48 20 Z" fill="#9FB56E"></path>
+<path d="M51 20 C51 6, 55 1, 58 3 C61 5, 55 15, 51 20 Z" fill="#B1CA7D"></path>
+<!-- Pebble body -->
+<path d="M18 60 C14 42, 28 26, 52 25 C78 24, 90 40, 86 63 C82 82, 68 88, 48 88 C26 88, 21 76, 18 60 Z" fill="#A9A79B"></path>
+<!-- Stone natural striations -->
+<path d="M30 42 C44 48, 62 46, 76 39" fill="none" stroke="#D1D0C7" stroke-linecap="round" stroke-width="3"></path>
+<path d="M24 64 C42 70, 64 71, 82 66" fill="none" stroke="#D1D0C7" stroke-linecap="round" stroke-width="2.5"></path>
+<!-- Closed peaceful eyes -->
+<path d="M38 53 C41 57, 46 57, 49 53" fill="none" stroke="#3D453E" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M57 53 C60 57, 65 57, 68 53" fill="none" stroke="#3D453E" stroke-linecap="round" stroke-width="2.5"></path>
+</svg>
+</div>
+<!-- Main Content -->
+<div class="flex-1 min-w-0 flex flex-col gap-1.5">
+<div class="flex flex-wrap items-baseline justify-between gap-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Rain on the side mirror</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">October 24, 2024 · From Talk turn 04</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  “We sat in the car for twenty minutes before walking in. Neither of us said anything, but watching the rain slide down the side mirror felt like the only honest thing to do.”
+                </p>
+<!-- Attached User Note -->
+<div class="mt-1 inline-flex items-center gap-2 self-start bg-secondary-container text-on-secondary-fixed px-3 py-1.5 rounded-lg font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[15px] text-secondary">sticky_note_2</span>
+<span><strong class="font-semibold">Note to self:</strong> The waiting wasn’t wasted time.</span>
+</div>
+</div>
+<!-- Actions Menu -->
+<div class="shrink-0 flex items-center gap-1">
+<button class="px-2.5 py-1 text-primary hover:bg-surface-container rounded-lg font-label-md text-label-md transition-colors" title="Read complete context" type="button">
+                  Open
+                </button>
+<button class="px-2.5 py-1 text-on-surface-variant hover:bg-surface-container rounded-lg font-label-md text-label-md transition-colors" type="button">
+                  Edit
+                </button>
+<div class="relative inline-block text-left">
+<button aria-label="More options" class="p-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" onclick="toggleMenu('menu-1')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<div class="hidden absolute right-0 mt-1 w-44 bg-surface-container-lowest rounded-xl shadow-md py-1.5 z-20 flex flex-col" id="menu-1">
+<button class="px-3.5 py-1.5 text-left font-label-md text-label-md text-on-surface hover:bg-surface-container flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">edit_note</span> Edit note
+                    </button>
+<button class="px-3.5 py-1.5 text-left font-label-md text-label-md text-on-surface hover:bg-surface-container flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">download</span> Export plaintext
+                    </button>
+<div class="h-[1px] bg-surface-container-highest my-1"></div>
+<button class="px-3.5 py-1.5 text-left font-label-md text-label-md text-error hover:bg-error-container/40 flex items-center gap-2" onclick="promptDelete('moment-card-1', 'delete-panel-1')" type="button">
+<span class="material-symbols-outlined text-[16px]">delete</span> Delete moment
+                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Inline Deletion Dialog for Item 1 -->
+<div class="hidden mt-2 p-3.5 bg-error-container/30 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-3" id="delete-panel-1">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[20px] text-error">info</span>
+<p class="font-body-sm text-body-sm text-on-surface">Delete this kept moment? This removes it permanently from your local device.</p>
+</div>
+<div class="flex items-center gap-2 self-end sm:self-auto">
+<button class="px-3 py-1 rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors" onclick="cancelDelete('delete-panel-1')" type="button">
+                  Cancel
+                </button>
+<button class="px-3 py-1 rounded-lg font-label-md text-label-md bg-error text-on-error hover:opacity-90 transition-opacity" onclick="confirmDelete('moment-card-1')" type="button">
+                  Delete
+                </button>
+</div>
+</div>
+</article>
+<!-- ITEM 2: The cold perimeter -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col gap-space-sm transition-all hover:bg-surface-container-low" id="moment-card-2">
+<div class="flex items-start gap-space-md">
+<!-- Miniature Pebble Glyph -->
+<div class="hidden sm:flex shrink-0 w-12 h-12 rounded-full bg-surface-container items-center justify-center pt-1" title="Slate River Pebble">
+<svg aria-label="Stone glyph" class="overflow-visible" height="34" viewbox="0 0 100 100" width="34">
+<!-- Sprout leaves -->
+<path d="M46 22 C43 10, 36 6, 34 8 C32 10, 38 18, 46 22 Z" fill="#9FB56E"></path>
+<path d="M54 22 C56 9, 62 4, 65 6 C68 8, 60 17, 54 22 Z" fill="#B1CA7D"></path>
+<!-- Stone shape -->
+<path d="M22 55 C16 38, 30 28, 54 27 C76 26, 88 38, 84 58 C80 78, 64 85, 46 85 C28 85, 25 70, 22 55 Z" fill="#9DA298"></path>
+<path d="M30 45 C45 42, 60 44, 72 48" fill="none" stroke="#CBD0C6" stroke-linecap="round" stroke-width="2.5"></path>
+<!-- Closed eyes -->
+<path d="M39 56 C42 59, 46 59, 49 56" fill="none" stroke="#2D332D" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M57 56 C60 59, 64 59, 67 56" fill="none" stroke="#2D332D" stroke-linecap="round" stroke-width="2.5"></path>
+</svg>
+</div>
+<!-- Main Content -->
+<div class="flex-1 min-w-0 flex flex-col gap-1.5">
+<div class="flex flex-wrap items-baseline justify-between gap-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">The cold perimeter</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">October 21, 2024 · From Talk turn 12</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  “I walked past [The Office] building this morning even though I had nowhere to be. The loop became a boundary between demands and your attention.”
+                </p>
+</div>
+<!-- Actions Menu -->
+<div class="shrink-0 flex items-center gap-1">
+<button class="px-2.5 py-1 text-primary hover:bg-surface-container rounded-lg font-label-md text-label-md transition-colors" type="button">
+                  Open
+                </button>
+<button class="px-2.5 py-1 text-on-surface-variant hover:bg-surface-container rounded-lg font-label-md text-label-md transition-colors" type="button">
+                  Edit
+                </button>
+<div class="relative inline-block text-left">
+<button aria-label="More options" class="p-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" onclick="toggleMenu('menu-2')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<div class="hidden absolute right-0 mt-1 w-44 bg-surface-container-lowest rounded-xl shadow-md py-1.5 z-20 flex flex-col" id="menu-2">
+<button class="px-3.5 py-1.5 text-left font-label-md text-label-md text-on-surface hover:bg-surface-container flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">add_comment</span> Attach note
+                    </button>
+<button class="px-3.5 py-1.5 text-left font-label-md text-label-md text-on-surface hover:bg-surface-container flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">download</span> Export plaintext
+                    </button>
+<div class="h-[1px] bg-surface-container-highest my-1"></div>
+<button class="px-3.5 py-1.5 text-left font-label-md text-label-md text-error hover:bg-error-container/40 flex items-center gap-2" onclick="promptDelete('moment-card-2', 'delete-panel-2')" type="button">
+<span class="material-symbols-outlined text-[16px]">delete</span> Delete moment
+                    </button>
+</div>
+</div>
+</div>
+</div>
+<div class="hidden mt-2 p-3.5 bg-error-container/30 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-3" id="delete-panel-2">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[20px] text-error">info</span>
+<p class="font-body-sm text-body-sm text-on-surface">Delete this kept moment? This removes it permanently from your local device.</p>
+</div>
+<div class="flex items-center gap-2 self-end sm:self-auto">
+<button class="px-3 py-1 rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors" onclick="cancelDelete('delete-panel-2')" type="button">
+                  Cancel
+                </button>
+<button class="px-3 py-1 rounded-lg font-label-md text-label-md bg-error text-on-error hover:opacity-90 transition-opacity" onclick="confirmDelete('moment-card-2')" type="button">
+                  Delete
+                </button>
+</div>
+</div>
+</article>
+<!-- ITEM 3: Ordering what is within reach -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col gap-space-sm transition-all hover:bg-surface-container-low" id="moment-card-3">
+<div class="flex items-start gap-space-md">
+<!-- Miniature Pebble Glyph -->
+<div class="hidden sm:flex shrink-0 w-12 h-12 rounded-full bg-surface-container items-center justify-center pt-1" title="Rounded Sandstone Pebble">
+<svg aria-label="Stone glyph" class="overflow-visible" height="34" viewbox="0 0 100 100" width="34">
+<!-- Sprout -->
+<path d="M49 18 C47 7, 43 2, 40 4 C37 6, 43 14, 49 18 Z" fill="#9FB56E"></path>
+<path d="M52 18 C54 8, 59 3, 62 5 C65 7, 57 15, 52 18 Z" fill="#B1CA7D"></path>
+<!-- Pebble body -->
+<path d="M20 58 C16 40, 32 26, 54 26 C74 26, 86 36, 85 58 C84 76, 72 86, 50 86 C28 86, 23 74, 20 58 Z" fill="#B0ADA1"></path>
+<path d="M28 66 C44 72, 62 70, 76 64" fill="none" stroke="#D3D0C6" stroke-linecap="round" stroke-width="2.5"></path>
+<!-- Eyes -->
+<path d="M38 52 C41 55, 45 55, 48 52" fill="none" stroke="#353A35" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M58 52 C61 55, 65 55, 68 52" fill="none" stroke="#353A35" stroke-linecap="round" stroke-width="2.5"></path>
+</svg>
+</div>
+<!-- Main Content -->
+<div class="flex-1 min-w-0 flex flex-col gap-1.5">
+<div class="flex flex-wrap items-baseline justify-between gap-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Ordering what is within reach</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">October 18, 2024 · From Talk turn 02</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  “I noticed I spent the entire afternoon arranging files instead of making the call. The stillness of objects gives a temporary shelter.”
+                </p>
+<!-- Attached User Note -->
+<div class="mt-1 inline-flex items-center gap-2 self-start bg-secondary-container text-on-secondary-fixed px-3 py-1.5 rounded-lg font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[15px] text-secondary">sticky_note_2</span>
+<span><strong class="font-semibold">Note to self:</strong> Remember this when rushing to tidy before bad news.</span>
+</div>
+</div>
+<!-- Actions Menu -->
+<div class="shrink-0 flex items-center gap-1">
+<button class="px-2.5 py-1 text-primary hover:bg-surface-container rounded-lg font-label-md text-label-md transition-colors" type="button">
+                  Open
+                </button>
+<button class="px-2.5 py-1 text-on-surface-variant hover:bg-surface-container rounded-lg font-label-md text-label-md transition-colors" type="button">
+                  Edit
+                </button>
+<div class="relative inline-block text-left">
+<button aria-label="More options" class="p-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" onclick="toggleMenu('menu-3')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<div class="hidden absolute right-0 mt-1 w-44 bg-surface-container-lowest rounded-xl shadow-md py-1.5 z-20 flex flex-col" id="menu-3">
+<button class="px-3.5 py-1.5 text-left font-label-md text-label-md text-on-surface hover:bg-surface-container flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">edit_note</span> Edit note
+                    </button>
+<button class="px-3.5 py-1.5 text-left font-label-md text-label-md text-on-surface hover:bg-surface-container flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">download</span> Export plaintext
+                    </button>
+<div class="h-[1px] bg-surface-container-highest my-1"></div>
+<button class="px-3.5 py-1.5 text-left font-label-md text-label-md text-error hover:bg-error-container/40 flex items-center gap-2" onclick="promptDelete('moment-card-3', 'delete-panel-3')" type="button">
+<span class="material-symbols-outlined text-[16px]">delete</span> Delete moment
+                    </button>
+</div>
+</div>
+</div>
+</div>
+<div class="hidden mt-2 p-3.5 bg-error-container/30 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-3" id="delete-panel-3">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[20px] text-error">info</span>
+<p class="font-body-sm text-body-sm text-on-surface">Delete this kept moment? This removes it permanently from your local device.</p>
+</div>
+<div class="flex items-center gap-2 self-end sm:self-auto">
+<button class="px-3 py-1 rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors" onclick="cancelDelete('delete-panel-3')" type="button">
+                  Cancel
+                </button>
+<button class="px-3 py-1 rounded-lg font-label-md text-label-md bg-error text-on-error hover:opacity-90 transition-opacity" onclick="confirmDelete('moment-card-3')" type="button">
+                  Delete
+                </button>
+</div>
+</div>
+</article>
+<!-- ITEM 4: Arriving without performance (Showing inline delete confirmation state demonstrator) -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col gap-space-sm transition-all hover:bg-surface-container-low" id="moment-card-4">
+<div class="flex items-start gap-space-md">
+<!-- Miniature Pebble Glyph -->
+<div class="hidden sm:flex shrink-0 w-12 h-12 rounded-full bg-surface-container items-center justify-center pt-1" title="Quartz-Veined River Pebble">
+<svg aria-label="Stone glyph" class="overflow-visible" height="34" viewbox="0 0 100 100" width="34">
+<!-- Sprout -->
+<path d="M47 19 C45 9, 39 3, 37 5 C35 7, 41 15, 47 19 Z" fill="#9FB56E"></path>
+<path d="M53 19 C55 10, 60 5, 63 7 C66 9, 58 17, 53 19 Z" fill="#B1CA7D"></path>
+<!-- Stone body -->
+<path d="M19 56 C15 39, 30 25, 52 24 C75 23, 87 37, 85 59 C82 78, 68 87, 47 87 C26 87, 22 73, 19 56 Z" fill="#A4A89E"></path>
+<path d="M32 38 C46 44, 60 42, 74 36" fill="none" stroke="#D1D4CC" stroke-linecap="round" stroke-width="2"></path>
+<path d="M26 62 C44 68, 66 69, 80 63" fill="none" stroke="#D1D4CC" stroke-linecap="round" stroke-width="2.5"></path>
+<!-- Eyes -->
+<path d="M37 50 C40 54, 45 54, 48 50" fill="none" stroke="#333833" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M57 50 C60 54, 65 54, 68 50" fill="none" stroke="#333833" stroke-linecap="round" stroke-width="2.5"></path>
+</svg>
+</div>
+<!-- Main Content -->
+<div class="flex-1 min-w-0 flex flex-col gap-1.5">
+<div class="flex flex-wrap items-baseline justify-between gap-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Arriving without performance</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">October 12, 2024 · From Talk turn 07</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  “Silence in a stopped car can carry the weight of an unspoken agreement... permission to simply arrive without performing composure.”
+                </p>
+</div>
+<!-- Actions Menu -->
+<div class="shrink-0 flex items-center gap-1">
+<button class="px-2.5 py-1 text-primary hover:bg-surface-container rounded-lg font-label-md text-label-md transition-colors" type="button">
+                  Open
+                </button>
+<button class="px-2.5 py-1 text-on-surface-variant hover:bg-surface-container rounded-lg font-label-md text-label-md transition-colors" type="button">
+                  Edit
+                </button>
+<div class="relative inline-block text-left">
+<button aria-label="More options" class="p-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" onclick="toggleMenu('menu-4')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<div class="hidden absolute right-0 mt-1 w-44 bg-surface-container-lowest rounded-xl shadow-md py-1.5 z-20 flex flex-col" id="menu-4">
+<button class="px-3.5 py-1.5 text-left font-label-md text-label-md text-on-surface hover:bg-surface-container flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">add_comment</span> Attach note
+                    </button>
+<button class="px-3.5 py-1.5 text-left font-label-md text-label-md text-on-surface hover:bg-surface-container flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">download</span> Export plaintext
+                    </button>
+<div class="h-[1px] bg-surface-container-highest my-1"></div>
+<button class="px-3.5 py-1.5 text-left font-label-md text-label-md text-error hover:bg-error-container/40 flex items-center gap-2" onclick="promptDelete('moment-card-4', 'delete-panel-4')" type="button">
+<span class="material-symbols-outlined text-[16px]">delete</span> Delete moment
+                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Inline Deletion Panel (Visible as an interactive confirmation state) -->
+<div class="mt-2 p-3.5 bg-error-container/40 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-3" id="delete-panel-4">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[20px] text-error">info</span>
+<p class="font-body-sm text-body-sm text-on-surface">Delete this kept moment? This removes it permanently from your local device.</p>
+</div>
+<div class="flex items-center gap-2 self-end sm:self-auto shrink-0">
+<button class="px-3 py-1 rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors" onclick="cancelDelete('delete-panel-4')" type="button">
+                  Cancel
+                </button>
+<button class="px-3.5 py-1 rounded-lg font-label-md text-label-md bg-error text-on-error hover:opacity-90 transition-opacity" onclick="confirmDelete('moment-card-4')" type="button">
+                  Delete
+                </button>
+</div>
+</div>
+</article>
+</div>
+</div>
+<!-- Silent Restorative Footer Note -->
+<div class="flex flex-col items-center justify-center py-space-lg text-center">
+<div class="w-8 h-[1px] bg-surface-container-highest mb-3"></div>
+<p class="font-label-sm text-label-sm text-outline">Nothing to optimize. Read only when needed.</p>
+</div>
+</section>
+</div>
+</div>
+<script>
+  function toggleMenu(menuId) {
+    const target = document.getElementById(menuId);
+    if (!target) return;
+    const isHidden = target.classList.contains('hidden');
+    // Close other menus first
+    document.querySelectorAll('[id^="menu-"]').forEach(el => el.classList.add('hidden'));
+    if (isHidden) {
+      target.classList.remove('hidden');
+    }
+  }
+
+  function promptDelete(cardId, panelId) {
+    // Close dropdowns
+    document.querySelectorAll('[id^="menu-"]').forEach(el => el.classList.add('hidden'));
+    const panel = document.getElementById(panelId);
+    if (panel) {
+      panel.classList.remove('hidden');
+    }
+  }
+
+  function cancelDelete(panelId) {
+    const panel = document.getElementById(panelId);
+    if (panel) {
+      panel.classList.add('hidden');
+    }
+  }
+
+  function confirmDelete(cardId) {
+    const card = document.getElementById(cardId);
+    if (card) {
+      card.style.transition = "opacity 0.25s ease, transform 0.25s ease";
+      card.style.opacity = "0";
+      card.style.transform = "scale(0.98)";
+      setTimeout(() => {
+        card.remove();
+      }, 250);
+    }
+  }
+
+  // Close menus when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.relative')) {
+      document.querySelectorAll('[id^="menu-"]').forEach(el => el.classList.add('hidden'));
+    }
+  });
+
+  // Client-side instant filter behavior for peace of mind
+  const searchInput = document.getElementById('moments-search');
+  const clearBtn = document.getElementById('clear-search-btn');
+
+  if (searchInput && clearBtn) {
+    searchInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      clearBtn.classList.toggle('hidden', q.length === 0);
+      
+      const cards = document.querySelectorAll('[id^="moment-card-"]');
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(q) ? 'flex' : 'none';
+      });
+    });
+
+    clearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      clearBtn.classList.add('hidden');
+      const cards = document.querySelectorAll('[id^="moment-card-"]');
+      cards.forEach(card => card.style.display = 'flex');
+      searchInput.focus();
+    });
+  }
+</script></main></div></body></html>

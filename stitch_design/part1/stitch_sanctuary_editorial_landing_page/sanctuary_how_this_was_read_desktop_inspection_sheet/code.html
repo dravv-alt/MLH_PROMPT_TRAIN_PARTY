@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@100..900&amp;family=Literata:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary-container":"#55695e","on-primary-fixed":"#022016","surface-bright":"#f7faf5","surface-variant":"#e0e3de","primary-container":"#2e4b3f","surface":"#f7faf5","primary":"#173429","tertiary-fixed-dim":"#bbcabe","secondary-container":"#d2e8da","on-surface":"#191c1a","on-tertiary-fixed-variant":"#3c4a41","surface-container-low":"#f2f4ef","primary-fixed":"#c9ead9","on-background":"#191c1a","secondary":"#4f6358","on-error":"#ffffff","tertiary":"#243229","surface-container-high":"#e6e9e4","on-tertiary-container":"#a7b6ab","on-primary":"#ffffff","tertiary-fixed":"#d7e6da","background":"#f7faf5","tertiary-container":"#3a483f","outline":"#727974","surface-container-lowest":"#ffffff","on-tertiary":"#ffffff","on-primary-fixed-variant":"#304d40","on-error-container":"#93000a","on-secondary-fixed-variant":"#384b41","inverse-on-surface":"#eff2ed","surface-container-highest":"#e0e3de","on-secondary-fixed":"#0c1f17","on-surface-variant":"#424844","on-tertiary-fixed":"#111e17","on-primary-container":"#9abaab","inverse-surface":"#2d312e","surface-tint":"#476558","surface-dim":"#d8dbd6","error":"#ba1a1a","secondary-fixed-dim":"#b6ccbe","surface-container":"#ecefea","error-container":"#ffdad6","secondary-fixed":"#d2e8da","outline-variant":"#c1c8c3","primary-fixed-dim":"#adcebe","inverse-primary":"#adcebe","on-secondary":"#ffffff"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"gutter":"1.5rem","space-md":"1.25rem","gutter-lg":"2.5rem","margin-lg":"5rem","space-xl":"3.5rem","space-sm":"0.75rem","margin-md":"3rem","space-lg":"2.25rem","margin":"1.5rem","space-xs":"0.375rem"},fontFamily:{"body-sm":["Atkinson Hyperlegible Next"],"label-sm":["Atkinson Hyperlegible Next"],"headline-lg-mobile":["Literata"],"label-md":["Atkinson Hyperlegible Next"],"headline-md":["Literata"],"body-lg":["Atkinson Hyperlegible Next"],"body-md":["Atkinson Hyperlegible Next"],"headline-sm":["Literata"],"display-lg":["Literata"],"display-lg-mobile":["Literata"],"headline-lg":["Literata"]},fontSize:{"body-sm":["0.875rem",{"lineHeight":"1.375rem","fontWeight":"400"}],"label-sm":["0.75rem",{"lineHeight":"1rem","letterSpacing":"0.05em","fontWeight":"500"}],"headline-lg-mobile":["1.75rem",{"lineHeight":"2.25rem","letterSpacing":"-0.01em","fontWeight":"400"}],"label-md":["0.875rem",{"lineHeight":"1.25rem","letterSpacing":"0.04em","fontWeight":"600"}],"headline-md":["1.75rem",{"lineHeight":"2.25rem","fontWeight":"400"}],"body-lg":["1.125rem",{"lineHeight":"1.875rem","fontWeight":"400"}],"body-md":["1rem",{"lineHeight":"1.625rem","fontWeight":"400"}],"headline-sm":["1.25rem",{"lineHeight":"1.75rem","fontWeight":"500"}],"display-lg":["3.5rem",{"lineHeight":"4rem","letterSpacing":"-0.02em","fontWeight":"400"}],"display-lg-mobile":["2.25rem",{"lineHeight":"2.75rem","letterSpacing":"-0.015em","fontWeight":"400"}],"headline-lg":["2.5rem",{"lineHeight":"3rem","letterSpacing":"-0.01em","fontWeight":"400"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen selection:bg-secondary-container selection:text-on-secondary-container"><header class="hidden"><img alt="A strictly non-emotive, minimalist river-stone brand symbol with smooth organic pebbles stacked or resting side-by-side in deep spruce-green #2E4B3F.. Brand logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WLwibH1a6D15VoiRi40MEKlos8GegiuItKrt-nnXqcEc_aCHsbgoj3DVuaHkQGecWCgpAhoYH5W6-l8uBI6uePZSGNY6mpj3CIVYAXgeYNggzpPiMSE8cOACJFLztsVLQCUKRwDSPociCu_GNBRdax3K64Osa90uxjPgFweYcdtgg5dBSirFSlzt6GQ0mROb9T4sq70C_JA3AZhI9qZgqrPPcDfqzNWHoeZ8tEHfurmSNaVrtujgQO1Sk"/><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1Wg222OZpNx3_SAHVewrDRW6sPgjXMo4NZgmb0M-85c33lOys1hG-vxgEAFRM0clvzQesUKlMd6qgV7tMOFuYyOHgQ-sfqhH1-7cYn8rgwy4jBwI07W0CIJJ7SEAYKVq-vSgsNd29fvkNuYIyCel90bIqD0LVFLNndn-kN4Y5vSr887J-s16XYYeIyYyixoCRL80X9k_S79C8enqiW6kavwAbCpQQ_wxee9On-QBrMREFR5TbVHL5jV_Yg"/></header><aside class="fixed left-0 top-0 h-full w-[88px] bg-surface-container-low z-50 flex flex-col items-center justify-between py-6 select-none"><div class="flex flex-col items-center w-full"><div class="mb-8 flex items-center justify-center p-2 rounded-lg hover:bg-surface-container transition-colors" title="Sanctuary"><img alt="A strictly non-emotive, minimalist river-stone brand symbol with smooth organic pebbles stacked or resting side-by-side in deep spruce-green #2E4B3F.. Brand logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WLwibH1a6D15VoiRi40MEKlos8GegiuItKrt-nnXqcEc_aCHsbgoj3DVuaHkQGecWCgpAhoYH5W6-l8uBI6uePZSGNY6mpj3CIVYAXgeYNggzpPiMSE8cOACJFLztsVLQCUKRwDSPociCu_GNBRdax3K64Osa90uxjPgFweYcdtgg5dBSirFSlzt6GQ0mROb9T4sq70C_JA3AZhI9qZgqrPPcDfqzNWHoeZ8tEHfurmSNaVrtujgQO1Sk"/></div><nav class="flex flex-col items-center gap-3 w-full px-2" data-active-classes="bg-primary-container text-on-primary rounded-lg"><a class="flex flex-col items-center justify-center w-full py-2.5 px-1 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors duration-200 group" data-path="talk" href="#"><span class="material-symbols-outlined text-2xl mb-1">forum</span><span class="font-label-sm text-label-sm tracking-normal text-center">Talk</span></a><a class="flex flex-col items-center justify-center w-full py-2.5 px-1 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors duration-200 group" data-path="moments" href="#"><span class="material-symbols-outlined text-2xl mb-1">filter_vintage</span><span class="font-label-sm text-label-sm tracking-normal text-center">Moments</span></a><a class="flex flex-col items-center justify-center w-full py-2.5 px-1 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors duration-200 group" data-path="remembered" href="#"><span class="material-symbols-outlined text-2xl mb-1">auto_stories</span><span class="font-label-sm text-label-sm tracking-normal text-center">Remembered</span></a><a class="flex flex-col items-center justify-center w-full py-2.5 px-1 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors duration-200 group" data-path="calm" href="#"><span class="material-symbols-outlined text-2xl mb-1">spa</span><span class="font-label-sm text-label-sm tracking-normal text-center">Calm</span></a><a class="flex flex-col items-center justify-center w-full py-2.5 px-1 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors duration-200 group" data-path="privacy" href="#"><span class="material-symbols-outlined text-2xl mb-1">shield</span><span class="font-label-sm text-label-sm tracking-normal text-center">Privacy</span></a></nav></div><div class="flex flex-col items-center gap-4 w-full px-2"><a class="flex flex-col items-center justify-center w-full py-2 text-on-surface-variant hover:text-on-surface transition-colors duration-200" data-path="support" href="#"><span class="material-symbols-outlined text-xl mb-0.5">help_outline</span><span class="font-label-sm text-label-sm tracking-normal text-center">Support</span></a><button class="p-1 rounded-full hover:bg-surface-container transition-colors focus:outline-none" title="Pebble mascot toggle" type="button"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1Wg222OZpNx3_SAHVewrDRW6sPgjXMo4NZgmb0M-85c33lOys1hG-vxgEAFRM0clvzQesUKlMd6qgV7tMOFuYyOHgQ-sfqhH1-7cYn8rgwy4jBwI07W0CIJJ7SEAYKVq-vSgsNd29fvkNuYIyCel90bIqD0LVFLNndn-kN4Y5vSr887J-s16XYYeIyYyixoCRL80X9k_S79C8enqiW6kavwAbCpQQ_wxee9On-QBrMREFR5TbVHL5jV_Yg"/></button></div></aside><div class="pl-[88px] min-h-screen"><main class="w-full min-h-screen bg-background"><div class="flex flex-col w-full">
+<div class="w-full min-h-screen bg-[#E9ECE7] text-[#23261F] flex flex-col justify-between">
+<!-- Top Quiet Status Bar -->
+<div class="w-full px-8 py-5 flex items-center justify-between border-b border-[#CDD2C8]/70 text-[#454B40]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[19px] text-[#2E4B3F]">radio_button_checked</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-[#454B40]">Volatile Session • Ephemeral RAM only</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="font-label-sm text-label-sm text-[#454B40]/80">Turn 3 of 3 recorded</span>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#2E4B3F]"></span>
+<span class="font-label-sm text-label-sm text-[#23261F]">Sanctuary Daylight Engine v4.2</span>
+</div>
+</div>
+</div>
+<!-- Main Workspace Area: Left Stream (576px focus) + Right Inspector (440px) -->
+<div class="w-full flex-1 flex flex-row relative overflow-hidden">
+<!-- Left: Reading Column & Transcript -->
+<section class="flex-1 overflow-y-auto px-8 py-10 lg:pr-[460px] flex justify-center">
+<div class="w-full max-w-[576px] flex flex-col gap-9 pb-20">
+<!-- Context timestamp banner -->
+<div class="flex items-center gap-3 text-[#454B40]/70 select-none">
+<span class="h-[1px] flex-1 bg-[#CDD2C8]"></span>
+<span class="font-label-sm text-label-sm">Morning perimeter log • 08:42</span>
+<span class="h-[1px] flex-1 bg-[#CDD2C8]"></span>
+</div>
+<!-- User Turn (Slip format) -->
+<div class="flex flex-col gap-2.5 items-end group">
+<div class="flex items-center gap-2 text-xs text-[#454B40] px-1 font-label-sm">
+<span class="material-symbols-outlined text-[14px]">person</span>
+<span>You</span>
+</div>
+<div class="w-full bg-[#DCE2D6] p-6 rounded-2xl rounded-tr-sm border border-[#CDD2C8] leading-relaxed">
+<p class="font-body-lg text-body-lg text-[#23261F]">
+                I walked past 
+                <span class="inline-flex items-center gap-1 bg-[#DDE1DA] border border-[#CDD2C8] px-2 py-0.5 rounded text-xs font-label-md text-[#23261F] align-baseline">
+<span class="material-symbols-outlined text-[12px] text-[#2E4B3F]">lock</span>[The Office]
+                </span> 
+                building this morning even though I had nowhere to be. I knew there were dishes in the sink and unanswered emails, but the cold air felt like the only thing that wasn't demanding a decision from me.
+              </p>
+</div>
+<span class="font-label-sm text-[11px] text-[#454B40]/70 pr-1">Masked locally prior to synthesis</span>
+</div>
+<!-- Sanctuary Reply -->
+<div class="flex flex-col gap-3 group">
+<div class="flex items-center gap-2 text-xs text-[#2E4B3F] px-1 font-label-sm font-semibold">
+<span class="material-symbols-outlined text-[16px] text-[#2E4B3F]">spa</span>
+<span>Sanctuary</span>
+</div>
+<div class="w-full bg-[#F6F7F3] p-7 rounded-2xl rounded-tl-sm border border-[#CDD2C8] flex flex-col gap-5">
+<p class="font-headline-sm text-headline-sm text-[#23261F] leading-relaxed font-normal">
+                The loop became a boundary between demands and your attention. Sometimes pacing the cold perimeter isn't avoidance—it is the only quiet territory where nothing is required of you. What did that cold air offer that the apartment couldn't?
+              </p>
+<!-- Turn Inspection Action bar -->
+<div class="pt-4 border-t border-[#CDD2C8]/70 flex flex-wrap items-center justify-between gap-3">
+<button aria-controls="inspectionSheet" aria-expanded="true" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#2E4B3F] text-[#E9ECE7] hover:bg-[#233A31] transition-all font-label-sm text-label-sm tracking-normal shadow-none cursor-pointer" id="inspectToggleBtn" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span>How this was read</span>
+<span class="w-1.5 h-1.5 rounded-full bg-[#C4CF5A]"></span>
+</button>
+<div class="flex items-center gap-2 text-[#454B40]">
+<button class="p-1.5 rounded-md hover:bg-[#DDE1DA] transition-colors" title="Copy raw text" type="button">
+<span class="material-symbols-outlined text-[17px]">content_copy</span>
+</button>
+<button class="p-1.5 rounded-md hover:bg-[#DDE1DA] transition-colors" title="Bookmark entry" type="button">
+<span class="material-symbols-outlined text-[17px]">bookmark_border</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Minimalist Writing Bar (Disabled / Non-intrusive) -->
+<div class="mt-6 pt-4 border-t border-[#CDD2C8] flex items-center justify-between text-[#454B40] text-sm font-label-sm">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#C4CF5A]"></span>
+<span>Inspection overlay active. Press Esc or close sheet to write.</span>
+</div>
+<span class="text-xs text-[#454B40]/70">Zero persistent cloud logs</span>
+</div>
+</div>
+</section>
+<!-- Right Side Inspection Sheet: Fixed width (440px), #F6F7F3, 28px top corner radius, border #CDD2C8 -->
+<aside aria-label="How this turn was read and parsed" class="fixed top-0 bottom-0 right-0 w-[440px] max-w-[90vw] bg-[#F6F7F3] border-l border-[#CDD2C8] rounded-tl-[28px] z-40 flex flex-col transition-transform duration-300 overflow-hidden" id="inspectionSheet">
+<!-- Sheet Header Bar -->
+<div class="px-6 py-5 border-b border-[#CDD2C8] flex items-start justify-between bg-[#F6F7F3]/95 backdrop-blur-sm sticky top-0 z-20">
+<div class="flex flex-col gap-1 pr-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[17px] text-[#2E4B3F]">grain</span>
+<h2 class="font-headline-sm text-headline-sm text-[#23261F] font-normal tracking-tight">How this was read</h2>
+</div>
+<!-- Always-visible Grounding sub-statement -->
+<p class="font-body-sm text-body-sm text-[#454B40] leading-snug">
+              This describes your wording. It does not describe how you feel.
+            </p>
+</div>
+<button aria-label="Close inspection sheet" class="p-2 rounded-lg text-[#454B40] hover:text-[#23261F] hover:bg-[#DDE1DA] transition-colors focus:outline-none" id="closeSheetBtn" title="Close inspection" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Scrollable Inspection Sections Container -->
+<div class="flex-1 overflow-y-auto px-6 py-6 space-y-8 divide-y divide-[#CDD2C8]/70">
+<!-- Section 1: What was hidden -->
+<div class="pt-0 flex flex-col gap-3.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-[#2E4B3F]"></span>
+<h3 class="font-label-md text-label-md text-[#23261F] uppercase tracking-wider text-xs">1. What was hidden</h3>
+</div>
+<details class="group cursor-pointer">
+<summary class="list-none text-[11px] font-label-sm text-[#454B40] hover:text-[#23261F] flex items-center gap-1 select-none">
+<span>What is this?</span>
+<span class="material-symbols-outlined text-[14px] group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="mt-2 text-xs text-[#454B40] bg-[#DDE1DA]/60 p-2.5 rounded-lg border border-[#CDD2C8] leading-relaxed">
+                  Named Entity Recognition runs strictly within isolated browser memory. Text matching sensitive entities is tokenized and replaced before network transmission.
+                </div>
+</details>
+</div>
+<!-- Turn with hidden name chip -->
+<div class="bg-[#DDE1DA] p-3.5 rounded-xl border border-[#CDD2C8] text-xs font-body-sm leading-relaxed text-[#23261F]">
+              "I walked past <span class="bg-[#C5CCC3] text-[#23261F] px-1.5 py-0.5 rounded font-label-md">[The Office]</span> building this morning even though I had nowhere to be. I knew there were dishes in the sink..."
+            </div>
+<!-- Detected Entity Badge -->
+<div class="flex items-start gap-2.5 bg-[#F2F4EF] p-3 rounded-lg border border-[#CDD2C8] text-xs">
+<span class="material-symbols-outlined text-[16px] text-[#2E4B3F] mt-0.5">verified_user</span>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-md text-[#23261F]">[The Office] • Organization / Location identifier</span>
+<span class="font-body-sm text-[#454B40]">Replaced in volatile WASM memory before dispatch</span>
+</div>
+</div>
+<!-- Collapsible: Show what writing service received -->
+<details class="border border-[#CDD2C8] rounded-lg bg-[#DDE1DA]/40 group text-xs overflow-hidden">
+<summary class="px-3.5 py-2 font-label-sm text-[#23261F] font-medium flex items-center justify-between cursor-pointer select-none hover:bg-[#DDE1DA]">
+<span>Show what the writing service received</span>
+<span class="material-symbols-outlined text-[16px] text-[#454B40] group-open:rotate-180 transition-transform">code</span>
+</summary>
+<div class="p-3 bg-[#23261F] text-[#E9ECE7] font-mono text-[11px] overflow-x-auto leading-relaxed border-t border-[#CDD2C8]">
+<code>{"role": "user", "text": "I walked past [The Office] building this morning even though I had nowhere to be. I knew there were dishes in the sink and unanswered emails, but the cold air felt like the only thing that wasn't demanding a decision from me.", "entities_masked": 1}</code>
+</div>
+</details>
+<!-- Honest Trust Notice -->
+<p class="font-label-sm text-[11px] text-[#454B40] leading-snug flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-[#2E4B3F]">info</span>
+<span>Names and explicit identifiers are masked. Contextual biographical events within sentences remain as authored.</span>
+</p>
+</div>
+<!-- Section 2: How your words connect -->
+<div class="pt-6 flex flex-col gap-3.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-[#2E4B3F]"></span>
+<h3 class="font-label-md text-label-md text-[#23261F] uppercase tracking-wider text-xs">2. How your words connect</h3>
+</div>
+<details class="group cursor-pointer">
+<summary class="list-none text-[11px] font-label-sm text-[#454B40] hover:text-[#23261F] flex items-center gap-1 select-none">
+<span>What is this?</span>
+<span class="material-symbols-outlined text-[14px] group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="mt-2 text-xs text-[#454B40] bg-[#DDE1DA]/60 p-2.5 rounded-lg border border-[#CDD2C8] leading-relaxed">
+                  Syntactic discourse markers show how separate clauses logically pivot or contrast without assuming sentiment or emotion.
+                </div>
+</details>
+</div>
+<!-- Interactive Discourse Link Diagram & Clauses -->
+<div class="relative flex flex-col gap-3 bg-[#DDE1DA]/50 p-4 rounded-xl border border-[#CDD2C8]">
+<!-- Clause A -->
+<div class="p-2.5 bg-[#F6F7F3] rounded-lg border border-[#CDD2C8] text-xs font-body-sm text-[#23261F]">
+<div class="font-label-sm text-[10px] uppercase text-[#454B40] mb-0.5">Clause A</div>
+                "I walked past [The Office] building this morning"
+              </div>
+<!-- Connecting Connector 1 -->
+<div class="flex items-center gap-2 pl-3">
+<div class="w-4 h-6 border-l-2 border-b-2 border-[#2E4B3F]/60 rounded-bl"></div>
+<span class="inline-flex items-center gap-1.5 bg-[#2E4B3F] text-[#E9ECE7] px-2.5 py-1 rounded font-label-sm text-[11px]">
+<span>[even though]</span>
+<span class="text-[#C4CF5A]">• Contrast / Exception</span>
+</span>
+</div>
+<!-- Clause B -->
+<div class="p-2.5 bg-[#F6F7F3] rounded-lg border border-[#CDD2C8] text-xs font-body-sm text-[#23261F]">
+<div class="font-label-sm text-[10px] uppercase text-[#454B40] mb-0.5">Clause B</div>
+                "I had nowhere to be"
+              </div>
+<!-- Connecting Connector 2 -->
+<div class="flex items-center gap-2 pl-3">
+<div class="w-4 h-6 border-l-2 border-b-2 border-[#2E4B3F]/60 rounded-bl"></div>
+<span class="inline-flex items-center gap-1.5 bg-[#2E4B3F] text-[#E9ECE7] px-2.5 py-1 rounded font-label-sm text-[11px]">
+<span>[but]</span>
+<span class="text-[#C4CF5A]">• Pivot / Counter-condition</span>
+</span>
+</div>
+<!-- Clause C -->
+<div class="p-2.5 bg-[#F6F7F3] rounded-lg border border-[#CDD2C8] text-xs font-body-sm text-[#23261F]">
+<div class="font-label-sm text-[10px] uppercase text-[#454B40] mb-0.5">Clause C</div>
+                "the cold air felt like the only thing that wasn't demanding a decision"
+              </div>
+<!-- Visual SVG Connecting Arc Diagram -->
+<div class="mt-2 pt-2 border-t border-[#CDD2C8]/70">
+<div class="flex items-center justify-between text-[11px] font-label-sm text-[#454B40] mb-1">
+<span>Deterministic clause flow</span>
+<span class="text-[#2E4B3F]">Clause A → Clause B → Clause C</span>
+</div>
+<svg class="w-full h-11 text-[#2E4B3F] overflow-visible" viewbox="0 0 340 44">
+<!-- Clause nodes -->
+<circle cx="20" cy="22" fill="#2E4B3F" r="6"></circle>
+<text fill="#454B40" font-family="Atkinson Hyperlegible Next" font-size="9" text-anchor="middle" x="20" y="38">Clause A</text>
+<!-- Link 1 -->
+<path d="M 26 22 H 164" stroke="#2E4B3F" stroke-dasharray="2 2" stroke-width="2"></path>
+<rect fill="#DDE1DA" height="18" rx="4" stroke="#CDD2C8" width="70" x="70" y="12"></rect>
+<text fill="#23261F" font-family="Atkinson Hyperlegible Next" font-size="8.5" font-weight="600" text-anchor="middle" x="105" y="24">even though</text>
+<!-- Clause node B -->
+<circle cx="170" cy="22" fill="#2E4B3F" r="6"></circle>
+<text fill="#454B40" font-family="Atkinson Hyperlegible Next" font-size="9" text-anchor="middle" x="170" y="38">Clause B</text>
+<!-- Link 2 -->
+<path d="M 176 22 H 314" stroke="#2E4B3F" stroke-width="2"></path>
+<rect fill="#C4CF5A" height="18" rx="4" width="50" x="220" y="12"></rect>
+<text fill="#23261F" font-family="Atkinson Hyperlegible Next" font-size="8.5" font-weight="600" text-anchor="middle" x="245" y="24">but</text>
+<!-- Clause node C -->
+<circle cx="320" cy="22" fill="#2E4B3F" r="6"></circle>
+<text fill="#454B40" font-family="Atkinson Hyperlegible Next" font-size="9" text-anchor="middle" x="320" y="38">Clause C</text>
+</svg>
+</div>
+</div>
+<!-- Accessible Table Disclosure -->
+<details class="text-xs group">
+<summary class="font-label-sm text-[11px] text-[#454B40] hover:text-[#23261F] cursor-pointer flex items-center gap-1 select-none">
+<span>View accessible discourse links table</span>
+<span class="material-symbols-outlined text-[14px] group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="mt-2 overflow-x-auto border border-[#CDD2C8] rounded-lg">
+<table class="w-full text-left border-collapse text-[11px]">
+<thead>
+<tr class="bg-[#DDE1DA] text-[#23261F] font-label-md">
+<th class="p-2 border-b border-[#CDD2C8]">Source</th>
+<th class="p-2 border-b border-[#CDD2C8]">Connector</th>
+<th class="p-2 border-b border-[#CDD2C8]">Target</th>
+<th class="p-2 border-b border-[#CDD2C8]">Function</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#CDD2C8] text-[#454B40]">
+<tr>
+<td class="p-2">Clause A</td>
+<td class="p-2 font-medium text-[#23261F]">even though</td>
+<td class="p-2">Clause B</td>
+<td class="p-2">Contrast / Exception</td>
+</tr>
+<tr>
+<td class="p-2">Clause B</td>
+<td class="p-2 font-medium text-[#23261F]">but</td>
+<td class="p-2">Clause C</td>
+<td class="p-2">Pivot / Counter-condition</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<!-- Section 3: Topics that came back -->
+<div class="pt-6 flex flex-col gap-3.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-[#2E4B3F]"></span>
+<h3 class="font-label-md text-label-md text-[#23261F] uppercase tracking-wider text-xs">3. Topics that came back</h3>
+</div>
+<details class="group cursor-pointer">
+<summary class="list-none text-[11px] font-label-sm text-[#454B40] hover:text-[#23261F] flex items-center gap-1 select-none">
+<span>What is this?</span>
+<span class="material-symbols-outlined text-[14px] group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="mt-2 text-xs text-[#454B40] bg-[#DDE1DA]/60 p-2.5 rounded-lg border border-[#CDD2C8] leading-relaxed">
+                  Lexical frequency tracks verbatim word repetitions across turns. Words are never tagged with clinical or emotional categories.
+                </div>
+</details>
+</div>
+<!-- Recurrence Cards -->
+<div class="space-y-2">
+<div class="p-3 bg-[#DDE1DA]/50 rounded-xl border border-[#CDD2C8] flex items-center justify-between">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-xs text-[#23261F]">"cold air"</span>
+<span class="bg-[#2E4B3F]/10 text-[#2E4B3F] text-[10px] font-label-sm px-1.5 py-0.2 rounded">Direct reuse</span>
+</div>
+<span class="text-[11px] font-body-sm text-[#454B40]">Found in Turn 1 &amp; Turn 3</span>
+</div>
+<span class="text-xs font-label-sm text-[#2E4B3F] flex items-center gap-1">
+<span>Linked</span>
+<span class="material-symbols-outlined text-[14px]">link</span>
+</span>
+</div>
+<div class="p-3 bg-[#DDE1DA]/50 rounded-xl border border-[#CDD2C8] flex items-center justify-between">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-xs text-[#23261F]">"demanding / decision"</span>
+<span class="bg-[#C5CCC3] text-[#23261F] text-[10px] font-label-sm px-1.5 py-0.2 rounded">Root pair</span>
+</div>
+<span class="text-[11px] font-body-sm text-[#454B40]">First noted in Turn 2, repeated Turn 3</span>
+</div>
+<span class="text-xs font-label-sm text-[#454B40]">2 instances</span>
+</div>
+<div class="p-3 bg-[#DDE1DA]/50 rounded-xl border border-[#CDD2C8] flex items-center justify-between">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-xs text-[#23261F]">"dishes / unanswered"</span>
+<span class="text-[10px] font-label-sm text-[#454B40]">Task inventory</span>
+</div>
+<span class="text-[11px] font-body-sm text-[#454B40]">Domestic context without evaluative score</span>
+</div>
+<span class="text-xs font-label-sm text-[#454B40]">New this turn</span>
+</div>
+</div>
+</div>
+<!-- Section 4: Wording over this conversation -->
+<div class="pt-6 flex flex-col gap-3.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-[#2E4B3F]"></span>
+<h3 class="font-label-md text-label-md text-[#23261F] uppercase tracking-wider text-xs">4. Wording over this conversation</h3>
+</div>
+<details class="group cursor-pointer">
+<summary class="list-none text-[11px] font-label-sm text-[#454B40] hover:text-[#23261F] flex items-center gap-1 select-none">
+<span>What is this?</span>
+<span class="material-symbols-outlined text-[14px] group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="mt-2 text-xs text-[#454B40] bg-[#DDE1DA]/60 p-2.5 rounded-lg border border-[#CDD2C8] leading-relaxed">
+                  Discrete tallies of grammatical occurrences over all session turns. These replace behavioral or diagnostic scores with literal word counts.
+                </div>
+</details>
+</div>
+<!-- 4 Quiet Micro-Timelines -->
+<div class="grid grid-cols-2 gap-2.5">
+<!-- Metric 1 -->
+<div class="p-3 bg-[#DDE1DA]/40 rounded-xl border border-[#CDD2C8] flex flex-col justify-between h-28">
+<div>
+<div class="text-[11px] font-label-md text-[#23261F] leading-tight">People or places</div>
+<div class="text-[10px] text-[#454B40]">1 masked entity (T3)</div>
+</div>
+<div class="w-full h-8">
+<svg class="w-full h-full stroke-[#2E4B3F] fill-none" viewbox="0 0 100 24">
+<line stroke="#CDD2C8" stroke-width="1.5" x1="10" x2="50" y1="20" y2="20"></line>
+<line stroke="#2E4B3F" stroke-width="1.5" x1="50" x2="90" y1="20" y2="8"></line>
+<circle cx="10" cy="20" fill="#454B40" r="2.5"></circle>
+<circle cx="50" cy="20" fill="#454B40" r="2.5"></circle>
+<circle cx="90" cy="8" fill="#2E4B3F" r="3"></circle>
+</svg>
+</div>
+<div class="flex justify-between text-[9px] font-label-sm text-[#454B40]">
+<span>Turn 1</span><span>Turn 2</span><span class="text-[#23261F] font-bold">Turn 3</span>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="p-3 bg-[#DDE1DA]/40 rounded-xl border border-[#CDD2C8] flex flex-col justify-between h-28">
+<div>
+<div class="text-[11px] font-label-md text-[#23261F] leading-tight">Thought connectors</div>
+<div class="text-[10px] text-[#454B40]">2 discourse links (T3)</div>
+</div>
+<div class="w-full h-8">
+<svg class="w-full h-full stroke-[#2E4B3F] fill-none" viewbox="0 0 100 24">
+<line stroke="#2E4B3F" stroke-width="1.5" x1="10" x2="50" y1="18" y2="12"></line>
+<line stroke="#2E4B3F" stroke-width="1.5" x1="50" x2="90" y1="12" y2="6"></line>
+<circle cx="10" cy="18" fill="#454B40" r="2.5"></circle>
+<circle cx="50" cy="12" fill="#454B40" r="2.5"></circle>
+<circle cx="90" cy="6" fill="#2E4B3F" r="3"></circle>
+</svg>
+</div>
+<div class="flex justify-between text-[9px] font-label-sm text-[#454B40]">
+<span>Turn 1</span><span>Turn 2</span><span class="text-[#23261F] font-bold">Turn 3</span>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="p-3 bg-[#DDE1DA]/40 rounded-xl border border-[#CDD2C8] flex flex-col justify-between h-28">
+<div>
+<div class="text-[11px] font-label-md text-[#23261F] leading-tight">Softening phrases</div>
+<div class="text-[10px] text-[#454B40]">"even though", "felt like"</div>
+</div>
+<div class="w-full h-8">
+<svg class="w-full h-full stroke-[#2E4B3F] fill-none" viewbox="0 0 100 24">
+<line stroke="#2E4B3F" stroke-width="1.5" x1="10" x2="50" y1="20" y2="8"></line>
+<line stroke="#2E4B3F" stroke-width="1.5" x1="50" x2="90" y1="8" y2="8"></line>
+<circle cx="10" cy="20" fill="#454B40" r="2.5"></circle>
+<circle cx="50" cy="8" fill="#454B40" r="2.5"></circle>
+<circle cx="90" cy="8" fill="#2E4B3F" r="3"></circle>
+</svg>
+</div>
+<div class="flex justify-between text-[9px] font-label-sm text-[#454B40]">
+<span>Turn 1</span><span>Turn 2</span><span class="text-[#23261F] font-bold">Turn 3</span>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="p-3 bg-[#DDE1DA]/40 rounded-xl border border-[#CDD2C8] flex flex-col justify-between h-28">
+<div>
+<div class="text-[11px] font-label-md text-[#23261F] leading-tight">Lexical divergence</div>
+<div class="text-[10px] text-[#454B40]">Moderate word shift</div>
+</div>
+<div class="w-full h-8">
+<svg class="w-full h-full stroke-[#2E4B3F] fill-none" viewbox="0 0 100 24">
+<line stroke="#2E4B3F" stroke-width="1.5" x1="10" x2="50" y1="8" y2="16"></line>
+<line stroke="#2E4B3F" stroke-width="1.5" x1="50" x2="90" y1="16" y2="10"></line>
+<circle cx="10" cy="8" fill="#454B40" r="2.5"></circle>
+<circle cx="50" cy="16" fill="#454B40" r="2.5"></circle>
+<circle cx="90" cy="10" fill="#2E4B3F" r="3"></circle>
+</svg>
+</div>
+<div class="flex justify-between text-[9px] font-label-sm text-[#454B40]">
+<span>Turn 1</span><span>Turn 2</span><span class="text-[#23261F] font-bold">Turn 3</span>
+</div>
+</div>
+</div>
+<!-- View raw counts table toggle -->
+<details class="text-xs group">
+<summary class="font-label-sm text-[11px] text-[#454B40] hover:text-[#23261F] cursor-pointer flex items-center gap-1 select-none">
+<span>View raw counts table</span>
+<span class="material-symbols-outlined text-[14px] group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="mt-2 overflow-x-auto border border-[#CDD2C8] rounded-lg">
+<table class="w-full text-left border-collapse text-[11px]">
+<thead>
+<tr class="bg-[#DDE1DA] text-[#23261F] font-label-md">
+<th class="p-2 border-b border-[#CDD2C8]">Turn</th>
+<th class="p-2 border-b border-[#CDD2C8]">Places/Names</th>
+<th class="p-2 border-b border-[#CDD2C8]">Connectors</th>
+<th class="p-2 border-b border-[#CDD2C8]">Softening</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#CDD2C8] text-[#454B40]">
+<tr><td class="p-2 font-medium">Turn 1</td><td class="p-2">0</td><td class="p-2">1</td><td class="p-2">0</td></tr>
+<tr><td class="p-2 font-medium">Turn 2</td><td class="p-2">0</td><td class="p-2">1</td><td class="p-2">2</td></tr>
+<tr class="bg-[#F2F4EF]"><td class="p-2 font-medium text-[#23261F]">Turn 3 (Current)</td><td class="p-2 font-semibold text-[#23261F]">1</td><td class="p-2 font-semibold text-[#23261F]">2</td><td class="p-2 font-semibold text-[#23261F]">2</td></tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<!-- Section 5: Why this reply -->
+<div class="pt-6 flex flex-col gap-3.5 pb-8">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-[#2E4B3F]"></span>
+<h3 class="font-label-md text-label-md text-[#23261F] uppercase tracking-wider text-xs">5. Why this reply</h3>
+</div>
+<details class="group cursor-pointer">
+<summary class="list-none text-[11px] font-label-sm text-[#454B40] hover:text-[#23261F] flex items-center gap-1 select-none">
+<span>What is this?</span>
+<span class="material-symbols-outlined text-[14px] group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="mt-2 text-xs text-[#454B40] bg-[#DDE1DA]/60 p-2.5 rounded-lg border border-[#CDD2C8] leading-relaxed">
+                  The Sanctuary response policy pairs structural anchors in your text with open questions rather than offering diagnosis or unsolicited advice.
+                </div>
+</details>
+</div>
+<div class="p-4 bg-[#DDE1DA] rounded-xl border border-[#CDD2C8] flex flex-col gap-3">
+<p class="font-body-md text-body-md text-[#23261F] leading-relaxed">
+                This reply connects the spatial boundary (<em class="text-[#2E4B3F] not-italic font-semibold">"walked past"</em>) with the unstated conflict between task demands and cold stillness mentioned in your second sentence.
+              </p>
+<div class="pt-3 border-t border-[#CDD2C8] flex items-center gap-2 text-xs text-[#454B40]">
+<span class="material-symbols-outlined text-[15px] text-[#2E4B3F]">anchor</span>
+<span class="font-label-sm">Anchors selected: Perimeter walk + Cold air pause</span>
+</div>
+</div>
+<!-- Rigorous Reassurance Stamp -->
+<div class="p-3 rounded-lg bg-[#F2F4EF] border border-[#CDD2C8] flex items-start gap-2.5 text-xs text-[#454B40]">
+<span class="material-symbols-outlined text-[16px] text-[#2E4B3F] mt-0.5">verified</span>
+<p class="font-label-sm leading-snug">
+                Grounded in sentence syntactic linkage. Zero inferred psychological traits.
+              </p>
+</div>
+</div>
+</div>
+<!-- Sheet Footer Bar -->
+<div class="px-6 py-4 border-t border-[#CDD2C8] bg-[#F6F7F3] flex items-center justify-between text-xs text-[#454B40]">
+<span class="font-label-sm">Local inspect view</span>
+<button class="text-[#2E4B3F] font-label-md hover:underline cursor-pointer" id="closeSheetBtnFooter" type="button">
+            Dismiss panel (Esc)
+          </button>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<script>
+  (function () {
+    const sheet = document.getElementById('inspectionSheet');
+    const openBtn = document.getElementById('inspectToggleBtn');
+    const closeBtn = document.getElementById('closeSheetBtn');
+    const closeBtnFooter = document.getElementById('closeSheetBtnFooter');
+
+    function openInspection() {
+      if (!sheet) return;
+      sheet.classList.remove('translate-x-full');
+      openBtn?.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeInspection() {
+      if (!sheet) return;
+      sheet.classList.add('translate-x-full');
+      openBtn?.setAttribute('aria-expanded', 'false');
+    }
+
+    openBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isExpanded = openBtn.getAttribute('aria-expanded') === 'true';
+      if (isExpanded) {
+        closeInspection();
+      } else {
+        openInspection();
+      }
+    });
+
+    closeBtn?.addEventListener('click', closeInspection);
+    closeBtnFooter?.addEventListener('click', closeInspection);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeInspection();
+      }
+    });
+  })();
+</script></main></div></body></html>

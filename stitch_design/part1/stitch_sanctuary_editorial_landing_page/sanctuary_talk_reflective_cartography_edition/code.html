@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@100..900&amp;family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&amp;family=IBM+Plex+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"background":"#E2E6DF","surface-raised":"#ECEFE8","surface-recessed":"#D0D8CD","surface-container-low":"#DBE0D7","border-divider":"#C0C8BC","spruce-primary":"#20362C","spruce-hover":"#16261F","lichen-accent":"#BECB5E","on-surface":"#1A221E","on-surface-variant":"#4A554E","text-secondary":"#5B6860","destructive":"#943A3A","destructive-light":"#F3DFDF"},fontFamily:{"serif-head":["Source Serif 4","Literata","serif"],"literata":["Literata","serif"],"sans-ui":["IBM Plex Sans","Atkinson Hyperlegible Next","sans-serif"]}}}};</script></head><body class="bg-background font-sans-ui text-on-surface antialiased min-h-screen selection:bg-lichen-accent/30 selection:text-spruce-primary"><header class="hidden"><img alt="A strictly non-emotive, minimalist river-stone brand symbol with smooth organic pebbles stacked or resting side-by-side in deep spruce-green #2E4B3F.. Brand logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WLwibH1a6D15VoiRi40MEKlos8GegiuItKrt-nnXqcEc_aCHsbgoj3DVuaHkQGecWCgpAhoYH5W6-l8uBI6uePZSGNY6mpj3CIVYAXgeYNggzpPiMSE8cOACJFLztsVLQCUKRwDSPociCu_GNBRdax3K64Osa90uxjPgFweYcdtgg5dBSirFSlzt6GQ0mROb9T4sq70C_JA3AZhI9qZgqrPPcDfqzNWHoeZ8tEHfurmSNaVrtujgQO1Sk"/><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1Wg222OZpNx3_SAHVewrDRW6sPgjXMo4NZgmb0M-85c33lOys1hG-vxgEAFRM0clvzQesUKlMd6qgV7tMOFuYyOHgQ-sfqhH1-7cYn8rgwy4jBwI07W0CIJJ7SEAYKVq-vSgsNd29fvkNuYIyCel90bIqD0LVFLNndn-kN4Y5vSr887J-s16XYYeIyYyixoCRL80X9k_S79C8enqiW6kavwAbCpQQ_wxee9On-QBrMREFR5TbVHL5jV_Yg"/></header>
+<!-- Left Navigation Rail (88px) -->
+<aside class="fixed left-0 top-0 h-full w-[88px] bg-[#D7DDD2] border-r border-border-divider z-50 flex flex-col items-center justify-between py-6 select-none"><div class="flex flex-col items-center w-full"><div class="mb-8 flex items-center justify-center p-2 rounded-lg hover:bg-surface-raised transition-colors" title="Sanctuary"><img alt="A strictly non-emotive, minimalist river-stone brand symbol with smooth organic pebbles stacked or resting side-by-side in deep spruce-green #2E4B3F.. Brand logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WLwibH1a6D15VoiRi40MEKlos8GegiuItKrt-nnXqcEc_aCHsbgoj3DVuaHkQGecWCgpAhoYH5W6-l8uBI6uePZSGNY6mpj3CIVYAXgeYNggzpPiMSE8cOACJFLztsVLQCUKRwDSPociCu_GNBRdax3K64Osa90uxjPgFweYcdtgg5dBSirFSlzt6GQ0mROb9T4sq70C_JA3AZhI9qZgqrPPcDfqzNWHoeZ8tEHfurmSNaVrtujgQO1Sk"/></div><nav class="flex flex-col items-center gap-3 w-full px-2"><a aria-current="page" class="flex flex-col items-center justify-center w-full py-2.5 px-1 bg-spruce-primary text-[#E2E6DF] rounded-lg transition-colors group" data-path="talk" href="#"><span class="material-symbols-outlined text-2xl mb-1">forum</span><span class="text-[11px] font-sans-ui tracking-tight text-center">Talk</span></a><a class="flex flex-col items-center justify-center w-full py-2.5 px-1 rounded-lg text-text-secondary hover:bg-surface-raised hover:text-on-surface transition-colors group" data-path="moments" href="#"><span class="material-symbols-outlined text-2xl mb-1">filter_vintage</span><span class="text-[11px] font-sans-ui tracking-tight text-center">Moments</span></a><a class="flex flex-col items-center justify-center w-full py-2.5 px-1 rounded-lg text-text-secondary hover:bg-surface-raised hover:text-on-surface transition-colors group" data-path="remembered" href="#"><span class="material-symbols-outlined text-2xl mb-1">auto_stories</span><span class="text-[11px] font-sans-ui tracking-tight text-center">Remembered</span></a><a class="flex flex-col items-center justify-center w-full py-2.5 px-1 rounded-lg text-text-secondary hover:bg-surface-raised hover:text-on-surface transition-colors group" data-path="calm" href="#"><span class="material-symbols-outlined text-2xl mb-1">spa</span><span class="text-[11px] font-sans-ui tracking-tight text-center">Calm</span></a><a class="flex flex-col items-center justify-center w-full py-2.5 px-1 rounded-lg text-text-secondary hover:bg-surface-raised hover:text-on-surface transition-colors group" data-path="privacy" href="#"><span class="material-symbols-outlined text-2xl mb-1">shield</span><span class="text-[11px] font-sans-ui tracking-tight text-center">Privacy</span></a></nav></div><div class="flex flex-col items-center gap-4 w-full px-2"><a class="flex flex-col items-center justify-center w-full py-2 text-text-secondary hover:text-on-surface transition-colors" data-path="support" href="#"><span class="material-symbols-outlined text-xl mb-0.5">help_outline</span><span class="text-[11px] font-sans-ui tracking-tight text-center">Support</span></a><button class="p-1 rounded-full hover:bg-surface-raised transition-colors focus:outline-none" title="Pebble mascot toggle" type="button"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1Wg222OZpNx3_SAHVewrDRW6sPgjXMo4NZgmb0M-85c33lOys1hG-vxgEAFRM0clvzQesUKlMd6qgV7tMOFuYyOHgQ-sfqhH1-7cYn8rgwy4jBwI07W0CIJJ7SEAYKVq-vSgsNd29fvkNuYIyCel90bIqD0LVFLNndn-kN4Y5vSr887J-s16XYYeIyYyixoCRL80X9k_S79C8enqiW6kavwAbCpQQ_wxee9On-QBrMREFR5TbVHL5jV_Yg"/></button></div></aside>
+<!-- Main Container -->
+<div class="pl-[88px] min-h-screen bg-background"><main class="w-full min-h-screen"><div class="flex flex-col w-full">
+<!-- Top State Selector & System Strip -->
+<div class="w-full bg-[#DCE1D8] border-b border-border-divider px-6 py-2.5 flex flex-wrap items-center justify-between gap-4 sticky top-0 z-40">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-spruce-primary"></span>
+<span class="font-sans-ui text-xs font-semibold uppercase tracking-wider text-text-secondary">Tactile Archival Split-View</span>
+</div>
+<div class="flex items-center gap-1.5 overflow-x-auto py-0.5">
+<button class="state-pill px-3 py-1 rounded text-xs font-medium transition-colors bg-spruce-primary text-[#E2E6DF]" id="btn-state-active" onclick="setViewState('active')" type="button">Active Conversation</button>
+<button class="state-pill px-3 py-1 rounded text-xs font-medium transition-colors text-text-secondary hover:bg-surface-raised" id="btn-state-empty" onclick="setViewState('empty')" type="button">Empty State</button>
+<button class="state-pill px-3 py-1 rounded text-xs font-medium transition-colors text-text-secondary hover:bg-surface-raised" id="btn-state-paused" onclick="setViewState('paused')" type="button">Paused State</button>
+<button class="state-pill px-3 py-1 rounded text-xs font-medium transition-colors text-text-secondary hover:bg-surface-raised" id="btn-state-recording" onclick="setViewState('recording')" type="button">Voice Recording</button>
+<button class="px-3 py-1 rounded text-xs font-medium transition-colors text-text-secondary hover:bg-surface-raised flex items-center gap-1" onclick="togglePrivacyVeil(true)" type="button">
+<span class="material-symbols-outlined text-[15px]">visibility_off</span> Stone Veil (Esc)
+</button>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs font-medium text-text-secondary flex items-center gap-1.5" id="volatile-badge">
+<span class="w-1.5 h-1.5 rounded-full bg-[#BECB5E]"></span> Ephemeral Encrypted RAM
+</span>
+</div>
+</div>
+<!-- Primary Stage (Split-View & Active Cartography) -->
+<div class="w-full max-w-[1360px] mx-auto px-6 md:px-10 py-7 flex flex-col relative min-h-[calc(100vh-45px)]">
+<!-- Conversation Header Bar -->
+<header class="w-full flex items-center justify-between pb-5 mb-7 border-b border-border-divider">
+<div class="flex items-center gap-3 group">
+<div class="flex items-center gap-2">
+<input class="font-serif-head text-2xl font-semibold text-on-surface bg-transparent border-0 focus:outline-none focus:ring-1 focus:ring-spruce-primary rounded px-1.5 py-0.5 tracking-tight w-[280px] sm:w-[460px] transition-all" id="convo-title" type="text" value="Quiet clinic return &amp; finite endurance"/>
+<span class="material-symbols-outlined text-text-secondary opacity-40 group-hover:opacity-100 transition-opacity text-sm cursor-pointer" onclick="document.getElementById('convo-title').focus();" title="Edit reflection title">edit</span>
+</div>
+<span class="text-xs text-text-secondary bg-[#D4DDD0] px-2.5 py-1 rounded border border-border-divider">Session #104 · Oct 24</span>
+</div>
+<!-- Header Controls -->
+<div class="flex items-center gap-2 relative">
+<button class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-border-divider bg-surface-raised hover:bg-[#E4E8DF] text-on-surface-variant text-xs font-medium transition-colors" onclick="togglePrivacyVeil(true)" title="Hide screen (Esc)" type="button">
+<span class="material-symbols-outlined text-[17px]">visibility_off</span>
+<span>Hide screen</span>
+<kbd class="text-[10px] opacity-60 ml-0.5 font-sans-ui">Esc</kbd>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-border-divider bg-surface-raised hover:bg-[#E4E8DF] text-on-surface-variant text-xs font-medium transition-colors" id="header-pause-btn" onclick="togglePauseState()" type="button">
+<span class="material-symbols-outlined text-[17px]" id="pause-icon">pause</span>
+<span id="pause-text">Pause</span>
+</button>
+<!-- Overflow Menu Trigger -->
+<div class="relative">
+<button class="p-1.5 rounded hover:bg-surface-raised border border-border-divider text-on-surface-variant transition-colors flex items-center" id="menu-btn" onclick="toggleOverflowMenu()" type="button">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+</button>
+<div class="hidden absolute right-0 mt-2 w-56 rounded bg-surface-raised border border-border-divider py-1.5 z-50 shadow-none" id="overflow-menu">
+<button class="w-full text-left px-3.5 py-2 text-xs font-medium text-on-surface hover:bg-[#DEE3D8] flex items-center gap-2" onclick="alert('Session settings modal triggered'); toggleOverflowMenu();" type="button">
+<span class="material-symbols-outlined text-base">tune</span> Settings
+</button>
+<button class="w-full text-left px-3.5 py-2 text-xs font-medium text-on-surface hover:bg-[#DEE3D8] flex items-center gap-2" onclick="alert('Viewing past archived stones'); toggleOverflowMenu();" type="button">
+<span class="material-symbols-outlined text-base">folder_open</span> Stone Archive
+</button>
+<button class="w-full text-left px-3.5 py-2 text-xs font-medium text-on-surface hover:bg-[#DEE3D8] flex items-center gap-2" onclick="toggleMascot()" type="button">
+<span class="material-symbols-outlined text-base">spa</span> <span id="mascot-toggle-text">Disable Pebble mascot</span>
+</button>
+<div class="my-1 border-t border-border-divider"></div>
+<button class="w-full text-left px-3.5 py-2 text-xs font-medium text-destructive hover:bg-destructive-light flex items-center justify-between" onclick="window.location.href='https://en.wikipedia.org/wiki/Limestone';" type="button">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-base">logout</span> Quick leave</span>
+<kbd class="text-[10px] opacity-70 font-sans-ui">Shift+Esc</kbd>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Balanced Split Architecture: Center (~520px) + Right (~420px) -->
+<div class="w-full flex flex-col xl:flex-row gap-10 items-start justify-between">
+<!-- Center Column (~520px) -->
+<section class="w-full max-w-[530px] flex flex-col gap-8 flex-shrink-0" id="main-reading-deck">
+<!-- View 1: Active Conversation State -->
+<div class="flex flex-col gap-7 transition-opacity duration-300" id="view-active">
+<!-- User Slip (Recessed tone #D0D8CD) -->
+<div class="flex flex-col items-end w-full">
+<div class="w-full bg-surface-recessed text-on-surface p-5 rounded-xl border border-border-divider text-[17px] leading-[1.65] font-literata">
+<p>
+We sat in silence during the drive back from the clinic. Neither of us wanted to say what was obvious: that whatever plan we make next is going to require more endurance than either of us has left.
+</p>
+</div>
+<span class="text-xs font-sans-ui text-text-secondary mt-1.5 mr-1 font-medium">08:12 AM · Inscribed</span>
+</div>
+<!-- Sanctuary Reflection (Literata 400 with Pebble Mascot) -->
+<div class="flex items-start gap-4 w-full">
+<!-- Mascot Glyph -->
+<div class="w-6 h-6 flex-shrink-0 mt-1" id="pebble-mascot-avatar">
+<svg class="w-full h-full fill-spruce-primary" viewbox="0 0 100 100">
+<path d="M50 15 C20 15 10 40 10 65 C10 85 30 92 50 92 C75 92 90 85 90 65 C90 40 80 15 50 15 Z"></path>
+<path d="M42 52 C45 56 49 56 52 52" fill="none" stroke="#BECB5E" stroke-linecap="round" stroke-width="3.5"></path>
+<path d="M60 52 C63 56 67 56 70 52" fill="none" stroke="#BECB5E" stroke-linecap="round" stroke-width="3.5"></path>
+<path d="M45 15 C45 6 55 6 55 15" fill="none" stroke="#BECB5E" stroke-width="3.5"></path>
+</svg>
+</div>
+<!-- Typographic reflection body -->
+<div class="flex flex-col gap-4 font-literata text-[20px] text-[#1E2621] leading-[1.7] antialiased">
+<p>
+Silence in a moving car carries a particular kind of exhaustion. When endurance is spent, silence can either be a wall or a shared acknowledgment that talking won't replenish you.
+</p>
+<p>
+In that quiet, did it feel like pulling apart, or resting together under an unspoken weight?
+</p>
+<!-- Sub-actions -->
+<div class="flex flex-wrap items-center gap-4 pt-3 text-xs font-sans-ui text-text-secondary border-t border-border-divider mt-1">
+<button class="hover:text-spruce-primary transition-colors flex items-center gap-1.5 py-0.5" onclick="toggleKeepMoment(this)" type="button">
+<span class="material-symbols-outlined text-[17px]" id="keep-icon">bookmark_border</span>
+<span id="keep-text">Keep this moment</span>
+</button>
+<button class="hover:text-spruce-primary transition-colors flex items-center gap-1.5 py-0.5" onclick="toggleReadRationale()" type="button">
+<span class="material-symbols-outlined text-[17px]">insights</span>
+<span>Cognitive parsing</span>
+</button>
+<button class="hover:text-spruce-primary transition-colors flex items-center gap-1.5 py-0.5" onclick="simulateAudioRead(this)" type="button">
+<span class="material-symbols-outlined text-[17px]" id="listen-icon">volume_up</span>
+<span id="listen-text">Listen</span>
+</button>
+</div>
+<!-- Parsing Rationale drawer -->
+<div class="hidden bg-surface-raised rounded-lg p-4 text-xs font-sans-ui text-on-surface-variant leading-relaxed border border-border-divider" id="read-rationale">
+<div class="flex items-center justify-between pb-2 mb-2 border-b border-border-divider">
+<span class="font-semibold text-on-surface">Narrative Extraction Note</span>
+<button class="material-symbols-outlined text-sm text-text-secondary hover:text-on-surface" onclick="toggleReadRationale()" type="button">close</button>
+</div>
+<p>
+The prompt isolates spatial confinement ("moving car") paired with shared depleted capacity ("endurance than either has left"). Reflection avoids solution-oriented framing and centers on the relational nature of shared silence.
+</p>
+</div>
+</div>
+</div>
+</div>
+<!-- View 2: Empty State -->
+<div class="hidden flex-col items-center text-center py-6 px-4" id="view-empty">
+<div class="w-32 h-32 mb-5 relative">
+<svg class="w-full h-full mx-auto" fill="none" viewbox="0 0 160 160">
+<ellipse cx="80" cy="95" fill="#D0D8CD" rx="65" ry="50"></ellipse>
+<path d="M 35 75 Q 80 85 125 72" fill="none" stroke="#B8C2B4" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M 30 100 Q 80 112 130 98" fill="none" stroke="#B8C2B4" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M 58 88 Q 66 94 74 88" fill="none" stroke="#20362C" stroke-linecap="round" stroke-width="3"></path>
+<path d="M 88 88 Q 96 94 104 88" fill="none" stroke="#20362C" stroke-linecap="round" stroke-width="3"></path>
+<path d="M 76 46 Q 74 25 80 18 Q 86 25 84 46 Z" fill="#BECB5E"></path>
+<path d="M 84 46 Q 95 32 101 26 Q 99 38 88 47 Z" fill="#A8B54F"></path>
+<path d="M 74 46 Q 64 34 58 29 Q 62 40 72 47 Z" fill="#A8B54F"></path>
+</svg>
+</div>
+<h2 class="font-serif-head text-2xl font-semibold text-on-surface mb-2">Say it however it comes out.</h2>
+<p class="font-sans-ui text-sm text-text-secondary max-w-[380px] mb-6">
+Words here are unranked, unindexed, and retained purely in session volatile storage.
+</p>
+<div class="flex flex-col gap-2.5 w-full max-w-sm text-left">
+<button class="w-full px-4 py-3 bg-surface-raised rounded-lg border border-border-divider hover:bg-[#E3E8DE] transition-colors text-on-surface text-sm font-sans-ui flex items-center justify-between group" onclick="populatePrompt('We sat in silence during the drive back from the clinic.')" type="button">
+<span>"We sat in silence during the drive"</span>
+<span class="material-symbols-outlined text-text-secondary group-hover:text-spruce-primary transition-colors text-base">arrow_forward</span>
+</button>
+<button class="w-full px-4 py-3 bg-surface-raised rounded-lg border border-border-divider hover:bg-[#E3E8DE] transition-colors text-on-surface text-sm font-sans-ui flex items-center justify-between group" onclick="populatePrompt('Neither of us wants to admit how worn down we are.')" type="button">
+<span>"Neither of us wants to admit"</span>
+<span class="material-symbols-outlined text-text-secondary group-hover:text-spruce-primary transition-colors text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Composer Box -->
+<div class="w-full flex flex-col gap-2 pt-2" id="composer-container">
+<div class="w-full bg-surface-raised rounded-xl border border-border-divider p-4 flex flex-col focus-within:border-spruce-primary transition-colors" id="normal-composer">
+<textarea class="w-full bg-transparent resize-none border-0 focus:outline-none font-sans-ui text-base text-on-surface placeholder:text-text-secondary leading-relaxed max-h-[320px]" id="journal-input" oninput="handleInput(this)" placeholder="Start anywhere..." rows="3"></textarea>
+<div class="flex items-center justify-between pt-3 border-t border-border-divider mt-2">
+<div class="flex items-center gap-2">
+<button class="p-1.5 rounded hover:bg-[#DEE3D8] text-text-secondary hover:text-spruce-primary transition-colors flex items-center justify-center" onclick="setViewState('recording')" title="Voice stream" type="button">
+<span class="material-symbols-outlined text-xl">mic</span>
+</button>
+<span class="font-sans-ui text-xs text-text-secondary" id="char-counter">0 / 2,000</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-sans-ui text-xs text-text-secondary hidden sm:inline">⌘ + Enter</span>
+<button class="px-5 py-2 rounded bg-spruce-primary text-[#E2E6DF] font-sans-ui text-xs font-semibold hover:bg-spruce-hover transition-colors flex items-center gap-1.5" id="send-btn" onclick="submitMessage()" type="button">
+<span>Inscribe</span>
+<span class="material-symbols-outlined text-sm">arrow_upward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between px-1 text-text-secondary font-sans-ui text-xs">
+<div class="flex items-center gap-2" id="reply-status">
+<span class="w-2 h-2 rounded-full bg-[#BECB5E]"></span>
+<span id="reply-status-text">Synchronized in memory</span>
+</div>
+<span>Encrypted local session</span>
+</div>
+</div>
+<!-- View 3: Paused State -->
+<div class="hidden w-full bg-surface-raised rounded-xl border border-border-divider p-8 flex-col items-center text-center gap-4" id="view-paused">
+<div class="w-10 h-10 rounded-full bg-[#D4DDD0] flex items-center justify-center text-spruce-primary">
+<span class="material-symbols-outlined text-xl">pause</span>
+</div>
+<div>
+<h3 class="font-serif-head text-xl font-semibold text-on-surface mb-1">Session Paused</h3>
+<p class="font-sans-ui text-xs text-text-secondary">Input stream frozen. Nothing transmitted or analyzed.</p>
+</div>
+<div class="flex items-center justify-center gap-3 w-full pt-1">
+<button class="px-5 py-2 rounded border border-border-divider bg-[#DCE2D8] hover:bg-[#D5DCD0] text-spruce-primary font-sans-ui text-xs font-semibold transition-colors flex items-center gap-1.5" onclick="startBreathingExercise()" type="button">
+<span class="material-symbols-outlined text-base">air</span> Paced Breath
+</button>
+<button class="px-5 py-2 rounded bg-spruce-primary text-[#E2E6DF] font-sans-ui text-xs font-semibold hover:bg-spruce-hover transition-colors flex items-center gap-1.5" onclick="togglePauseState()" type="button">
+<span class="material-symbols-outlined text-base">play_arrow</span> Resume
+</button>
+</div>
+</div>
+<!-- View 4: Recording State -->
+<div class="hidden w-full bg-surface-raised rounded-xl border border-border-divider p-5 flex-col gap-4" id="view-recording">
+<div class="flex items-center justify-between pb-3 border-b border-border-divider">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-destructive animate-ping"></span>
+<span class="font-sans-ui text-xs font-semibold text-on-surface">Vocal capture stream</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-mono text-xs text-text-secondary" id="rec-timer">00:28</span>
+<button class="text-text-secondary hover:text-destructive text-xs ml-2 font-medium" onclick="cancelRecording()" type="button">Cancel</button>
+</div>
+</div>
+<!-- Waveform Indicator -->
+<div class="h-10 w-full bg-background rounded flex items-center justify-center gap-1 px-4 overflow-hidden border border-border-divider">
+<span class="w-1 bg-spruce-primary rounded-full h-2 animate-pulse" style="animation-duration: 0.7s;"></span>
+<span class="w-1 bg-spruce-primary rounded-full h-6 animate-pulse" style="animation-duration: 0.4s;"></span>
+<span class="w-1 bg-spruce-primary rounded-full h-8 animate-pulse" style="animation-duration: 0.55s;"></span>
+<span class="w-1 bg-spruce-primary rounded-full h-4 animate-pulse" style="animation-duration: 0.65s;"></span>
+<span class="w-1 bg-spruce-primary rounded-full h-7 animate-pulse" style="animation-duration: 0.45s;"></span>
+<span class="w-1 bg-spruce-primary rounded-full h-3 animate-pulse" style="animation-duration: 0.8s;"></span>
+<span class="w-1 bg-spruce-primary rounded-full h-9 animate-pulse" style="animation-duration: 0.5s;"></span>
+<span class="w-1 bg-spruce-primary rounded-full h-5 animate-pulse" style="animation-duration: 0.6s;"></span>
+</div>
+<textarea class="w-full bg-[#FAFBF9] border border-border-divider rounded p-3 font-sans-ui text-sm text-on-surface focus:outline-none" id="voice-transcript" rows="2">We sat in silence during the drive back from the clinic, knowing there is very little endurance left to budget...</textarea>
+<div class="flex items-center justify-between pt-1">
+<button class="text-xs text-text-secondary hover:text-on-surface font-sans-ui" onclick="cancelRecording()" type="button">Discard</button>
+<div class="flex items-center gap-2">
+<button class="px-4 py-1.5 rounded border border-border-divider bg-[#DCE2D8] hover:bg-[#D5DCD0] text-spruce-primary text-xs font-semibold font-sans-ui" onclick="insertVoiceText()" type="button">Send to composer</button>
+<button class="px-4 py-1.5 rounded bg-spruce-primary text-[#E2E6DF] text-xs font-semibold font-sans-ui hover:bg-spruce-hover" onclick="sendVoiceMessage()" type="button">Direct Send</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Column: Active Cartography & Tactile Archival Dock (~420px) -->
+<aside class="w-full xl:w-[420px] flex flex-col gap-6 flex-shrink-0">
+<!-- Panel 1: Reflective Cartography / Thought Map -->
+<div class="w-full bg-surface-raised rounded-xl border border-border-divider p-6 flex flex-col gap-4">
+<div class="flex items-center justify-between pb-3 border-b border-border-divider">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-spruce-primary text-lg">alt_route</span>
+<h3 class="font-serif-head text-base font-semibold text-on-surface">Reflective Cartography</h3>
+</div>
+<span class="text-[11px] font-sans-ui tracking-wide text-text-secondary bg-[#DCE2D8] px-2 py-0.5 rounded border border-border-divider">Active Map</span>
+</div>
+<!-- Extracted Narrative Themes -->
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold font-sans-ui uppercase tracking-wider text-text-secondary">Extracted Themes</span>
+<span class="text-[11px] text-text-secondary">3 active clusters</span>
+</div>
+<!-- Theme Items -->
+<div class="flex flex-col gap-2.5">
+<!-- Theme 1 -->
+<div class="p-3 bg-[#E1E6DC] rounded-lg border border-border-divider flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#BECB5E]"></span>
+<span class="font-sans-ui text-xs font-semibold text-on-surface">Perimeter Walking</span>
+</div>
+<span class="text-[10px] font-mono text-text-secondary">Freq: 0.82</span>
+</div>
+<p class="font-sans-ui text-xs text-text-secondary leading-snug">
+Kinetic displacement to postpone stillness and confrontation.
+</p>
+</div>
+<!-- Theme 2 -->
+<div class="p-3 bg-[#E1E6DC] rounded-lg border border-border-divider flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-spruce-primary"></span>
+<span class="font-sans-ui text-xs font-semibold text-on-surface">Unvoiced Obligation</span>
+</div>
+<span class="text-[10px] font-mono text-text-secondary">Freq: 0.94</span>
+</div>
+<p class="font-sans-ui text-xs text-text-secondary leading-snug">
+Mutual tacit awareness of heavy next steps avoided in verbal exchange.
+</p>
+</div>
+<!-- Theme 3 -->
+<div class="p-3 bg-[#E1E6DC] rounded-lg border border-border-divider flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#8E9B89]"></span>
+<span class="font-sans-ui text-xs font-semibold text-on-surface">Boundary Fatigue</span>
+</div>
+<span class="text-[10px] font-mono text-text-secondary">Freq: 0.76</span>
+</div>
+<p class="font-sans-ui text-xs text-text-secondary leading-snug">
+Reserves depleted beyond the capacity to negotiate or construct alternatives.
+</p>
+</div>
+</div>
+<!-- Mini Cartographic Density Chart -->
+<div class="pt-2 border-t border-border-divider flex flex-col gap-2">
+<div class="flex items-center justify-between text-[11px] font-sans-ui text-text-secondary">
+<span>Cartographic Drift</span>
+<span>Stable equilibrium</span>
+</div>
+<div class="w-full bg-[#D4DDD0] h-2 rounded overflow-hidden flex">
+<div class="bg-[#BECB5E] h-full" style="width: 32%"></div>
+<div class="bg-spruce-primary h-full" style="width: 44%"></div>
+<div class="bg-[#8E9B89] h-full" style="width: 24%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Panel 2: Earth Ambiance Sound Mixer with Slider Stones -->
+<div class="w-full bg-surface-raised rounded-xl border border-border-divider p-6 flex flex-col gap-4">
+<div class="flex items-center justify-between pb-3 border-b border-border-divider">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-spruce-primary text-lg">graphic_eq</span>
+<h3 class="font-serif-head text-base font-semibold text-on-surface">Earth Ambiance</h3>
+</div>
+<span class="text-[11px] font-sans-ui tracking-wide text-text-secondary bg-[#DCE2D8] px-2 py-0.5 rounded border border-border-divider">Tactile Mixer</span>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Channel 1 -->
+<div class="flex items-center justify-between gap-3">
+<div class="flex items-center gap-2.5">
+<button class="w-7 h-7 rounded bg-spruce-primary text-[#E2E6DF] flex items-center justify-center transition-colors hover:bg-spruce-hover" onclick="toggleAudioTrack(this)" type="button">
+<span class="material-symbols-outlined text-sm">air</span>
+</button>
+<div class="flex flex-col">
+<span class="font-sans-ui text-xs font-semibold text-on-surface">Glacial Wind</span>
+<span class="font-sans-ui text-[11px] text-text-secondary">380 Hz sub-hum</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<input class="w-28 accent-[#20362C] h-1.5 bg-[#CBD4C8] rounded cursor-pointer" type="range" value="45"/>
+<span class="text-[11px] font-mono text-text-secondary w-6 text-right">45%</span>
+</div>
+</div>
+<!-- Channel 2 -->
+<div class="flex items-center justify-between gap-3">
+<div class="flex items-center gap-2.5">
+<button class="w-7 h-7 rounded bg-spruce-primary text-[#E2E6DF] flex items-center justify-center transition-colors hover:bg-spruce-hover" onclick="toggleAudioTrack(this)" type="button">
+<span class="material-symbols-outlined text-sm">water_drop</span>
+</button>
+<div class="flex flex-col">
+<span class="font-sans-ui text-xs font-semibold text-on-surface">Riverbed Pebbles</span>
+<span class="font-sans-ui text-[11px] text-text-secondary">Silt trickle resonance</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<input class="w-28 accent-[#20362C] h-1.5 bg-[#CBD4C8] rounded cursor-pointer" type="range" value="68"/>
+<span class="text-[11px] font-mono text-text-secondary w-6 text-right">68%</span>
+</div>
+</div>
+<!-- Channel 3 -->
+<div class="flex items-center justify-between gap-3">
+<div class="flex items-center gap-2.5">
+<button class="w-7 h-7 rounded bg-[#D2DAD0] text-spruce-primary flex items-center justify-center transition-colors hover:bg-[#C6CFC4]" onclick="toggleAudioTrack(this)" type="button">
+<span class="material-symbols-outlined text-sm">forest</span>
+</button>
+<div class="flex flex-col">
+<span class="font-sans-ui text-xs font-semibold text-on-surface">Lichen Rustle</span>
+<span class="font-sans-ui text-[11px] text-text-secondary">Muted pine floor</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<input class="w-28 accent-[#20362C] h-1.5 bg-[#CBD4C8] rounded cursor-pointer" type="range" value="0"/>
+<span class="text-[11px] font-mono text-text-secondary w-6 text-right">0%</span>
+</div>
+</div>
+</div>
+<div class="pt-2 border-t border-border-divider flex items-center justify-between text-xs font-sans-ui text-text-secondary">
+<span>Master Output: Filtered</span>
+<button class="text-spruce-primary font-medium hover:underline text-xs" onclick="alert('Ambient landscape profile synchronized to device.')" type="button">Save Profile</button>
+</div>
+</div>
+<!-- Panel 3: Cryptographic Local Session Status Card -->
+<div class="w-full bg-surface-raised rounded-xl border border-border-divider p-6 flex flex-col gap-3.5">
+<div class="flex items-center justify-between pb-2 border-b border-border-divider">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-spruce-primary text-base">lock</span>
+<h4 class="font-sans-ui text-xs font-semibold uppercase tracking-wider text-on-surface">Cryptographic Session</h4>
+</div>
+<span class="text-[10px] font-mono bg-[#BECB5E]/30 text-spruce-primary px-2 py-0.5 rounded font-semibold">ED25519-RAM</span>
+</div>
+<p class="font-sans-ui text-xs text-text-secondary leading-relaxed">
+All linguistic parses and cartography coordinates exist purely in WebAssembly ephemeral allocation. Keys zeroized on process termination or navigation.
+</p>
+<div class="flex items-center justify-between pt-2 border-t border-border-divider text-[11px] font-sans-ui">
+<span class="flex items-center gap-1.5 text-on-surface font-medium">
+<span class="w-2 h-2 rounded-full bg-[#BECB5E]"></span>
+Zero cloud telemetry
+</span>
+<span class="font-mono text-text-secondary">RAM: 4.2 MB</span>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<!-- Stone Curtain / Screen Privacy Veil (Esc) -->
+<div class="fixed inset-0 z-50 bg-[#17241D]/90 backdrop-blur-none flex flex-col items-center justify-center p-6 hidden select-none" id="privacy-veil">
+<div class="max-w-md w-full flex flex-col items-center text-center gap-5">
+<div class="w-16 h-16 opacity-85">
+<svg class="w-full h-full fill-[#D0D8CD]" viewbox="0 0 100 100">
+<path d="M50 20 C20 20 10 45 10 70 C10 88 30 92 50 92 C75 92 90 88 90 70 C90 45 80 20 50 20 Z"></path>
+<path d="M40 60 Q 48 68 56 60" fill="none" stroke="#20362C" stroke-linecap="round" stroke-width="4"></path>
+<path d="M64 60 Q 72 68 80 60" fill="none" stroke="#20362C" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+</div>
+<div>
+<h2 class="font-serif-head text-2xl font-semibold text-[#E2E6DF] mb-1.5">Curtain Sealed</h2>
+<p class="font-sans-ui text-xs text-[#A4B3A8]">Screen hidden from room view. Press Escape or Hold the button below to inspect.</p>
+</div>
+<button class="w-full max-w-xs py-3 px-6 rounded-lg bg-[#243B30] border border-border-divider/30 text-[#E2E6DF] font-sans-ui text-xs font-semibold hover:bg-[#2C473A] active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer" id="peek-button" type="button">
+<span class="material-symbols-outlined text-base">visibility</span>
+<span>Press &amp; Hold to Peek</span>
+</button>
+<button class="text-xs font-sans-ui text-[#A4B3A8] hover:text-[#E2E6DF] underline underline-offset-4 transition-colors" onclick="togglePrivacyVeil(false)" type="button">
+Dismiss Veil (Esc)
+</button>
+</div>
+</div>
+<!-- Paced Breathing Modal for Paused State -->
+<div class="fixed inset-0 z-50 bg-[#16211B]/80 hidden items-center justify-center p-6" id="breathing-modal">
+<div class="bg-surface-raised rounded-xl border border-border-divider p-8 max-w-sm w-full flex flex-col items-center text-center gap-6">
+<span class="font-sans-ui text-xs uppercase tracking-widest text-text-secondary font-semibold">Paced Respiration</span>
+<div class="relative w-36 h-36 flex items-center justify-center">
+<div class="w-24 h-24 rounded-full bg-[#D4DDD0] border border-border-divider transition-all duration-[4000ms] ease-in-out flex items-center justify-center" id="breath-circle">
+<span class="font-serif-head text-base font-semibold text-spruce-primary" id="breath-cue">Breathe In</span>
+</div>
+</div>
+<p class="font-sans-ui text-xs text-text-secondary">Expand gently with the rhythm of the stone circle. Empty completely on release.</p>
+<button class="px-5 py-2 rounded bg-spruce-primary text-[#E2E6DF] font-sans-ui text-xs font-semibold hover:bg-spruce-hover transition-colors" onclick="closeBreathingExercise()" type="button">
+Return to stillness
+</button>
+</div>
+</div>
+</div>
+<!-- Vanilla Interactive Orchestration -->
+<script>
+  let currentViewState = 'active';
+  let isMascotEnabled = true;
+  let isVeiled = false;
+  let isPaused = false;
+  let isKept = false;
+  let isListening = false;
+  let breathInterval = null;
+
+  function setViewState(state) {
+    currentViewState = state;
+    
+    // UI Pills sync
+    document.querySelectorAll('.state-pill').forEach(btn => {
+      btn.className = 'state-pill px-3 py-1 rounded text-xs font-medium transition-colors text-text-secondary hover:bg-surface-raised';
+    });
+    const activeBtn = document.getElementById('btn-state-' + state);
+    if (activeBtn) {
+      activeBtn.className = 'state-pill px-3 py-1 rounded text-xs font-medium transition-colors bg-spruce-primary text-[#E2E6DF]';
+    }
+
+    const viewActive = document.getElementById('view-active');
+    const viewEmpty = document.getElementById('view-empty');
+    const viewPaused = document.getElementById('view-paused');
+    const viewRecording = document.getElementById('view-recording');
+    const composerBox = document.getElementById('composer-container');
+
+    viewActive.classList.add('hidden');
+    viewEmpty.classList.add('hidden');
+    viewPaused.classList.add('hidden');
+    viewRecording.classList.add('hidden');
+    composerBox.classList.remove('hidden');
+
+    if (state === 'active') {
+      viewActive.classList.remove('hidden');
+    } else if (state === 'empty') {
+      viewEmpty.classList.remove('hidden');
+    } else if (state === 'paused') {
+      viewActive.classList.remove('hidden');
+      composerBox.classList.add('hidden');
+      viewPaused.classList.remove('hidden');
+    } else if (state === 'recording') {
+      viewActive.classList.remove('hidden');
+      composerBox.classList.add('hidden');
+      viewRecording.classList.remove('hidden');
+    }
+  }
+
+  function handleInput(textarea) {
+    const len = textarea.value.length;
+    document.getElementById('char-counter').textContent = `${len.toLocaleString()} / 2,000`;
+    
+    textarea.style.height = 'auto';
+    textarea.style.height = Math.min(textarea.scrollHeight, 260) + 'px';
+  }
+
+  function populatePrompt(text) {
+    const input = document.getElementById('journal-input');
+    setViewState('active');
+    input.value = text;
+    handleInput(input);
+    input.focus();
+  }
+
+  function submitMessage() {
+    const input = document.getElementById('journal-input');
+    const val = input.value.trim();
+    if (!val) return;
+
+    const replyStatus = document.getElementById('reply-status-text');
+    replyStatus.textContent = 'Parsing reflections...';
+
+    setTimeout(() => {
+      replyStatus.textContent = 'Synchronized in memory';
+      input.value = '';
+      handleInput(input);
+      setViewState('active');
+    }, 850);
+  }
+
+  function togglePauseState() {
+    isPaused = !isPaused;
+    const pauseBtn = document.getElementById('header-pause-btn');
+    const pauseIcon = document.getElementById('pause-icon');
+    const pauseText = document.getElementById('pause-text');
+
+    if (isPaused) {
+      setViewState('paused');
+      pauseIcon.textContent = 'play_arrow';
+      pauseText.textContent = 'Resume';
+      pauseBtn.classList.add('bg-[#D0D8CD]');
+    } else {
+      setViewState('active');
+      pauseIcon.textContent = 'pause';
+      pauseText.textContent = 'Pause';
+      pauseBtn.classList.remove('bg-[#D0D8CD]');
+    }
+  }
+
+  function togglePrivacyVeil(show) {
+    isVeiled = show;
+    const veil = document.getElementById('privacy-veil');
+    if (show) {
+      veil.classList.remove('hidden');
+    } else {
+      veil.classList.add('hidden');
+    }
+  }
+
+  function toggleOverflowMenu() {
+    const menu = document.getElementById('overflow-menu');
+    menu.classList.toggle('hidden');
+  }
+
+  function toggleMascot() {
+    isMascotEnabled = !isMascotEnabled;
+    const mascot = document.getElementById('pebble-mascot-avatar');
+    const text = document.getElementById('mascot-toggle-text');
+    if (isMascotEnabled) {
+      mascot.classList.remove('opacity-0');
+      text.textContent = 'Disable Pebble mascot';
+    } else {
+      mascot.classList.add('opacity-0');
+      text.textContent = 'Enable Pebble mascot';
+    }
+    toggleOverflowMenu();
+  }
+
+  function toggleKeepMoment(btn) {
+    isKept = !isKept;
+    const icon = document.getElementById('keep-icon');
+    const text = document.getElementById('keep-text');
+    if (isKept) {
+      icon.textContent = 'bookmark';
+      text.textContent = 'Moment kept';
+      btn.classList.add('text-spruce-primary');
+    } else {
+      icon.textContent = 'bookmark_border';
+      text.textContent = 'Keep this moment';
+      btn.classList.remove('text-spruce-primary');
+    }
+  }
+
+  function toggleReadRationale() {
+    const drawer = document.getElementById('read-rationale');
+    drawer.classList.toggle('hidden');
+  }
+
+  function simulateAudioRead(btn) {
+    isListening = !isListening;
+    const icon = document.getElementById('listen-icon');
+    const text = document.getElementById('listen-text');
+    if (isListening) {
+      icon.textContent = 'stop';
+      text.textContent = 'Ambient narration...';
+      btn.classList.add('text-spruce-primary');
+    } else {
+      icon.textContent = 'volume_up';
+      text.textContent = 'Listen';
+      btn.classList.remove('text-spruce-primary');
+    }
+  }
+
+  function toggleAudioTrack(btn) {
+    btn.classList.toggle('bg-spruce-primary');
+    btn.classList.toggle('text-[#E2E6DF]');
+    btn.classList.toggle('bg-[#D2DAD0]');
+    btn.classList.toggle('text-spruce-primary');
+  }
+
+  function cancelRecording() {
+    setViewState('active');
+  }
+
+  function insertVoiceText() {
+    const transcript = document.getElementById('voice-transcript').value;
+    populatePrompt(transcript);
+  }
+
+  function sendVoiceMessage() {
+    insertVoiceText();
+    submitMessage();
+  }
+
+  // Breathing Guide Loop
+  function startBreathingExercise() {
+    const modal = document.getElementById('breathing-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+
+    const circle = document.getElementById('breath-circle');
+    const cue = document.getElementById('breath-cue');
+
+    let isInhale = true;
+    function cycle() {
+      if (isInhale) {
+        cue.textContent = 'Breathe Out';
+        circle.style.transform = 'scale(0.75)';
+        circle.classList.replace('bg-[#D4DDD0]', 'bg-[#BECB5E]/30');
+      } else {
+        cue.textContent = 'Breathe In';
+        circle.style.transform = 'scale(1.2)';
+        circle.classList.replace('bg-[#BECB5E]/30', 'bg-[#D4DDD0]');
+      }
+      isInhale = !isInhale;
+    }
+
+    cycle();
+    breathInterval = setInterval(cycle, 4000);
+  }
+
+  function closeBreathingExercise() {
+    const modal = document.getElementById('breathing-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    if (breathInterval) clearInterval(breathInterval);
+  }
+
+  // Press and hold peek logic
+  const peekBtn = document.getElementById('peek-button');
+  const veil = document.getElementById('privacy-veil');
+
+  peekBtn.addEventListener('mousedown', () => {
+    veil.classList.add('opacity-10');
+  });
+  peekBtn.addEventListener('mouseup', () => {
+    veil.classList.remove('opacity-10');
+  });
+  peekBtn.addEventListener('mouseleave', () => {
+    veil.classList.remove('opacity-10');
+  });
+  peekBtn.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    veil.classList.add('opacity-10');
+  });
+  peekBtn.addEventListener('touchend', () => {
+    veil.classList.remove('opacity-10');
+  });
+
+  // Global Keyboard shortcuts
+  window.addEventListener('keydown', (e) => {
+    if (e.shiftKey && e.key === 'Escape') {
+      window.location.href = 'https://en.wikipedia.org/wiki/Limestone';
+      return;
+    }
+    if (e.key === 'Escape') {
+      togglePrivacyVeil(!isVeiled);
+    }
+    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+      submitMessage();
+    }
+  });
+
+  window.addEventListener('click', (e) => {
+    const menu = document.getElementById('overflow-menu');
+    const menuBtn = document.getElementById('menu-btn');
+    if (!menu.contains(e.target) && !menuBtn.contains(e.target) && !menu.classList.contains('hidden')) {
+      menu.classList.add('hidden');
+    }
+  });
+</script></main></div></body></html>

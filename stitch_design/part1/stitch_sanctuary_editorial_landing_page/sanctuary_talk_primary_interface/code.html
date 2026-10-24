@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@100..900&family=Literata:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary-container":"#55695e","on-primary-fixed":"#022016","surface-bright":"#f7faf5","surface-variant":"#e0e3de","primary-container":"#2e4b3f","surface":"#f7faf5","primary":"#173429","tertiary-fixed-dim":"#bbcabe","secondary-container":"#d2e8da","on-surface":"#191c1a","on-tertiary-fixed-variant":"#3c4a41","surface-container-low":"#f2f4ef","primary-fixed":"#c9ead9","on-background":"#191c1a","secondary":"#4f6358","on-error":"#ffffff","tertiary":"#243229","surface-container-high":"#e6e9e4","on-tertiary-container":"#a7b6ab","on-primary":"#ffffff","tertiary-fixed":"#d7e6da","background":"#f7faf5","tertiary-container":"#3a483f","outline":"#727974","surface-container-lowest":"#ffffff","on-tertiary":"#ffffff","on-primary-fixed-variant":"#304d40","on-error-container":"#93000a","on-secondary-fixed-variant":"#384b41","inverse-on-surface":"#eff2ed","surface-container-highest":"#e0e3de","on-secondary-fixed":"#0c1f17","on-surface-variant":"#424844","on-tertiary-fixed":"#111e17","on-primary-container":"#9abaab","inverse-surface":"#2d312e","surface-tint":"#476558","surface-dim":"#d8dbd6","error":"#ba1a1a","secondary-fixed-dim":"#b6ccbe","surface-container":"#ecefea","error-container":"#ffdad6","secondary-fixed":"#d2e8da","outline-variant":"#c1c8c3","primary-fixed-dim":"#adcebe","inverse-primary":"#adcebe","on-secondary":"#ffffff"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"gutter":"1.5rem","space-md":"1.25rem","gutter-lg":"2.5rem","margin-lg":"5rem","space-xl":"3.5rem","space-sm":"0.75rem","margin-md":"3rem","space-lg":"2.25rem","margin":"1.5rem","space-xs":"0.375rem"},fontFamily:{"body-sm":["Atkinson Hyperlegible Next"],"label-sm":["Atkinson Hyperlegible Next"],"headline-lg-mobile":["Literata"],"label-md":["Atkinson Hyperlegible Next"],"headline-md":["Literata"],"body-lg":["Atkinson Hyperlegible Next"],"body-md":["Atkinson Hyperlegible Next"],"headline-sm":["Literata"],"display-lg":["Literata"],"display-lg-mobile":["Literata"],"headline-lg":["Literata"]},fontSize:{"body-sm":["0.875rem",{"lineHeight":"1.375rem","fontWeight":"400"}],"label-sm":["0.75rem",{"lineHeight":"1rem","letterSpacing":"0.05em","fontWeight":"500"}],"headline-lg-mobile":["1.75rem",{"lineHeight":"2.25rem","letterSpacing":"-0.01em","fontWeight":"400"}],"label-md":["0.875rem",{"lineHeight":"1.25rem","letterSpacing":"0.04em","fontWeight":"600"}],"headline-md":["1.75rem",{"lineHeight":"2.25rem","fontWeight":"400"}],"body-lg":["1.125rem",{"lineHeight":"1.875rem","fontWeight":"400"}],"body-md":["1rem",{"lineHeight":"1.625rem","fontWeight":"400"}],"headline-sm":["1.25rem",{"lineHeight":"1.75rem","fontWeight":"500"}],"display-lg":["3.5rem",{"lineHeight":"4rem","letterSpacing":"-0.02em","fontWeight":"400"}],"display-lg-mobile":["2.25rem",{"lineHeight":"2.75rem","letterSpacing":"-0.015em","fontWeight":"400"}],"headline-lg":["2.5rem",{"lineHeight":"3rem","letterSpacing":"-0.01em","fontWeight":"400"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen selection:bg-secondary-container selection:text-on-secondary-container"><header class="hidden"><img alt="A strictly non-emotive, minimalist river-stone brand symbol with smooth organic pebbles stacked or resting side-by-side in deep spruce-green #2E4B3F.. Brand logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WLwibH1a6D15VoiRi40MEKlos8GegiuItKrt-nnXqcEc_aCHsbgoj3DVuaHkQGecWCgpAhoYH5W6-l8uBI6uePZSGNY6mpj3CIVYAXgeYNggzpPiMSE8cOACJFLztsVLQCUKRwDSPociCu_GNBRdax3K64Osa90uxjPgFweYcdtgg5dBSirFSlzt6GQ0mROb9T4sq70C_JA3AZhI9qZgqrPPcDfqzNWHoeZ8tEHfurmSNaVrtujgQO1Sk"/><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1Wg222OZpNx3_SAHVewrDRW6sPgjXMo4NZgmb0M-85c33lOys1hG-vxgEAFRM0clvzQesUKlMd6qgV7tMOFuYyOHgQ-sfqhH1-7cYn8rgwy4jBwI07W0CIJJ7SEAYKVq-vSgsNd29fvkNuYIyCel90bIqD0LVFLNndn-kN4Y5vSr887J-s16XYYeIyYyixoCRL80X9k_S79C8enqiW6kavwAbCpQQ_wxee9On-QBrMREFR5TbVHL5jV_Yg"/></header><aside class="fixed left-0 top-0 h-full w-[88px] bg-surface-container-low z-50 flex flex-col items-center justify-between py-6 select-none"><div class="flex flex-col items-center w-full"><div class="mb-8 flex items-center justify-center p-2 rounded-lg hover:bg-surface-container transition-colors" title="Sanctuary"><img alt="A strictly non-emotive, minimalist river-stone brand symbol with smooth organic pebbles stacked or resting side-by-side in deep spruce-green #2E4B3F.. Brand logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WLwibH1a6D15VoiRi40MEKlos8GegiuItKrt-nnXqcEc_aCHsbgoj3DVuaHkQGecWCgpAhoYH5W6-l8uBI6uePZSGNY6mpj3CIVYAXgeYNggzpPiMSE8cOACJFLztsVLQCUKRwDSPociCu_GNBRdax3K64Osa90uxjPgFweYcdtgg5dBSirFSlzt6GQ0mROb9T4sq70C_JA3AZhI9qZgqrPPcDfqzNWHoeZ8tEHfurmSNaVrtujgQO1Sk"/></div><nav class="flex flex-col items-center gap-3 w-full px-2" data-active-classes="bg-primary-container text-on-primary rounded-lg"><a aria-current="page" class="flex flex-col items-center justify-center w-full py-2.5 px-1 transition-colors duration-200 group bg-primary-container text-on-primary rounded-lg" data-path="talk" href="#"><span class="material-symbols-outlined text-2xl mb-1">forum</span><span class="font-label-sm text-label-sm tracking-normal text-center">Talk</span></a><a class="flex flex-col items-center justify-center w-full py-2.5 px-1 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors duration-200 group" data-path="moments" href="#"><span class="material-symbols-outlined text-2xl mb-1">filter_vintage</span><span class="font-label-sm text-label-sm tracking-normal text-center">Moments</span></a><a class="flex flex-col items-center justify-center w-full py-2.5 px-1 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors duration-200 group" data-path="remembered" href="#"><span class="material-symbols-outlined text-2xl mb-1">auto_stories</span><span class="font-label-sm text-label-sm tracking-normal text-center">Remembered</span></a><a class="flex flex-col items-center justify-center w-full py-2.5 px-1 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors duration-200 group" data-path="calm" href="#"><span class="material-symbols-outlined text-2xl mb-1">spa</span><span class="font-label-sm text-label-sm tracking-normal text-center">Calm</span></a><a class="flex flex-col items-center justify-center w-full py-2.5 px-1 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors duration-200 group" data-path="privacy" href="#"><span class="material-symbols-outlined text-2xl mb-1">shield</span><span class="font-label-sm text-label-sm tracking-normal text-center">Privacy</span></a></nav></div><div class="flex flex-col items-center gap-4 w-full px-2"><a class="flex flex-col items-center justify-center w-full py-2 text-on-surface-variant hover:text-on-surface transition-colors duration-200" data-path="support" href="#"><span class="material-symbols-outlined text-xl mb-0.5">help_outline</span><span class="font-label-sm text-label-sm tracking-normal text-center">Support</span></a><button class="p-1 rounded-full hover:bg-surface-container transition-colors focus:outline-none" title="Pebble mascot toggle" type="button"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1Wg222OZpNx3_SAHVewrDRW6sPgjXMo4NZgmb0M-85c33lOys1hG-vxgEAFRM0clvzQesUKlMd6qgV7tMOFuYyOHgQ-sfqhH1-7cYn8rgwy4jBwI07W0CIJJ7SEAYKVq-vSgsNd29fvkNuYIyCel90bIqD0LVFLNndn-kN4Y5vSr887J-s16XYYeIyYyixoCRL80X9k_S79C8enqiW6kavwAbCpQQ_wxee9On-QBrMREFR5TbVHL5jV_Yg"/></button></div></aside><div class="pl-[88px] min-h-screen"><main class="w-full min-h-screen bg-background"><div class="flex flex-col w-full">
+<!-- Interactive View State Controller (Sanctuary Architect Bar) -->
+<div class="w-full bg-surface-container border-b border-outline-variant/40 px-6 py-2.5 flex flex-wrap items-center justify-between gap-4 sticky top-0 z-40">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">State Selector</span>
+</div>
+<div class="flex items-center gap-1.5 overflow-x-auto py-1">
+<button class="state-pill px-3 py-1 rounded font-label-sm text-label-sm transition-colors bg-primary-container text-on-primary" id="btn-state-active" onclick="setViewState('active')" type="button">Active Conversation</button>
+<button class="state-pill px-3 py-1 rounded font-label-sm text-label-sm transition-colors text-on-surface-variant hover:bg-surface-container-high" id="btn-state-empty" onclick="setViewState('empty')" type="button">Empty State</button>
+<button class="state-pill px-3 py-1 rounded font-label-sm text-label-sm transition-colors text-on-surface-variant hover:bg-surface-container-high" id="btn-state-paused" onclick="setViewState('paused')" type="button">Paused State</button>
+<button class="state-pill px-3 py-1 rounded font-label-sm text-label-sm transition-colors text-on-surface-variant hover:bg-surface-container-high" id="btn-state-recording" onclick="setViewState('recording')" type="button">Voice Recording</button>
+<button class="px-3 py-1 rounded font-label-sm text-label-sm transition-colors text-on-surface-variant hover:bg-surface-container-high flex items-center gap-1" onclick="togglePrivacyVeil(true)" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility_off</span> Stone Veil (Esc)
+      </button>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-label-sm text-label-sm text-secondary flex items-center gap-1.5" id="volatile-badge">
+<span class="w-1.5 h-1.5 rounded-full bg-[#8fae54] animate-pulse"></span> Volatile memory: Secure
+      </span>
+</div>
+</div>
+<!-- Primary Sanctuary Stage -->
+<div class="w-full max-w-[1280px] mx-auto px-6 md:px-12 py-8 flex flex-col relative min-h-[calc(100vh-50px)]">
+<!-- Top Conversation Header -->
+<header class="w-full flex items-center justify-between pb-6 mb-8 border-b border-outline-variant/40">
+<div class="flex items-center gap-3 group">
+<div class="flex items-center gap-2">
+<input class="font-headline-sm text-headline-sm text-on-surface bg-transparent border-0 focus:outline-none focus:ring-1 focus:ring-primary-container rounded px-1.5 py-0.5 tracking-tight w-[280px] sm:w-[420px] transition-all" id="convo-title" type="text" value="Morning walk & unspoken tension"/>
+<span class="material-symbols-outlined text-secondary opacity-40 group-hover:opacity-100 transition-opacity text-sm cursor-pointer" onclick="document.getElementById('convo-title').focus();" title="Edit reflection title">edit</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary bg-surface-container px-2 py-0.5 rounded">Oct 24 · 07:42 AM</span>
+</div>
+<!-- Action Cluster -->
+<div class="flex items-center gap-2 relative">
+<button class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-outline-variant bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-sm text-label-sm transition-colors" onclick="togglePrivacyVeil(true)" title="Hide screen (Esc)" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility_off</span>
+<span>Hide screen</span>
+<kbd class="text-[10px] opacity-60 ml-0.5 font-sans">Esc</kbd>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-outline-variant bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-sm text-label-sm transition-colors" id="header-pause-btn" onclick="togglePauseState()" type="button">
+<span class="material-symbols-outlined text-[18px]" id="pause-icon">pause</span>
+<span id="pause-text">Pause</span>
+</button>
+<!-- Overflow Menu Trigger -->
+<div class="relative">
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant transition-colors flex items-center" id="menu-btn" onclick="toggleOverflowMenu()" type="button">
+<span class="material-symbols-outlined text-xl">more_horiz</span>
+</button>
+<!-- Dropdown Slate -->
+<div class="hidden absolute right-0 mt-2 w-56 rounded bg-surface-container-lowest border border-outline-variant py-1.5 z-50" id="overflow-menu">
+<button class="w-full text-left px-3.5 py-2 font-label-md text-label-md text-on-surface hover:bg-surface-container-low flex items-center gap-2" onclick="alert('Session settings modal triggered'); toggleOverflowMenu();" type="button">
+<span class="material-symbols-outlined text-base">tune</span> Settings
+            </button>
+<button class="w-full text-left px-3.5 py-2 font-label-md text-label-md text-on-surface hover:bg-surface-container-low flex items-center gap-2" onclick="alert('Viewing past archived stones'); toggleOverflowMenu();" type="button">
+<span class="material-symbols-outlined text-base">folder_open</span> Conversations
+            </button>
+<button class="w-full text-left px-3.5 py-2 font-label-md text-label-md text-on-surface hover:bg-surface-container-low flex items-center gap-2" onclick="toggleMascot()" type="button">
+<span class="material-symbols-outlined text-base">spa</span> <span id="mascot-toggle-text">Disable Pebble mascot</span>
+</button>
+<div class="my-1 border-t border-outline-variant/30"></div>
+<button class="w-full text-left px-3.5 py-2 font-label-md text-label-md text-error hover:bg-error-container/20 flex items-center justify-between" onclick="window.location.href='https://en.wikipedia.org/wiki/Limestone';" type="button">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-base">logout</span> Quick leave</span>
+<kbd class="text-[10px] opacity-70">Shift+Esc</kbd>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Reading Column & Interaction Hub: Exactly ~576px wide, left-aligned with ample asymmetrical breathing room -->
+<div class="w-full flex flex-col lg:flex-row gap-12 items-start justify-between">
+<!-- Primary 576px Column -->
+<main class="w-full max-w-[576px] flex flex-col gap-10 flex-shrink-0" id="main-reading-deck">
+<!-- View 1: Active Conversation State -->
+<div class="flex flex-col gap-8 transition-opacity duration-300" id="view-active">
+<!-- Turn 1: User message -->
+<div class="flex flex-col items-end w-full">
+<div class="w-auto max-w-[85%] bg-[#DCE2D6] text-on-surface px-5 py-4 rounded-[18px] rounded-br-[6px] text-[18px] leading-[1.6] font-body-md">
+<p>
+                I kept walking past <span class="inline-flex items-center px-2 py-0.5 rounded bg-[#CDD2C8] text-on-surface font-label-sm text-label-sm tracking-wide select-none cursor-pointer" title="Redacted or private placeholder">[The Office]</span> building this morning even though I had nowhere to be. I noticed my shoulders were locked up tight. It felt like if I stopped moving, whatever I've been avoiding all week would catch up with me.
+              </p>
+</div>
+<span class="font-label-sm text-label-sm text-secondary mt-1.5 mr-1">07:44 AM · Sent</span>
+</div>
+<!-- Turn 2: Sanctuary Reply (Pure literary typographic presence) -->
+<div class="flex items-start gap-4 w-full">
+<!-- Small static stone mascot glyph -->
+<div class="w-6 h-6 flex-shrink-0 mt-1.5" id="pebble-mascot-avatar">
+<svg class="w-full h-full fill-primary-container" viewbox="0 0 100 100">
+<path d="M50 15 C20 15 10 40 10 65 C10 85 30 92 50 92 C75 92 90 85 90 65 C90 40 80 15 50 15 Z"></path>
+<path d="M42 52 C45 56 49 56 52 52" fill="none" stroke="#d2e8da" stroke-linecap="round" stroke-width="3"></path>
+<path d="M60 52 C63 56 67 56 70 52" fill="none" stroke="#d2e8da" stroke-linecap="round" stroke-width="3"></path>
+<path d="M45 15 C45 6 55 6 55 15" fill="none" stroke="#9abaab" stroke-width="3"></path>
+</svg>
+</div>
+<!-- Sanctuary Typographic Reading Flow -->
+<div class="flex flex-col gap-4 font-headline-md text-headline-md text-[#23261F] leading-[1.7] antialiased">
+<p>
+                You noticed your body keeping momentum as a shield before your thoughts even caught up with it. Walking became a way to stay one step ahead of stillness.
+              </p>
+<p>
+                When you describe that lock in your shoulders, is that tension anticipating a specific conversation, or is it simply the weight of holding everything together while you keep pace?
+              </p>
+<!-- Subtle Quiet Actions -->
+<div class="flex flex-wrap items-center gap-4 pt-2 font-label-sm text-label-sm text-secondary border-t border-outline-variant/40 mt-1">
+<button class="hover:text-primary transition-colors flex items-center gap-1.5 py-1" onclick="toggleKeepMoment(this)" type="button">
+<span class="material-symbols-outlined text-[17px]" id="keep-icon">bookmark_border</span>
+<span id="keep-text">Keep this moment</span>
+</button>
+<button class="hover:text-primary transition-colors flex items-center gap-1.5 py-1" onclick="toggleReadRationale()" type="button">
+<span class="material-symbols-outlined text-[17px]">insights</span>
+<span>How this was read</span>
+</button>
+<button class="hover:text-primary transition-colors flex items-center gap-1.5 py-1" onclick="simulateAudioRead(this)" type="button">
+<span class="material-symbols-outlined text-[17px]" id="listen-icon">volume_up</span>
+<span id="listen-text">Listen</span>
+</button>
+</div>
+<!-- Rationale drawer/slate -->
+<div class="hidden bg-surface-container-low rounded p-4 text-on-surface-variant font-body-sm text-body-sm leading-relaxed border border-outline-variant" id="read-rationale">
+<div class="flex items-center justify-between pb-2 mb-2 border-b border-outline-variant/40">
+<span class="font-label-md text-label-md text-on-surface">Reflection Framing</span>
+<button class="material-symbols-outlined text-sm text-secondary hover:text-on-surface" onclick="toggleReadRationale()" type="button">close</button>
+</div>
+<p>
+                  No clinical or diagnostic heuristics applied. The engine noted somatic physical indicators (<em class="italic">"shoulders locked up tight"</em>) paired with kinetic displacement (<em class="italic">"walking past without somewhere to be"</em>). The query is structured solely to prompt introspection between situational tension and general fatigue.
+                </p>
+</div>
+</div>
+</div>
+</div>
+<!-- View 2: Empty State (Quiet Grounding Canvas) -->
+<div class="hidden flex-col items-center text-center py-6 px-4" id="view-empty">
+<!-- Mascot Illustration -->
+<div class="w-36 h-36 mb-6 relative">
+<svg class="w-full h-full mx-auto" fill="none" viewbox="0 0 160 160">
+<!-- River stone body -->
+<ellipse cx="80" cy="95" fill="#CDD2C8" rx="65" ry="50"></ellipse>
+<path d="M 35 75 Q 80 85 125 72" fill="none" stroke="#B4BCAD" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M 30 100 Q 80 112 130 98" fill="none" stroke="#B4BCAD" stroke-linecap="round" stroke-width="2.5"></path>
+<!-- Serene closed eyes -->
+<path d="M 58 88 Q 66 94 74 88" fill="none" stroke="#2E4B3F" stroke-linecap="round" stroke-width="3"></path>
+<path d="M 88 88 Q 96 94 104 88" fill="none" stroke="#2E4B3F" stroke-linecap="round" stroke-width="3"></path>
+<!-- Subtle botanical shoot sprouting from stone -->
+<path d="M 76 46 Q 74 25 80 18 Q 86 25 84 46 Z" fill="#A8BF58"></path>
+<path d="M 84 46 Q 95 32 101 26 Q 99 38 88 47 Z" fill="#91A748"></path>
+<path d="M 74 46 Q 64 34 58 29 Q 62 40 72 47 Z" fill="#91A748"></path>
+</svg>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2 font-normal">Say it however it comes out.</h2>
+<p class="font-body-md text-body-md text-secondary max-w-[420px] mb-8">
+            There is no right way to structure a feeling. Words are not judged, ranked, or analyzed for productivity.
+          </p>
+<!-- Thought Starters -->
+<div class="flex flex-col gap-2.5 w-full max-w-md text-left">
+<button class="w-full px-4 py-3 bg-surface-container rounded border border-outline-variant hover:bg-surface-container-high transition-colors text-on-surface font-body-md text-body-md flex items-center justify-between group" onclick="populatePrompt('Something happened today that I didn\'t have words for.')" type="button">
+<span>"Something happened today"</span>
+<span class="material-symbols-outlined text-secondary group-hover:text-primary transition-colors text-lg">arrow_forward</span>
+</button>
+<button class="w-full px-4 py-3 bg-surface-container rounded border border-outline-variant hover:bg-surface-container-high transition-colors text-on-surface font-body-md text-body-md flex items-center justify-between group" onclick="populatePrompt('I keep thinking about something that was said earlier this week.')" type="button">
+<span>"I keep thinking about something"</span>
+<span class="material-symbols-outlined text-secondary group-hover:text-primary transition-colors text-lg">arrow_forward</span>
+</button>
+<button class="w-full px-4 py-3 bg-surface-container rounded border border-outline-variant hover:bg-surface-container-high transition-colors text-on-surface font-body-md text-body-md flex items-center justify-between group" onclick="populatePrompt('I do not know where to start, but my mind feels heavy.')" type="button">
+<span>"I do not know where to start"</span>
+<span class="material-symbols-outlined text-secondary group-hover:text-primary transition-colors text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Composer & Input Sanctuary (Distraction-Free Stone Tablet) -->
+<div class="w-full flex flex-col gap-2 pt-4" id="composer-container">
+<!-- Normal Composer Box -->
+<div class="w-full bg-[#F6F7F3] rounded-[22px] border border-[#CDD2C8] p-4 flex flex-col transition-all focus-within:border-primary-container" id="normal-composer">
+<textarea class="w-full bg-transparent resize-none border-0 focus:outline-none font-body-md text-body-md text-on-surface placeholder:text-secondary/70 leading-relaxed max-h-[38vh]" id="journal-input" oninput="handleInput(this)" placeholder="Start anywhere." rows="4"></textarea>
+<!-- Bottom Control Tier -->
+<div class="flex items-center justify-between pt-3 border-t border-[#CDD2C8]/50 mt-2">
+<div class="flex items-center gap-2">
+<!-- Mic / Vocal Stream Toggle -->
+<button class="p-2 rounded-full hover:bg-surface-container text-secondary hover:text-primary transition-colors flex items-center justify-center" onclick="setViewState('recording')" title="Voice stream" type="button">
+<span class="material-symbols-outlined text-xl">mic</span>
+</button>
+<span class="font-label-sm text-label-sm text-secondary" id="char-counter">0 / 2,000</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-label-sm text-label-sm text-secondary hidden sm:inline">⌘ + Enter</span>
+<button class="px-5 py-2 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary transition-colors flex items-center gap-1.5" id="send-btn" onclick="submitMessage()" type="button">
+<span>Send</span>
+<span class="material-symbols-outlined text-base">arrow_upward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Composer Status Line -->
+<div class="flex items-center justify-between px-2 text-secondary font-label-sm text-label-sm">
+<div class="flex items-center gap-2" id="reply-status">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span id="reply-status-text">Reply ready</span>
+</div>
+<span>Drafts safely saved in volatile local memory.</span>
+</div>
+</div>
+<!-- View 3: Paused State Replacement Deck -->
+<div class="hidden w-full bg-surface-container rounded-[22px] border border-outline-variant p-8 flex-col items-center text-center gap-5" id="view-paused">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-2xl">pause</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Paused. Nothing is being sent.</h3>
+<p class="font-body-sm text-body-sm text-secondary">Take whatever time is needed. Your canvas remains untouched and private.</p>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-3 w-full pt-2">
+<button class="px-5 py-2.5 rounded-lg border border-secondary text-primary font-label-md text-label-md hover:bg-surface-container-high transition-colors flex items-center gap-2" onclick="startBreathingExercise()" type="button">
+<span class="material-symbols-outlined text-lg">air</span> Breathe
+            </button>
+<button class="px-6 py-2.5 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary transition-colors flex items-center gap-2" onclick="togglePauseState()" type="button">
+<span class="material-symbols-outlined text-lg">play_arrow</span> Resume
+            </button>
+<button class="px-4 py-2.5 rounded-lg text-secondary hover:text-on-surface font-label-md text-label-md transition-colors" onclick="setViewState('empty')" type="button">
+              Close conversation
+            </button>
+</div>
+</div>
+<!-- View 4: Voice Recording State -->
+<div class="hidden w-full bg-surface-container-high rounded-[22px] border border-outline-variant p-6 flex-col gap-4" id="view-recording">
+<div class="flex items-center justify-between pb-3 border-b border-outline-variant/60">
+<div class="flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-error animate-ping"></span>
+<span class="font-label-md text-label-md text-on-surface">Listening to your voice</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-secondary font-mono" id="rec-timer">00:42</span>
+<button class="text-secondary hover:text-error text-sm ml-2" onclick="cancelRecording()" type="button">Cancel</button>
+</div>
+</div>
+<!-- Pulsing Soundwave Frequency Indicator -->
+<div class="h-14 w-full bg-surface-container rounded flex items-center justify-center gap-1.5 px-4 overflow-hidden">
+<span class="w-1 bg-primary rounded-full h-3 animate-pulse" style="animation-duration: 0.8s;"></span>
+<span class="w-1 bg-primary rounded-full h-8 animate-pulse" style="animation-duration: 0.5s;"></span>
+<span class="w-1 bg-primary rounded-full h-11 animate-pulse" style="animation-duration: 0.6s;"></span>
+<span class="w-1 bg-primary rounded-full h-6 animate-pulse" style="animation-duration: 0.7s;"></span>
+<span class="w-1 bg-primary rounded-full h-10 animate-pulse" style="animation-duration: 0.4s;"></span>
+<span class="w-1 bg-primary rounded-full h-4 animate-pulse" style="animation-duration: 0.9s;"></span>
+<span class="w-1 bg-primary rounded-full h-9 animate-pulse" style="animation-duration: 0.5s;"></span>
+<span class="w-1 bg-primary rounded-full h-12 animate-pulse" style="animation-duration: 0.65s;"></span>
+<span class="w-1 bg-primary rounded-full h-7 animate-pulse" style="animation-duration: 0.75s;"></span>
+<span class="w-1 bg-primary rounded-full h-3 animate-pulse" style="animation-duration: 0.85s;"></span>
+</div>
+<!-- Editable Live Transcript Slip -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-secondary">Live speech transcript (editable before sending)</label>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded p-3 font-body-md text-body-md text-on-surface focus:outline-none" id="voice-transcript" rows="3">I felt this sudden urge to turn back and not answer the call, like retreating back into the woods where nothing is expected of me...</textarea>
+</div>
+<div class="flex items-center justify-between pt-2">
+<button class="font-label-sm text-label-sm text-secondary hover:text-on-surface" onclick="cancelRecording()" type="button">Discard recording</button>
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 rounded border border-secondary text-primary font-label-md text-label-md hover:bg-surface-container transition-colors" onclick="insertVoiceText()" type="button">Apply to composer</button>
+<button class="px-5 py-2 rounded bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary transition-colors flex items-center gap-1.5" onclick="sendVoiceMessage()" type="button">
+<span>Send transcript</span>
+<span class="material-symbols-outlined text-sm">arrow_upward</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Right Column: Asymmetric Contemplative Anchor & Geological Audio Dock -->
+<aside class="w-full lg:w-[360px] flex flex-col gap-6 pt-2">
+<!-- Riverstone Ambient Frequency Dock -->
+<div class="w-full bg-[#DDE1DA] rounded-[22px] border border-[#CDD2C8] p-6 flex flex-col gap-5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-xl">graphic_eq</span>
+<span class="font-label-md text-label-md text-on-surface">Earth Ambiance</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary bg-surface-container px-2 py-0.5 rounded">Matte Stone</span>
+</div>
+<!-- Sound toggles -->
+<div class="flex flex-col gap-3.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest flex items-center justify-center text-primary-container hover:bg-primary-container hover:text-on-primary transition-colors" onclick="toggleAudioTrack(this, 'wind')" type="button">
+<span class="material-symbols-outlined text-sm">air</span>
+</button>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface leading-tight">Glacial Wind</span>
+<span class="font-label-sm text-label-sm text-secondary">380 Hz resonance</span>
+</div>
+</div>
+<input class="w-24 accent-[#2E4B3F] h-1.5 bg-[#CDD2C8] rounded-lg cursor-pointer" type="range" value="40"/>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest flex items-center justify-center text-primary-container hover:bg-primary-container hover:text-on-primary transition-colors" onclick="toggleAudioTrack(this, 'stream')" type="button">
+<span class="material-symbols-outlined text-sm">water_drop</span>
+</button>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface leading-tight">Riverbed Pebbles</span>
+<span class="font-label-sm text-label-sm text-secondary">Filtered silt murmur</span>
+</div>
+</div>
+<input class="w-24 accent-[#2E4B3F] h-1.5 bg-[#CDD2C8] rounded-lg cursor-pointer" type="range" value="65"/>
+</div>
+</div>
+<div class="pt-2 border-t border-[#CDD2C8] flex items-center justify-between text-secondary font-label-sm text-label-sm">
+<span>Binaural sync: Inactive</span>
+<span class="text-primary cursor-pointer hover:underline" onclick="alert('Preset saved to browser offline store.')">Save mix</span>
+</div>
+</div>
+<!-- Geological Sanctuary Context Card -->
+<div class="w-full bg-surface-container-low rounded-[22px] border border-outline-variant/60 p-6 flex flex-col gap-4">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-lg">shield</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Sanctuary Guarantee</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Conversations exist solely in the browser session memory. Closing the tab removes encryption salts and zeros all local memory pages.
+          </p>
+<div class="flex items-center gap-2 pt-2 border-t border-outline-variant/40">
+<span class="w-2 h-2 rounded-full bg-[#8fae54]"></span>
+<span class="font-label-sm text-label-sm text-on-surface">Zero cloud telemetry active</span>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<!-- Stone Curtain / Screen Privacy Veil (Esc) -->
+<div class="fixed inset-0 z-50 bg-[#23261F]/90 backdrop-blur-xl flex flex-col items-center justify-center p-6 hidden select-none" id="privacy-veil">
+<div class="max-w-md w-full flex flex-col items-center text-center gap-6">
+<!-- Pebble Icon Sleeping -->
+<div class="w-20 h-20 opacity-80">
+<svg class="w-full h-full fill-[#CDD2C8]" viewbox="0 0 100 100">
+<path d="M50 20 C20 20 10 45 10 70 C10 88 30 92 50 92 C75 92 90 88 90 70 C90 45 80 20 50 20 Z"></path>
+<path d="M40 60 Q 48 68 56 60" fill="none" stroke="#23261F" stroke-linecap="round" stroke-width="4"></path>
+<path d="M64 60 Q 72 68 80 60" fill="none" stroke="#23261F" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-[#E9ECE7] mb-2">Screen Resting</h2>
+<p class="font-body-sm text-body-sm text-[#9abaab]">The sanctuary is sealed from nearby view. Press Escape or Hold the pebble below to peek.</p>
+</div>
+<!-- Press and Hold to Peek Button -->
+<button class="w-full max-w-xs py-4 px-6 rounded-xl bg-surface-container-highest/20 border border-outline-variant/40 text-[#E9ECE7] font-label-md text-label-md hover:bg-surface-container-highest/30 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer" id="peek-button" type="button">
+<span class="material-symbols-outlined">visibility</span>
+<span>Press & Hold to Peek</span>
+</button>
+<button class="text-sm font-label-sm text-[#9abaab] hover:text-[#E9ECE7] underline underline-offset-4 transition-colors" onclick="togglePrivacyVeil(false)" type="button">
+        Dismiss Veil (Press Esc)
+      </button>
+</div>
+</div>
+<!-- Subtle Breathing Modal for Paused State -->
+<div class="fixed inset-0 z-50 bg-[#191c1a]/80 backdrop-blur-md hidden items-center justify-center p-6" id="breathing-modal">
+<div class="bg-surface rounded-2xl border border-outline-variant p-8 max-w-sm w-full flex flex-col items-center text-center gap-6">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Contemplative Pace</span>
+<!-- Expanding & Contracting Stone Ring -->
+<div class="relative w-40 h-40 flex items-center justify-center">
+<div class="w-24 h-24 rounded-full bg-secondary-container transition-all duration-4000 ease-in-out flex items-center justify-center" id="breath-circle">
+<span class="font-headline-sm text-headline-sm text-primary" id="breath-cue">Breathe In</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Follow the circle. Expand lungs with the stone, release softly as it contracts.</p>
+<button class="px-6 py-2 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary transition-colors" onclick="closeBreathingExercise()" type="button">
+        Return to stillness
+      </button>
+</div>
+</div>
+</div>
+<!-- Vanilla Interactive Orchestration -->
+<script>
+  let currentViewState = 'active';
+  let isMascotEnabled = true;
+  let isVeiled = false;
+  let isPaused = false;
+  let isKept = false;
+  let isListening = false;
+  let breathInterval = null;
+
+  function setViewState(state) {
+    currentViewState = state;
+    
+    // UI Pills sync
+    document.querySelectorAll('.state-pill').forEach(btn => {
+      btn.className = 'state-pill px-3 py-1 rounded font-label-sm text-label-sm transition-colors text-on-surface-variant hover:bg-surface-container-high';
+    });
+    const activeBtn = document.getElementById('btn-state-' + state);
+    if (activeBtn) {
+      activeBtn.className = 'state-pill px-3 py-1 rounded font-label-sm text-label-sm transition-colors bg-primary-container text-on-primary';
+    }
+
+    const viewActive = document.getElementById('view-active');
+    const viewEmpty = document.getElementById('view-empty');
+    const viewPaused = document.getElementById('view-paused');
+    const viewRecording = document.getElementById('view-recording');
+    const composerBox = document.getElementById('composer-container');
+
+    // Reset visibility
+    viewActive.classList.add('hidden');
+    viewEmpty.classList.add('hidden');
+    viewPaused.classList.add('hidden');
+    viewRecording.classList.add('hidden');
+    composerBox.classList.remove('hidden');
+
+    if (state === 'active') {
+      viewActive.classList.remove('hidden');
+    } else if (state === 'empty') {
+      viewEmpty.classList.remove('hidden');
+    } else if (state === 'paused') {
+      viewActive.classList.remove('hidden');
+      composerBox.classList.add('hidden');
+      viewPaused.classList.remove('hidden');
+    } else if (state === 'recording') {
+      viewActive.classList.remove('hidden');
+      composerBox.classList.add('hidden');
+      viewRecording.classList.remove('hidden');
+    }
+  }
+
+  function handleInput(textarea) {
+    const len = textarea.value.length;
+    document.getElementById('char-counter').textContent = `${len.toLocaleString()} / 2,000`;
+    
+    // Auto-grow
+    textarea.style.height = 'auto';
+    textarea.style.height = Math.min(textarea.scrollHeight, window.innerHeight * 0.38) + 'px';
+  }
+
+  function populatePrompt(text) {
+    const input = document.getElementById('journal-input');
+    setViewState('active');
+    input.value = text;
+    handleInput(input);
+    input.focus();
+  }
+
+  function submitMessage() {
+    const input = document.getElementById('journal-input');
+    const val = input.value.trim();
+    if (!val) return;
+
+    // Simulate reply generation
+    const replyStatus = document.getElementById('reply-status-text');
+    replyStatus.textContent = 'Reflecting in silence...';
+
+    setTimeout(() => {
+      replyStatus.textContent = 'Reply ready';
+      input.value = '';
+      handleInput(input);
+      setViewState('active');
+    }, 900);
+  }
+
+  function togglePauseState() {
+    isPaused = !isPaused;
+    const pauseBtn = document.getElementById('header-pause-btn');
+    const pauseIcon = document.getElementById('pause-icon');
+    const pauseText = document.getElementById('pause-text');
+
+    if (isPaused) {
+      setViewState('paused');
+      pauseIcon.textContent = 'play_arrow';
+      pauseText.textContent = 'Resume';
+      pauseBtn.classList.add('bg-secondary-container');
+    } else {
+      setViewState('active');
+      pauseIcon.textContent = 'pause';
+      pauseText.textContent = 'Pause';
+      pauseBtn.classList.remove('bg-secondary-container');
+    }
+  }
+
+  function togglePrivacyVeil(show) {
+    isVeiled = show;
+    const veil = document.getElementById('privacy-veil');
+    if (show) {
+      veil.classList.remove('hidden');
+    } else {
+      veil.classList.add('hidden');
+    }
+  }
+
+  function toggleOverflowMenu() {
+    const menu = document.getElementById('overflow-menu');
+    menu.classList.toggle('hidden');
+  }
+
+  function toggleMascot() {
+    isMascotEnabled = !isMascotEnabled;
+    const mascot = document.getElementById('pebble-mascot-avatar');
+    const text = document.getElementById('mascot-toggle-text');
+    if (isMascotEnabled) {
+      mascot.classList.remove('opacity-0');
+      text.textContent = 'Disable Pebble mascot';
+    } else {
+      mascot.classList.add('opacity-0');
+      text.textContent = 'Enable Pebble mascot';
+    }
+    toggleOverflowMenu();
+  }
+
+  function toggleKeepMoment(btn) {
+    isKept = !isKept;
+    const icon = document.getElementById('keep-icon');
+    const text = document.getElementById('keep-text');
+    if (isKept) {
+      icon.textContent = 'bookmark';
+      text.textContent = 'Moment kept';
+      btn.classList.add('text-primary');
+    } else {
+      icon.textContent = 'bookmark_border';
+      text.textContent = 'Keep this moment';
+      btn.classList.remove('text-primary');
+    }
+  }
+
+  function toggleReadRationale() {
+    const drawer = document.getElementById('read-rationale');
+    drawer.classList.toggle('hidden');
+  }
+
+  function simulateAudioRead(btn) {
+    isListening = !isListening;
+    const icon = document.getElementById('listen-icon');
+    const text = document.getElementById('listen-text');
+    if (isListening) {
+      icon.textContent = 'stop';
+      text.textContent = 'Playing ambient voice...';
+      btn.classList.add('text-primary');
+    } else {
+      icon.textContent = 'volume_up';
+      text.textContent = 'Listen';
+      btn.classList.remove('text-primary');
+    }
+  }
+
+  function toggleAudioTrack(btn, type) {
+    btn.classList.toggle('bg-primary-container');
+    btn.classList.toggle('text-on-primary');
+    btn.classList.toggle('bg-surface-container-lowest');
+    btn.classList.toggle('text-primary-container');
+  }
+
+  function cancelRecording() {
+    setViewState('active');
+  }
+
+  function insertVoiceText() {
+    const transcript = document.getElementById('voice-transcript').value;
+    populatePrompt(transcript);
+  }
+
+  function sendVoiceMessage() {
+    insertVoiceText();
+    submitMessage();
+  }
+
+  // Breathing Guide Loop
+  function startBreathingExercise() {
+    const modal = document.getElementById('breathing-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+
+    const circle = document.getElementById('breath-circle');
+    const cue = document.getElementById('breath-cue');
+
+    let isInhale = true;
+    function cycle() {
+      if (isInhale) {
+        cue.textContent = 'Breathe Out';
+        circle.style.transform = 'scale(0.7)';
+        circle.classList.replace('bg-secondary-container', 'bg-surface-container-highest');
+      } else {
+        cue.textContent = 'Breathe In';
+        circle.style.transform = 'scale(1.25)';
+        circle.classList.replace('bg-surface-container-highest', 'bg-secondary-container');
+      }
+      isInhale = !isInhale;
+    }
+
+    cycle();
+    breathInterval = setInterval(cycle, 4000);
+  }
+
+  function closeBreathingExercise() {
+    const modal = document.getElementById('breathing-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    if (breathInterval) clearInterval(breathInterval);
+  }
+
+  // Press and hold peek logic
+  const peekBtn = document.getElementById('peek-button');
+  const veil = document.getElementById('privacy-veil');
+
+  peekBtn.addEventListener('mousedown', () => {
+    veil.classList.add('opacity-10');
+  });
+  peekBtn.addEventListener('mouseup', () => {
+    veil.classList.remove('opacity-10');
+  });
+  peekBtn.addEventListener('mouseleave', () => {
+    veil.classList.remove('opacity-10');
+  });
+  peekBtn.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    veil.classList.add('opacity-10');
+  });
+  peekBtn.addEventListener('touchend', () => {
+    veil.classList.remove('opacity-10');
+  });
+
+  // Global Keyboard shortcuts
+  window.addEventListener('keydown', (e) => {
+    // Quick Leave
+    if (e.shiftKey && e.key === 'Escape') {
+      window.location.href = 'https://en.wikipedia.org/wiki/Limestone';
+      return;
+    }
+    // Esc toggles Privacy Veil
+    if (e.key === 'Escape') {
+      togglePrivacyVeil(!isVeiled);
+    }
+    // Command + Enter sends message
+    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+      submitMessage();
+    }
+  });
+
+  // Close menus on outside click
+  window.addEventListener('click', (e) => {
+    const menu = document.getElementById('overflow-menu');
+    const menuBtn = document.getElementById('menu-btn');
+    if (!menu.contains(e.target) && !menuBtn.contains(e.target) && !menu.classList.contains('hidden')) {
+      menu.classList.add('hidden');
+    }
+  });
+</script></main></div></body></html>

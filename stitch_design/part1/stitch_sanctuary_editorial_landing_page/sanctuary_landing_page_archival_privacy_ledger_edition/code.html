@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-background" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sanctuary — Provably Private Archival Ledger</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-bright": "#f7faf5",
+            "surface": "#f7faf5",
+            "on-primary": "#ffffff",
+            "surface-container-low": "#f2f4ef",
+            "on-surface": "#191c1a",
+            "outline-variant": "#c1c8c3",
+            "tertiary-container": "#3a483f",
+            "error": "#ba1a1a",
+            "surface-variant": "#e0e3de",
+            "on-secondary": "#ffffff",
+            "primary-fixed": "#c9ead9",
+            "on-tertiary-fixed-variant": "#3c4a41",
+            "on-error": "#ffffff",
+            "inverse-primary": "#adcebe",
+            "on-error-container": "#93000a",
+            "on-tertiary-container": "#a7b6ab",
+            "on-surface-variant": "#424844",
+            "surface-container": "#ecefea",
+            "on-tertiary": "#ffffff",
+            "on-secondary-fixed": "#0c1f17",
+            "surface-container-highest": "#e0e3de",
+            "surface-tint": "#476558",
+            "outline": "#727974",
+            "inverse-on-surface": "#eff2ed",
+            "surface-dim": "#d8dbd6",
+            "primary": "#173429",
+            "secondary-container": "#d2e8da",
+            "primary-container": "#2e4b3f",
+            "on-primary-container": "#9abaab",
+            "tertiary-fixed": "#d7e6da",
+            "secondary": "#4f6358",
+            "on-secondary-container": "#55695e",
+            "tertiary": "#243229",
+            "error-container": "#ffdad6",
+            "background": "#e9ece7",
+            "inverse-surface": "#2d312e",
+            "secondary-fixed-dim": "#b6ccbe",
+            "on-secondary-fixed-variant": "#384b41",
+            "on-tertiary-fixed": "#111e17",
+            "primary-fixed-dim": "#adcebe",
+            "secondary-fixed": "#d2e8da",
+            "on-background": "#191c1a",
+            "tertiary-fixed-dim": "#bbcabe",
+            "on-primary-fixed": "#022016",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-high": "#e6e9e4",
+            "on-primary-fixed-variant": "#304d40",
+            "ledger-card": "#f6f7f3",
+            "crimson-accent": "#9e3b3f"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          fontFamily: {
+            "headline-lg-mobile": ["Literata", "serif"],
+            "label-md": ["Atkinson Hyperlegible Next", "sans-serif"],
+            "body-sm": ["Atkinson Hyperlegible Next", "sans-serif"],
+            "display-lg-mobile": ["Literata", "serif"],
+            "label-sm": ["Atkinson Hyperlegible Next", "sans-serif"],
+            "body-lg": ["Atkinson Hyperlegible Next", "sans-serif"],
+            "headline-sm": ["Literata", "serif"],
+            "headline-md": ["Literata", "serif"],
+            "headline-lg": ["Literata", "serif"],
+            "display-lg": ["Literata", "serif"],
+            "body-md": ["Atkinson Hyperlegible Next", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    body {
+      background-color: #e9ece7;
+      color: #191c1a;
+      -webkit-font-smoothing: antialiased;
+    }
+    .ledger-grid-border {
+      border-color: #d8dbd6;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-full flex flex-col font-body-md selection:bg-secondary-container selection:text-primary">
+<!-- Desktop Ledger Metadata Top Bar -->
+<aside class="w-full border-b border-[#d8dbd6] bg-[#ecefea] text-[11px] font-mono uppercase tracking-widest text-secondary px-6 py-2">
+<div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+<div class="flex items-center space-x-4">
+<span class="inline-flex items-center gap-1.5 font-semibold text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-[#476558] animate-pulse"></span>
+          LEDGER STATE: ACTIVE
+        </span>
+<span class="text-[#727974]">|</span>
+<span>SPECIMEN ARCHIVE 2025</span>
+<span class="text-[#727974] hidden md:inline">|</span>
+<span class="hidden md:inline">SHA-256 INTEGRITY VERIFIED</span>
+</div>
+<div class="flex items-center space-x-6 text-on-surface-variant">
+<span>ZERO-KNOWLEDGE ENCLAVE</span>
+<span class="bg-[#e0e3de] text-primary px-2 py-0.5 rounded text-[10px] font-semibold tracking-wider">EDITION 01 • PROVABLY PRIVATE</span>
+</div>
+</div>
+</aside>
+<!-- Desktop Main Navigation Header -->
+<header class="w-full bg-[#f6f7f3] border-b border-[#d8dbd6] sticky top-0 z-40 backdrop-blur-sm bg-opacity-95">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<!-- Wordmark -->
+<a class="flex items-center space-x-3 group" href="#">
+<img alt="Sanctuary River-Stone Mark" class="w-8 h-8 object-contain transition-transform group-hover:scale-105 duration-200" src="https://lh3.googleusercontent.com/aida/AEtjO1XasxiGISVbwyT2oYKLeMM-kKqZ6AQquUTQIPnxTk36J4YAWihA9zHYs-QNjkr4TsjlZl9r9enSShzU8MXYpHKoP_EwKOk5yUf6R04B4UxRMr0jlFs_S8h20HHZYftfH8xmkjyE4lkiRRc0VWYAU9mpQbVmiXXjovHVN3BY1yQb31j7HqrhKwyPR9IiZ_6iuIhz1oSR6AkZGf9IhtQv49dMo8elUZCibNKmrEC1EQ5JH6VcFHmrB4OVkD0"/>
+<div class="flex flex-col">
+<span class="font-headline-sm text-xl text-primary font-medium tracking-tight">Sanctuary</span>
+<span class="font-mono text-[9px] uppercase tracking-widest text-[#727974]">Cryptographic Journal</span>
+</div>
+</a>
+<!-- Primary Nav Links -->
+<nav class="hidden lg:flex items-center space-x-8 text-sm font-label-md text-on-surface-variant font-medium">
+<a class="hover:text-primary transition-colors" href="#hero">Manifesto</a>
+<a class="hover:text-primary transition-colors" href="#live-shield">Shield Inspection</a>
+<a class="hover:text-primary transition-colors" href="#protocols">Security Protocols</a>
+<a class="hover:text-primary transition-colors" href="#architecture">Enclave vs Cloud</a>
+<a class="hover:text-crimson-accent transition-colors flex items-center gap-1" href="#emergency">
+<span class="w-1.5 h-1.5 rounded-full bg-crimson-accent"></span>
+          Emergency Support
+        </a>
+</nav>
+<!-- Action Buttons -->
+<div class="flex items-center space-x-3">
+<button class="hidden sm:inline-flex items-center text-xs font-mono font-medium text-secondary bg-[#ecefea] hover:bg-[#e0e3de] px-3.5 py-2.5 rounded border border-[#d8dbd6] transition-colors" id="navSpecBtn">
+<span class="material-symbols-outlined text-[15px] mr-1.5 text-secondary">terminal</span>
+          SPEC v1.4
+        </button>
+<button class="bg-[#2e4b3f] hover:bg-primary text-on-primary font-label-md text-sm py-2.5 px-5 rounded flex items-center space-x-2 transition-colors">
+<span>Begin Private Journal</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 w-full max-w-7xl mx-auto px-6 py-10 space-y-16">
+<!-- HERO SECTION: Split Editorial Layout -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch pt-4" id="hero">
+<!-- Left Column: Copy & Value Proposition -->
+<div class="lg:col-span-7 flex flex-col justify-between bg-ledger-card border border-[#d8dbd6] rounded-xl p-8 sm:p-12">
+<div class="space-y-6">
+<div class="inline-flex items-center space-x-2 bg-[#ecefea] px-3 py-1 rounded text-secondary text-xs font-mono tracking-wider uppercase border border-[#d8dbd6]">
+<span class="material-symbols-outlined text-[15px] text-primary">lock</span>
+<span>Archival Privacy Ledger • Zero Exposure</span>
+</div>
+<h1 class="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-primary font-normal leading-[1.15] tracking-tight">
+            Thought requires privacy to exist honestly.
+          </h1>
+<p class="font-body-lg text-lg text-on-surface-variant leading-relaxed max-w-2xl">
+            Sanctuary is an encrypted haven for deep personal reflection. Built strictly without engagement traps, algorithmic dopamine, vanity counters, or commercial behavioral surveillance.
+          </p>
+<div class="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-[#d8dbd6]">
+<div class="space-y-1">
+<span class="font-mono text-[11px] text-[#727974] uppercase tracking-wider block">Cryptographic Envelope</span>
+<p class="text-xs text-on-surface leading-normal">
+                XChaCha20-Poly1305 authenticated local stream cipher with hardware enclave binding.
+              </p>
+</div>
+<div class="space-y-1">
+<span class="font-mono text-[11px] text-[#727974] uppercase tracking-wider block">Physical Data Locality</span>
+<p class="text-xs text-on-surface leading-normal">
+                Stored purely in an offline SQLite sandbox on your silicon. Zero telemetry ingestion.
+              </p>
+</div>
+</div>
+</div>
+<div class="pt-8 flex flex-wrap items-center gap-4">
+<button class="bg-[#2e4b3f] hover:bg-primary text-on-primary font-label-md text-sm py-3.5 px-6 rounded flex items-center space-x-2 transition-colors">
+<span>Begin private journal</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<button class="bg-[#ecefea] hover:bg-[#e0e3de] text-primary border border-[#d8dbd6] font-label-md text-sm py-3.5 px-6 rounded text-center transition-colors" id="specToggleBtn">
+            Inspect cryptographic spec
+          </button>
+<span class="text-xs font-mono text-outline ml-auto self-center">FIPS 140-3 COMPLIANT SEEDING</span>
+</div>
+</div>
+<!-- Right Column: Specimen Archival Card -->
+<div class="lg:col-span-5 flex flex-col bg-ledger-card border border-[#d8dbd6] rounded-xl p-5 justify-between">
+<div class="flex items-center justify-between border-b border-[#d8dbd6] pb-3 mb-4 font-mono text-[11px] text-secondary">
+<span class="flex items-center gap-1.5 font-semibold tracking-wider text-primary">
+<span class="material-symbols-outlined text-[14px]">landscape</span>
+            SPECIMEN NO. A-1
+          </span>
+<span class="text-[#727974]">PLATE 04 • SILENT RIVER</span>
+</div>
+<div class="relative w-full aspect-[4/3] rounded overflow-hidden bg-[#e6e9e4] border border-[#d8dbd6]">
+<img alt="Archival Riverbed Landscape" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB470MeGiI25xUYhLlmnhqCmkcXEM3Azdhbnaq15fnPbT3Y9LxVf9RuTnhFB6MEe0V77VQiGKlnvvUFQhqIqiXGqno3j18xFDalTmDO9cVigmd1V3qZQoee8G0oSX__k7olW5fyjBcM8tPiEl1XJwonQHWucl3LXep9EO4N_HjrCYJFQh9r319X163seaM-g31TgMbROL3EeOW8HDITcSUJbvgmtcqfj7azrVH2wPs-EX23lxk4RNzP"/>
+<div class="absolute bottom-2 left-2 bg-[#173429]/80 backdrop-blur-sm text-surface text-[10px] font-mono px-2 py-1 rounded">
+            CALIBRATION: STOIC GROUND
+          </div>
+</div>
+<div class="pt-4 flex flex-col space-y-2 font-mono text-[11px]">
+<div class="flex items-center justify-between text-secondary">
+<span class="font-medium text-primary">TAXONOMY: RIVERBED BASIN DEPOSIT</span>
+<span class="text-outline">37.7749° N, 122.4194° W</span>
+</div>
+<p class="text-[11px] font-body-sm text-on-surface-variant leading-snug">
+            Specimen card registered under ledger index 0x9F41. Natural mineral structures represent enduring calm through temporal silence.
+          </p>
+</div>
+</div>
+</section>
+<!-- LIVE CRYPTOGRAPHIC SHIELD DEMO -->
+<section class="bg-ledger-card border border-[#d8dbd6] rounded-xl p-8 sm:p-10 space-y-6" id="live-shield">
+<div class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-[#d8dbd6] gap-4">
+<div class="space-y-1">
+<div class="flex items-center space-x-2">
+<span class="w-2.5 h-2.5 rounded-full bg-surface-tint"></span>
+<span class="font-mono text-xs text-primary uppercase tracking-wider font-semibold">Live Cryptographic Redaction Engine</span>
+</div>
+<p class="text-xs font-body-sm text-on-surface-variant">
+            Interactive client-side proof. Redacted entropy fields remain opaque to external observability until authenticated on-device.
+          </p>
+</div>
+<div class="flex items-center space-x-3">
+<span class="font-mono text-xs text-secondary bg-[#ecefea] border border-[#d8dbd6] px-3 py-1.5 rounded font-medium" id="shieldStatus">
+            SEALED • 256-BIT
+          </span>
+<button class="text-xs font-mono uppercase tracking-wider font-semibold bg-[#2e4b3f] text-on-primary hover:bg-primary px-3 py-1.5 rounded transition-colors flex items-center gap-1" id="resealBtn">
+<span class="material-symbols-outlined text-[14px]">lock_reset</span>
+            Reseal Ledger
+          </button>
+</div>
+</div>
+<!-- Journal Entry Box -->
+<div class="bg-surface-container-lowest p-6 sm:p-8 rounded-lg border border-[#d8dbd6] shadow-none flex flex-col space-y-4">
+<div class="flex items-center justify-between font-mono text-[11px] text-[#727974] border-b border-[#ecefea] pb-2">
+<span>ENTRY ID: #SJ-2025-0814-OCT</span>
+<span>PASSPHRASE DERIVED KEY: argon2id$v=19$m=65536</span>
+</div>
+<p class="font-headline-sm text-lg sm:text-xl text-on-surface leading-relaxed font-normal">
+          "I awoke at dawn near 
+          <span class="redact-pill inline-block bg-[#ecefea] hover:bg-[#e0e3de] text-primary border border-[#d8dbd6] px-2 py-0.5 rounded text-xs font-mono cursor-pointer transition-all duration-150 mx-1 select-none" data-hidden="Emerald Basin Pier">
+            [REDACTED: GEOLOCATION]
+          </span>
+          feeling an acute wave of 
+          <span class="redact-pill inline-block bg-[#ecefea] hover:bg-[#e0e3de] text-primary border border-[#d8dbd6] px-2 py-0.5 rounded text-xs font-mono cursor-pointer transition-all duration-150 mx-1 select-none" data-hidden="solitary exhaustion">
+            [REDACTED: EMOTIONAL STATE INDEX]
+          </span>.
+          I haven't told 
+          <span class="redact-pill inline-block bg-[#ecefea] hover:bg-[#e0e3de] text-primary border border-[#d8dbd6] px-2 py-0.5 rounded text-xs font-mono cursor-pointer transition-all duration-150 mx-1 select-none" data-hidden="my therapist or Clara">
+            [REDACTED: IDENTIFYING ENTITY]
+          </span> 
+          about this recurring quiet dread."
+        </p>
+<div class="pt-3 flex flex-col sm:flex-row sm:items-center justify-between text-xs text-secondary gap-2 border-t border-[#ecefea]">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-[16px] text-primary">visibility</span>
+<span class="font-body-sm">Click any redacted token above to simulate client-side plaintext inspection.</span>
+</div>
+<span class="font-mono text-[11px] text-outline">STATE: ZERO TRANSMISSION DETECTED</span>
+</div>
+</div>
+<!-- Technical Callout -->
+<div class="bg-[#ecefea] border border-[#d8dbd6] p-4 rounded text-on-surface-variant font-mono text-xs flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-[18px] text-secondary">terminal</span>
+<span>Zero-Knowledge Guarantee: Server relays accept purely ephemeral encrypted blobs. Zero user ID ties, zero metadata persistence.</span>
+</div>
+<span class="hidden md:inline text-[10px] text-secondary uppercase tracking-widest font-semibold">CIPHER: XCHACHA20-POLY1305</span>
+</div>
+</section>
+<!-- VERIFICATION & SECURITY PROTOCOLS (3-Column Ledger Table) -->
+<section class="space-y-6" id="protocols">
+<div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-[#d8dbd6] pb-3">
+<div>
+<span class="font-mono text-xs uppercase tracking-widest text-secondary block mb-1">Architecture Specifications</span>
+<h2 class="font-headline-md text-2xl text-primary font-normal">Verification &amp; Security Protocols</h2>
+</div>
+<div class="font-mono text-xs text-outline mt-2 sm:mt-0">
+          STANDARD: SANCTUARY RFC-008
+        </div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Protocol 01 -->
+<div class="bg-ledger-card border border-[#d8dbd6] p-6 rounded-xl flex flex-col justify-between space-y-4">
+<div class="space-y-3">
+<div class="flex items-center justify-between border-b border-[#d8dbd6] pb-2 font-mono text-xs text-secondary">
+<span class="font-semibold text-primary">PROTOCOL 01</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">enhanced_encryption</span>
+</div>
+<h3 class="font-headline-sm text-lg text-primary font-medium">Zero-Knowledge Architecture</h3>
+<p class="font-body-sm text-sm text-on-surface-variant leading-relaxed">
+              No database operator can decrypt entries under any subpoena or breach. Cryptographic keys are derived strictly on-device through Argon2id memory-hard hashing with 64MB memory cost.
+            </p>
+</div>
+<div class="pt-4 border-t border-[#d8dbd6] font-mono text-[11px] space-y-1.5 text-secondary">
+<div class="flex justify-between">
+<span>PRIMITIVE:</span>
+<span class="text-primary font-medium">Argon2id + ChaCha20</span>
+</div>
+<div class="flex justify-between">
+<span>KEY RESIDENCE:</span>
+<span class="text-primary font-medium">Secure Enclave Only</span>
+</div>
+</div>
+</div>
+<!-- Protocol 02 -->
+<div class="bg-ledger-card border border-[#d8dbd6] p-6 rounded-xl flex flex-col justify-between space-y-4">
+<div class="space-y-3">
+<div class="flex items-center justify-between border-b border-[#d8dbd6] pb-2 font-mono text-xs text-secondary">
+<span class="font-semibold text-primary">PROTOCOL 02</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">cloud_off</span>
+</div>
+<h3 class="font-headline-sm text-lg text-primary font-medium">Pure Local-First Storage</h3>
+<p class="font-body-sm text-sm text-on-surface-variant leading-relaxed">
+              Sync occurs directly peer-to-peer over encrypted local Wi-Fi or optional zero-knowledge relay blobs. Your thoughts exist offline in an unshared, sandboxed SQLite container.
+            </p>
+</div>
+<div class="pt-4 border-t border-[#d8dbd6] font-mono text-[11px] space-y-1.5 text-secondary">
+<div class="flex justify-between">
+<span>STORAGE ENGINE:</span>
+<span class="text-primary font-medium">SQLite3 (WAL Mode)</span>
+</div>
+<div class="flex justify-between">
+<span>NETWORK DEPENDENCY:</span>
+<span class="text-primary font-medium">0% (Fully Autonomous)</span>
+</div>
+</div>
+</div>
+<!-- Protocol 03 -->
+<div class="bg-ledger-card border border-[#d8dbd6] p-6 rounded-xl flex flex-col justify-between space-y-4">
+<div class="space-y-3">
+<div class="flex items-center justify-between border-b border-[#d8dbd6] pb-2 font-mono text-xs text-secondary">
+<span class="font-semibold text-primary">PROTOCOL 03</span>
+<span class="material-symbols-outlined text-crimson-accent text-[20px]">delete_sweep</span>
+</div>
+<h3 class="font-headline-sm text-lg text-primary font-medium">Physical Right to Erasure</h3>
+<p class="font-body-sm text-sm text-on-surface-variant leading-relaxed">
+              Instantaneous full SQLite export with verifiable cryptographic wipe. Deleting an entry triggers multi-pass pseudorandom block overwriting, rendering forensic hardware recovery impossible.
+            </p>
+</div>
+<div class="pt-4 border-t border-[#d8dbd6] font-mono text-[11px] space-y-1.5 text-secondary">
+<div class="flex justify-between">
+<span>ERASURE METHOD:</span>
+<span class="text-crimson-accent font-medium">DoD 5220.22-M Multi-Pass</span>
+</div>
+<div class="flex justify-between">
+<span>PORTABILITY:</span>
+<span class="text-primary font-medium">Plain JSON &amp; SQLite Dump</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- DIRECT COMPARISON: Sanctuary Sovereign Enclave vs Big Tech Cloud -->
+<section class="bg-ledger-card border border-[#d8dbd6] rounded-xl p-8 sm:p-10 space-y-6" id="architecture">
+<div class="flex flex-col md:flex-row md:items-end justify-between border-b border-[#d8dbd6] pb-4 gap-2">
+<div>
+<span class="font-mono text-xs uppercase tracking-widest text-secondary block mb-1">Architecture Comparison</span>
+<h2 class="font-headline-md text-2xl text-primary font-normal">Sovereign Local Enclave vs Standard Cloud Journal</h2>
+</div>
+<p class="text-xs font-mono text-outline">MODEL AUDIT 2025</p>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm font-body-sm border-collapse">
+<thead>
+<tr class="border-b border-[#d8dbd6] font-mono text-xs text-secondary">
+<th class="py-3 px-4 font-semibold w-1/3">Security Vector</th>
+<th class="py-3 px-4 font-semibold text-primary bg-[#e6e9e4] rounded-t w-1/3">Sanctuary Sovereign Ledger</th>
+<th class="py-3 px-4 font-semibold text-outline w-1/3">Commercial Cloud Journaling</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#ecefea]">
+<tr>
+<td class="py-4 px-4 font-medium text-primary">Decryption Authority</td>
+<td class="py-4 px-4 bg-[#f2f4ef] text-primary font-mono text-xs">
+                Client-only (Device Master Key)
+              </td>
+<td class="py-4 px-4 text-on-surface-variant font-mono text-xs">
+                Server-side managed KMS / Vendor accessible
+              </td>
+</tr>
+<tr>
+<td class="py-4 px-4 font-medium text-primary">AI &amp; Sentiment Telemetry</td>
+<td class="py-4 px-4 bg-[#f2f4ef] text-primary font-mono text-xs">
+                Absolute Zero (No trackers, no LLM parsing)
+              </td>
+<td class="py-4 px-4 text-on-surface-variant font-mono text-xs">
+                Tokenized sentiment scoring &amp; cloud embeddings
+              </td>
+</tr>
+<tr>
+<td class="py-4 px-4 font-medium text-primary">Subpoena &amp; Leak Vulnerability</td>
+<td class="py-4 px-4 bg-[#f2f4ef] text-primary font-mono text-xs">
+                Mathematically impossible (Zero plain blobs)
+              </td>
+<td class="py-4 px-4 text-on-surface-variant font-mono text-xs">
+                Subject to court orders &amp; database dumps
+              </td>
+</tr>
+<tr>
+<td class="py-4 px-4 font-medium text-primary">Data Durability &amp; Offline Autonomy</td>
+<td class="py-4 px-4 bg-[#f2f4ef] text-primary font-mono text-xs">
+                100% offline native SQLite storage
+              </td>
+<td class="py-4 px-4 text-on-surface-variant font-mono text-xs">
+                Requires network sign-in and cloud sync
+              </td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- GROUNDED 24/7 CRISIS SUPPORT BLOCK -->
+<section class="bg-[#ecefea] border border-[#d8dbd6] rounded-xl p-8 sm:p-10 space-y-6" id="emergency">
+<div class="flex flex-col md:flex-row md:items-center justify-between border-b border-[#d8dbd6] pb-4 gap-4">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded bg-crimson-accent/10 border border-crimson-accent/20 flex items-center justify-center text-crimson-accent">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-lg text-primary font-medium">Emergency &amp; Immediate Human Support</h3>
+<span class="font-mono text-xs text-[#727974]">HUMAN COMPASSION FIRST • NON-ALGORITHMIC</span>
+</div>
+</div>
+<span class="text-xs font-mono text-secondary bg-[#e0e3de] px-3 py-1 rounded">24/7 CONFIDENTIAL &amp; FREE</span>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant leading-relaxed max-w-3xl">
+        Writing candidly can unearth overwhelming weight. If private contemplation evolves into an acute mental health crisis, human assistance is always available. You do not have to carry it alone.
+      </p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-xs">
+<a class="bg-surface-container-lowest p-4 rounded border border-[#d8dbd6] hover:border-primary flex flex-col justify-between transition-colors group" href="tel:988">
+<div class="flex items-center justify-between text-primary font-medium mb-2">
+<span>988 Crisis Lifeline</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-0.5 transition-transform">call</span>
+</div>
+<span class="text-secondary">US &amp; Canada • Dial 988</span>
+</a>
+<a class="bg-surface-container-lowest p-4 rounded border border-[#d8dbd6] hover:border-primary flex flex-col justify-between transition-colors group" href="sms:678-678">
+<div class="flex items-center justify-between text-primary font-medium mb-2">
+<span>The Trevor Project</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-0.5 transition-transform">sms</span>
+</div>
+<span class="text-secondary">LGBTQ+ Support • Text START to 678-678</span>
+</a>
+<a class="bg-surface-container-lowest p-4 rounded border border-[#d8dbd6] hover:border-primary flex flex-col justify-between transition-colors group" href="https://findahelpline.com" rel="noopener noreferrer" target="_blank">
+<div class="flex items-center justify-between text-primary font-medium mb-2">
+<span>Global Helplines</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-0.5 transition-transform">open_in_new</span>
+</div>
+<span class="text-secondary">findahelpline.com • Worldwide directory</span>
+</a>
+</div>
+</section>
+</main>
+<!-- ARCHIVAL DESKTOP FOOTER -->
+<footer class="w-full bg-[#e6e9e4] border-t border-[#d8dbd6] mt-16 font-mono text-xs text-secondary py-12">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex items-center space-x-3">
+<img alt="Sanctuary River-Stone Mark" class="w-6 h-6 object-contain grayscale opacity-80" src="https://lh3.googleusercontent.com/aida/AEtjO1XasxiGISVbwyT2oYKLeMM-kKqZ6AQquUTQIPnxTk36J4YAWihA9zHYs-QNjkr4TsjlZl9r9enSShzU8MXYpHKoP_EwKOk5yUf6R04B4UxRMr0jlFs_S8h20HHZYftfH8xmkjyE4lkiRRc0VWYAU9mpQbVmiXXjovHVN3BY1yQb31j7HqrhKwyPR9IiZ_6iuIhz1oSR6AkZGf9IhtQv49dMo8elUZCibNKmrEC1EQ5JH6VcFHmrB4OVkD0"/>
+<span>Sanctuary Archival Edition • Open Verifiable Cryptographic Spec</span>
+</div>
+<div class="flex items-center space-x-6 text-[#727974]">
+<span>NO TRACKING COOKIES</span>
+<span>•</span>
+<span>NO TELEMETRY PIPELINES</span>
+<span>•</span>
+<span>ZERO COMMERCIAL AD REVENUE</span>
+</div>
+<div class="text-outline">
+        LEDGER BUILD 2025.10.4
+      </div>
+</div>
+</footer>
+<!-- Interactivity Script -->
+<script>
+    (function() {
+      const pills = document.querySelectorAll('.redact-pill');
+      const statusEl = document.getElementById('shieldStatus');
+      const resealBtn = document.getElementById('resealBtn');
+      const specBtn = document.getElementById('specToggleBtn');
+      const navSpecBtn = document.getElementById('navSpecBtn');
+
+      pills.forEach(pill => {
+        const originalText = pill.innerText.trim();
+        const hiddenValue = pill.getAttribute('data-hidden');
+
+        pill.addEventListener('click', () => {
+          if (pill.innerText.trim() === originalText) {
+            pill.innerText = hiddenValue;
+            pill.classList.remove('bg-[#ecefea]', 'text-primary');
+            pill.classList.add('bg-secondary-container', 'text-on-secondary-container', 'font-medium');
+            if (statusEl) {
+              statusEl.innerText = 'CLIENT DECRYPTED';
+              statusEl.classList.remove('bg-[#ecefea]', 'text-secondary');
+              statusEl.classList.add('bg-primary-fixed', 'text-on-primary-fixed');
+            }
+          } else {
+            pill.innerText = originalText;
+            pill.classList.add('bg-[#ecefea]', 'text-primary');
+            pill.classList.remove('bg-secondary-container', 'text-on-secondary-container', 'font-medium');
+          }
+        });
+      });
+
+      function restoreAllRedactions() {
+        pills.forEach(pill => {
+          const hidden = pill.getAttribute('data-hidden');
+          if (hidden === 'Emerald Basin Pier') pill.innerText = '[REDACTED: GEOLOCATION]';
+          if (hidden === 'solitary exhaustion') pill.innerText = '[REDACTED: EMOTIONAL STATE INDEX]';
+          if (hidden === 'my therapist or Clara') pill.innerText = '[REDACTED: IDENTIFYING ENTITY]';
+          pill.classList.add('bg-[#ecefea]', 'text-primary');
+          pill.classList.remove('bg-secondary-container', 'text-on-secondary-container', 'font-medium');
+        });
+        if (statusEl) {
+          statusEl.innerText = 'SEALED • 256-BIT';
+          statusEl.classList.add('bg-[#ecefea]', 'text-secondary');
+          statusEl.classList.remove('bg-primary-fixed', 'text-on-primary-fixed');
+        }
+      }
+
+      if (resealBtn) {
+        resealBtn.addEventListener('click', restoreAllRedactions);
+      }
+
+      function handleSpecClick(btn) {
+        if (!btn) return;
+        btn.addEventListener('click', () => {
+          const isInspecting = btn.innerText.includes('Inspect') || btn.innerText.includes('v1.4');
+          btn.innerText = isInspecting ? 'Spec v1.4 Loaded (Verified)' : 'Inspect cryptographic spec';
+          setTimeout(() => {
+            btn.innerText = 'Inspect cryptographic spec';
+          }, 3000);
+        });
+      }
+
+      handleSpecClick(specBtn);
+      handleSpecClick(navSpecBtn);
+    })();
+  </script>
+</body></html>

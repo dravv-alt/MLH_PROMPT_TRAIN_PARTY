@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400..700;1,400..700&amp;family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"tertiary-fixed-dim":"#bbcabe","secondary-container":"#d2e8da","primary-fixed-dim":"#adcebe","on-tertiary":"#ffffff","on-tertiary-container":"#a7b6ab","surface-bright":"#f7faf5","inverse-primary":"#adcebe","on-secondary":"#ffffff","tertiary":"#243229","background":"#f7faf5","tertiary-container":"#3a483f","primary-fixed":"#c9ead9","surface-container":"#ecefea","on-background":"#191c1a","surface-container-lowest":"#ffffff","surface":"#f7faf5","surface-tint":"#476558","secondary":"#4f6358","surface-container-high":"#e6e9e4","outline":"#727974","surface-container-highest":"#e0e3de","on-tertiary-fixed":"#111e17","on-error-container":"#93000a","primary":"#173429","on-secondary-fixed":"#0c1f17","on-surface":"#191c1a","on-tertiary-fixed-variant":"#3c4a41","surface-dim":"#d8dbd6","inverse-on-surface":"#eff2ed","on-secondary-fixed-variant":"#384b41","primary-container":"#2e4b3f","error":"#ba1a1a","tertiary-fixed":"#d7e6da","surface-variant":"#e0e3de","on-secondary-container":"#55695e","on-primary-container":"#9abaab","on-surface-variant":"#424844","surface-container-low":"#f2f4ef","on-primary":"#ffffff","secondary-fixed":"#d2e8da","inverse-surface":"#2d312e","error-container":"#ffdad6","on-primary-fixed-variant":"#304d40","on-error":"#ffffff","secondary-fixed-dim":"#b6ccbe","on-primary-fixed":"#022016","outline-variant":"#c1c8c3"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"margin":"1.5rem","space-sm":"0.75rem","space-xl":"3.5rem","space-lg":"2.25rem","margin-lg":"5rem","space-md":"1.25rem","gutter-lg":"2.5rem","margin-md":"3rem","space-xs":"0.375rem","gutter":"1.5rem"},"fontFamily":{"label-md":["Atkinson Hyperlegible Next"],"body-lg":["Atkinson Hyperlegible Next"],"headline-lg":["Literata"],"body-md":["Atkinson Hyperlegible Next"],"body-sm":["Atkinson Hyperlegible Next"],"headline-lg-mobile":["Literata"],"headline-sm":["Literata"],"display-lg-mobile":["Literata"],"display-lg":["Literata"],"headline-md":["Literata"],"label-sm":["Atkinson Hyperlegible Next"]},"fontSize":{"label-md":["0.875rem",{"lineHeight":"1.25rem","letterSpacing":"0.04em","fontWeight":"600"}],"body-lg":["1.125rem",{"lineHeight":"1.875rem","fontWeight":"400"}],"headline-lg":["2.5rem",{"lineHeight":"3rem","letterSpacing":"-0.01em","fontWeight":"400"}],"body-md":["1rem",{"lineHeight":"1.625rem","fontWeight":"400"}],"body-sm":["0.875rem",{"lineHeight":"1.375rem","fontWeight":"400"}],"headline-lg-mobile":["1.75rem",{"lineHeight":"2.25rem","letterSpacing":"-0.01em","fontWeight":"400"}],"headline-sm":["1.25rem",{"lineHeight":"1.75rem","fontWeight":"500"}],"display-lg-mobile":["2.25rem",{"lineHeight":"2.75rem","letterSpacing":"-0.015em","fontWeight":"400"}],"display-lg":["3.5rem",{"lineHeight":"4rem","letterSpacing":"-0.02em","fontWeight":"400"}],"headline-md":["1.75rem",{"lineHeight":"2.25rem","fontWeight":"400"}],"label-sm":["0.75rem",{"lineHeight":"1rem","letterSpacing":"0.05em","fontWeight":"500"}]}}}}</script></head><body class="bg-surface text-on-surface antialiased font-body-md text-body-md selection:bg-secondary-container selection:text-on-secondary-container"><aside class="fixed left-0 top-0 bottom-0 w-64 bg-surface-container-low z-40 flex flex-col justify-between py-margin px-space-md"><div class="flex flex-col gap-space-xl"><div class="flex items-center gap-space-sm px-space-xs"><span class="material-symbols-outlined text-secondary text-[24px]">filter_vintage</span><span class="font-headline-sm text-headline-sm tracking-tight text-primary font-serif">Sanctuary</span></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary font-semibold"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="talk" href="#"><span class="material-symbols-outlined text-[20px]">chat_bubble_outline</span><span class="font-label-md text-label-md">Talk</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="moments" href="#"><span class="material-symbols-outlined text-[20px]">history_edu</span><span class="font-label-md text-label-md">Moments</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="remembered" href="#"><span class="material-symbols-outlined text-[20px]">bookmarks</span><span class="font-label-md text-label-md">Remembered</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg transition-colors bg-primary-container text-on-primary font-semibold" data-path="calm" href="#"><span class="material-symbols-outlined text-[20px]">spa</span><span class="font-label-md text-label-md">Calm</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="privacy" href="#"><span class="material-symbols-outlined text-[20px]">shield</span><span class="font-label-md text-label-md">Privacy</span></a></nav></div><div class="px-space-xs pb-space-sm"><div class="bg-surface-container rounded-lg p-space-sm flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col min-w-0"><span class="font-label-sm text-label-sm text-on-surface truncate">Sanctuary Guest</span><span class="font-label-sm text-label-sm text-on-surface-variant truncate">Encrypted Session</span></div></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface z-30 flex items-center justify-between px-gutter shadow-[0_1px_8px_rgba(0,0,0,0.02)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-space-xs rounded-full"><span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span><span class="font-label-sm text-label-sm text-on-surface-variant tracking-wider uppercase">Zero Telemetry Active</span></div></div><div class="flex items-center gap-space-md"><button class="flex items-center gap-space-xs px-space-sm py-space-xs rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">visibility_off</span><span class="font-label-sm text-label-sm">Curtain (Esc)</span></button><div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-secondary" title="Quiet Pebble"><span class="material-symbols-outlined text-[18px]">lens</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="flex-1 pt-16 pb-16 bg-surface w-full max-w-[1200px] mx-auto px-gutter"><div class="flex flex-col w-full">
+<div class="w-full max-w-[1152px] mx-auto py-margin-md flex flex-col gap-space-xl">
+<!-- Top Header & Contemplative Grounding Statement -->
+<header class="flex flex-col gap-space-sm max-w-3xl">
+<div class="flex items-center gap-space-xs text-secondary mb-space-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Restorative Pacing · Private Space</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight font-serif font-semibold">
+        Calm
+      </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant font-normal">
+        These are simple pacing tools.
+      </p>
+<p class="font-body-sm text-body-sm text-outline max-w-xl">
+        Optional, self-directed exercises to slow down or steady attention. Sanctuary never launches these automatically.
+      </p>
+</header>
+<!-- Visual Stone Garden Inset Art (Inspired by Zen Slabs) -->
+<div class="w-full relative overflow-hidden rounded-xl bg-surface-container-low p-space-lg flex items-center justify-between">
+<div class="flex flex-col gap-space-xs z-10 max-w-md">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary">Acoustic &amp; Visual Horizon</span>
+<span class="font-headline-sm text-headline-sm text-primary font-serif">Riverstone Stillness</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Weighted forms and rhythmic expansion designed to bring your nervous system back into natural equilibrium.
+        </p>
+</div>
+<!-- Tactile Mineral Stacking Graphic (Inline Vector Illustration) -->
+<div class="hidden md:flex items-center justify-center pr-space-md opacity-90 select-none">
+<svg aria-hidden="true" class="w-72 h-36" fill="none" viewbox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
+<!-- Distant mountain ridges -->
+<path d="M0 110 C60 90 120 100 180 85 C240 70 280 80 320 65 L320 160 L0 160 Z" fill="#E0E3DE" opacity="0.6"></path>
+<path d="M30 118 C90 105 160 115 220 100 C270 90 295 95 320 85 L320 160 L30 160 Z" fill="#D8DBD6" opacity="0.5"></path>
+<!-- Water ripple line -->
+<ellipse cx="140" cy="140" fill="#D2E8DA" opacity="0.4" rx="100" ry="8"></ellipse>
+<ellipse cx="135" cy="142" fill="#C1C8C3" opacity="0.3" rx="70" ry="5"></ellipse>
+<!-- River stones (Smooth stack) -->
+<ellipse cx="120" cy="132" fill="#4F6358" rx="58" ry="16"></ellipse>
+<ellipse cx="116" cy="128" fill="#727974" opacity="0.25" rx="54" ry="12"></ellipse>
+<ellipse cx="130" cy="116" fill="#3A483F" rx="42" ry="13"></ellipse>
+<ellipse cx="126" cy="113" fill="#BBCABE" opacity="0.2" rx="38" ry="10"></ellipse>
+<ellipse cx="145" cy="102" fill="#243229" rx="28" ry="10"></ellipse>
+<ellipse cx="143" cy="100" fill="#C9EAD9" opacity="0.25" rx="25" ry="7"></ellipse>
+<!-- Little balance pebble -->
+<ellipse cx="205" cy="133" fill="#55695E" rx="22" ry="7"></ellipse>
+<!-- Minimal reed stalks -->
+<path d="M48 142 C45 110 50 80 58 55" stroke="#4F6358" stroke-linecap="round" stroke-width="1.5"></path>
+<path d="M54 105 C62 98 70 96 74 95" stroke="#4F6358" stroke-linecap="round" stroke-width="1.2"></path>
+<path d="M51 85 C42 78 36 76 34 75" stroke="#4F6358" stroke-linecap="round" stroke-width="1.2"></path>
+<path d="M57 65 C64 60 70 59 72 58" stroke="#4F6358" stroke-linecap="round" stroke-width="1.2"></path>
+</svg>
+</div>
+</div>
+<!-- The Two Primary Slabs: Breathing and Five Senses -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter-lg items-stretch">
+<!-- Slab 1: Breathing -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-low" style="border-radius: 12px;">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">air</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Rhythmic Cadence</span>
+</div>
+<!-- Mineral Pebble Graphic Accent -->
+<div class="flex items-center gap-1.5 opacity-70" title="Balanced stones">
+<span class="w-3.5 h-2 bg-outline-variant rounded-full"></span>
+<span class="w-5 h-2.5 bg-secondary rounded-full"></span>
+<span class="w-4 h-2 bg-tertiary-container rounded-full"></span>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h2 class="font-headline-md text-headline-md text-primary font-serif font-medium">
+              Breathing
+            </h2>
+<p class="font-body-md text-body-md text-secondary font-medium">
+              Rhythmic breath pacing with visual cadences
+            </p>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Choose between box breathing (4-4-4-4), relaxing breath (4-7-8), or steady 5s balance. Set 1, 3, 5 minutes or no limit.
+          </p>
+<!-- Interactive Cadence Visual Preview Box -->
+<div class="bg-surface-container rounded-lg p-space-md flex flex-col gap-space-sm select-none">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase tracking-wide">Cadence Preview</span>
+<span class="font-label-sm text-label-sm font-semibold text-primary" id="activeCadenceName">Box (4 · 4 · 4 · 4)</span>
+</div>
+<div class="h-20 w-full flex items-center justify-center relative overflow-hidden bg-surface rounded-lg">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center transition-all duration-1000 ease-in-out" id="breathPacingCircle">
+<div class="w-4 h-4 rounded-full bg-primary-container"></div>
+</div>
+<span class="absolute bottom-2 font-label-sm text-label-sm text-secondary" id="breathPhaseLabel">Inhale</span>
+</div>
+<!-- Pattern Selectors -->
+<div class="flex flex-wrap gap-space-xs pt-1">
+<button class="pattern-btn px-2.5 py-1 rounded bg-surface-container-highest text-primary font-label-sm text-label-sm hover:bg-secondary-container transition-colors" onclick="setBreathPattern('box')" type="button">
+                Box (4-4-4-4)
+              </button>
+<button class="pattern-btn px-2.5 py-1 rounded bg-surface text-on-surface-variant font-label-sm text-label-sm hover:bg-secondary-container transition-colors" onclick="setBreathPattern('relax')" type="button">
+                Relax (4-7-8)
+              </button>
+<button class="pattern-btn px-2.5 py-1 rounded bg-surface text-on-surface-variant font-label-sm text-label-sm hover:bg-secondary-container transition-colors" onclick="setBreathPattern('steady')" type="button">
+                5s Steady
+              </button>
+</div>
+</div>
+<!-- Feature Chips -->
+<div class="flex flex-wrap gap-space-xs pt-space-xs">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">tune</span>
+              3 rhythm patterns
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">timelapse</span>
+              1 to 5 min or open
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">volume_mute</span>
+              Sound opt-in (off by default)
+            </span>
+</div>
+</div>
+<!-- Action Area -->
+<div class="pt-space-lg flex items-center justify-between">
+<button class="flex items-center justify-center gap-space-xs px-6 py-3 rounded-[10px] bg-primary-container text-on-primary font-label-md text-label-md hover:bg-tertiary transition-colors shadow-sm focus:ring-2 focus:ring-primary focus:outline-none" id="startBreathingBtn" onclick="toggleBreathingSession()" type="button">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+<span>Begin breathing</span>
+</button>
+<span class="font-label-sm text-label-sm text-outline">Unhurried &amp; silent</span>
+</div>
+</section>
+<!-- Slab 2: Five Senses Grounding -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-low" style="border-radius: 12px;">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">radar</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Immediate Anchoring</span>
+</div>
+<!-- Mineral 5-4-3-2-1 Stepped Stone Visual -->
+<div class="flex items-end gap-1 select-none" title="5-4-3-2-1 steps">
+<span class="w-2.5 h-6 rounded-t-sm bg-primary-container"></span>
+<span class="w-2.5 h-5 rounded-t-sm bg-secondary"></span>
+<span class="w-2.5 h-4 rounded-t-sm bg-tertiary-container"></span>
+<span class="w-2.5 h-3 rounded-t-sm bg-outline"></span>
+<span class="w-2.5 h-2 rounded-t-sm bg-outline-variant"></span>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h2 class="font-headline-md text-headline-md text-primary font-serif font-medium">
+              Five senses
+            </h2>
+<p class="font-body-md text-body-md text-secondary font-medium">
+              5-4-3-2-1 sensory grounding walkthrough
+            </p>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            A five-step observational sequence noticing what is immediately around you in your physical room. Step through sight, touch, sound, smell, and taste.
+          </p>
+<!-- Stepped Visual Pathway Walkthrough Preview -->
+<div class="bg-surface-container rounded-lg p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wide text-on-surface-variant">Grounding Progress</span>
+<span class="font-label-sm text-label-sm font-semibold text-primary" id="senseStepCounter">Step 1 of 5</span>
+</div>
+<!-- Visual Progress Dots with Mineral Stepped Indicator -->
+<div class="grid grid-cols-5 gap-2 pt-1">
+<div class="step-indicator h-1.5 rounded-full bg-primary-container transition-all"></div>
+<div class="step-indicator h-1.5 rounded-full bg-surface-container-highest transition-all"></div>
+<div class="step-indicator h-1.5 rounded-full bg-surface-container-highest transition-all"></div>
+<div class="step-indicator h-1.5 rounded-full bg-surface-container-highest transition-all"></div>
+<div class="step-indicator h-1.5 rounded-full bg-surface-container-highest transition-all"></div>
+</div>
+<!-- Current Step Callout Card -->
+<div class="bg-surface rounded-lg p-space-sm flex items-start gap-space-sm mt-1" id="sensePromptCard">
+<span class="material-symbols-outlined text-secondary text-[22px] shrink-0" id="senseIcon">visibility</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary" id="senseTitle">5 things you see</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="senseDesc">Notice five distinct shapes, surfaces, or light reflections near you.</span>
+</div>
+</div>
+</div>
+<!-- Feature Chips -->
+<div class="flex flex-wrap gap-space-xs pt-space-xs">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">format_list_numbered</span>
+              5 observational steps
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">edit_note</span>
+              Optional text notes
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">exit_to_app</span>
+              Self-paced with instant exit
+            </span>
+</div>
+</div>
+<!-- Action Area -->
+<div class="pt-space-lg flex items-center justify-between">
+<button class="flex items-center justify-center gap-space-xs px-6 py-3 rounded-[10px] bg-primary-container text-on-primary font-label-md text-label-md hover:bg-tertiary transition-colors shadow-sm focus:ring-2 focus:ring-primary focus:outline-none" id="startSensesBtn" onclick="advanceSenseStep()" type="button">
+<span class="material-symbols-outlined text-[18px]">unfold_more</span>
+<span id="sensesBtnLabel">Begin 5 senses</span>
+</button>
+<button class="text-outline hover:text-on-surface font-label-sm text-label-sm transition-colors" onclick="resetSenses()" type="button">
+            Reset sequence
+          </button>
+</div>
+</section>
+</div>
+<!-- Active Walkthrough Canvas (Expandable Quiet Overlay Bar) -->
+<div class="w-full bg-surface-container rounded-xl p-space-md flex flex-col md:flex-row items-center justify-between gap-space-md hidden transition-all" id="activeSessionDock">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]" id="dockIcon">filter_vintage</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary font-serif" id="dockTitle">Current Session Active</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="dockSubtitle">Take your time. There is nowhere else you need to be.</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-sm text-label-sm text-secondary mr-2" id="dockTimer">00:00</span>
+<button class="px-space-md py-space-xs rounded-lg bg-surface-container-highest text-primary hover:bg-surface-container-high font-label-sm text-label-sm transition-colors" onclick="stopActiveSession()" type="button">
+          Leave Exercise
+        </button>
+</div>
+</div>
+<!-- Minimal Supportive Architectural Slabs -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-secondary">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Browser Sandbox</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Your input remains entirely ephemeral. No notes, durations, or cadence choices touch a server.
+        </p>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-secondary">
+<span class="material-symbols-outlined text-[18px]">do_not_disturb_on</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Zero Gamification</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          No streaks, badges, or progress points. These tools exist purely as quiet instruments when needed.
+        </p>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-secondary">
+<span class="material-symbols-outlined text-[18px]">nature</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Somatic Grounding</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Designed alongside trauma-informed principles to restore tactile presence within your physical room.
+        </p>
+</div>
+</div>
+<!-- Bottom Informational Grounding Notice -->
+<footer class="pt-space-md pb-space-lg flex items-center justify-center text-center">
+<p class="font-body-sm text-body-sm text-outline max-w-2xl leading-relaxed">
+        Pacing tools operate entirely locally in your browser. No data, timers, scores, or engagement metrics are recorded or evaluated.
+      </p>
+</footer>
+</div>
+</div>
+<script>
+  // Simple state management for Calm tools
+  let breathState = {
+    active: false,
+    timer: null,
+    phaseIndex: 0,
+    pattern: 'box', // 'box', 'relax', 'steady'
+    secondsElapsed: 0
+  };
+
+  const breathPatterns = {
+    box: {
+      name: "Box (4 · 4 · 4 · 4)",
+      phases: [
+        { name: "Inhale (4s)", scale: "scale-150", duration: 4000 },
+        { name: "Hold (4s)", scale: "scale-150", duration: 4000 },
+        { name: "Exhale (4s)", scale: "scale-90", duration: 4000 },
+        { name: "Pause (4s)", scale: "scale-90", duration: 4000 }
+      ]
+    },
+    relax: {
+      name: "Relax (4 · 7 · 8)",
+      phases: [
+        { name: "Inhale (4s)", scale: "scale-150", duration: 4000 },
+        { name: "Hold (7s)", scale: "scale-150", duration: 7000 },
+        { name: "Exhale (8s)", scale: "scale-75", duration: 8000 }
+      ]
+    },
+    steady: {
+      name: "Steady (5s In · 5s Out)",
+      phases: [
+        { name: "Inhale (5s)", scale: "scale-150", duration: 5000 },
+        { name: "Exhale (5s)", scale: "scale-90", duration: 5000 }
+      ]
+    }
+  };
+
+  function setBreathPattern(type) {
+    breathPatterns.current = type;
+    const pat = breathPatterns[type];
+    document.getElementById('activeCadenceName').textContent = pat.name;
+    
+    // Update button styling
+    const btns = document.querySelectorAll('.pattern-btn');
+    btns.forEach(btn => {
+      btn.classList.remove('bg-surface-container-highest', 'text-primary');
+      btn.classList.add('bg-surface', 'text-on-surface-variant');
+    });
+    event.currentTarget.classList.remove('bg-surface', 'text-on-surface-variant');
+    event.currentTarget.classList.add('bg-surface-container-highest', 'text-primary');
+  }
+
+  function toggleBreathingSession() {
+    const btn = document.getElementById('startBreathingBtn');
+    const dock = document.getElementById('activeSessionDock');
+    const circle = document.getElementById('breathPacingCircle');
+    const phaseLabel = document.getElementById('breathPhaseLabel');
+
+    if (!breathState.active) {
+      breathState.active = true;
+      btn.innerHTML = `<span class="material-symbols-outlined text-[18px]">pause</span><span>Pause breathing</span>`;
+      dock.classList.remove('hidden');
+      document.getElementById('dockTitle').textContent = "Pacing Breath: " + document.getElementById('activeCadenceName').textContent;
+      document.getElementById('dockIcon').textContent = "air";
+
+      runBreathCycle();
+      startDockTimer();
+    } else {
+      stopActiveSession();
+    }
+  }
+
+  function runBreathCycle() {
+    if (!breathState.active) return;
+    const currentPat = breathPatterns[breathPatterns.current || 'box'];
+    const phase = currentPat.phases[breathState.phaseIndex];
+
+    const circle = document.getElementById('breathPacingCircle');
+    const phaseLabel = document.getElementById('breathPhaseLabel');
+
+    phaseLabel.textContent = phase.name;
+    circle.className = `w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center transition-all duration-[3000ms] ease-in-out ${phase.scale}`;
+
+    breathState.timer = setTimeout(() => {
+      if (!breathState.active) return;
+      breathState.phaseIndex = (breathState.phaseIndex + 1) % currentPat.phases.length;
+      runBreathCycle();
+    }, phase.duration);
+  }
+
+  let dockInterval = null;
+  function startDockTimer() {
+    breathState.secondsElapsed = 0;
+    clearInterval(dockInterval);
+    dockInterval = setInterval(() => {
+      breathState.secondsElapsed++;
+      const mins = String(Math.floor(breathState.secondsElapsed / 60)).padStart(2, '0');
+      const secs = String(breathState.secondsElapsed % 60).padStart(2, '0');
+      document.getElementById('dockTimer').textContent = `${mins}:${secs}`;
+    }, 1000);
+  }
+
+  function stopActiveSession() {
+    breathState.active = false;
+    clearTimeout(breathState.timer);
+    clearInterval(dockInterval);
+    document.getElementById('startBreathingBtn').innerHTML = `<span class="material-symbols-outlined text-[18px]">play_arrow</span><span>Begin breathing</span>`;
+    document.getElementById('breathPhaseLabel').textContent = "Rest";
+    document.getElementById('breathPacingCircle').className = `w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center transition-all duration-700 ease-in-out scale-100`;
+    document.getElementById('activeSessionDock').classList.add('hidden');
+  }
+
+  // 5-4-3-2-1 Senses Grounding Logic
+  const senseSteps = [
+    {
+      count: 5,
+      title: "5 things you see",
+      desc: "Scan your surroundings. Look for five small visual details—a shadow, a grain of wood, a color, or a reflection.",
+      icon: "visibility"
+    },
+    {
+      count: 4,
+      title: "4 things you can physically feel",
+      desc: "Bring attention to physical contact: feet against the floor, clothing against skin, texture of a desk, or room temperature.",
+      icon: "touch_app"
+    },
+    {
+      count: 3,
+      title: "3 things you hear",
+      desc: "Listen past the obvious sounds. Notice distant traffic, a computer fan, birds outside, or your own breath.",
+      icon: "hearing"
+    },
+    {
+      count: 2,
+      title: "2 things you smell",
+      desc: "Take a gentle breath in. Notice coffee, wood, clean air, linen, or the faint scent of rain.",
+      icon: "air"
+    },
+    {
+      count: 1,
+      title: "1 thing you taste",
+      desc: "Notice the lingering taste of mint, tea, water, or simply rest your tongue against the roof of your mouth.",
+      icon: "restaurant"
+    }
+  ];
+
+  let currentSenseIndex = 0;
+
+  function advanceSenseStep() {
+    const dock = document.getElementById('activeSessionDock');
+    dock.classList.remove('hidden');
+    document.getElementById('dockTitle').textContent = "Grounding: Five Senses Exploration";
+    document.getElementById('dockIcon').textContent = "radar";
+
+    if (currentSenseIndex < senseSteps.length - 1) {
+      currentSenseIndex++;
+      updateSenseUI();
+      document.getElementById('sensesBtnLabel').textContent = "Next sense (" + (5 - currentSenseIndex) + ")";
+    } else {
+      // Completed full sequence
+      document.getElementById('senseStepCounter').textContent = "Walkthrough Complete";
+      document.getElementById('senseTitle').textContent = "Grounded & Present";
+      document.getElementById('senseDesc').textContent = "You have completed the sequence. Take a gentle breath before returning to your day.";
+      document.getElementById('senseIcon').textContent = "done_all";
+      document.getElementById('sensesBtnLabel').textContent = "Restart sequence";
+      currentSenseIndex = -1; // Reset ready
+    }
+  }
+
+  function updateSenseUI() {
+    const data = senseSteps[currentSenseIndex];
+    document.getElementById('senseStepCounter').textContent = `Step ${currentSenseIndex + 1} of 5`;
+    document.getElementById('senseTitle').textContent = data.title;
+    document.getElementById('senseDesc').textContent = data.desc;
+    document.getElementById('senseIcon').textContent = data.icon;
+
+    // Update progress bars
+    const bars = document.querySelectorAll('.step-indicator');
+    bars.forEach((bar, idx) => {
+      if (idx <= currentSenseIndex) {
+        bar.className = 'step-indicator h-1.5 rounded-full bg-primary-container transition-all';
+      } else {
+        bar.className = 'step-indicator h-1.5 rounded-full bg-surface-container-highest transition-all';
+      }
+    });
+  }
+
+  function resetSenses() {
+    currentSenseIndex = 0;
+    updateSenseUI();
+    document.getElementById('sensesBtnLabel').textContent = "Begin 5 senses";
+  }
+</script></main><footer class="fixed bottom-0 left-64 right-0 h-16 bg-surface-container-lowest z-30 flex items-center justify-between px-gutter shadow-[0_-1px_6px_rgba(0,0,0,0.02)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs text-secondary"><span class="material-symbols-outlined text-[20px]">graphic_eq</span><span class="font-label-sm text-label-sm uppercase tracking-wide">Acoustic Texture: Forest Stillness</span></div><button class="text-on-surface-variant hover:text-primary transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">volume_up</span></button></div><div class="flex items-center gap-space-md"><span class="font-body-sm text-body-sm text-on-surface-variant">24/7 Monitored Refuge</span><a class="inline-flex items-center gap-space-xs px-space-sm py-space-xs bg-surface-container text-primary font-label-md text-label-md rounded-lg hover:bg-surface-container-high hover:text-on-surface transition-colors" href="tel:988"><span class="material-symbols-outlined text-primary text-[16px]">phone_in_talk</span>Crisis Lifeline (Dial 988)</a></div></footer></div></body></html>

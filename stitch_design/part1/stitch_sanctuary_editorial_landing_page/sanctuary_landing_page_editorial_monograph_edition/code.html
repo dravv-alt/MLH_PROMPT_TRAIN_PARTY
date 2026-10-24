@@ -1,0 +1,496 @@
+<!DOCTYPE html><html class="h-full scroll-smooth" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Sanctuary — Monograph &amp; Public Record</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,300;1,7..72,400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-bright": "#f7faf5",
+            "surface": "#f7faf5",
+            "on-primary": "#ffffff",
+            "surface-container-low": "#f2f4ef",
+            "on-surface": "#191c1a",
+            "outline-variant": "#c1c8c3",
+            "tertiary-container": "#3a483f",
+            "error": "#ba1a1a",
+            "surface-variant": "#e0e3de",
+            "on-secondary": "#ffffff",
+            "primary-fixed": "#c9ead9",
+            "on-tertiary-fixed-variant": "#3c4a41",
+            "on-error": "#ffffff",
+            "inverse-primary": "#adcebe",
+            "on-error-container": "#93000a",
+            "on-tertiary-container": "#a7b6ab",
+            "on-surface-variant": "#424844",
+            "surface-container": "#ecefea",
+            "on-tertiary": "#ffffff",
+            "on-secondary-fixed": "#0c1f17",
+            "surface-container-highest": "#e0e3de",
+            "surface-tint": "#476558",
+            "outline": "#727974",
+            "inverse-on-surface": "#eff2ed",
+            "surface-dim": "#d8dbd6",
+            "primary": "#173429",
+            "secondary-container": "#d2e8da",
+            "primary-container": "#2e4b3f",
+            "on-primary-container": "#9abaab",
+            "tertiary-fixed": "#d7e6da",
+            "secondary": "#4f6358",
+            "on-secondary-container": "#55695e",
+            "tertiary": "#243229",
+            "error-container": "#ffdad6",
+            "background": "#f7faf5",
+            "inverse-surface": "#2d312e",
+            "secondary-fixed-dim": "#b6ccbe",
+            "on-secondary-fixed-variant": "#384b41",
+            "on-tertiary-fixed": "#111e17",
+            "primary-fixed-dim": "#adcebe",
+            "secondary-fixed": "#d2e8da",
+            "on-background": "#191c1a",
+            "tertiary-fixed-dim": "#bbcabe",
+            "on-primary-fixed": "#022016",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-high": "#e6e9e4",
+            "on-primary-fixed-variant": "#304d40",
+            "lichen": "#c4cf5a",
+            "mineral": "#e9ece7"
+          },
+          fontFamily: {
+            "display-lg": ["Literata", "serif"],
+            "headline-lg": ["Literata", "serif"],
+            "headline-md": ["Literata", "serif"],
+            "headline-sm": ["Literata", "serif"],
+            "body-lg": ["Atkinson Hyperlegible Next", "sans-serif"],
+            "body-md": ["Atkinson Hyperlegible Next", "sans-serif"],
+            "body-sm": ["Atkinson Hyperlegible Next", "sans-serif"],
+            "label-md": ["Atkinson Hyperlegible Next", "sans-serif"],
+            "label-sm": ["Atkinson Hyperlegible Next", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    body {
+      background-color: #f7faf5;
+      color: #191c1a;
+      -webkit-font-smoothing: antialiased;
+    }
+    .redact-pill {
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    /* Subtle fine-press texture simulation without bulky data-uris */
+    .fine-rule {
+      background-image: linear-gradient(to right, transparent, #c1c8c3 20%, #c1c8c3 80%, transparent);
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col font-body-md selection:bg-secondary-container selection:text-primary">
+<!-- Editorial Top Folio Bar (Desktop Full-width Archival Header) -->
+<header class="w-full border-b border-surface-container-highest bg-surface-bright/95 backdrop-blur-md sticky top-0 z-50 transition-all"><div class="max-w-[1360px] mx-auto px-6 lg:px-12 h-20 flex items-center justify-between gap-6"><div class="flex items-center gap-8 lg:gap-12"><a class="flex items-center gap-3 group" href="#"><div class="w-9 h-9 rounded-full bg-primary-container/10 flex items-center justify-center border border-primary/20 group-hover:border-primary transition-colors shrink-0"><span class="w-3 h-3 rounded-full bg-primary"></span></div><div class="flex flex-col"><span class="font-headline-sm text-xl tracking-tight text-primary font-medium leading-none">Sanctuary</span><span class="font-label-sm text-[11px] text-secondary mt-1 font-normal">Private Journal</span></div></a><nav class="hidden md:flex items-center gap-6 lg:gap-8 font-body-md text-sm text-on-surface-variant font-normal"><a class="hover:text-primary transition-colors py-1" href="#monograph">How it works</a><a class="hover:text-primary transition-colors py-1" href="#proof">Privacy &amp; Security</a><a class="hover:text-primary transition-colors py-1" href="#tenets">Pillars</a><a class="hover:text-primary transition-colors py-1" href="#stillness">Sound</a></nav></div><div class="flex items-center gap-4 lg:gap-6 shrink-0"><a class="hidden xl:flex items-center gap-1.5 text-xs text-secondary hover:text-primary transition-colors py-1" href="tel:988"><span class="material-symbols-outlined text-[16px] text-surface-tint">emergency</span><span class="">Crisis Lifeline (988)</span></a><div class="hidden xl:block h-4 w-px bg-outline-variant/60"></div><a class="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium" href="#login">Sign in</a><a class="inline-flex items-center gap-2 bg-primary text-on-primary font-body-md text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-primary-container hover:shadow-sm active:scale-[0.98] transition-all" href="#journal"><span class="">Begin writing</span><span class="material-symbols-outlined text-base">arrow_forward</span></a></div></div></header>
+<main class="flex-1 w-full flex flex-col items-center">
+<!-- Hero Section: Japanese Negative Space & Monograph Presentation -->
+<section class="w-full max-w-[1360px] mx-auto px-8 lg:px-12 pt-16 lg:pt-24 pb-20" id="monograph">
+<!-- Monograph Metadata Header -->
+<div class="flex flex-col items-center text-center max-w-4xl mx-auto mb-12">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container border border-surface-container-highest text-secondary font-label-sm text-xs tracking-widest uppercase mb-6">
+<span class="w-1.5 h-1.5 rounded-full bg-lichen"></span>
+<span class="">Monograph / Public Record • Revision 2025</span>
+</div>
+<h1 class="font-display-lg text-4xl sm:text-5xl lg:text-6xl text-primary font-normal tracking-tight leading-[1.15] mb-6">
+          A quiet, unobserved space for your interior life.
+        </h1>
+<p class="font-body-lg text-lg lg:text-xl text-on-surface-variant max-w-2xl font-light leading-relaxed">
+          No surveillance algorithms, no emotional scoring, no telemetry relays. Simply a private vessel made of stone, local memory, and silence.
+        </p>
+</div>
+<!-- Monumental Landscape Art: Circular Riverbed Stone Ripple -->
+<div class="relative w-full max-w-4xl mx-auto flex flex-col items-center justify-center my-6">
+<!-- Concentric Mineral Ripple Rings -->
+<div class="absolute inset-0 m-auto w-[460px] h-[460px] lg:w-[540px] lg:h-[540px] rounded-full border border-surface-container-highest/80 -z-0 pointer-events-none"></div>
+<div class="absolute inset-0 m-auto w-[560px] h-[560px] lg:w-[660px] lg:h-[660px] rounded-full border border-surface-container-highest/40 -z-0 pointer-events-none"></div>
+<div class="absolute -top-6 -right-6 lg:right-16 bg-surface-container-low border border-surface-container-highest/70 px-4 py-2 rounded-lg font-mono text-[11px] text-secondary tracking-tight z-20 flex items-center gap-2 shadow-xs">
+<span class="w-2 h-2 rounded-full bg-lichen animate-ping"></span>
+<span class="">Zero External Calls</span>
+</div>
+<!-- Central Circular Riverbed Frame -->
+<div class="relative z-10 w-80 h-80 sm:w-96 sm:h-96 lg:w-[440px] lg:h-[440px] rounded-full overflow-hidden shadow-sm border-4 border-surface-container-lowest bg-surface-container">
+<img alt="Minimalist fine art landscape illustration of smooth river stones, muted slate and moss green boulders resting by a quiet pale stream with contoured tidal sand banks and austere mountain silhouettes in soft mineral tones." class="w-full h-full object-cover object-center filter saturate-[0.95]" src="https://lh3.googleusercontent.com/aida/AEtjO1W44xugt3KgL2RepOxFT2YmNIg5AXDPJepmLBymlfzYjMO-QnijUuQ2whMMOx1B1Rnrk2bmmiSv2eomYsseXkzQFfyjowdcMf3w6zI8aXzcpQkIWhrKqpZ7W_2ovAiSTQXWTCNy4wpaEk-Xk9h79yIiMAlbIdKI-e2dnD_Vq9cnk8gaz3ZTKuxfbJ_ni8TLaMdtUqoeK9HfzHaznT30j1aLTaaNKEk6h-TfS17Sn0bV1gf_vctzJT6-mHQ">
+<div class="absolute inset-0 bg-primary/5 pointer-events-none"></div>
+</div>
+<!-- Lichen & Mineral Subtext Plaque -->
+<div class="mt-8 text-center max-w-md">
+<p class="font-label-sm text-xs text-secondary tracking-wide uppercase">
+            Figure 01. The Unindexed Bedrock
+          </p>
+<p class="font-body-sm text-xs text-outline mt-1 italic">
+            "Like river stones smoothed beneath dark cold currents, human thoughts deserve dissolution without archival harvesting."
+          </p>
+</div>
+</div>
+<!-- CTA & Reassurance Bar -->
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
+<a class="w-full sm:w-auto text-center bg-primary text-on-primary font-label-md text-sm uppercase tracking-wider py-4 px-8 rounded-full hover:bg-primary-container transition-all flex items-center justify-center gap-3 group" href="#proof">
+<span class="">Explore Cryptographic Proof</span>
+<span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">south</span>
+</a>
+<a class="w-full sm:w-auto text-center border border-outline-variant bg-surface-container-lowest text-on-surface font-label-md text-sm uppercase tracking-wider py-4 px-8 rounded-full hover:bg-surface-container transition-all" href="#journal">
+          Launch Local Environment
+        </a>
+</div>
+<p class="text-center font-label-sm text-xs text-outline mt-4">Zero registration telemetry • SQLite client-isolated storage • Offline native</p>
+</section>
+<!-- Full Width Hairline Separator -->
+<div class="w-full max-w-[1360px] px-8 lg:px-12">
+<div class="w-full h-px bg-surface-container-highest"></div>
+</div>
+<!-- Interactive Proof Section: Desktop Dual Column Layout -->
+<section class="w-full max-w-[1360px] mx-auto px-8 lg:px-12 py-20 lg:py-28" id="proof">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+<!-- Left Column: Architectural Thesis -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<div class="inline-flex items-center gap-2 text-secondary font-label-sm text-xs tracking-widest uppercase">
+<span class="material-symbols-outlined text-[16px]">fingerprint</span>
+<span class="">Mathematical Guarantee</span>
+</div>
+<h2 class="font-headline-lg text-3xl lg:text-4xl text-primary font-normal leading-tight">
+            The Zero-Knowledge Ledger &amp; Secrecy Ledger.
+          </h2>
+<p class="font-body-md text-base text-on-surface-variant leading-relaxed">
+            Every sentence entered into Sanctuary undergoes immediate local hardware enclave sealing. Plaintext strings are shredded in RAM immediately following SQLite encryption.
+          </p>
+<div class="border-l-2 border-surface-tint pl-4 py-1 my-2">
+<p class="font-headline-sm text-sm italic text-secondary">
+              "We do not hold the keys to decipher your silence, nor does any third-party infrastructure vendor."
+            </p>
+</div>
+<!-- Interactive Control Toggle -->
+<div class="pt-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+<button class="inline-flex items-center gap-2 bg-secondary-container hover:bg-surface-variant text-on-secondary-container px-5 py-2.5 rounded-full font-label-md text-xs uppercase tracking-wider transition-all cursor-pointer" id="desktopToggleRedaction" type="button">
+<span class="material-symbols-outlined text-[18px]" id="desktopLockIcon">lock</span>
+<span id="desktopToggleText" class="">Reveal Plaintext Simulation</span>
+</button>
+<span class="font-label-sm text-xs text-outline">Simulated local enclave decrypt</span>
+</div>
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-surface-container-highest">
+<div>
+<span class="font-mono text-xs text-primary font-semibold block">0 Bytes</span>
+<span class="font-label-sm text-xs text-on-surface-variant">Telemetry Sent</span>
+</div>
+<div>
+<span class="font-mono text-xs text-primary font-semibold block">ChaCha20-Poly1305</span>
+<span class="font-label-sm text-xs text-on-surface-variant">Hardware Cipher</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Interactive Enclave Simulation Terminal -->
+<div class="lg:col-span-7">
+<div class="bg-surface-container-lowest border border-surface-container-highest rounded-2xl p-6 sm:p-8 shadow-sm">
+<!-- Terminal Header -->
+<div class="flex items-center justify-between pb-5 border-b border-surface-container-highest">
+<div class="flex items-center gap-3">
+<span class="w-3 h-3 rounded-full bg-surface-tint"></span>
+<div>
+<span class="font-label-sm text-xs uppercase tracking-widest text-primary font-semibold block">Client Node #7402</span>
+<span class="font-mono text-[10px] text-outline">HARDWARE_ENCLAVE_ISOLATION: SECURE</span>
+</div>
+</div>
+<span class="font-mono text-xs bg-surface-container px-2.5 py-1 rounded text-secondary border border-surface-container-highest">
+                SE-ENCLAVE: OK
+              </span>
+</div>
+<!-- Terminal Ledger Passage with Redacted Tokens -->
+<div class="py-8 space-y-6 font-body-md text-base leading-loose text-on-surface">
+<p class="">
+                At 
+                <span class="redact-block inline-block transition-all duration-200">
+<span class="bg-surface-container-highest text-surface-container-highest px-2 py-0.5 rounded text-xs select-none redacted-val">06:14 AM</span>
+<span class="hidden font-mono text-xs text-primary bg-secondary-container/60 px-2 py-0.5 rounded plaintext-val">06:14 AM</span>
+</span>, 
+                feelings regarding 
+                <span class="redact-block inline-block transition-all duration-200">
+<span class="bg-surface-container-highest text-surface-container-highest px-3 py-0.5 rounded text-xs select-none redacted-val">family dialogue &amp; estrangement</span>
+<span class="hidden font-mono text-xs text-primary bg-secondary-container/60 px-2 py-0.5 rounded plaintext-val">family dialogue &amp; estrangement</span>
+</span> 
+                were transcribed directly to local storage. No sentiment indexing was triggered, and local vector caches were quarantined within client sandbox partition.
+              </p>
+<p class="">
+                Session pulse recorded as 
+                <span class="redact-block inline-block transition-all duration-200">
+<span class="bg-surface-container-highest text-surface-container-highest px-2 py-0.5 rounded text-xs select-none redacted-val">restorative</span>
+<span class="hidden font-mono text-xs text-primary bg-secondary-container/60 px-2 py-0.5 rounded plaintext-val">restorative</span>
+</span>; 
+                biometric keystroke cadence remains 
+                <span class="redact-block inline-block transition-all duration-200">
+<span class="bg-surface-container-highest text-surface-container-highest px-2.5 py-0.5 rounded text-xs select-none redacted-val">unindexed &amp; discarded</span>
+<span class="hidden font-mono text-xs text-primary bg-secondary-container/60 px-2 py-0.5 rounded plaintext-val">unindexed &amp; discarded</span>
+</span>. 
+                Zero telemetry transferred to external networks.
+              </p>
+</div>
+<!-- Terminal Footnote & Status -->
+<div class="pt-5 border-t border-surface-container-highest flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-secondary font-label-sm text-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-surface-tint">verified_user</span>
+<span class="">Cryptographic seal applied on flash block #4120</span>
+</div>
+<span class="font-mono text-outline">SHA256: 8f9b...e21a</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pillars of Sanctuary: Three Editorial Columns -->
+<section class="w-full bg-surface-container-low border-y border-surface-container-highest py-20 lg:py-28" id="tenets">
+<div class="max-w-[1360px] mx-auto px-8 lg:px-12">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b border-surface-container-highest">
+<div>
+<span class="font-label-sm text-xs uppercase tracking-widest text-secondary block mb-2">Architectural Foundation</span>
+<h2 class="font-headline-lg text-3xl lg:text-4xl text-primary font-normal">Pillars of Sanctuary</h2>
+</div>
+<p class="font-body-sm text-sm text-on-surface-variant max-w-md mt-4 md:mt-0">
+            A quiet manifesto against surveillance capitalism in modern wellness software. We hold zero interest in your consciousness data.
+          </p>
+</div>
+<!-- 3 Columns -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12">
+<!-- Pillar 1 -->
+<article class="bg-surface-container-lowest p-8 rounded-xl border border-surface-container-highest/60 flex flex-col justify-between hover:border-surface-tint transition-all group">
+<div>
+<span class="font-mono text-xs text-secondary mb-4 block">01 / HARDWARE</span>
+<h3 class="font-headline-sm text-xl text-primary mb-3 group-hover:text-secondary transition-colors">
+                Client-Side Key Enclave
+              </h3>
+<p class="font-body-md text-sm text-on-surface-variant leading-relaxed">
+                Keys never leave your personal physical device. Decryption keys are derived locally through Argon2id and anchored within Apple Secure Enclave or Android StrongBox.
+              </p>
+</div>
+<div class="pt-8 mt-6 border-t border-surface-container-highest flex items-center justify-between font-label-sm text-xs text-secondary">
+<span class="">Zero-knowledge derivation</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</article>
+<!-- Pillar 2 -->
+<article class="bg-surface-container-lowest p-8 rounded-xl border border-surface-container-highest/60 flex flex-col justify-between hover:border-surface-tint transition-all group">
+<div>
+<span class="font-mono text-xs text-secondary mb-4 block">02 / INTERACTION</span>
+<h3 class="font-headline-sm text-xl text-primary mb-3 group-hover:text-secondary transition-colors">
+                Zero Telemetry &amp; No Graphing
+              </h3>
+<p class="font-body-md text-sm text-on-surface-variant leading-relaxed">
+                No tracking of typing velocity, affective valence, or pause durations. We reject the contemporary obsession with scoring emotional states into algorithmic graphs.
+              </p>
+</div>
+<div class="pt-8 mt-6 border-t border-surface-container-highest flex items-center justify-between font-label-sm text-xs text-secondary">
+<span class="">Unmeasured interiority</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</article>
+<!-- Pillar 3 -->
+<article class="bg-surface-container-lowest p-8 rounded-xl border border-surface-container-highest/60 flex flex-col justify-between hover:border-surface-tint transition-all group">
+<div>
+<span class="font-mono text-xs text-secondary mb-4 block">03 / SOVEREIGNTY</span>
+<h3 class="font-headline-sm text-xl text-primary mb-3 group-hover:text-secondary transition-colors">
+                Local SQLite Export &amp; Ownership
+              </h3>
+<p class="font-body-md text-sm text-on-surface-variant leading-relaxed">
+                Export raw unencumbered markdown, plain SQLite databases, or encrypted tar archives at any millisecond. No lock-in, no proprietary schema obfuscation.
+              </p>
+</div>
+<div class="pt-8 mt-6 border-t border-surface-container-highest flex items-center justify-between font-label-sm text-xs text-secondary">
+<span class="">Full data jurisdiction</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- Ambient Silt Frequency Player: Horizontal Acoustic Dock -->
+<section class="w-full max-w-[1360px] mx-auto px-8 lg:px-12 py-16" id="stillness">
+<div class="bg-surface-container-lowest border border-surface-container-highest rounded-2xl p-8 lg:p-10 shadow-xs flex flex-col lg:flex-row items-center justify-between gap-8">
+<!-- Left: Audio Info -->
+<div class="flex items-center gap-6 w-full lg:w-auto">
+<button class="w-14 h-14 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container transition-all shrink-0" id="mainAudioBtn" type="button">
+<span class="material-symbols-outlined text-2xl" id="mainAudioIcon">waves</span>
+</button>
+<div class="flex flex-col">
+<div class="flex items-center gap-3">
+<span class="font-headline-sm text-lg text-primary">Acoustic Stillness Dock</span>
+<span class="w-2 h-2 rounded-full bg-surface-tint animate-pulse"></span>
+<span class="font-mono text-xs text-secondary">432Hz</span>
+</div>
+<span class="font-label-sm text-xs text-secondary" id="mainAudioStatus">Stream silt &amp; deep bedrock acoustic resonance</span>
+</div>
+</div>
+<!-- Middle: Natural Frequencies Selector -->
+<div class="flex items-center gap-2 bg-surface-container-low p-1.5 rounded-full border border-surface-container-highest overflow-x-auto w-full lg:w-auto">
+<button class="px-4 py-1.5 rounded-full bg-surface-container-lowest text-primary font-label-sm text-xs uppercase tracking-wider shadow-xs cursor-pointer">
+            Stream Silt (432Hz)
+          </button>
+<button class="px-4 py-1.5 rounded-full text-secondary hover:text-primary font-label-sm text-xs uppercase tracking-wider transition-colors cursor-pointer">
+            Alpine Pine Wind
+          </button>
+<button class="px-4 py-1.5 rounded-full text-secondary hover:text-primary font-label-sm text-xs uppercase tracking-wider transition-colors cursor-pointer">
+            Glacial Melt
+          </button>
+</div>
+<!-- Right: Volume & Resonance Slider -->
+<div class="flex items-center gap-4 w-full lg:w-64">
+<span class="material-symbols-outlined text-secondary text-sm">volume_down</span>
+<input class="w-full accent-primary h-1 bg-surface-container rounded-lg appearance-none cursor-pointer" max="100" min="0" type="range" value="45">
+<span class="material-symbols-outlined text-secondary text-sm">volume_up</span>
+</div>
+</div>
+</section>
+<!-- Epigraph Callout: Fine-Press Letterpress Imprint -->
+<section class="w-full max-w-4xl mx-auto px-8 py-16 text-center">
+<div class="relative py-12 px-8 lg:px-16 border-y border-surface-container-highest">
+<!-- Letterpress Ornament -->
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-surface px-4 text-outline font-serif text-sm">
+          ❦
+        </div>
+<blockquote class="font-display-lg text-2xl lg:text-3xl italic text-primary leading-relaxed font-light">
+          “To be unobserved is not an act of hiding, but the necessary condition for truth.”
+        </blockquote>
+<cite class="block font-label-sm text-xs uppercase tracking-widest text-secondary mt-6 not-italic">
+          — Notes on Solitude &amp; Mineral Form, Archival Folio No. 12
+        </cite>
+</div>
+</section>
+</main>
+<!-- Archival Colophon & Desktop Footer -->
+<footer class="w-full border-t border-surface-container-highest bg-surface-container-low mt-12" id="colophon">
+<div class="max-w-[1360px] mx-auto px-8 lg:px-12 py-16">
+<!-- Top Crisis Support Ribbon -->
+<div class="bg-surface-container-lowest border border-surface-container-highest rounded-xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-12">
+<div class="flex items-center gap-3 text-secondary">
+<span class="material-symbols-outlined text-xl text-surface-tint">spa</span>
+<p class="font-body-sm text-xs sm:text-sm text-on-surface-variant">
+            If you or someone you know is experiencing acute crisis, support exists:
+            <a class="text-primary font-semibold underline underline-offset-2 hover:text-secondary ml-1" href="tel:988">988 Lifeline (US/Canada)</a> • 
+            <span class="text-primary font-semibold">Text HOME to 741741</span> • 
+            <a class="text-primary underline underline-offset-2 hover:text-secondary" href="#helplines">International Directory</a>.
+          </p>
+</div>
+<span class="font-label-sm text-xs uppercase tracking-widest text-outline whitespace-nowrap">Compassionate Access</span>
+</div>
+<!-- Footer Columns -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-surface-container-highest">
+<!-- Sanctuary Mission -->
+<div class="md:col-span-1 flex flex-col gap-3">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span class="font-headline-sm text-lg text-primary">Sanctuary</span>
+</div>
+<p class="font-body-sm text-xs text-on-surface-variant leading-relaxed">
+            Built for human stillness, quiet self-interrogation, and mathematical non-disclosure.
+          </p>
+<span class="font-label-sm text-[11px] text-outline">Independent software. Zero corporate venture debt.</span>
+</div>
+<!-- Specifications -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-xs uppercase tracking-widest text-primary font-semibold mb-2">Cryptographic Spec</span>
+<span class="font-mono text-xs text-on-surface-variant">Argon2id KDF</span>
+<span class="font-mono text-xs text-on-surface-variant">ChaCha20-Poly1305</span>
+<span class="font-mono text-xs text-on-surface-variant">Zero-Knowledge Ledger</span>
+<span class="font-mono text-xs text-on-surface-variant">Local SQLite Isolation</span>
+</div>
+<!-- Navigation Index -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-xs uppercase tracking-widest text-primary font-semibold mb-2">Folio Navigation</span>
+<a class="font-body-sm text-xs text-on-surface-variant hover:text-primary transition-colors" href="#monograph">Monograph Foreword</a>
+<a class="font-body-sm text-xs text-on-surface-variant hover:text-primary transition-colors" href="#proof">Proof of Secrecy</a>
+<a class="font-body-sm text-xs text-on-surface-variant hover:text-primary transition-colors" href="#tenets">Core Tenets</a>
+<a class="font-body-sm text-xs text-on-surface-variant hover:text-primary transition-colors" href="#stillness">Acoustic Dock</a>
+</div>
+<!-- Colophon & Integrity -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-xs uppercase tracking-widest text-primary font-semibold mb-2">Colophon</span>
+<span class="font-body-sm text-xs text-on-surface-variant">Set in Literata &amp; Atkinson Hyperlegible Next.</span>
+<span class="font-body-sm text-xs text-on-surface-variant">Archived in the Daylight Mineral Spectrum.</span>
+<span class="font-body-sm text-xs text-on-surface-variant">Rendered without external telemetry or tracking cookies.</span>
+</div>
+</div>
+<!-- Bottom Bar -->
+<div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-label-sm text-xs text-outline">
+<div class="">Sanctuary Public Record © 2025. All human thoughts remain sovereign.</div>
+<div class="flex items-center gap-6">
+<span class="">Release 1.4.0</span>
+<span class="">•</span>
+<span class="">Stationary Edition</span>
+</div>
+</div>
+</div>
+</footer>
+<!-- Interactive Scripts -->
+<script>
+    // Desktop Interactive Redaction Simulation
+    const desktopToggleBtn = document.getElementById('desktopToggleRedaction');
+    const desktopLockIcon = document.getElementById('desktopLockIcon');
+    const desktopToggleText = document.getElementById('desktopToggleText');
+    let isPlaintext = false;
+
+    if (desktopToggleBtn) {
+      desktopToggleBtn.addEventListener('click', () => {
+        isPlaintext = !isPlaintext;
+        const redactedTags = document.querySelectorAll('.redacted-val');
+        const plaintextTags = document.querySelectorAll('.plaintext-val');
+
+        redactedTags.forEach(el => {
+          if (isPlaintext) {
+            el.classList.add('hidden');
+          } else {
+            el.classList.remove('hidden');
+          }
+        });
+
+        plaintextTags.forEach(el => {
+          if (isPlaintext) {
+            el.classList.remove('hidden');
+          } else {
+            el.classList.add('hidden');
+          }
+        });
+
+        if (isPlaintext) {
+          desktopLockIcon.textContent = 'lock_open';
+          desktopToggleText.textContent = 'Apply Hardware Redaction';
+        } else {
+          desktopLockIcon.textContent = 'lock';
+          desktopToggleText.textContent = 'Reveal Plaintext Simulation';
+        }
+      });
+    }
+
+    // Acoustic Stillness Dock Toggle
+    const mainAudioBtn = document.getElementById('mainAudioBtn');
+    const mainAudioIcon = document.getElementById('mainAudioIcon');
+    const mainAudioStatus = document.getElementById('mainAudioStatus');
+    let isAudioPlaying = false;
+
+    if (mainAudioBtn) {
+      mainAudioBtn.addEventListener('click', () => {
+        isAudioPlaying = !isAudioPlaying;
+        if (isAudioPlaying) {
+          mainAudioIcon.textContent = 'pause';
+          mainAudioStatus.textContent = 'Resonating: 432Hz stream silt active playback';
+        } else {
+          mainAudioIcon.textContent = 'waves';
+          mainAudioStatus.textContent = 'Stream silt & deep bedrock acoustic resonance';
+        }
+      });
+    }
+  </script>
+
+
+
+
+</body></html>
