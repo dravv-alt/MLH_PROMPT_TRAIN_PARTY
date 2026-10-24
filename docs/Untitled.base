@@ -1,0 +1,3 @@
+views:  # STATUS: DEPRECATED
+  - type: table
+    name: Table

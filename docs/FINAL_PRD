@@ -1,0 +1,2726 @@
+# SANCTUARY V2 — STATUS: ACTIVE
+## Product Requirements Document — Final Architecture Draft
+## For Execution by AI Coding Agents and Human Engineers
+
+---
+
+## AGENT READING PROTOCOL
+
+Read this entire document before writing a single line of code.
+Every section is load-bearing. Nothing is decorative.
+When a schema is defined — implement it exactly as written.
+When a constraint says NEVER — it means never, in any context, under any framing.
+When an implementation order is specified — the dependencies are real. Do not skip phases.
+When a component says "local only" — it never touches an external network.
+
+---
+
+## 0. NORTH STAR
+
+```
+"Sanctuary assists expression. It does not define identity."
+```
+
+This is the hard architectural constraint from which every design decision descends.
+It is not a UX guideline. It is enforced structurally at the policy gate layer.
+Any system output that assigns a clinical label, diagnostic category, identity claim,
+or behavioral prescription to a user MUST be rejected before it reaches the user.
+No exception exists for any strategy, hypothesis, or tone mode.
+
+---
+
+## 1. WHAT SANCTUARY V2 IS
+
+Sanctuary V2 is a voice-first emotional expression companion operating on the principle
+of Logical Empathy: the system mirrors the structural shape of a user's experience
+without assigning clinical labels or fostering emotional dependency.
+
+It is not a therapy app. It is not a diagnostic tool. It does not give advice.
+It does not tell users who they are. It helps users hear themselves more clearly.
+
+The system accumulates a private, local, structured model of the user's inner world
+across sessions — called the Personal World Model (PWM) — and uses that model to
+respond with the depth of understanding that compounds over time.
+
+The longer a user uses Sanctuary, the more knowing it becomes.
+That accumulated knowing lives entirely on-device. It never leaves.
+
+---
+
+## 2. THREE-ZONE PRIVACY ARCHITECTURE
+
+Every component of the system belongs to exactly one zone.
+Zone assignment determines what data the component can receive.
+No component may receive data from a zone higher than its own.
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  ZONE A — LOCAL / ON-DEVICE (Zero Trust)                        │
+│  Raw text lives and dies here. Never exits.                     │
+│                                                                 │
+│  • PII Stripping + Placeholder Mapping                          │
+│  • EmbeddingGemma (on-device embeddings)                        │
+│  • PWM (Entity Registry, Thread Map, Scene Registry,            │
+│          Unsaid Index, Private Language Registry)               │
+│  • Narrative State Vector + Kalman Filter (UKF)                 │
+│  • DAG Construction (NarrativeStructure)                        │
+│  • VAD Affective Trajectory                                     │
+│  • RST Analysis (DMRST-Parser, local)                           │
+│  • Interpretation Engine (Bayesian Hypothesis Competition)      │
+│  • Strategy Selector                                            │
+│  • Companion Fade Engine                                        │
+│  • Placeholder Restorer                                         │
+│  • SQLite (local persistence)                                   │
+│                                                                 │
+├─────────────────────────────────────────────────────────────────┤
+│  ZONE B — ENCRYPTED SYNC (Zettelkasten Shadow Memory)           │
+│  Abstract behavioral schemas only. No raw text. No names.       │
+│  No locations. No specific events.                              │
+│                                                                 │
+│  • Abstract pattern nodes: {"pattern": "pressure→withdrawal",   │
+│    "frequency": "recurring", "thread_id": "uuid"}              │
+│  • Encrypted at rest (AES-256)                                  │
+│  • Encrypted in transit (TLS 1.3)                               │
+│  • Optional user opt-in. Off by default.                        │
+│  • Upgrade path: Azure Confidential Computing TEE               │
+│    (planned post-launch with institutional backing)             │
+│                                                                 │
+├─────────────────────────────────────────────────────────────────┤
+│  ZONE C — EXTERNAL BOUNDED CLOUD                                │
+│  Receives ONLY: distilled, anonymized NarrativeStructure JSON   │
+│  and behavioral strategy specification.                         │
+│  NEVER receives: raw text, PWM, state vector, entity names.     │
+│                                                                 │
+│  • Groq (LLM inference — language generation only)             │
+│  • ElevenLabs (TTS)                                             │
+│  • OpenAI Whisper (STT) — receives audio only, not text         │
+│  • Chain-of-Agents pattern extraction (Gemini 2.0 Flash)        │
+│    — receives abstract Zone B schemas only, on user opt-in      │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**The privacy guarantee:** A user can be fully honest with Sanctuary because
+the system that accumulates rich understanding of them (Zone A) never communicates
+with the system that has network access (Zone C) except through a stripped,
+anonymized intermediary structure. The external model sees a thin slice.
+Only the local model sees the whole picture.
+
+---
+
+## 3. SYSTEM PIPELINE — COMPLETE TURN EXECUTION
+
+```
+USER VOICE / TEXT INPUT
+        │
+        ▼
+[STT: Whisper — audio only, Zone C]
+        │ raw text
+        ▼
+[ZONE A BEGINS — raw text never exits past this point]
+        │
+        ▼
+┌─────────────────────────────────────────────────────┐
+│  PRIVACY DISTILLATION LAYER                         │
+│  1. spaCy NER → detect PERSON, GPE, ORG, DATE, TIME │
+│  2. CoreferenceResolver → match to existing entities│
+│  3. Assign/reuse consistent placeholder IDs         │
+│  4. Strip emails, phones, URLs via regex            │
+│  5. Output: PlaceholderMap + distilled_text         │
+│  Raw text discarded. PlaceholderMap lives in memory │
+│  for this turn only.                                │
+└─────────────────────────────────────────────────────┘
+        │ distilled_text
+        ▼
+┌─────────────────────────────────────────────────────┐
+│  NARRATIVESTRUCTURE EXTRACTION (DAG Builder)        │
+│  Maps distilled_text into 11-field structured JSON  │
+│  Constructs Directed Acyclic Graph:                 │
+│  Trigger → Actor → Action → Reaction →              │
+│  Constraint → Meaning → Pattern                     │
+│  Uses local SSM (Situational Structure Model)       │
+│  Output: NarrativeStructure JSON                    │
+└─────────────────────────────────────────────────────┘
+        │
+        ▼
+┌─────────────────────────────────────────────────────┐
+│  PARALLEL COMPUTATION BLOCK (all Zone A, all local) │
+│                                                     │
+│  A. RST ANALYSIS (DMRST-Parser)                     │
+│     → Rhetorical stance: claim_strength,            │
+│       self_undermining (2D coordinate)              │
+│                                                     │
+│  B. VAD AFFECTIVE TRAJECTORY (UED Framework)        │
+│     → Valence, Arousal, Dominance (rolling window) │
+│     → Emotional arc across session turns            │
+│                                                     │
+│  C. THREAD MAP UPDATE (EmbeddingGemma)              │
+│     → Embed distilled_text                          │
+│     → Cosine similarity to thread centroids        │
+│     → Reinforce / create / decay threads            │
+│                                                     │
+│  D. DISCLOSURE ENTROPY (entity-anchored)            │
+│     → Per active thread, not global session         │
+│     → Deflection detection (pivot without thread)  │
+│                                                     │
+│  E. DEPTH LAYER CLASSIFIER                          │
+│     Phase 1: LLM zero-shot (with logging)           │
+│     Phase 3: local scikit-learn on accumulated data │
+│                                                     │
+│  F. BIFURCATION PROXIMITY                           │
+│     → Variance + autocorrelation of state history   │
+│     → Critical slowing down detection               │
+│     → Requires min 5 prior state vectors            │
+└─────────────────────────────────────────────────────┘
+        │ all dimension values
+        ▼
+┌─────────────────────────────────────────────────────┐
+│  UNSCENTED KALMAN FILTER (UKF)                      │
+│  Maintains optimal estimate of NarrativeStateVector │
+│  Handles nonlinear state transitions                │
+│  (handles trauma-bomb discontinuities correctly)    │
+│  Prior state + new observation → updated estimate   │
+│  Output: NarrativeStateVector + uncertainty matrix  │
+└─────────────────────────────────────────────────────┘
+        │
+        ▼
+┌─────────────────────────────────────────────────────┐
+│  INTERPRETATION ENGINE                              │
+│  Five competing hypotheses (Bayesian scoring):      │
+│  H1: Thread Activation                              │
+│  H2: Rhetorical Pattern (self-undermining)          │
+│  H3: Bifurcation Signal (critical point)            │
+│  H4: Resolution Failure (false resolution)          │
+│  H5: Deflection (topic pivot away from active thread│
+│  Prior × Likelihood → Posterior (normalized)        │
+│  Losing hypotheses decay but persist across turns   │
+│  Winner selected. All five returned.                │
+└─────────────────────────────────────────────────────┘
+        │ winning hypothesis + all scores
+        ▼
+┌─────────────────────────────────────────────────────┐
+│  COMPANION FADE ENGINE                              │
+│  Checks closure-ready state:                        │
+│  low bifurcation proximity + high claim_strength    │
+│  + low self_undermining + thread resolution signal  │
+│  If closure-ready across 3+ consecutive turns:      │
+│  → Activate Companion Fade protocol                 │
+│  → Constrain response length                        │
+│  → Shift language toward completion not continuation│
+│  → Encourage human connection / journaling          │
+└─────────────────────────────────────────────────────┘
+        │
+        ▼
+┌─────────────────────────────────────────────────────┐
+│  STRATEGY SELECTOR                                  │
+│  Winning hypothesis × NarrativeStateVector →        │
+│  ResponseStrategy (precise behavioral specification)│
+│  Seven strategies (see Section 7)                   │
+│  Companion Fade overrides strategy if active        │
+└─────────────────────────────────────────────────────┘
+        │ ResponseStrategy (behavioral spec only)
+        ▼
+[ZONE C: LLM — Groq]
+  Receives: behavioral_spec, distilled conversation
+            history (last 5 turns), distilled_input
+  NEVER receives: PWM, state vector, entity names,
+                  hypothesis scores, raw text
+  Returns: raw response text (with placeholders)
+        │
+        ▼
+[ZONE A: POLICY GATE]
+  Blocks: diagnostic language, identity assignment,
+          advice-giving, dependency-fostering language
+  On fail: regenerate once with stricter spec
+  On 2nd fail: safe fallback response
+        │
+        ▼
+[ZONE A: PLACEHOLDER RESTORER]
+  Replaces PERSON_A → "David" using PlaceholderMap
+  PlaceholderMap exists only in memory for this turn
+        │ final response text
+        ▼
+[ZONE C: ElevenLabs TTS]
+  Returns audio URL
+        │
+        ▼
+[ZONE A: PWM UPDATE — async, non-blocking]
+  Entity Registry, Relationship Graph, Scene Registry,
+  Thread Map, Unsaid Index, Private Language Registry
+  NarrativeStateVector persisted to SQLite
+        │
+        ▼
+USER RECEIVES: response_text + audio + turn_id
+               (can_save_to_journal = true always)
+```
+
+---
+
+## 4. TECH STACK — EXACT DEPENDENCIES
+
+```toml
+# Python 3.11+
+
+# Core Backend
+fastapi = "^0.111.0"
+uvicorn = "^0.29.0"
+sqlalchemy = "^2.0.0"
+alembic = "^1.13.0"
+pydantic = "^2.7.0"
+python-dotenv = "^1.0.0"
+httpx = "^0.27.0"
+redis = "^5.0.0"
+
+# Local ML / NLP (Zone A — runs on device)
+sentence-transformers = "^3.0.0"
+# EmbeddingGemma loaded via sentence-transformers:
+# SentenceTransformer("google/embeddinggemma-300m")
+# Replaces all-MiniLM-L6-v2. Drop-in replacement.
+
+spacy = "^3.7.0"
+en_core_web_sm = "*"      # PII stripping, sentence segmentation
+
+# DMRST-Parser for RST analysis
+# Install from: https://github.com/seq-to-mind/DMRST_Parser
+# Run as local subprocess — not a pip package
+# Dependency: torch >= 2.0, transformers >= 4.30
+
+scikit-learn = "^1.4.0"    # Depth layer classifier (Phase 3)
+numpy = "^1.26.0"
+scipy = "^1.13.0"
+filterpy = "^1.4.5"        # UKF: filterpy.kalman.UnscentedKalmanFilter
+
+# State Estimation
+# filterpy.kalman.UnscentedKalmanFilter — NOT vanilla KalmanFilter
+# Reason: narrative state is nonlinear. UKF handles discontinuities
+# (e.g. sudden high-entropy disclosure) without Jacobian linearization.
+
+# External APIs (Zone C)
+groq = "^0.9.0"            # LLM inference
+openai = "^1.30.0"         # Whisper STT only
+elevenlabs = "^1.2.0"      # TTS
+
+# Auth
+python-jose = "^3.3.0"     # JWT
+passlib = "^1.7.4"         # Password hashing
+bcrypt = "^4.1.0"
+
+# Testing
+pytest = "^8.0.0"
+pytest-asyncio = "^0.23.0"
+httpx = "^0.27.0"          # Test client
+```
+
+```env
+# .env.example
+
+# External APIs (Zone C only)
+GROQ_API_KEY=
+OPENAI_API_KEY=            # Whisper STT only
+ELEVENLABS_API_KEY=
+ELEVENLABS_VOICE_ID=
+
+# Database (Zone A)
+DATABASE_URL=sqlite:///./sanctuary.db
+REDIS_URL=redis://localhost:6379
+
+# Auth
+SECRET_KEY=                # 32+ char random string for JWT signing
+ACCESS_TOKEN_EXPIRE_MINUTES=10080   # 7 days
+
+# DMRST Parser
+DMRST_MODEL_PATH=./models/dmrst_parser/
+DMRST_PORT=5050            # Local subprocess server port
+
+# EmbeddingGemma
+EMBEDDING_MODEL=google/embeddinggemma-300m
+EMBEDDING_DIM=256           # 256-dim via MRL (balance speed + quality)
+
+# UKF Configuration
+UKF_PROCESS_NOISE=0.01
+UKF_OBSERVATION_NOISE=0.1
+UKF_ALPHA=0.001             # Sigma point spread (small = near-linear)
+UKF_BETA=2.0                # Gaussian distribution assumption
+UKF_KAPPA=0.0
+
+# Thresholds
+ENTROPY_HIGH_THRESHOLD=0.70
+ENTROPY_LOW_THRESHOLD=0.30
+ENTROPY_CONSECUTIVE_TURNS=3       # For INTRODUCE_PERTURBATION trigger
+BIFURCATION_THRESHOLD=0.75
+THREAD_REINFORCE_SIMILARITY=0.72
+THREAD_NEW_SIMILARITY=0.55
+THREAD_DECAY_RATE=0.95
+DEPTH_TRANSITION_CONFIDENCE=0.55
+COMPANION_FADE_CONSECUTIVE_TURNS=3
+```
+
+---
+
+## 5. REPOSITORY STRUCTURE
+
+```
+sanctuary_v2/
+│
+├── backend/
+│   ├── main.py                          # FastAPI app, lifespan, startup
+│   ├── config.py                        # Settings from .env
+│   ├── database.py                      # SQLAlchemy engine, session factory
+│   │
+│   ├── models/                          # SQLAlchemy ORM (persistence layer)
+│   │   ├── user.py
+│   │   ├── session.py
+│   │   ├── turn.py
+│   │   ├── narrative_state.py           # NarrativeStateVector persistence
+│   │   ├── hypothesis_history.py        # Cross-turn hypothesis decay tracking
+│   │   ├── pwm/
+│   │   │   ├── entity.py
+│   │   │   ├── relationship.py
+│   │   │   ├── scene.py
+│   │   │   ├── thread.py
+│   │   │   ├── unsaid.py
+│   │   │   └── private_language.py
+│   │   └── journal.py                   # User-curated Zettelkasten nodes
+│   │
+│   ├── schemas/                         # Pydantic (API + internal typing)
+│   │   ├── turn.py
+│   │   ├── state.py                     # NarrativeStateVector, Hypothesis
+│   │   ├── strategy.py                  # ResponseStrategy, StrategyType
+│   │   ├── pwm.py                       # All PWM entity schemas
+│   │   └── narrative.py                 # NarrativeStructure (DAG)
+│   │
+│   ├── core/                            # All Zone A computation
+│   │   │
+│   │   ├── privacy/
+│   │   │   ├── distiller.py             # PII stripping, PlaceholderMap
+│   │   │   ├── coreference.py           # Cross-session entity resolution
+│   │   │   └── restorer.py              # Placeholder → real name
+│   │   │
+│   │   ├── narrative/
+│   │   │   ├── dag_builder.py           # NarrativeStructure extraction
+│   │   │   ├── ssm.py                   # Situational Structure Model layers
+│   │   │   └── vad_tracker.py           # Valence-Arousal-Dominance (UED)
+│   │   │
+│   │   ├── rst/
+│   │   │   ├── preprocessor.py          # spaCy sentence normalization
+│   │   │   ├── parser_client.py         # DMRST-Parser subprocess client
+│   │   │   └── stance_computer.py       # RST tree → RhetoricalStance
+│   │   │
+│   │   ├── pwm/
+│   │   │   ├── manager.py               # PWM orchestrator (single write entry)
+│   │   │   ├── entity_registry.py
+│   │   │   ├── relationship_graph.py
+│   │   │   ├── scene_registry.py
+│   │   │   ├── thread_map.py            # EmbeddingGemma + centroid tracking
+│   │   │   ├── unsaid_index.py
+│   │   │   └── private_language.py
+│   │   │
+│   │   ├── state/
+│   │   │   ├── vector.py                # NarrativeStateVector dataclass
+│   │   │   ├── ukf.py                   # Unscented Kalman Filter
+│   │   │   └── dimensions/
+│   │   │       ├── thread_activation.py
+│   │   │       ├── rhetorical_stance.py
+│   │   │       ├── depth_layer.py       # Phase 1: LLM, Phase 3: sklearn
+│   │   │       ├── disclosure_entropy.py # Entity-anchored, thread-relative
+│   │   │       └── bifurcation.py       # Dynamical systems proximity
+│   │   │
+│   │   ├── interpretation/
+│   │   │   ├── engine.py                # Bayesian hypothesis orchestrator
+│   │   │   ├── hypotheses/
+│   │   │   │   ├── thread_activation.py
+│   │   │   │   ├── rhetorical_pattern.py
+│   │   │   │   ├── bifurcation_signal.py
+│   │   │   │   ├── resolution_failure.py
+│   │   │   │   └── deflection.py        # NEW: topic pivot detection
+│   │   │   ├── scorer.py                # Bayesian posterior computation
+│   │   │   └── strategy_selector.py     # State + winner → ResponseStrategy
+│   │   │
+│   │   └── companion_fade/
+│   │       └── engine.py                # Closure detection + fade protocol
+│   │
+│   ├── services/                        # Zone C — external API calls only
+│   │   ├── stt.py                       # Whisper (audio → text)
+│   │   ├── llm.py                       # Groq (behavioral spec → language)
+│   │   ├── tts.py                       # ElevenLabs (text → audio)
+│   │   ├── policy_gate.py               # Response safety filter (Zone A)
+│   │   └── chain_of_agents.py           # Zone B→C pattern extraction (opt-in)
+│   │
+│   ├── api/
+│   │   ├── auth.py                      # /auth/register, /auth/login
+│   │   ├── session.py                   # /session/start, /session/end
+│   │   ├── turn.py                      # /turn — main pipeline endpoint
+│   │   └── journal.py                   # /journal — Zettelkasten nodes
+│   │
+│   └── alembic/
+│       ├── env.py
+│       └── versions/
+│
+├── frontend/
+│   ├── src/
+│   │   ├── App.tsx
+│   │   ├── pages/
+│   │   │   ├── Conversation.tsx
+│   │   │   └── Journal.tsx
+│   │   ├── components/
+│   │   │   ├── VoiceInput.tsx           # MediaRecorder API
+│   │   │   ├── ResponsePlayer.tsx       # Auto-play TTS audio
+│   │   │   ├── MomentCard.tsx           # Zettelkasten journal node
+│   │   │   └── FadeIndicator.tsx        # Companion Fade visual signal
+│   │   ├── hooks/
+│   │   │   ├── useConversation.ts
+│   │   │   └── useAudioRecorder.ts
+│   │   └── api/client.ts
+│   └── package.json
+│
+├── models/
+│   └── dmrst_parser/                    # DMRST-Parser model weights
+│       └── (downloaded separately — see setup instructions)
+│
+├── data/
+│   └── depth_labels/                    # Accumulated for Phase 3 classifier
+│       ├── labeled_examples.json        # {"text": ..., "layer": int}
+│       └── depth_classifier.pkl         # Trained model (Phase 3)
+│
+├── scripts/
+│   ├── start_dmrst_server.py            # Launch DMRST subprocess
+│   ├── train_depth_classifier.py        # Phase 3: train sklearn model
+│   ├── seed_depth_labels.py             # Annotation helper
+│   └── download_embeddinggemma.py       # First-run model download
+│
+├── tests/
+│   ├── unit/
+│   └── integration/
+│
+├── .env.example
+├── requirements.txt
+├── docker-compose.yml
+└── README.md
+
+---
+
+## 6. COMPLETE DATA SCHEMAS
+
+### 6.1 PlaceholderMap (in-memory, single turn)
+
+```python
+# backend/core/privacy/distiller.py
+
+from dataclasses import dataclass, field
+from typing import Dict
+
+@dataclass
+class PlaceholderMap:
+    raw_text: str = ""                        # NEVER persisted, NEVER sent externally
+    distilled_text: str = ""                  # Safe for internal processing
+    entity_map: Dict[str, str] = field(default_factory=dict)
+    # {"PERSON_A": "David", "LOCATION_X": "the office"}
+
+    reverse_map: Dict[str, str] = field(default_factory=dict)
+    # {"David": "PERSON_A", "the office": "LOCATION_X"}
+
+    entity_types: Dict[str, str] = field(default_factory=dict)
+    # {"PERSON_A": "PERSON", "LOCATION_X": "GPE"}
+
+    # Destroyed after placeholder restoration. Never stored.
+```
+
+---
+
+### 6.2 NarrativeStructure (DAG — Zone A output)
+
+```python
+# backend/schemas/narrative.py
+
+from pydantic import BaseModel
+from typing import Optional, List, Dict
+
+class NarrativeStructure(BaseModel):
+    """
+    11-field structured representation of user input.
+    Implements the Situational Structure Model (SSM).
+    Built from distilled text — never contains raw PII.
+    Used for: thread map updates, Zone C context (anonymized only).
+    """
+
+    # SSM Layer 1: Event Structure
+    trigger_domain: str           # work | family | romantic | social | internal | ambiguous
+    primary_actors: List[str]     # Placeholder IDs only ["PERSON_A", "PERSON_B"]
+    action_taken: Optional[str]   # What the user did (distilled)
+    action_desired: Optional[str] # What the user wanted to do (distilled)
+    outcome: Optional[str]        # What happened as result (distilled)
+
+    # SSM Layer 2: Constraint Field (6 continuous dimensions 0.0-1.0)
+    freedom_to_refuse: float      # How much user felt they could say no
+    conflict_cost: float          # Perceived cost of conflict in this situation
+    relationship_risk: float      # Perceived risk to relationship
+    expectation_pressure: float   # External expectations bearing on situation
+    agency_score: float           # Overall perceived agency (derived)
+    social_exposure: float        # How exposed/witnessed the user felt
+
+    # SSM Layer 3: Internal Reaction
+    primary_emotion_label: str    # Non-diagnostic: hollow | tense | heavy | numb etc.
+    body_location: Optional[str]  # Where user feels it (if mentioned)
+    reaction_pattern: str         # suppress | express | withdraw | confront | freeze
+
+    # SSM Layer 4: Meaning-Making
+    attributed_cause: Optional[str]  # What user believes caused this (distilled)
+    self_narrative: Optional[str]    # How user narrates their own role (distilled)
+
+    # SSM Layer 5: Temporal Pattern
+    first_occurrence: bool        # Is this the first time or recurring?
+    pattern_descriptor: Optional[str]  # "always when X", "every time Y" (distilled)
+
+    # SSM Layer 6: Resolution Attempt
+    resolution_tried: Optional[str]   # What user attempted (distilled)
+    resolution_outcome: Optional[str] # Whether it worked
+
+    # DAG edges (causal links between fields)
+    causal_chain: List[Dict]     # [{"from": "trigger", "to": "reaction", "type": "causes"}]
+```
+
+---
+
+### 6.3 VAD Affective State
+
+```python
+# backend/core/narrative/vad_tracker.py
+
+from dataclasses import dataclass
+from typing import List
+
+@dataclass
+class VADState:
+    """
+    Utterance Emotion Dynamics (UED) framework.
+    Three-dimensional affective space.
+    Computed per turn from distilled text.
+    Tracked as rolling window across session.
+    """
+    valence: float    # -1.0 (very negative) to +1.0 (very positive)
+    arousal: float    # 0.0 (calm) to 1.0 (highly activated)
+    dominance: float  # 0.0 (powerless) to 1.0 (in control)
+    turn_index: int
+
+@dataclass
+class VADTrajectory:
+    """Rolling window of VAD states across session."""
+    states: List[VADState]
+    window_size: int = 5
+
+    @property
+    def valence_trend(self) -> float:
+        """Positive = improving, negative = declining."""
+        if len(self.states) < 2:
+            return 0.0
+        recent = [s.valence for s in self.states[-self.window_size:]]
+        return recent[-1] - recent[0]
+
+    @property
+    def arousal_level(self) -> float:
+        """Average arousal over window."""
+        if not self.states:
+            return 0.5
+        return sum(s.arousal for s in self.states[-self.window_size:]) / min(len(self.states), self.window_size)
+
+    @property
+    def pacing_signal(self) -> str:
+        """
+        Pacing Engine output. Used by Companion Fade and Strategy Selector.
+        Returns: "deepen" | "stabilize" | "pause" | "soften"
+        """
+        if self.arousal_level > 0.75:
+            return "stabilize"
+        if self.valence_trend < -0.3:
+            return "soften"
+        if self.valence_trend > 0.2 and self.arousal_level < 0.4:
+            return "deepen"
+        return "pause"
+```
+
+---
+
+### 6.4 NarrativeStateVector
+
+```python
+# backend/core/state/vector.py
+
+from dataclasses import dataclass, field
+from typing import Dict, List
+import numpy as np
+
+@dataclass
+class RhetoricalStance:
+    claim_strength: float = 0.5     # 0.0=no claim, 1.0=full assertion
+    self_undermining: float = 0.5   # 0.0=no undermining, 1.0=full invalidation
+    # Critical pattern: high claim_strength AND high self_undermining simultaneously
+    # = user asserting and immediately invalidating own claim
+
+@dataclass
+class NarrativeStateVector:
+    """
+    Five-dimensional snapshot of user's current narrative position.
+    Updated every turn via Unscented Kalman Filter.
+    Persisted to SQLite after each turn.
+    Used by: Interpretation Engine, Strategy Selector, Bifurcation Proximity.
+    NEVER sent to Zone C in any form.
+    """
+    user_id: str
+    session_id: str
+    turn_index: int
+
+    # DIMENSION 1: Thread Activation (maps thread_id → score 0.0-1.0)
+    thread_activation: Dict[str, float] = field(default_factory=dict)
+
+    # DIMENSION 2: Rhetorical Stance (RST-derived)
+    rhetorical_stance: RhetoricalStance = field(default_factory=RhetoricalStance)
+
+    # DIMENSION 3: Depth Layer (1-5, SSM-based)
+    # 1=Event Surface, 2=Feeling ID, 3=Pattern Recognition,
+    # 4=Belief Encounter, 5=Authorship
+    depth_layer: int = 1
+    depth_confidence: float = 0.5   # Classifier confidence — only transition if > 0.55
+
+    # DIMENSION 4: Disclosure Entropy (entity-anchored, thread-relative)
+    # 0.0 = perfectly predicted by existing thread model
+    # 1.0 = completely novel relative to active threads
+    disclosure_entropy: float = 0.5
+    is_deflection: bool = False     # True if high semantic distance BUT no thread match
+                                    # = user avoiding active thread, not genuinely novel
+
+    # DIMENSION 5: Bifurcation Proximity (dynamical systems)
+    # 0.0 = stable trajectory, 1.0 = critical point imminent
+    bifurcation_proximity: float = 0.0
+
+    # VAD Affective State (this turn)
+    vad: VADState = field(default_factory=lambda: VADState(0.0, 0.5, 0.5, 0))
+
+    # UKF uncertainty (covariance matrix P, flattened for storage)
+    ukf_uncertainty: List[float] = field(default_factory=list)
+
+    # Companion Fade
+    closure_ready_consecutive_turns: int = 0
+
+    def to_numpy(self) -> np.ndarray:
+        """Flatten to numpy array for UKF computation."""
+        thread_vec = list(self.thread_activation.values()) if self.thread_activation else [0.0]
+        return np.array([
+            *thread_vec,
+            self.rhetorical_stance.claim_strength,
+            self.rhetorical_stance.self_undermining,
+            float(self.depth_layer),
+            self.disclosure_entropy,
+            self.bifurcation_proximity,
+            self.vad.valence,
+            self.vad.arousal,
+            self.vad.dominance,
+        ], dtype=np.float64)
+```
+
+---
+
+### 6.5 PWM Entity Registry
+
+```python
+# backend/models/pwm/entity.py
+
+class Entity(Base):
+    __tablename__ = "entities"
+
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    user_id = Column(String, ForeignKey("users.id"), nullable=False)
+
+    placeholder_id = Column(String, nullable=False)
+    # Consistent anonymous ID: "PERSON_A", "PERSON_B", "LOCATION_X"
+    # NEVER the real name. Real name lives only in PlaceholderMap (in-memory).
+
+    entity_type = Column(String, nullable=False)
+    # PERSON | LOCATION | ORGANIZATION | TIME | EVENT
+
+    role_tag = Column(String, default="unknown")
+    # work | family | romantic | friendship | self | ambiguous | unknown
+
+    emotional_valence_avg = Column(Float, default=0.0)   # -1.0 to +1.0
+    emotional_valence_variance = Column(Float, default=0.0)
+    # High variance = user's feelings toward entity are conflicted (important signal)
+
+    mention_frequency = Column(Integer, default=0)
+    last_seen = Column(DateTime, default=datetime.utcnow)
+    session_appearances = Column(JSON, default=list)  # session_id list
+
+    surface_forms = Column(JSON, default=list)
+    # All names/pronouns this entity has appeared as:
+    # ["David", "my boss", "he", "him", "my manager"]
+
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+```
+
+---
+
+### 6.6 PWM Thread (Zettelkasten Node)
+
+```python
+# backend/models/pwm/thread.py
+
+class Thread(Base):
+    __tablename__ = "threads"
+
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    user_id = Column(String, ForeignKey("users.id"), nullable=False)
+
+    internal_label = Column(String, nullable=False)
+    # Machine-readable only. NEVER shown to user.
+    # Format: "thread_{domain}_{pattern}" e.g. "thread_work_authority_tension"
+
+    # EmbeddingGemma 256-dim centroid of all distilled inputs on this thread
+    centroid_embedding = Column(JSON, nullable=False)
+
+    activation_score = Column(Float, default=0.0)    # 0.0-1.0 continuous
+    status = Column(String, default="emerging")       # emerging|active|dormant|integrated
+
+    session_count = Column(Integer, default=1)        # sessions this thread appeared in
+    turn_count = Column(Integer, default=1)           # total turns referencing this thread
+
+    first_detected = Column(DateTime, default=datetime.utcnow)
+    last_activated = Column(DateTime, default=datetime.utcnow)
+
+    associated_entities = Column(JSON, default=list)  # placeholder_id list
+    typical_depth_layer = Column(Integer, default=1)  # most common depth when active
+
+    # Zettelkasten abstract pattern schema (Zone B sync candidate)
+    # Format: {"pattern": "pressure->suppression->spillover", "frequency": "recurring"}
+    abstract_pattern = Column(JSON, nullable=True)
+
+    # DAG summary from most recent activations
+    causal_chain_summary = Column(JSON, nullable=True)
+
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+```
+
+---
+
+### 6.7 PWM Unsaid Index
+
+```python
+# backend/models/pwm/unsaid.py
+
+class UnsaidNode(Base):
+    __tablename__ = "unsaid_nodes"
+
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    user_id = Column(String, ForeignKey("users.id"), nullable=False)
+    session_id = Column(String, ForeignKey("sessions.id"), nullable=False)
+    turn_index = Column(Integer, nullable=False)
+
+    signal_type = Column(String, nullable=False)
+    # abandoned_sentence | rapid_topic_pivot | low_volume_marker |
+    # incomplete_clause | deflection_detected
+
+    structural_description = Column(String, nullable=False)
+    # Structural only — no raw content.
+    # e.g. "User approached RELATIONSHIP/PERSON_A context,
+    #        began emotional disclosure at Layer 2,
+    #        pivoted to WORK context within 2 turns"
+
+    structure_embedding = Column(JSON, nullable=True)  # EmbeddingGemma 256-dim
+
+    thread_id = Column(String, ForeignKey("threads.id"), nullable=True)
+
+    surfaced = Column(String, default="no")
+    # no | offered | accepted | declined
+
+    created_at = Column(DateTime, default=datetime.utcnow)
+```
+
+---
+
+### 6.8 PWM Private Language Registry
+
+```python
+# backend/models/pwm/private_language.py
+
+class PrivateLanguageEntry(Base):
+    __tablename__ = "private_language"
+
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    user_id = Column(String, ForeignKey("users.id"), nullable=False)
+
+    phrase = Column(String, nullable=False)
+    # Exact idiosyncratic phrase: "that spinning feeling", "going grey"
+
+    inferred_vad_state = Column(JSON, nullable=False)
+    # {"valence": -0.7, "arousal": 0.8, "dominance": 0.2}
+    # VAD state typically present when this phrase is used
+
+    occurrence_count = Column(Integer, default=1)
+    associated_thread_ids = Column(JSON, default=list)
+
+    idiosyncrasy_score = Column(Float, default=0.5)
+    # 0.0 = common phrase, 1.0 = highly idiosyncratic to this user
+    # Computed as: 1.0 - (frequency in common English corpus / baseline)
+
+    first_seen = Column(DateTime, default=datetime.utcnow)
+    last_seen = Column(DateTime, default=datetime.utcnow)
+```
+
+---
+
+### 6.9 Hypothesis Schema
+
+```python
+# backend/schemas/state.py
+
+from enum import Enum
+from pydantic import BaseModel
+from typing import Dict, Any
+
+class HypothesisType(str, Enum):
+    THREAD_ACTIVATION = "thread_activation"
+    RHETORICAL_PATTERN = "rhetorical_pattern"
+    BIFURCATION_SIGNAL = "bifurcation_signal"
+    RESOLUTION_FAILURE = "resolution_failure"
+    DEFLECTION = "deflection"                  # NEW in V2
+
+class Hypothesis(BaseModel):
+    hypothesis_type: HypothesisType
+    score: float                               # Bayesian posterior [0.0, 1.0]
+    evidence: Dict[str, Any]                   # Structured evidence dict
+    consecutive_turns: int = 0                 # How many turns this has been active
+    is_winner: bool = False
+    prior_score: float = 0.0                   # Score from previous turn (before decay)
+```
+
+---
+
+### 6.10 Response Strategy Schema
+
+```python
+# backend/schemas/strategy.py
+
+from enum import Enum
+from pydantic import BaseModel
+from typing import Optional
+
+class StrategyType(str, Enum):
+    CREATE_SPACE = "create_space"
+    INTRODUCE_PERTURBATION = "introduce_perturbation"
+    TRACK_PRIVATE_LANGUAGE = "track_private_language"
+    DEPTH_INVITATION = "depth_invitation"
+    ANOMALY_HOLD = "anomaly_hold"
+    BIFURCATION_PRESENCE = "bifurcation_presence"
+    COMPANION_FADE = "companion_fade"
+    STANDARD_REFLECTION = "standard_reflection"
+
+class ResponseStrategy(BaseModel):
+    strategy_type: StrategyType
+    behavioral_spec: str           # Exact instruction string sent to LLM
+    max_sentences: int = 3
+    allow_questions: bool = True
+    private_phrase: Optional[str] = None       # For TRACK_PRIVATE_LANGUAGE
+    target_depth_layer: Optional[int] = None   # For DEPTH_INVITATION
+    pacing_override: Optional[str] = None      # From VAD trajectory pacing signal
+    winning_hypothesis: HypothesisType
+    hypothesis_confidence: float
+    companion_fade_active: bool = False
+```
+
+---
+
+### 6.11 Turn and Session Models
+
+```python
+# backend/models/session.py
+
+class Session(Base):
+    __tablename__ = "sessions"
+
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    user_id = Column(String, ForeignKey("users.id"), nullable=False)
+    status = Column(String, default="active")              # active | ended
+    tone_mode = Column(String, default="standard")         # standard | casual
+    turn_count = Column(Integer, default=0)
+    max_depth_reached = Column(Integer, default=1)
+    session_entropy_avg = Column(Float, nullable=True)
+    companion_fade_triggered = Column(Boolean, default=False)
+    started_at = Column(DateTime, default=datetime.utcnow)
+    ended_at = Column(DateTime, nullable=True)
+
+class Turn(Base):
+    __tablename__ = "turns"
+
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    session_id = Column(String, ForeignKey("sessions.id"), nullable=False)
+    user_id = Column(String, ForeignKey("users.id"), nullable=False)
+    turn_index = Column(Integer, nullable=False)
+
+    # PRIVACY RULE: raw_user_text COLUMN DOES NOT EXIST IN THIS TABLE
+    # If you add it: critical privacy violation. See test_raw_text_never_stored.
+
+    distilled_input = Column(String, nullable=False)       # Zone A safe
+    narrative_structure_json = Column(JSON, nullable=True) # NarrativeStructure
+
+    strategy_used = Column(String, nullable=False)
+    winning_hypothesis = Column(String, nullable=False)
+    hypothesis_confidence = Column(Float, nullable=False)
+
+    response_text = Column(String, nullable=False)         # Restored (real names)
+    response_audio_url = Column(String, nullable=True)
+
+    vad_valence = Column(Float, nullable=True)
+    vad_arousal = Column(Float, nullable=True)
+    vad_dominance = Column(Float, nullable=True)
+    depth_layer = Column(Integer, nullable=True)
+
+    user_saved_to_journal = Column(Boolean, default=False)
+    depth_label_logged = Column(Boolean, default=False)    # For Phase 3 classifier
+    state_vector_id = Column(String, ForeignKey("narrative_states.id"), nullable=True)
+
+    created_at = Column(DateTime, default=datetime.utcnow)
+```
+
+
+---
+
+## 7. COMPONENT SPECIFICATIONS
+
+### 7.1 Privacy Distillation Layer
+
+**File:** `backend/core/privacy/distiller.py`
+**Zone:** A only. No network calls.
+
+```python
+class PrivacyDistiller:
+    """
+    PII stripping and placeholder mapping.
+    Must run BEFORE any other processing.
+    Raw text must never reach any other component without distillation.
+    """
+
+    PLACEHOLDER_PREFIXES = {
+        "PERSON": "PERSON",
+        "GPE": "LOCATION",
+        "LOC": "LOCATION",
+        "ORG": "ORG",
+        "DATE": "TIME",
+        "TIME": "TIME",
+        "EVENT": "EVENT",
+    }
+
+    def distill(self, raw_text: str, user_id: str, db: Session) -> PlaceholderMap:
+        """
+        Step 1: Run spaCy NER on raw_text.
+        Step 2: For each detected entity:
+            a. Call CoreferenceResolver.resolve() → check if maps to existing entity
+            b. If match found (confidence >= 0.75): use existing placeholder_id
+            c. If no match: assign next available (PERSON_A, PERSON_B, etc.)
+            d. Update reverse_map and entity_map
+        Step 3: Replace all entity spans in text with placeholder IDs
+        Step 4: Regex strip: email patterns, phone patterns, URLs
+        Step 5: Return PlaceholderMap. Do NOT persist. Do NOT log raw_text.
+
+        Output guarantee: distilled_text contains zero PII.
+        Verify: no surface_form from entity_map appears in distilled_text.
+        """
+        pass
+```
+
+**File:** `backend/core/privacy/coreference.py`
+
+```python
+class CoreferenceResolver:
+    """
+    Determines if a new entity mention is the same as an existing PWM entity.
+    Uses three-stage resolution with confidence thresholds.
+    Err toward creating new entity when uncertain — wrong merge corrupts PWM.
+    """
+
+    EXACT_MATCH_CONFIDENCE = 1.0
+    SEMANTIC_MATCH_CONFIDENCE = 0.80
+    STRUCTURAL_MATCH_CONFIDENCE = 0.70
+    ACCEPTANCE_THRESHOLD = 0.75
+
+    def resolve(self, surface_form, entity_type, context_distilled, user_id, db) -> Optional[Entity]:
+        """
+        Stage 1: Exact string match in entity.surface_forms → high confidence
+        Stage 2: EmbeddingGemma semantic similarity of context to prior session
+                 contexts where this entity appeared → medium confidence
+        Stage 3: entity_type match + co-occurring placeholder_ids match → low confidence
+
+        Return first match above ACCEPTANCE_THRESHOLD.
+        Return None if no match (create new entity).
+        """
+        pass
+```
+
+---
+
+### 7.2 NarrativeStructure DAG Builder
+
+**File:** `backend/core/narrative/dag_builder.py`
+
+```python
+class DAGBuilder:
+    """
+    Converts distilled text into NarrativeStructure (11-field JSON + DAG edges).
+    Implements SSM (Situational Structure Model) layers 1-6.
+
+    Phase 1: LLM-based extraction (Groq, with structured output prompt).
+    Phase 4+: Local trained model when sufficient data exists.
+
+    IMPORTANT: The LLM receives distilled text with placeholders.
+    It returns structured JSON. It never sees raw PII.
+
+    Extraction prompt enforces:
+    - Use placeholder IDs for all actors (PERSON_A not "David")
+    - Non-diagnostic emotion labels only
+      Allowed: hollow, tense, heavy, numb, tight, expansive, scattered, still
+      Forbidden: anxious, depressed, traumatized, dysregulated, triggered
+    - Structural causal chains, not clinical interpretations
+    """
+
+    SYSTEM_PROMPT = """
+    You are a narrative structure extractor. Extract the structure of the user's
+    experience into the provided JSON schema. Use ONLY the placeholder IDs provided
+    (PERSON_A, PERSON_B, etc.) for all people mentioned. Use structural,
+    non-diagnostic language for all emotion fields.
+    Return valid JSON only. No commentary. No markdown.
+    """
+
+    def extract(self, distilled_text: str, placeholder_map: PlaceholderMap) -> NarrativeStructure:
+        """
+        Sends structured extraction request to Groq.
+        Validates response against NarrativeStructure schema.
+        Falls back to minimal structure on parse failure.
+        """
+        pass
+```
+
+---
+
+### 7.3 VAD Affective Tracker
+
+**File:** `backend/core/narrative/vad_tracker.py`
+
+```python
+class VADTracker:
+    """
+    Computes Valence-Arousal-Dominance per turn from distilled text.
+    Implements UED (Utterance Emotion Dynamics) rolling window tracking.
+
+    Computation method:
+    - Use NarrativeStructure fields + rhetorical stance as VAD proxies
+    - Primary emotion label → rough valence estimate
+    - agency_score from SSM Layer 2 → dominance proxy
+    - Depth layer + arousal markers → arousal estimate
+    - Do NOT call external API for VAD (Zone A constraint)
+
+    Rolling window: last 5 turns.
+    Pacing signal derived from trajectory (see VADTrajectory.pacing_signal).
+    """
+
+    def compute_vad(
+        self,
+        narrative: NarrativeStructure,
+        rhetorical_stance: RhetoricalStance,
+        depth_layer: int
+    ) -> VADState:
+        """
+        Heuristic computation from available local signals.
+        No external API call.
+
+        Valence proxy:
+            positive_emotion_labels → +0.3 to +0.7
+            negative_emotion_labels → -0.3 to -0.7
+            self_undermining > 0.6 → valence penalty -0.2
+
+        Arousal proxy:
+            depth_layer 4-5 + high bifurcation → arousal 0.7-0.9
+            depth_layer 1-2 + low entropy → arousal 0.3-0.5
+
+        Dominance proxy:
+            agency_score from NarrativeStructure Layer 2
+            claim_strength from rhetorical_stance
+        """
+        pass
+
+    def update_trajectory(self, session_id: str, vad: VADState, db: Session) -> VADTrajectory:
+        pass
+```
+
+---
+
+### 7.4 RST Analysis Pipeline
+
+**File:** `backend/core/rst/preprocessor.py`
+
+```python
+class RSTPreprocessor:
+    """
+    Prepares distilled text for DMRST-Parser.
+    Informal speech requires normalization before RST parsing.
+    DMRST-Parser struggles with filler words and incomplete syntax.
+    """
+
+    FILLER_WORDS = [
+        "um", "uh", "like", "you know", "i mean", "sort of",
+        "kind of", "basically", "literally", "honestly", "actually"
+    ]
+
+    def normalize(self, distilled_text: str) -> str:
+        """
+        1. Run spaCy sentence segmenter
+        2. Remove filler words (FILLER_WORDS list)
+        3. Complete incomplete sentences if trailing off
+           (append period if sentence lacks end punctuation)
+        4. Ensure each sentence is grammatically closed
+        Return normalized text ready for DMRST-Parser.
+        """
+        pass
+```
+
+**File:** `backend/core/rst/parser_client.py`
+
+```python
+class DMRSTParserClient:
+    """
+    Communicates with DMRST-Parser running as local subprocess.
+    DMRST-Parser: https://github.com/seq-to-mind/DMRST_Parser
+    Runs on port DMRST_PORT (default 5050) as local HTTP server.
+    Zone A — no external network access.
+
+    RST Relations used by RhetoricalStanceComputer:
+    - CONCESSION: user acknowledging counterpoint
+    - CONTRAST: user asserting against prior concession
+    - ANTITHESIS: user working against their own claim
+    - ELABORATION: user developing a claim
+    - CAUSE: user explaining causation
+    - CONDITION: user hedging with conditions
+    """
+
+    def parse(self, normalized_text: str) -> dict:
+        """
+        POST to localhost:DMRST_PORT/parse
+        Returns RST tree as JSON:
+        {
+            "nodes": [{"id": int, "text": str, "relation": str,
+                        "type": "nucleus"|"satellite", "parent_id": int}],
+            "root_id": int
+        }
+        Timeout: 2000ms. On timeout: return None (use heuristic fallback).
+        """
+        pass
+```
+
+**File:** `backend/core/rst/stance_computer.py`
+
+```python
+class RhetoricalStanceComputer:
+    """
+    Converts RST tree → RhetoricalStance (2D coordinate).
+    Falls back to heuristic marker detection if DMRST-Parser unavailable.
+
+    Key RST patterns for stance detection:
+    ANTITHESIS satellite after CONTRAST nucleus = self-undermining
+    e.g. "I know he was wrong [nucleus/CONTRAST]
+          but maybe I'm just too sensitive [satellite/ANTITHESIS]"
+    → self_undermining = high, claim_strength = low
+
+    Strong ELABORATION chain from nucleus = high claim_strength
+    e.g. "He dismissed me [nucleus] which was unfair [ELABORATION]
+          because I had prepared thoroughly [ELABORATION]"
+    → claim_strength = high, self_undermining = low
+    """
+
+    # Heuristic fallback markers (if DMRST-Parser unavailable)
+    SELF_UNDERMINING_MARKERS = [
+        "maybe i'm just", "i'm probably", "i might be overreacting",
+        "i'm too sensitive", "it's probably nothing", "i guess i",
+        "maybe i shouldn't", "i could be wrong", "maybe that's just me",
+    ]
+    STRONG_CLAIM_MARKERS = [
+        "i know that", "it was clearly", "that was wrong",
+        "i didn't deserve", "i felt", "that hurt", "it mattered",
+    ]
+
+    def compute(self, rst_tree: Optional[dict], distilled_text: str) -> RhetoricalStance:
+        """
+        If rst_tree available: extract from RST relation patterns.
+        If rst_tree None: fall back to SELF_UNDERMINING_MARKERS heuristic.
+        Both paths return RhetoricalStance.
+        Heuristic fallback clearly logged for monitoring.
+        """
+        pass
+```
+
+---
+
+### 7.5 Thread Map Manager
+
+**File:** `backend/core/pwm/thread_map.py`
+
+```python
+class ThreadMapManager:
+    """
+    Maintains the Zettelkasten Shadow Memory: abstract narrative pattern nodes.
+    Uses EmbeddingGemma (256-dim) for all embeddings.
+    Running centroid update — no full embedding history stored.
+    """
+
+    REINFORCE_THRESHOLD = 0.72    # cosine similarity → reinforce existing thread
+    NEW_THREAD_THRESHOLD = 0.55   # cosine similarity → all below = new thread
+    DECAY_RATE = 0.95             # per-turn decay for non-activated threads
+    DORMANT_THRESHOLD = 0.05      # activation_score below = dormant
+
+    def update(self, distilled_input, narrative_structure, placeholder_map,
+               user_id, db) -> List[Thread]:
+        """
+        1. Embed distilled_input via EmbeddingGemma (256-dim)
+        2. Load all active/emerging threads for user from SQLite
+        3. Compute cosine similarity to each thread centroid
+        4. If max_similarity >= REINFORCE_THRESHOLD:
+             a. Increase activation_score (cap at 1.0)
+             b. Update centroid via running mean
+             c. Update last_activated, turn_count
+             d. If new session: increment session_count
+             e. Update abstract_pattern from narrative_structure
+        5. If max_similarity < NEW_THREAD_THRESHOLD (all threads checked):
+             a. Create new Thread (status=emerging, activation=0.3)
+             b. Set centroid = current embedding
+             c. Extract abstract_pattern from narrative_structure DAG
+        6. Decay all threads NOT activated this turn:
+             activation_score *= DECAY_RATE
+             If activation_score < DORMANT_THRESHOLD: status = dormant
+        7. Persist all changes
+        8. Return list of threads activated this turn
+        """
+        pass
+
+    def _update_centroid(self, existing: List[float], new_emb: np.ndarray, n: int) -> List[float]:
+        """Running mean: c_new = (c_old * n + new_emb) / (n + 1)"""
+        existing_arr = np.array(existing)
+        return ((existing_arr * n + new_emb) / (n + 1)).tolist()
+```
+
+---
+
+### 7.6 Disclosure Entropy (Entity-Anchored)
+
+**File:** `backend/core/state/dimensions/disclosure_entropy.py`
+
+```python
+class DisclosureEntropyComputer:
+    """
+    Entity-anchored, thread-relative entropy.
+    NOT flat session-to-session semantic distance.
+
+    Key distinction (from brutal critique analysis):
+    Flat semantic distance cannot distinguish:
+    - Genuine novelty (new territory within active thread) → HIGH entropy
+    - Deflection (switching topic away from active thread) → DEFLECTION flag
+
+    This computer disambiguates by anchoring entropy to active threads.
+    """
+
+    DEFLECTION_MAX_SIMILARITY = 0.35   # All active threads below this = deflection
+    HIGH_ENTROPY_MIN = 0.70
+    LOW_ENTROPY_MAX = 0.30
+
+    def compute(self, distilled_input: str, user_id: str,
+                db: Session) -> tuple[float, bool]:
+        """
+        Returns: (entropy_score: float, is_deflection: bool)
+
+        1. Embed distilled_input via EmbeddingGemma (256-dim)
+        2. Retrieve all active threads (activation_score > 0.3) for user
+        3. If no active threads: return (0.8, False) — new user, everything novel
+        4. Compute cosine similarity to each active thread centroid
+        5. max_similarity = max across all active thread similarities
+        6. entropy = 1.0 - max_similarity  (0.0=familiar, 1.0=novel)
+        7. Deflection check:
+              if max_similarity < DEFLECTION_MAX_SIMILARITY
+              AND user has active threads (step 2 returned threads)
+              → is_deflection = True (user pivoting away, not genuinely novel)
+        8. Return (entropy, is_deflection)
+        """
+        pass
+```
+
+---
+
+### 7.7 Depth Layer Classifier
+
+**File:** `backend/core/state/dimensions/depth_layer.py`
+
+```python
+class DepthLayerClassifier:
+    """
+    Phase 1 (launch): LLM-based zero-shot classification via Groq.
+    - Every classification logged to data/depth_labels/ for future training.
+    - Prediction + confidence returned.
+
+    Phase 3 (after 200+ labeled examples): Local scikit-learn model.
+    - TF-IDF + LogisticRegression trained on accumulated labeled data.
+    - LLM call replaced entirely.
+
+    Layer Definitions:
+    1 = Event Surface:        Describes what happened. Concrete. Past tense.
+    2 = Feeling ID:           Names how they felt. "I felt X." Emotion words.
+    3 = Pattern Recognition:  Generalizes. "Always", "never", "every time."
+    4 = Belief Encounter:     Articulates belief. "I must be", "I guess I am."
+    5 = Authorship:           Questions own belief. Contradicts prior statement.
+
+    Transition rule: depth_layer only changes when confidence >= 0.55.
+    Layers never skip. 1→3 without 2 is invalid.
+    """
+
+    LAYER_DEFINITIONS = {
+        1: "User describes events concretely. Third-person or past-tense dominant. No emotional labeling.",
+        2: "User names emotional states. 'I felt X', 'it made me feel Y'. First-person emotional.",
+        3: "User generalizes pattern. 'Always', 'never', 'every time this happens'. Connects event to recurring experience.",
+        4: "User articulates underlying belief. 'Maybe I am just X', 'I guess I believe Y about myself'.",
+        5: "User questions or revises their own belief. 'But wait—', 'that's not actually true', self-contradiction present.",
+    }
+
+    CLASSIFICATION_PROMPT = """
+Classify this text into exactly one depth layer (1-5):
+
+{layer_definitions}
+
+Text: {distilled_input}
+
+Return JSON only: {{"layer": int, "confidence": float, "evidence": "one sentence"}}
+No markdown. No commentary. Valid JSON only.
+"""
+
+    def predict(self, distilled_input: str, current_layer: int) -> tuple[int, float]:
+        """
+        Phase 1: calls Groq with CLASSIFICATION_PROMPT.
+        Logs result to depth_labels for Phase 3 training.
+        If confidence < 0.55: return current_layer unchanged (no transition).
+        If predicted_layer skips (e.g. 1→3 without 2): clamp to current + 1.
+        Returns: (layer: int, confidence: float)
+        """
+        pass
+
+    def log_label(self, distilled_input: str, layer: int, confidence: float) -> None:
+        """Append to data/depth_labels/labeled_examples.json for Phase 3 training."""
+        pass
+```
+
+---
+
+### 7.8 Bifurcation Proximity
+
+**File:** `backend/core/state/dimensions/bifurcation.py`
+
+```python
+class BifurcationProximityComputer:
+    """
+    Detects proximity to narrative critical point (bifurcation).
+    Uses dynamical systems theory: critical slowing down signatures.
+
+    Before a qualitative shift in a nonlinear dynamical system:
+    - Variance of recent states increases (system fluctuating widely)
+    - Lag-1 autocorrelation increases (system slowing, not settling)
+    Both simultaneously = critical slowing down = bifurcation approaching.
+
+    This detects: user hovering near a genuine inner shift.
+    At this moment: one precise response matters more than many.
+    Strategy: BIFURCATION_PRESENCE (one sentence, maximum space).
+    """
+
+    MIN_HISTORY = 5           # Minimum state vectors before computation is valid
+    WINDOW = 10               # State vectors to analyze
+    THRESHOLD = 0.75          # proximity > this = bifurcation imminent
+
+    def compute(self, user_id: str, db: Session) -> float:
+        """
+        1. Retrieve last WINDOW NarrativeStateRecord vectors for user
+           (across sessions — trajectory is continuous across sessions)
+        2. If fewer than MIN_HISTORY: return 0.0 (insufficient data)
+        3. Stack to numpy array: shape (n_turns, state_dim)
+        4. Compute variance across last n states:
+              variance = np.var(state_matrix, axis=0).mean()
+              normalized_variance = min(variance / 0.5, 1.0)
+        5. Compute lag-1 autocorrelation of mean-state trajectory:
+              traj = state_matrix.mean(axis=1)  # scalar per turn
+              autocorr = np.corrcoef(traj[:-1], traj[1:])[0, 1]
+              normalized_autocorr = max(0.0, autocorr)  # clip negative
+        6. proximity = 0.5 * normalized_variance + 0.5 * normalized_autocorr
+        7. Return min(proximity, 1.0)
+        """
+        pass
+```
+
+---
+
+### 7.9 Unscented Kalman Filter (UKF)
+
+**File:** `backend/core/state/ukf.py`
+
+```python
+from filterpy.kalman import UnscentedKalmanFilter as FilterPyUKF
+from filterpy.common import Q_discrete_white_noise
+
+class NarrativeUKF:
+    """
+    Optimal nonlinear state estimator for NarrativeStateVector.
+
+    Why UKF not vanilla Kalman (from brutal critique):
+    Vanilla Kalman assumes linear state transitions and Gaussian noise.
+    Human narrative is nonlinear — a trauma disclosure mid-session
+    is a genuine state discontinuity, not a measurement outlier.
+    Vanilla Kalman smooths it out incorrectly as noise.
+    UKF uses sigma points to propagate uncertainty through the
+    nonlinear function without linearization — handles discontinuities.
+
+    Why not EKF:
+    EKF linearizes via Jacobians — works for mild nonlinearity.
+    Narrative transitions can be severely nonlinear.
+    UKF is more robust across the full range of possible state jumps.
+
+    Implementation: filterpy.kalman.UnscentedKalmanFilter
+    """
+
+    def __init__(self, state_dim: int):
+        self.state_dim = state_dim
+        self.ukf = FilterPyUKF(
+            dim_x=state_dim,
+            dim_z=state_dim,
+            dt=1.0,                    # 1 "time step" = 1 turn
+            fx=self._state_transition,
+            hx=self._observation_model,
+            alpha=0.001,               # Sigma point spread — small for near-linear
+            beta=2.0,                  # Gaussian prior assumption
+            kappa=0.0,
+        )
+        self.ukf.Q = np.eye(state_dim) * float(settings.UKF_PROCESS_NOISE)
+        self.ukf.R = np.eye(state_dim) * float(settings.UKF_OBSERVATION_NOISE)
+
+    def _state_transition(self, x: np.ndarray, dt: float) -> np.ndarray:
+        """State transition: assume state persists between turns (identity)."""
+        return x
+
+    def _observation_model(self, x: np.ndarray) -> np.ndarray:
+        """Observation model: we directly observe all state dimensions."""
+        return x
+
+    def initialize(self, first_observation: np.ndarray) -> tuple:
+        self.ukf.x = first_observation.copy()
+        self.ukf.P = np.eye(self.state_dim) * 1.0  # High initial uncertainty
+        return self.ukf.x.copy(), self.ukf.P.copy()
+
+    def update(self, prior_x: np.ndarray, prior_P: np.ndarray,
+               observation: np.ndarray) -> tuple:
+        """
+        Restore UKF state from persistence (prior_x, prior_P).
+        Run predict + update cycle.
+        Return updated state estimate and covariance.
+        """
+        self.ukf.x = prior_x.copy()
+        self.ukf.P = prior_P.copy()
+        self.ukf.predict()
+        self.ukf.update(observation)
+        return self.ukf.x.copy(), self.ukf.P.copy()
+```
+
+---
+
+### 7.10 Interpretation Engine
+
+**File:** `backend/core/interpretation/engine.py`
+
+```python
+class InterpretationEngine:
+    """
+    Five competing hypotheses scored via Bayesian update each turn.
+    Losing hypotheses decay but persist — can rise again if evidence supports.
+    This models how a skilled practitioner actually thinks:
+    not committing to one reading, holding multiple, updating continuously.
+    """
+
+    DECAY_RATE = 0.85   # Prior score * DECAY_RATE if not reinforced this turn
+    NEW_PRIOR = 0.10    # Starting prior for hypothesis not seen last turn
+
+    def run(self, state_vector: NarrativeStateVector, distilled_input: str,
+            narrative_structure: NarrativeStructure, placeholder_map: PlaceholderMap,
+            prior_hypotheses: List[Hypothesis], user_id: str,
+            db: Session) -> List[Hypothesis]:
+        """
+        For each of five hypotheses:
+        1. Compute prior:
+             was_active_last_turn → prior = prior_score * DECAY_RATE
+             not_seen_last_turn   → prior = NEW_PRIOR
+        2. Compute likelihood via hypothesis.compute_likelihood()
+        3. Posterior = prior * likelihood (unnormalized)
+        4. Normalize all five posteriors to sum to 1.0
+        5. Mark highest as is_winner = True
+        6. Return all five Hypothesis objects
+
+        Ordering of returned list: descending by score.
+        """
+        pass
+```
+
+**Hypothesis likelihood logic (all hypotheses):**
+
+```python
+# H1: ThreadActivation
+# High likelihood when:
+#   disclosure_entropy > 0.70 AND not is_deflection
+#   AND at least one thread activation_score increased this turn
+#   AND depth_layer in {1, 2}
+
+# H2: RhetoricalPattern
+# High likelihood when:
+#   self_undermining > 0.60
+#   OR (claim_strength changed by > 0.30 from prior turn)
+#   AND depth_layer in {2, 3, 4}
+# Especially high when: claim_strength > 0.6 AND self_undermining > 0.6
+# (simultaneous assertion and invalidation)
+
+# H3: BifurcationSignal
+# High likelihood when:
+#   bifurcation_proximity > 0.75
+#   AND at least one thread with session_count >= 3
+#   AND recent entropy shows non-monotonic pattern (variance high)
+
+# H4: ResolutionFailure
+# High likelihood when:
+#   a thread previously had activation_score drop below 0.20
+#   AND now re-activating above 0.50
+#   AND current embedding cosine similarity to that thread's
+#       3+-sessions-ago centroid > 0.65
+
+# H5: Deflection (NEW)
+# High likelihood when:
+#   state_vector.is_deflection == True
+#   AND at least one active thread exists
+#   AND topic switch happened within last 2 turns
+```
+
+---
+
+### 7.11 Strategy Selector
+
+**File:** `backend/core/interpretation/strategy_selector.py`
+
+```python
+class StrategySelector:
+    """
+    Maps (winning_hypothesis × NarrativeStateVector × VADTrajectory) → ResponseStrategy.
+    Companion Fade overrides all strategies when active.
+
+    Prompt-level behavioral steering (honest framing):
+    Sanctuary cannot access LLM internal activation vectors (requires local weights).
+    Instead, strategy behavioral_spec implements prompt-level steering that
+    approximates the behavioral effect of activation-level emotion vector steering
+    (as studied by Anthropic's interpretability team, 2026).
+    The LLM receives a precise behavioral specification that constrains its
+    output toward calm, grounded, reflective language.
+    This is the accessible implementation of the same principle.
+    Activation-level steering is the documented upgrade path when local inference.
+    """
+
+    def select(self, state: NarrativeStateVector, winner: Hypothesis,
+               vad_trajectory: VADTrajectory, private_lang: Optional[str],
+               tone_mode: str, fade_engine_output: dict) -> ResponseStrategy:
+        """
+        COMPANION FADE OVERRIDE (check first):
+        If fade_engine_output["active"] == True:
+            → COMPANION_FADE strategy
+            max_sentences = 2
+            allow_questions = False
+            spec = "The user has found clarity. Shorten your presence.
+                    Acknowledge what they've found. Gently point outward —
+                    toward rest, journaling, or human connection.
+                    Do not extend the conversation."
+
+        BIFURCATION_SIGNAL wins:
+            → BIFURCATION_PRESENCE
+            max_sentences = 1, allow_questions = False
+            spec = "Say one sentence only. The user is at a pivotal moment.
+                    Be fully present. Introduce nothing new.
+                    The less you say, the more space exists."
+
+        RHETORICAL_PATTERN wins AND self_undermining > 0.65:
+            → CREATE_SPACE
+            max_sentences = 2, allow_questions = False
+            spec = "The user just made a claim and immediately worked against it.
+                    Reflect only the original claim as if it stands fully.
+                    Do not acknowledge the undermining clause.
+                    Create space for the user to hear their own assertion."
+
+        DEFLECTION wins:
+            → CREATE_SPACE (toward unsaid)
+            max_sentences = 2, allow_questions = False
+            spec = "The user moved away from something. Do not name what they
+                    moved away from. Simply be present near that space.
+                    One gentle reflective sentence. Leave the door open."
+
+        THREAD_ACTIVATION wins AND disclosure_entropy > 0.70 AND NOT is_deflection:
+            → ANOMALY_HOLD
+            max_sentences = 2, allow_questions = False
+            spec = "Something genuinely new appeared. Stay entirely with it.
+                    Do not connect it to prior themes yet.
+                    Do not integrate. Simply acknowledge what just arrived."
+
+        THREAD_ACTIVATION wins AND disclosure_entropy < 0.30
+        for 3+ consecutive turns (per state history):
+            → INTRODUCE_PERTURBATION
+            max_sentences = 3, allow_questions = True
+            spec = "The user is circling familiar territory without moving.
+                    Offer one angle they have not yet considered on this theme.
+                    Do not contradict. Do not advise. Simply reframe gently.
+                    Ask one open question if appropriate."
+
+        Private language phrase detected in distilled_input:
+            → TRACK_PRIVATE_LANGUAGE
+            private_phrase = detected phrase
+            spec = f"The user used the phrase '{phrase}'.
+                    Use their exact phrase in your response.
+                    Speak their language back precisely."
+
+        Depth transition conditions met (confidence >= 0.55 for next layer):
+            → DEPTH_INVITATION
+            target_depth_layer = current_layer + 1
+            spec = f"Create an opening for the user to go deeper.
+                    Make it feel natural and safe. Do not name depth.
+                    Do not force. Simply open the door quietly."
+
+        RESOLUTION_FAILURE wins:
+            → CREATE_SPACE
+            spec = "Something the user thought was resolved has returned.
+                    Do not reference prior resolution attempts.
+                    Simply be present with what they are bringing now."
+
+        Default:
+            → STANDARD_REFLECTION
+            max_sentences = 3, allow_questions = True
+            spec = "Reflect what the user shared with care.
+                    Be present. No diagnostic language.
+                    No advice. No identity claims."
+
+        VAD pacing override (applied after base strategy):
+        If vad_trajectory.pacing_signal == "stabilize" AND arousal > 0.75:
+            Append to spec: " The user is highly activated.
+            Keep your response shorter and calmer than usual."
+        If vad_trajectory.pacing_signal == "soften":
+            Append to spec: " The user's emotional state is declining.
+            Soften tone. Prioritize being alongside, not forward-moving."
+
+        Tone mode (always last):
+        If tone_mode == "casual":
+            Append to spec: " Use casual, natural language.
+            No clinical or formal phrasing. Match the user's register."
+        """
+        pass
+```
+
+---
+
+### 7.12 Companion Fade Engine
+
+**File:** `backend/core/companion_fade/engine.py`
+
+```python
+class CompanionFadeEngine:
+    """
+    Detects when user has reached narrative closure and initiates
+    intentional withdrawal of Sanctuary's presence.
+
+    Philosophical basis:
+    The greatest risk of AI emotional support is dependency formation.
+    Sanctuary is designed to help users process and then step away.
+    When a user reaches clarity, the right response is to make space
+    for human connection and their own reflection — not to extend.
+
+    Implements Autonomy by Design (Self-Determination Theory):
+    Sanctuary acts as a decision-support scaffold, not a social actor.
+    When scaffold is no longer needed: withdraw it cleanly.
+
+    This is unique in the emotional AI market.
+    Every competitor optimizes for engagement.
+    Sanctuary optimizes for completion and disengagement.
+    """
+
+    CONSECUTIVE_TURNS_REQUIRED = 3
+
+    CLOSURE_CONDITIONS = {
+        "bifurcation_proximity_max": 0.30,    # System stable, not near critical point
+        "claim_strength_min": 0.65,           # User speaking with authority
+        "self_undermining_max": 0.35,         # User not working against themselves
+        "depth_layer_min": 4,                 # User at belief or authorship level
+        "entropy_low": True,                  # Familiar, settled territory
+    }
+
+    def evaluate(self, state_vector: NarrativeStateVector,
+                 prior_consecutive: int) -> dict:
+        """
+        Check all CLOSURE_CONDITIONS against current state_vector.
+        If all met: increment consecutive_turns counter.
+        If counter >= CONSECUTIVE_TURNS_REQUIRED: activate fade.
+
+        Returns: {
+            "active": bool,
+            "consecutive_turns": int,
+            "message_hint": str    # For behavioral spec construction
+        }
+        """
+        all_met = (
+            state_vector.bifurcation_proximity <= self.CLOSURE_CONDITIONS["bifurcation_proximity_max"]
+            and state_vector.rhetorical_stance.claim_strength >= self.CLOSURE_CONDITIONS["claim_strength_min"]
+            and state_vector.rhetorical_stance.self_undermining <= self.CLOSURE_CONDITIONS["self_undermining_max"]
+            and state_vector.depth_layer >= self.CLOSURE_CONDITIONS["depth_layer_min"]
+            and not state_vector.is_deflection
+        )
+
+        consecutive = (prior_consecutive + 1) if all_met else 0
+        active = consecutive >= self.CONSECUTIVE_TURNS_REQUIRED
+
+        return {
+            "active": active,
+            "consecutive_turns": consecutive,
+            "message_hint": "closure_ready" if active else "building"
+        }
+```
+
+---
+
+### 7.13 LLM Service
+
+**File:** `backend/services/llm.py`
+**Zone:** C — external network. Receives ONLY distilled content + behavioral spec.
+
+```python
+class LLMService:
+    """
+    Language generation only. Narrow role.
+    The intelligence of the system lives in Zone A computation.
+    The LLM is the voice, not the brain.
+
+    What LLM receives:
+    - behavioral_spec (strategy instruction string)
+    - distilled conversation history (last 5 turns, placeholders intact)
+    - distilled_input (current turn, placeholders intact)
+    - max_sentences, allow_questions constraints
+
+    What LLM NEVER receives:
+    - PWM contents (entity names, thread labels, relationship data)
+    - NarrativeStateVector (hypothesis scores, bifurcation proximity, etc.)
+    - raw user text
+    - entity real names (only placeholder IDs)
+
+    Note on emotion steering (honest architecture):
+    Prompt-level behavioral specification approximates activation-level
+    emotion vector steering (Anthropic, 2026) at the output level.
+    The behavioral_spec is the accessible implementation of steering
+    toward "calm" and away from "desperate/sycophantic" outputs.
+    True activation-level steering requires local model inference (future).
+    """
+
+    SYSTEM_PROMPT = """You are Sanctuary — a companion for emotional expression.
+Your only job is generating language that implements the behavioral specification given.
+
+ABSOLUTE RULES (no exceptions, no context overrides these):
+1. NEVER use diagnostic language: anxiety, depression, trauma, disorder, symptoms,
+   diagnosis, mental illness, condition, bipolar, adhd, ptsd, ocd, dysregulated
+2. NEVER assign identity: "you are someone who", "you tend to", "you always",
+   "you're the type", "your pattern is", "you have a pattern of"
+3. NEVER give advice unless user explicitly requested it in this turn
+4. NEVER reference prior sessions explicitly
+5. NEVER use more sentences than the behavioral spec allows
+6. If allow_questions = False: use ZERO question marks in response
+7. NEVER express that you are an AI, reference your limitations, or break character
+8. NEVER foster dependency: avoid "I'm always here", "you can always talk to me"
+
+You are calm, present, and grounded. Nothing theatrical. Nothing desperate.
+Reflect. Be present. Speak in the user's register."""
+
+    def generate(self, behavioral_spec: str, distilled_input: str,
+                 conversation_history: list, max_sentences: int,
+                 allow_questions: bool) -> str:
+        """
+        User message format:
+        [BEHAVIORAL SPEC]: {behavioral_spec}
+        [MAX SENTENCES]: {max_sentences}
+        [QUESTIONS ALLOWED]: {allow_questions}
+        [WHAT USER SAID]: {distilled_input}
+
+        Temperature: 0.7
+        Max tokens: 200
+        Model: llama-3.1-70b-versatile (or configured GROQ_MODEL)
+        """
+        pass
+```
+
+---
+
+### 7.14 Policy Gate
+
+**File:** `backend/services/policy_gate.py`
+**Zone:** A — runs locally, before response reaches user.
+
+```python
+class PolicyGate:
+    """
+    Final structural enforcement of the north star constraint.
+    The behavioral_spec and LLM system prompt prevent violations.
+    The policy gate catches any that slip through.
+    Prevention is primary. Detection is backup.
+    """
+
+    DIAGNOSTIC_TERMS = [
+        "anxiety", "anxious", "depression", "depressed", "trauma", "traumatic",
+        "disorder", "symptoms", "diagnosis", "diagnose", "mental illness",
+        "condition", "therapy", "therapist", "treatment", "bipolar", "adhd",
+        "ptsd", "ocd", "borderline", "narcissistic", "codependent",
+        "attachment style", "you suffer from", "your condition", "dysregulated",
+        "triggered", "hypervigilant", "dissociat",
+    ]
+
+    IDENTITY_PATTERNS = [
+        r"you are (someone|a person) who",
+        r"you tend to",
+        r"you('re| are) the type",
+        r"your pattern is",
+        r"you have a pattern of",
+        r"people like you",
+        r"you always (do|feel|think|say)",
+        r"you never (do|feel|think|say)",
+    ]
+
+    ADVICE_PATTERNS = [
+        r"\byou should\b",
+        r"\byou need to\b",
+        r"\bi (would )?recommend\b",
+        r"\btry to\b",
+        r"\bhave you tried\b",
+        r"\bwhy don't you\b",
+        r"\bit might help (to|if)\b",
+    ]
+
+    DEPENDENCY_PATTERNS = [
+        r"i('m| am) always here",
+        r"you can always (come back|talk to me|return)",
+        r"i('ll| will) never (leave|go away)",
+        r"i('m| am) your",
+    ]
+
+    def check(self, response_text: str) -> tuple[bool, str]:
+        """
+        Returns (is_safe: bool, reason: str)
+        Checks all four pattern categories.
+        On first violation found: return (False, violation_description).
+        If safe: return (True, "").
+
+        Caller behavior on failure:
+        Attempt 1: regenerate with behavioral_spec + "IMPORTANT: " + reason
+        Attempt 2: if still failing, return safe fallback:
+                   "That sounds like it carries a lot. Tell me more."
+        Max attempts: 2. Never retry more than twice.
+        """
+        pass
+```
+
+
+---
+
+## 8. API CONTRACT
+
+### 8.1 Authentication
+
+```
+POST /auth/register
+Body:     { "email": string, "password": string }
+Response: { "user_id": string, "access_token": string }
+
+POST /auth/login
+Body:     { "email": string, "password": string }
+Response: { "user_id": string, "access_token": string }
+
+All subsequent endpoints:
+Header: Authorization: Bearer {access_token}
+```
+
+### 8.2 Session
+
+```
+POST /session/start
+Body:     { "tone_mode": "standard" | "casual" }
+Response: { "session_id": string, "started_at": string }
+
+POST /session/{session_id}/end
+Response: {
+    "session_id": string,
+    "turn_count": int,
+    "max_depth_reached": int,
+    "session_entropy_avg": float,
+    "companion_fade_triggered": bool
+}
+```
+
+### 8.3 Turn — Main Pipeline Endpoint
+
+```
+POST /turn
+Content-Type: multipart/form-data
+Body:
+  audio_file: File   (optional — if voice input)
+  text_input: string (optional — if text input)
+  session_id: string (required)
+
+Exactly one of audio_file or text_input must be provided.
+
+Response: {
+    "turn_id": string,
+    "response_text": string,         // Restored — real names, user-ready
+    "response_audio_url": string,    // ElevenLabs CDN URL
+    "turn_index": int,
+    "can_save_to_journal": true,     // Always true — user decides
+    "companion_fade_active": bool,   // True when fade protocol running
+    "depth_layer": int               // Current depth (for frontend awareness)
+}
+
+Server execution order (exact — dependencies are real):
+ 1. Whisper STT if audio_file provided → raw_text
+ 2. distiller.distill(raw_text) → placeholder_map
+ 3. dag_builder.extract(distilled_text, placeholder_map) → narrative_structure
+ 4. PARALLEL (all Zone A, all local, can run concurrently):
+    4a. rst_pipeline.compute(distilled_text) → rhetorical_stance
+    4b. vad_tracker.compute_vad(narrative_structure, rhetorical_stance) → vad_state
+    4c. thread_map.update(distilled_text, narrative_structure, placeholder_map) → threads
+    4d. entropy_computer.compute(distilled_text) → (entropy, is_deflection)
+    4e. depth_classifier.predict(distilled_text, current_depth) → (depth, confidence)
+    4f. bifurcation_computer.compute(user_id) → bifurcation_proximity
+ 5. Build NarrativeStateVector from all 4a-4f outputs
+ 6. Load prior UKF state (prior_x, prior_P) from last NarrativeStateRecord
+    If none exists: ukf.initialize(observation)
+    Else: ukf.update(prior_x, prior_P, observation) → updated state
+ 7. Load prior_hypotheses from last HypothesisHistory (decay tracking)
+ 8. interpretation_engine.run(state_vector, ..., prior_hypotheses) → hypotheses
+ 9. companion_fade_engine.evaluate(state_vector, prior_consecutive) → fade_output
+10. strategy_selector.select(state_vector, winner, vad_trajectory,
+                             private_lang, tone_mode, fade_output) → strategy
+11. llm_service.generate(strategy.behavioral_spec, distilled_input,
+                         history_last5, strategy.max_sentences,
+                         strategy.allow_questions) → raw_response
+12. policy_gate.check(raw_response):
+      If unsafe, attempt 1: regenerate with stricter spec
+      If still unsafe: fallback = "That sounds like it carries a lot. Tell me more."
+13. restorer.restore(response_to_use, placeholder_map) → final_response
+14. tts_service.synthesize(final_response) → audio_url
+15. ASYNC (non-blocking — do not await before returning response):
+    pwm_manager.update_after_turn(placeholder_map, distilled_input,
+                                   state_vector, winner, session_id, user_id)
+    persist: Turn, NarrativeStateRecord, HypothesisHistory
+    update: Session.turn_count, Session.max_depth_reached
+16. Return response
+```
+
+### 8.4 Journal (User-Curated Zettelkasten)
+
+```
+POST /journal/save
+Body:     { "turn_id": string, "user_note": string (optional) }
+Response: { "journal_entry_id": string, "saved_at": string }
+
+GET /journal
+Response: {
+    "entries": [{
+        "journal_entry_id": string,
+        "distilled_input": string,    // Anonymized — no real names
+        "response_text": string,      // Restored — real names
+        "user_note": string,
+        "abstract_pattern": object,   // Thread's Zettelkasten node
+        "saved_at": string
+    }]
+}
+
+DELETE /journal/{journal_entry_id}
+Response: { "deleted": true }
+```
+
+---
+
+## 9. IMPLEMENTATION PHASES
+
+### PHASE 1 — Foundation (Build First. Nothing Else Until Complete.)
+
+**Goal:** Full voice-in voice-out pipeline. Raw text never stored. Entity registry builds.
+
+Ordered task list:
+```
+1.  SQLAlchemy engine setup. All ORM models. Alembic migration.
+2.  Auth: register, login, JWT middleware.
+3.  PrivacyDistiller.distill() — spaCy NER, placeholder assignment.
+4.  PlaceholderRestorer.restore() — reverse lookup.
+5.  CoreferenceResolver — Stage 1 only (exact surface_forms match).
+6.  Entity Registry CRUD in PWMManager.
+7.  Turn + Session persistence (distilled_input only — NO raw text column).
+8.  LLMService.generate() — STANDARD_REFLECTION strategy only.
+9.  PolicyGate.check() — diagnostic term detection only.
+10. STTService.transcribe() — Whisper via OpenAI API.
+11. TTSService.synthesize() — ElevenLabs.
+12. /auth, /session/start, /session/end, /turn endpoints (minimal pipeline).
+
+DONE WHEN:
+Full voice conversation works end-to-end.
+Entities accumulate across sessions via exact coreference.
+Raw text provably never in any database table (see test_raw_text_never_stored).
+```
+
+---
+
+### PHASE 2 — EmbeddingGemma + Thread Map + Disclosure Entropy
+
+**Goal:** System detects recurring themes. Entropy computed per active thread.
+
+Ordered task list:
+```
+1.  Download EmbeddingGemma: python scripts/download_embeddinggemma.py
+    Model: SentenceTransformer("google/embeddinggemma-300m")
+    Dimension: 256 (via MRL truncation — balance speed + quality)
+    Load once at startup as singleton. Share across all components.
+
+2.  ThreadMapManager.update():
+    - Embed via EmbeddingGemma
+    - Cosine similarity to all user's thread centroids
+    - Reinforce (>= 0.72) or create new (< 0.55 all)
+    - Running centroid update
+    - Decay rate 0.95 per inactive turn
+
+3.  Thread model persistence + abstract_pattern field.
+4.  DisclosureEntropyComputer.compute() — entity-anchored (not flat session).
+    Deflection detection (all similarities < 0.35 = is_deflection).
+5.  DAGBuilder.extract() — NarrativeStructure via Groq structured output.
+6.  NarrativeStateVector: thread_activation + entropy dimensions active.
+7.  NarrativeStateRecord persistence (flattened state vector).
+8.  ThreadActivationHypothesis + DeflectionHypothesis likelihood computation.
+9.  Partial InterpretationEngine — two hypotheses competing.
+10. ANOMALY_HOLD strategy when entropy > 0.70 and not deflection.
+11. CREATE_SPACE strategy when deflection detected.
+
+DONE WHEN:
+System detects recurring themes across sessions.
+High-entropy moments trigger ANOMALY_HOLD.
+Deflection triggers CREATE_SPACE.
+Thread centroids accumulate correctly with running mean.
+```
+
+---
+
+### PHASE 3 — RST + VAD + Rhetorical Stance
+
+**Goal:** System understands HOW user constructs meaning, not just what.
+
+Ordered task list:
+```
+1.  DMRST-Parser setup:
+    git clone https://github.com/seq-to-mind/DMRST_Parser models/dmrst_parser/
+    Download model weights (see DMRST repo README)
+    python scripts/start_dmrst_server.py — runs on localhost:5050
+
+2.  RSTPreprocessor.normalize() — filler word removal, sentence completion.
+3.  DMRSTParserClient.parse() — local subprocess HTTP client.
+    Fallback: None (triggers heuristic stance computation).
+4.  RhetoricalStanceComputer.compute():
+    RST tree → claim_strength, self_undermining
+    Heuristic fallback if DMRST unavailable.
+5.  VADTracker.compute_vad() + VADTrajectory.pacing_signal.
+6.  Rhetorical stance + VAD dimensions in NarrativeStateVector.
+7.  RhetoricalPatternHypothesis likelihood computation.
+8.  CREATE_SPACE strategy when self_undermining > 0.65.
+9.  VAD pacing_signal applied as override to strategy behavioral_spec.
+
+DONE WHEN:
+RST analysis running (or gracefully falling back to heuristic).
+Self-undermining detected triggers CREATE_SPACE with correct behavioral spec.
+VAD pacing signal modulating response length and tone.
+```
+
+---
+
+### PHASE 4 — UKF + Full Interpretation Engine + Depth Layer (Phase 1)
+
+**Goal:** Principled nonlinear state estimation. All five hypotheses compete.
+         Depth layer classified via LLM zero-shot with data logging.
+
+Ordered task list:
+```
+1.  NarrativeUKF implementation (filterpy.kalman.UnscentedKalmanFilter).
+    initialize() for first turn.
+    update() for subsequent turns.
+    Persist state_vector_flat + ukf_uncertainty to NarrativeStateRecord.
+
+2.  DepthLayerClassifier.predict() — Phase 1: Groq zero-shot.
+    Log all predictions to data/depth_labels/labeled_examples.json.
+
+3.  BifurcationProximityComputer.compute() — variance + autocorrelation.
+    Requires MIN_HISTORY = 5 NarrativeStateRecords.
+
+4.  Full NarrativeStateVector (all 5 dimensions active).
+
+5.  BifurcationSignalHypothesis likelihood computation.
+6.  ResolutionFailureHypothesis likelihood computation.
+7.  Full InterpretationEngine — all five hypotheses with Bayesian scoring.
+8.  HypothesisHistory persistence for cross-turn decay tracking.
+
+9.  Full StrategySelector decision matrix:
+    BIFURCATION_PRESENCE, CREATE_SPACE, ANOMALY_HOLD,
+    INTRODUCE_PERTURBATION, DEPTH_INVITATION, STANDARD_REFLECTION,
+    TRACK_PRIVATE_LANGUAGE, COMPANION_FADE.
+
+10. CompanionFadeEngine.evaluate() integrated into pipeline.
+
+DONE WHEN:
+Full five-hypothesis competition running each turn.
+UKF updating state estimate with correct uncertainty tracking.
+BIFURCATION_PRESENCE triggers correctly near critical points.
+Companion Fade activating after 3 consecutive closure-ready turns.
+```
+
+---
+
+### PHASE 5 — Private Language + Full Coreference + Unsaid Index
+
+**Goal:** System speaks user's own language back. Cross-session entity merging robust.
+
+Ordered task list:
+```
+1.  PrivateLanguageRegistry detection:
+    - Pattern: phrase occurring 3+ times in high-valence contexts
+    - idiosyncrasy_score: compare against common English n-gram frequency
+    - Phrases below idiosyncrasy threshold = not private language
+
+2.  TRACK_PRIVATE_LANGUAGE strategy integration in strategy_selector.
+
+3.  CoreferenceResolver — Stage 2 (semantic similarity via EmbeddingGemma).
+    Match ambiguous pronouns + alternate surface forms to existing entities.
+
+4.  UnsaidIndex detection:
+    - abandoned_sentence: sentence fragment without completion
+    - rapid_topic_pivot: entity/domain switch within 2 turns
+    - deflection_detected: is_deflection flag from entropy computer
+
+5.  UnsaidNode persistence with structural_description (no raw content).
+
+6.  Optional: surface unsaid node in future session:
+    Strategy: "Last session you approached something about PERSON_A
+               and moved on. No need to go there — but it is there if you want."
+    Only surface once. Mark as "offered". Never force.
+
+DONE WHEN:
+Private language detected after 3+ occurrences.
+TRACK_PRIVATE_LANGUAGE strategy correctly uses exact user phrase.
+Cross-session entity coreference working for pronoun resolution.
+Unsaid nodes accumulating and offered at most once per node.
+```
+
+---
+
+### PHASE 6 — Depth Layer Classifier Training (Local)
+
+**Goal:** Replace LLM depth classification with local sklearn model.
+         Trigger when 200+ labeled examples accumulated.
+
+Ordered task list:
+```
+1.  python scripts/train_depth_classifier.py:
+    - Load data/depth_labels/labeled_examples.json
+    - TF-IDF vectorizer (ngram_range=(1,3), max_features=5000)
+    - LogisticRegression(C=1.0, max_iter=1000, class_weight="balanced")
+    - 80/20 train/test split
+    - Evaluate: accuracy, per-class F1, confusion matrix
+    - Target: overall accuracy >= 0.75 before switching
+    - Save to data/depth_labels/depth_classifier.pkl
+
+2.  DepthLayerClassifier updated to load pkl and use local model.
+3.  Stop logging to labeled_examples.json (or keep at 10% sampling rate).
+
+DONE WHEN:
+Local classifier accuracy >= 0.75.
+No LLM call for depth classification.
+```
+
+---
+
+### PHASE 7 — Frontend
+
+**Goal:** Working user-facing product.
+
+Ordered task list:
+```
+1.  React + TypeScript + Vite + Tailwind setup.
+2.  useAudioRecorder hook (MediaRecorder API, audio/webm blob).
+3.  VoiceInput component — record button, send, receive.
+4.  ResponsePlayer component — auto-play TTS audio on receipt.
+5.  Conversation page — turn-by-turn display.
+    Each turn: user text + response text + save-to-journal button.
+6.  MomentCard component — Zettelkasten journal node display.
+7.  Journal page — saved moments, user notes, abstract_pattern visible.
+8.  FadeIndicator component — subtle signal when Companion Fade active.
+    Not intrusive. Small indicator, no explanation.
+9.  Tone mode toggle (standard / casual).
+10. Auth flow (register, login, token persistence).
+
+Design constraints:
+- Minimal UI. Nothing that competes with the conversation.
+- No mood sliders, no ratings, no metrics visible to user.
+- No display of internal state, hypotheses, strategy names.
+- Companion Fade: subtle, not dramatic. User should feel the space, not read about it.
+```
+
+---
+
+## 10. TESTING REQUIREMENTS
+
+### 10.1 The Test That Must Never Fail
+
+```python
+def test_raw_text_never_stored_anywhere(client, db):
+    """
+    Runs full turn pipeline. Queries EVERY table in database.
+    If any raw entity or identifying text found: FAIL immediately.
+    This is the privacy guarantee. It must hold after every schema change.
+    Run this test after: any new model added, any new column added,
+    any PWM component modified, any distiller change.
+    """
+    raw_input = "My boss David criticized me in front of Sarah at our Tuesday standup in London."
+    identifiers = ["David", "Sarah", "Tuesday", "London", "standup"]
+
+    response = client.post("/turn", data={"text_input": raw_input,
+                                          "session_id": create_test_session(client)})
+    assert response.status_code == 200
+
+    for table in [Turn, Entity, Thread, UnsaidNode, NarrativeStateRecord,
+                  Session, PrivateLanguageEntry, HypothesisHistory]:
+        records = db.query(table).all()
+        for record in records:
+            record_str = str(record.__dict__)
+            for identifier in identifiers:
+                assert identifier not in record_str, \
+                    f"PII '{identifier}' found in {table.__tablename__}: {record.id}"
+```
+
+### 10.2 Required Unit Tests
+
+```python
+# Privacy
+def test_pii_stripped_from_distilled_text(): ...
+def test_coreference_reuses_existing_placeholder(): ...
+def test_new_entity_created_on_no_match(): ...
+def test_restorer_replaces_all_placeholders(): ...
+
+# UKF
+def test_ukf_initializes_with_high_uncertainty(): ...
+def test_ukf_update_reduces_uncertainty_over_turns(): ...
+def test_ukf_handles_large_observation_jump(): ...
+    # Verify UKF does not smooth out trauma-bomb as outlier noise
+    # Large jump in observation should propagate, not be dampened
+
+# Thread Map
+def test_thread_reinforced_above_similarity_threshold(): ...
+def test_new_thread_created_below_threshold(): ...
+def test_thread_decays_when_not_activated(): ...
+def test_centroid_running_mean_correct(): ...
+
+# Disclosure Entropy
+def test_entropy_high_for_new_user(): ...
+def test_entropy_low_for_repeated_content(): ...
+def test_deflection_detected_when_all_threads_low_similarity(): ...
+def test_genuine_novelty_not_flagged_as_deflection(): ...
+
+# Depth Classifier
+def test_layer1_event_language(): ...
+def test_layer4_belief_language(): ...
+def test_no_layer_skip_without_confidence(): ...
+def test_layer_stays_stable_below_confidence_threshold(): ...
+
+# Bifurcation
+def test_bifurcation_zero_below_min_history(): ...
+def test_bifurcation_high_with_high_variance_high_autocorr(): ...
+
+# Interpretation Engine
+def test_five_hypotheses_sum_to_one(): ...
+def test_bifurcation_hypothesis_wins_at_high_proximity(): ...
+def test_losing_hypothesis_decays_not_discards(): ...
+def test_deflection_hypothesis_wins_when_deflection_detected(): ...
+
+# Strategy
+def test_bifurcation_presence_max_one_sentence(): ...
+def test_create_space_no_questions(): ...
+def test_companion_fade_overrides_all_strategies(): ...
+
+# Policy Gate
+def test_diagnostic_terms_blocked(): ...
+def test_identity_assignment_blocked(): ...
+def test_advice_blocked(): ...
+def test_safe_reflection_passes(): ...
+def test_fallback_on_double_failure(): ...
+
+# Companion Fade
+def test_fade_not_active_below_consecutive_threshold(): ...
+def test_fade_activates_after_three_consecutive_closure_turns(): ...
+def test_fade_resets_when_conditions_not_met(): ...
+```
+
+### 10.3 Integration Tests
+
+```python
+def test_full_turn_voice_to_audio(): ...
+def test_state_vector_persists_and_loads_correctly(): ...
+def test_thread_accumulates_across_sessions(): ...
+def test_hypothesis_decay_persists_across_turns(): ...
+def test_entity_coreference_across_two_sessions(): ...
+def test_private_language_detected_after_three_occurrences(): ...
+def test_unsaid_node_created_on_topic_pivot(): ...
+def test_companion_fade_shortens_response(): ...
+def test_llm_never_receives_entity_real_names(): ...
+    # Mock LLM service, capture what it receives
+    # Assert: no entry from entity.surface_forms present in any argument
+```
+
+---
+
+## 11. STARTUP SEQUENCE
+
+```python
+# backend/main.py
+
+from contextlib import asynccontextmanager
+from fastapi import FastAPI
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup — load all Zone A resources once, share via app.state
+    app.state.nlp = spacy.load("en_core_web_sm")
+
+    from sentence_transformers import SentenceTransformer
+    app.state.embedding_model = SentenceTransformer(
+        settings.EMBEDDING_MODEL,          # "google/embeddinggemma-300m"
+        truncate_dim=int(settings.EMBEDDING_DIM)  # 256
+    )
+
+    # Start DMRST-Parser subprocess (local RST analysis)
+    import subprocess
+    app.state.dmrst_process = subprocess.Popen(
+        ["python", "scripts/start_dmrst_server.py"],
+        cwd=str(settings.DMRST_MODEL_PATH)
+    )
+    # Wait for DMRST server ready (poll localhost:5050 health endpoint)
+
+    # Load depth classifier if Phase 3 pkl exists
+    depth_pkl = Path("data/depth_labels/depth_classifier.pkl")
+    if depth_pkl.exists():
+        import pickle
+        with open(depth_pkl, "rb") as f:
+            app.state.depth_classifier = pickle.load(f)
+    else:
+        app.state.depth_classifier = None  # Phase 1: use LLM
+
+    yield
+
+    # Shutdown
+    app.state.dmrst_process.terminate()
+
+app = FastAPI(lifespan=lifespan)
+```
+
+---
+
+## 12. SETUP INSTRUCTIONS
+
+```bash
+# 1. Clone and install
+git clone <repo>
+cd sanctuary_v2/backend
+python -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+python -m spacy download en_core_web_sm
+
+# 2. Download EmbeddingGemma (first run only, ~200MB)
+python scripts/download_embeddinggemma.py
+
+# 3. Download DMRST-Parser model weights (Phase 3+)
+git clone https://github.com/seq-to-mind/DMRST_Parser models/dmrst_parser/
+# Follow DMRST repo README for weight download
+
+# 4. Configure environment
+cp .env.example .env
+# Fill in: GROQ_API_KEY, OPENAI_API_KEY, ELEVENLABS_API_KEY, ELEVENLABS_VOICE_ID
+
+# 5. Initialize database
+alembic upgrade head
+
+# 6. Start Redis (required for session state)
+redis-server
+
+# 7. Start backend
+uvicorn main:app --reload --port 8000
+
+# 8. Start frontend (separate terminal)
+cd ../frontend
+npm install && npm run dev
+
+# Phase 3 only — train depth classifier after 200+ labeled examples:
+python scripts/train_depth_classifier.py
+```
+
+---
+
+## 13. WHAT IS ARCHITECTURALLY PARKED (NOT BUILT NOW)
+
+These components are documented because they are the correct future direction.
+They are not built because the timing is wrong for solo MVP development.
+They are not abandoned.
+
+```
+TURBOQUANT (Google Research, ICLR 2026):
+Status: Parked until local LLM inference is feasible.
+Why parked: TurboQuant compresses KV cache of locally-running models.
+Sanctuary V2 uses API inference (Groq). No access to KV cache.
+Becomes relevant when: local on-device generation model adopted.
+Path: Replace Groq with local Llama/Gemma instance + TurboQuant for KV compression.
+
+AZURE CONFIDENTIAL COMPUTING (TEE for Zone B):
+Status: Parked until institutional backing / post-launch.
+Why parked: Enterprise infrastructure. Complex key management.
+Significant DevOps overhead for solo builder. Non-trivial monthly cost.
+Current Zone B: AES-256 at rest + TLS 1.3 in transit (standard, sufficient for MVP).
+Upgrade path: Azure Confidential VMs (AMD SEV-SNP) for Zone B sync.
+This becomes the research contribution: hardware-guaranteed privacy for emotional AI.
+
+ACTIVATION-LEVEL EMOTION VECTOR STEERING (Anthropic, 2026):
+Status: Documented as theoretical foundation. Implemented as prompt-level approximation.
+Why not accessible: requires white-box access to model internal activations.
+API provides only input/output. No access to intermediate layer representations.
+Current implementation: prompt-level behavioral specification (behavioral_spec)
+achieves the same output-level effect through constrained generation.
+The Anthropic research (calm vector, desperate vector, sycophancy suppression)
+is the theoretical grounding. behavioral_spec is the accessible implementation.
+Upgrade path: When local model inference adopted, implement activation steering
+via representation engineering on intermediate layers.
+
+CHAIN-OF-AGENTS PATTERN EXTRACTION (Zone B → C):
+Status: Interface designed. Not built in Phase 1-6.
+Why parked: Requires Zone B sync infrastructure and real user data.
+Path: After 3+ months of user data, abstract Zettelkasten nodes
+can be processed by CoA pipeline (Gemini 2.0 Flash worker agents +
+manager agent) to identify macro-behavioral loops across months.
+User opt-in only. Default off.
+```
+
+---
+
+## 14. HONEST RESEARCH CONTRIBUTION FRAMING
+
+For academic submission (when pursuing publication post-launch):
+
+**What is genuinely novel and publishable:**
+
+1. Entity-anchored disclosure entropy in privacy-distilled emotional AI
+   (deflection vs novelty disambiguation — no prior work in this context)
+   → Target: CHI, CSCW
+
+2. Unscented Kalman Filter for nonlinear narrative state estimation
+   across privacy-distilled sessions — handling discontinuities in
+   emotional disclosure without treating them as measurement noise
+   → Target: ACL, Cognitive Science Society
+
+3. Bayesian hypothesis competition for narrative interpretation
+   with cross-turn decay — modeling the practitioner's multi-reading approach
+   → Target: CHI, interdisciplinary AI + psychology venue
+
+4. User-curated Zettelkasten memory in AI emotional companions —
+   empirical study of agency effects on narrative ownership
+   → Target: CHI, CSCW (most feasible near-term)
+
+5. Companion Fade as designed disengagement protocol —
+   ethical AI design pattern for preventing dependency formation
+   → Target: FAccT, AIES
+
+6. Three-Zone Privacy Architecture for emotional AI —
+   formal description of zone-based PII containment
+   with upgrade path to hardware TEE
+   → Target: USENIX Security, IEEE S&P
+
+**What requires empirical study before claiming:**
+- That Sanctuary improves narrative coherence (needs pre/post measurement)
+- That privacy architecture increases user honesty (needs study design)
+- That user-curated memory improves narrative ownership (needs user study)
+
+Research sequencing: Ship. Gather real user data. Design studies. Publish with evidence.
+Not: design, build, claim, then study.
+
+---
+
+## 15. AGENT CONSTRAINTS — FINAL SUMMARY
+
+```
+1.  NEVER store raw user text. Distill first. Store distilled_input only.
+    The column raw_user_text must never exist in any table.
+
+2.  NEVER send raw text, PWM contents, entity real names,
+    or NarrativeStateVector to any external API.
+    Zone C receives: distilled_text, behavioral_spec, conversation history
+    (with placeholder IDs, not real names).
+
+3.  NEVER let the LLM receive: PWM data, state vector scores,
+    hypothesis type names, bifurcation proximity values, thread labels.
+
+4.  NEVER use diagnostic language in any response, system prompt addition,
+    or database field label visible to users.
+
+5.  NEVER use vanilla Kalman filter. Use UKF (filterpy UnscentedKalmanFilter).
+    Reason: nonlinear narrative state. Vanilla Kalman smooths genuine
+    state jumps incorrectly as measurement noise.
+
+6.  NEVER skip Kalman update. Initialize on first turn. Update every turn.
+
+7.  NEVER show internal labels, thread IDs, hypothesis names, state scores,
+    depth layer integers, or bifurcation proximity values to the user
+    through any UI element.
+
+8.  ALWAYS follow phase order. Dependencies between phases are real.
+    Phase 2 requires Phase 1 complete. Phase 4 requires Phase 3 complete.
+
+9.  ALWAYS run test_raw_text_never_stored_anywhere after:
+    any new model added, any column added, any distiller change.
+
+10. ALWAYS use Pydantic schemas at API boundaries.
+    SQLAlchemy models for persistence only. Never mix.
+
+11. ALWAYS load EmbeddingGemma once at startup (singleton via app.state).
+    Never instantiate SentenceTransformer inside a request handler.
+
+12. ALWAYS compute disclosure entropy as entity-anchored (thread-relative),
+    not as flat session-to-session semantic distance.
+    The flat approach cannot distinguish deflection from genuine novelty.
+
+13. DEFAULT strategy when selector is uncertain: STANDARD_REFLECTION.
+    Never default to advice-giving. Never default to questioning.
+
+14. COMPANION FADE takes priority over all strategies.
+    Check fade_engine_output BEFORE strategy selection decision matrix.
+
+15. DMRST-Parser failure is graceful, not catastrophic.
+    Always fall back to heuristic RhetoricalStanceComputer.
+    Log fallbacks for monitoring. Do not surface to user.
+```
+
+---
+
+*Sanctuary V2 — Final PRD*
+*Built from: original V1 architecture + brutal critique analysis + V2 component research*
+*Every component verified against published sources before inclusion*
+*Every architectural decision has a documented reason*
+*Everything parked has a documented upgrade path*
+*Nothing here is hype*
+
+The five risks you flagged are real and deserve more than acknowledgment—they need architectural and design answers that work within Sanctuary’s constraints. Here’s how to **mitigate each without violating the North Star**, and how to **express these limitations** in ways that feel respectful rather than rigid.
+
+---
+
+## 1. “Do I have anxiety?” → Stonewalling feels cold
+
+**What can be done:**
+Replace the Policy Gate’s binary block with a **compassionate redirection generator**.  
+Don’t just reject diagnostic language—respond to the *emotion behind the question*.
+
+**Implementation:**
+- When a message contains a diagnostic ask (regex + LLM check), the gate returns a safe redirection from a pre-written library, not a generic fallback.
+- Example for “Do I have anxiety?”:  
+  *“I’m not the right place to answer that. But it sounds like something is weighing on you. Tell me about what you’re feeling right now, in your own words.”*
+- These redirections maintain the prohibition but show warmth. They can be built once, reviewed, and never generated raw.
+- A small set of categories (diagnostic, advice-seeking, identity-labeling) each get 3-4 scripted variations, so it never feels robotic.
+
+**Expressing the limitation to users:**
+During onboarding and in a serene “What Sanctuary is” card:  
+*“Sanctuary won’t diagnose, label, or prescribe. It’s a space for you to hear yourself, not a clinical tool.”*
+
+This sets expectations early. When a redirection occurs, it feels like the system caring for its boundaries, not ignoring the user.
+
+---
+
+## 2. System’s understanding is hidden → confusion when behavior changes (Fade, tone shift)
+
+**What can be done:**
+Communicate **intent, not internals**. Users don’t need to know “bifurcation proximity 0.82,” but they deserve to know *why* something changed.
+
+**For Companion Fade:**
+- **Transparent, gentle message** before reducing presence. When fade conditions are met, have the system say:  
+  *“It feels like you’ve reached a moment of clarity. I’m going to step back a little. This space is yours—if you want to keep talking, just say so.”*
+- UI: a subtle fading indicator (a thin, warm-colored line) and maybe a small text note “Sanctuary is pausing” that appears for a few seconds. No big explanation, no science.
+
+**For tone shifts / depth deepening:**
+Don’t surface depth layers. Instead, let the language itself carry the signal—when you move from surface to belief, response language naturally becomes quieter, more spacious. You can let the behavioral spec handle this without revealing internal state. If a shift feels abrupt, a single phrase like *“It’s okay to take this slowly”* can anchor it.
+
+This keeps the user in the experience, not in the meta-cognition, but prevents disorientation.
+
+---
+
+## 3. Companion Fade could feel like abandonment → needs emergency brake
+
+**What can be done:**
+Build **two critical safeguards** into the Fade protocol:
+
+1. **Explicit opt-out per session**: After the fade message, Sanctuary must remain fully present for that turn. Only if the user *does not* indicate a desire to continue (by typing/speaking further, or explicitly tapping “I want to keep talking”) does it proceed to shorten responses. If the user says “No, I still need this,” fade resets immediately and switches back to STANDARD_REFLECTION with no penalty.
+
+2. **A visible, always-available “Keep talking” affordance**: On the conversation screen, a small, discreet button appears when fade is active—maybe just the Sanctuary icon with a subtle glow. Tapping it instantly revokes fade for the current session. This gives the user full control without breaking the atmosphere.
+
+This transforms Companion Fade from something Sanctuary does *to* the user into something it *offers*, and the user can accept or decline. Fade becomes a permission, not a push.
+
+---
+
+## 4. Privacy invisible until breached; non-clinical can seem less credible
+
+**What can be done:**
+Make privacy a **felt experience**, not a promise.
+
+- **First-session ceremony**: When a user first opens the app, a short, beautifully designed animation explains how their data is handled.  
+  *“Your raw words stay on this device. Nothing you say is uploaded unaltered. We send only anonymized structure to power the voice. You can verify this.”*  
+  Pair this with a “Privacy explained” link to a plain-language, not legal, document.
+
+- **Real-time privacy indicator**: During a session, a small icon (e.g., a shield with a checkmark) could indicate “Local processing active.” No data leaves the phone without the icon briefly changing—be transparent about every network call. (Whisper call, TTS call, Groq call—each can be shown as a minimal signal.)
+
+- **Differentiation in marketing**: Frame the non-clinical stance as liberation. Target *those who have tried clinical chatbots and felt labeled or boxed in*. Use language like:  
+  *“You’re not a diagnosis. You’re a story. Sanctuary helps you hear it.”*
+
+Privacy becomes part of the product’s identity, not a policy buried in settings. People pay for calm, respectful tech—you can charge for this.
+
+---
+
+## 5. No clinical oversight limits adoption → but you can still handle risk responsibly
+
+**What can be done:**
+Sanctuary doesn’t need to *be* clinical to show care in crisis. Build a **light-touch safety layer** that respects the non-diagnostic philosophy:
+
+- **Crisis language detection**: A local, on-device small model or keyword list that flags expressions like “I want to die,” “I can’t go on,” “I’m going to hurt myself.”  
+  When detected, the system does *not* try to treat or assess—it responds with something like:  
+  *“That sounds overwhelming. You deserve support from someone who can be fully present with you right now. Here is a number you can call [local helpline]. I’ll wait, or you can come back anytime.”*  
+  This is not diagnosis—it’s compassionate signposting. It can be delivered in Sanctuary’s calm, non-judgmental voice.
+
+- **Optional human safety contact**: In settings, users can add a trusted friend’s phone number. If they trigger a crisis response, the app can offer to send a pre-written, gentle SMS to that contact (*“I’m having a hard moment and could use a call”*), initiated by the user. The system never auto-contacts anyone.
+
+- **Transparent non-clinical disclaimer**: Every session drawer or about screen says:  
+  *“Sanctuary is not a substitute for therapy or emergency care. If you’re in crisis, please use the resources provided.”* This isn’t a defect; it’s an honest boundary that builds trust with users who don’t want paternalistic surveillance.
+
+This approach expands the viable market: it can sit comfortably in universities, wellness apps, or self-directed mental fitness contexts where clinical oversight isn’t mandated, but safety is still expected.
+
+---
+
+## Expressing the limitations as strengths
+
+All five risks ultimately stem from Sanctuary’s intentional refusals. The fix isn’t to erode those refusals but to **make them legible and kind**. You do that by:
+
+- **Pre-empting frustration with clear, warm onboarding.**  
+- **Using graceful, scripted redirections instead of blocks.**  
+- **Giving the user an emergency brake on any feature that could feel like withdrawal.**  
+- **Making privacy visible and visceral, not just a technical claim.**  
+- **Adding a non-clinical safety cushion that honors the philosophy while showing responsibility.**
+
+When a user encounters a refusal, they should feel: *“This is protecting me, not ignoring me.”* That’s a design goal, not a code flinch.
+
+These adjustments don’t require changing the core architecture—they fit within the behavioral spec, policy gate, and frontend logic. They transform Sanctuary from a technically correct system into a truly usable companion.
