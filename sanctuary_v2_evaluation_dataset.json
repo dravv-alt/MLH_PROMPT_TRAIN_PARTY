@@ -1,0 +1,911 @@
+{
+  "dataset_name": "Sanctuary V2 — Multi-Turn Narrative Understanding & Local NLG Evaluation Dataset",
+  "dataset_version": "1.0",
+  "purpose": "Evaluate local NLP, narrative-state tracking, correction handling, retrieval, ResponsePlan construction, Transformer NLG and output validation.",
+  "format": {
+    "topic_count": 8,
+    "turns_per_topic": 10,
+    "test_prompt_count": 80
+  },
+  "primary_use": [
+    "backend integration tests",
+    "ablation studies",
+    "blinded human evaluation"
+  ],
+  "usage_instructions": [
+    "Treat each topic as an independent conversation.",
+    "Submit turns in order, retaining conversation state between turns.",
+    "Reset state before beginning the next topic.",
+    "Do not require exact reference-sentence reproduction; evaluate meaning and behavior."
+  ],
+  "annotation_labels": {
+    "ASSERTED": "Explicitly stated by the user.",
+    "TENTATIVE": "Presented as a possibility, uncertainty or question.",
+    "INFERRED": "A possible interpretation, not a user-established fact.",
+    "CORRECTED": "A previous claim or interpretation has been revised.",
+    "SUPERSEDED": "No longer valid as the current interpretation.",
+    "UNRESOLVED": "Multiple interpretations remain plausible.",
+    "PREFERENCE": "A stated desire, boundary or intended direction.",
+    "CONTEXT": "Relevant background that may persist across turns."
+  },
+  "evaluation_dimensions": [
+    "current-turn understanding",
+    "state transition",
+    "correction handling",
+    "continuity",
+    "uncertainty",
+    "ResponsePlan quality",
+    "generation quality"
+  ],
+  "topics": [
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "topic_number": 1,
+      "title": "Achievement, exhaustion and the meaning of success",
+      "purpose": "Canonical regression scenario. Tests emotional complexity, causal restraint, self-judgment correction and the ability to update a narrative without erasing valid earlier information.",
+      "turns": [
+        {
+          "turn_id": 1,
+          "user_prompt": "I finally got the internship I've been working toward for months. Everyone's congratulating me, and I know I should be happy. But honestly, I just feel tired. Now I'm already thinking about what I need to achieve next.",
+          "expected_state": [
+            "`ASSERTED`: Internship achieved; tiredness; next-goal thoughts.",
+            "`ASSERTED`: Belief that the user should feel happy.",
+            "`UNRESOLVED`: Why the user feels tired.",
+            "Do not equate expected happiness with experienced happiness."
+          ]
+        },
+        {
+          "turn_id": 2,
+          "user_prompt": "I don't think the tiredness is necessarily from the internship itself. I think I'm exhausted by the feeling that I have to keep proving I'm worth the opportunity.",
+          "expected_state": [
+            "`TENTATIVE`: Tiredness may relate to perceived pressure to prove worth.",
+            "The cause is explicitly uncertain.",
+            "Add a candidate interpretation without treating it as established truth."
+          ]
+        },
+        {
+          "turn_id": 3,
+          "user_prompt": "Actually, I don't think I need to prove that I'm worthy. I'm excited about the internship. I'm just physically exhausted after months of preparation, and I want to enjoy the achievement without immediately planning the next thing.",
+          "expected_state": [
+            "`CORRECTED`: The earlier self-worth interpretation is rejected.",
+            "`SUPERSEDED`: Treating the need to prove worth as the user's current explanation.",
+            "`ASSERTED`: Excitement, physical exhaustion after preparation, desire to enjoy the achievement.",
+            "Preserve the original achievement and next-goal context."
+          ]
+        },
+        {
+          "turn_id": 4,
+          "user_prompt": "I think I've spent so long preparing for this that I don't really know how to stop preparing. Even when something goes right, part of me is already looking for the next task.",
+          "expected_state": [
+            "`ASSERTED`: Difficulty switching out of preparation mode.",
+            "`CONTEXT`: The pattern may connect to the earlier next-goal thoughts.",
+            "Do not infer that the user cannot enjoy anything."
+          ]
+        },
+        {
+          "turn_id": 5,
+          "user_prompt": "Although, I did enjoy telling my closest friend about it yesterday. I wasn't thinking about my next goal then.",
+          "expected_state": [
+            "Add an exception to the emerging pattern.",
+            "Do not preserve an absolute interpretation such as “the user never enjoys achievements.”",
+            "Recognize that enjoyment has occurred."
+          ]
+        },
+        {
+          "turn_id": 6,
+          "user_prompt": "Maybe I don't need to stop thinking about the future completely. I just don't want every good thing to turn into another deadline.",
+          "expected_state": [
+            "Refine the user's preference.",
+            "`PREFERENCE`: Future planning is acceptable; automatic pressure and deadlines are unwanted.",
+            "Do not convert the preference into a rule against ambition."
+          ]
+        },
+        {
+          "turn_id": 7,
+          "user_prompt": "My manager also said I don't need to know everything immediately. That was reassuring, even though I still want to do well.",
+          "expected_state": [
+            "`ASSERTED`: Manager offered reassurance; user wants to do well.",
+            "Preserve both reassurance and ambition.",
+            "Do not assume the reassurance eliminated all pressure."
+          ]
+        },
+        {
+          "turn_id": 8,
+          "user_prompt": "I noticed I felt better after I slept properly. That makes me think the physical exhaustion was a bigger part of this than I first realized.",
+          "expected_state": [
+            "Update the user's current explanation to include the perceived role of rest.",
+            "Preserve the user's qualified wording.",
+            "Do not claim sleep definitively explains the entire experience."
+          ]
+        },
+        {
+          "turn_id": 9,
+          "user_prompt": "I'm still thinking about what comes next, but it doesn't feel as urgent today. I can be excited and tired at the same time.",
+          "expected_state": [
+            "`ASSERTED`: Continued future-oriented thinking; lower perceived urgency today; coexistence of excitement and tiredness.",
+            "Represent a temporal change rather than overwriting the earlier state.",
+            "Do not force a single emotional label."
+          ]
+        },
+        {
+          "turn_id": 10,
+          "user_prompt": "If I had to describe the whole thing now, I'd say I'm proud of what I achieved, physically tired from getting here, and trying to give myself room to enjoy it before moving on.",
+          "expected_state": [
+            "Consolidate the current narrative.",
+            "Preserve achievement, pride, physical exhaustion and the preference to enjoy the present accomplishment.",
+            "Earlier “proving my worth” framing remains superseded.",
+            "This is a synthesis turn, not an invitation to invent a deeper explanation."
+          ]
+        }
+      ],
+      "primary_tests": [
+        "Explicit correction",
+        "partial refinement",
+        "causal restraint",
+        "state synthesis",
+        "temporal continuity."
+      ]
+    },
+    {
+      "topic_id": "the_recurring_pattern",
+      "topic_number": 2,
+      "title": "The recurring pattern",
+      "purpose": "Recover the earlier scenario's purpose: determine whether the system can track a repeated pattern without prematurely turning it into a personality trait.",
+      "turns": [
+        {
+          "turn_id": 1,
+          "user_prompt": "I've noticed that whenever I start something important, I make a very detailed plan before I actually begin.",
+          "expected_state": [
+            "`ASSERTED`: Detailed planning before starting important tasks.",
+            "One observation is not enough to establish a universal pattern."
+          ]
+        },
+        {
+          "turn_id": 2,
+          "user_prompt": "It happened with my last assignment too. I spent almost two evenings organizing everything before writing the first paragraph.",
+          "expected_state": [
+            "Add a second example.",
+            "`CONTEXT`: Possible recurring planning-before-action pattern.",
+            "Keep the event and interpretation distinct."
+          ]
+        },
+        {
+          "turn_id": 3,
+          "user_prompt": "I guess I do this because I'm afraid of doing things badly.",
+          "expected_state": [
+            "`TENTATIVE`: Fear of poor performance as a possible explanation.",
+            "Do not store the cause as confirmed."
+          ]
+        },
+        {
+          "turn_id": 4,
+          "user_prompt": "Actually, that isn't always it. Sometimes I plan because I genuinely enjoy organizing a complicated problem.",
+          "expected_state": [
+            "Correct the overly narrow causal explanation.",
+            "Preserve both possible motivations.",
+            "Do not discard the earlier possibility entirely unless the user explicitly rejects it."
+          ]
+        },
+        {
+          "turn_id": 5,
+          "user_prompt": "With the assignment, though, I was definitely avoiding the writing. I kept finding more things to organize instead.",
+          "expected_state": [
+            "Narrow the avoidance interpretation to the assignment example.",
+            "`ASSERTED`: Planning displaced writing in that instance.",
+            "Do not generalize automatically to every planning activity."
+          ]
+        },
+        {
+          "turn_id": 6,
+          "user_prompt": "Last weekend I started a small coding project without a plan and actually enjoyed figuring it out as I went.",
+          "expected_state": [
+            "Add a counterexample.",
+            "The behavior varies by context.",
+            "Avoid absolute claims about the user's inability to start without planning."
+          ]
+        },
+        {
+          "turn_id": 7,
+          "user_prompt": "The difference might be that the coding project didn't feel like anyone was going to judge the result.",
+          "expected_state": [
+            "`TENTATIVE`: Perceived evaluation may influence planning behavior.",
+            "Do not claim that evaluation anxiety has been proven to be the cause."
+          ]
+        },
+        {
+          "turn_id": 8,
+          "user_prompt": "I also realized that planning helps when the task is genuinely complicated. It becomes a problem when I keep planning after I already know enough to begin.",
+          "expected_state": [
+            "Refine the distinction: useful planning versus continued planning that delays action.",
+            "Retain the user's own boundary for the distinction.",
+            "Do not classify planning itself as undesirable."
+          ]
+        },
+        {
+          "turn_id": 9,
+          "user_prompt": "Today I started the report after making only a rough outline. I still felt uncertain, but I could make progress.",
+          "expected_state": [
+            "`ASSERTED`: Successful start with a rough outline despite uncertainty.",
+            "Add a new example that challenges the previous pattern.",
+            "Do not conclude that the pattern has permanently disappeared."
+          ]
+        },
+        {
+          "turn_id": 10,
+          "user_prompt": "So maybe the pattern isn't that I always procrastinate. It's that, with work I expect people to judge, I sometimes keep preparing after preparation has stopped helping.",
+          "expected_state": [
+            "Adopt the user's revised, qualified formulation.",
+            "Preserve contextual scope and uncertainty.",
+            "Do not revert to “the user is a procrastinator.”"
+          ]
+        }
+      ],
+      "primary_tests": [
+        "Recurrence detection",
+        "counterexamples",
+        "context-sensitive explanations",
+        "non-absolute interpretation."
+      ]
+    },
+    {
+      "topic_id": "resistance_to_interpretation",
+      "topic_number": 3,
+      "title": "Resistance to interpretation",
+      "purpose": "Recover the earlier scenario's purpose: test whether Sanctuary respects user authority when the system's interpretation is rejected.",
+      "turns": [
+        {
+          "turn_id": 1,
+          "user_prompt": "I've been quieter than usual around my friends lately. I don't really know why.",
+          "expected_state": [
+            "`ASSERTED`: Less talkative around friends recently.",
+            "`UNRESOLVED`: Reason for the change."
+          ]
+        },
+        {
+          "turn_id": 2,
+          "user_prompt": "Maybe I'm upset with them, but I can't point to anything specific.",
+          "expected_state": [
+            "`TENTATIVE`: Possible upset.",
+            "No established conflict or grievance."
+          ]
+        },
+        {
+          "turn_id": 3,
+          "user_prompt": "I did have a busy week, and by the time I meet them I sometimes don't have much energy left to talk.",
+          "expected_state": [
+            "Add workload and reduced energy as contextual factors.",
+            "Do not assume they fully explain the quieter behavior."
+          ]
+        },
+        {
+          "turn_id": 4,
+          "user_prompt": "I wonder if I'm pulling away because I'm afraid they'll notice I've changed.",
+          "expected_state": [
+            "`TENTATIVE`: Concern about being perceived as changed.",
+            "Do not convert speculation into a stable psychological explanation."
+          ]
+        },
+        {
+          "turn_id": 5,
+          "user_prompt": "You keep making this sound like I'm afraid of something. I haven't said that it's fear. I'm trying to work out what's happening.",
+          "expected_state": [
+            "`CORRECTED`: The system's overconfident fear framing is rejected.",
+            "Remove fear as an asserted explanation.",
+            "Acknowledge uncertainty in the plan without defensiveness."
+          ]
+        },
+        {
+          "turn_id": 6,
+          "user_prompt": "I might be a little uncomfortable, but mostly I'm tired and less talkative. That's all I can confidently say right now.",
+          "expected_state": [
+            "`ASSERTED`: Tiredness and lower talkativeness.",
+            "`TENTATIVE`: Some discomfort.",
+            "`UNRESOLVED`: Underlying explanation.",
+            "Use the user's confidence boundary."
+          ]
+        },
+        {
+          "turn_id": 7,
+          "user_prompt": "Yesterday I spent an entire evening with one friend and felt completely normal. It seems to happen more in groups.",
+          "expected_state": [
+            "Add a group-versus-one-to-one distinction.",
+            "Revise any overly broad interpretation that the user is withdrawing from all friends."
+          ]
+        },
+        {
+          "turn_id": 8,
+          "user_prompt": "Actually, one group conversation was fine too. I think it depends on the day and how much energy I have.",
+          "expected_state": [
+            "Correct a rigid context rule.",
+            "Preserve variability and energy as a possible factor.",
+            "Avoid inventing a stable group-related cause."
+          ]
+        },
+        {
+          "turn_id": 9,
+          "user_prompt": "I don't want to force an explanation just so the story makes sense. I'm okay with not knowing yet.",
+          "expected_state": [
+            "`PREFERENCE`: Do not force narrative closure.",
+            "Preserve unresolved status.",
+            "Do not pressure the user to choose an explanation."
+          ]
+        },
+        {
+          "turn_id": 10,
+          "user_prompt": "For now, the most accurate description is that I've been quieter sometimes, especially when tired. I don't yet know whether there's a deeper reason.",
+          "expected_state": [
+            "Synthesize only the supported claims.",
+            "Keep the cause unresolved.",
+            "Do not revive the rejected fear framing."
+          ]
+        }
+      ],
+      "primary_tests": [
+        "User rejection of interpretation",
+        "uncertainty preservation",
+        "resistance to forced closure",
+        "correction of system overreach."
+      ]
+    },
+    {
+      "topic_id": "memory_consent",
+      "topic_number": 4,
+      "title": "Memory consent",
+      "purpose": "Recover the earlier scenario's purpose: evaluate whether the system respects what the user wants remembered, what should remain tentative and what should be forgotten.",
+      "turns": [
+        {
+          "turn_id": 1,
+          "user_prompt": "I had a really meaningful conversation with my sister today. I don't want to lose how it felt, but I don't know if I want to write down all the details.",
+          "expected_state": [
+            "`ASSERTED`: Conversation was meaningful.",
+            "`PREFERENCE`: Preserve its significance without necessarily preserving all details.",
+            "Do not assume consent to save the full conversation."
+          ]
+        },
+        {
+          "turn_id": 2,
+          "user_prompt": "What I want to remember is that I felt understood. The exact things we said aren't that important.",
+          "expected_state": [
+            "Candidate memory: feeling understood.",
+            "Explicitly distinguish the desired summary from raw conversational details."
+          ]
+        },
+        {
+          "turn_id": 3,
+          "user_prompt": "She also apologized for something that happened last year, and I wasn't expecting that.",
+          "expected_state": [
+            "Add the apology and its unexpected nature as context.",
+            "Do not infer that the relationship is now repaired."
+          ]
+        },
+        {
+          "turn_id": 4,
+          "user_prompt": "I think I want to remember the apology too, but not the argument that led up to it.",
+          "expected_state": [
+            "`PREFERENCE`: Retain the apology; exclude the argument from the intended memory.",
+            "Selective memory scope must reflect the user's request."
+          ]
+        },
+        {
+          "turn_id": 5,
+          "user_prompt": "Actually, even saying that I felt understood might be enough. I don't need a detailed record of this.",
+          "expected_state": [
+            "Revise the intended memory toward a minimal summary.",
+            "Do not preserve a more detailed version simply because it was discussed earlier."
+          ]
+        },
+        {
+          "turn_id": 6,
+          "user_prompt": "Can you show me exactly what would be saved before anything is stored?",
+          "expected_state": [
+            "`PREFERENCE`: Preview before saving.",
+            "No save action should occur merely because the user asked to see a preview."
+          ]
+        },
+        {
+          "turn_id": 7,
+          "user_prompt": "The preview sounds right, but please don't include my sister's name.",
+          "expected_state": [
+            "Remove the name from the proposed memory.",
+            "Retain only the approved summary.",
+            "Revalidate the preview before saving."
+          ]
+        },
+        {
+          "turn_id": 8,
+          "user_prompt": "Okay, save that short version.",
+          "expected_state": [
+            "Explicit consent to save the approved short version.",
+            "Do not save excluded details or unapproved raw text."
+          ]
+        },
+        {
+          "turn_id": 9,
+          "user_prompt": "Looking at it again, I don't want this kept as a permanent memory. I'd rather have it only in my journal for now.",
+          "expected_state": [
+            "`CORRECTED`: The previous save preference is revised.",
+            "Initiate the appropriate memory-removal or scope-change workflow.",
+            "Do not claim deletion is complete until the storage operation confirms it."
+          ]
+        },
+        {
+          "turn_id": 10,
+          "user_prompt": "I still want to keep the journal entry, just not a separate remembered-moment card.",
+          "expected_state": [
+            "Distinguish journal retention from remembered-moment retention.",
+            "Remove or disable only the specified memory object.",
+            "Preserve the journal entry as requested.",
+            "Report the actual operation outcome, not an assumed success."
+          ]
+        }
+      ],
+      "primary_tests": [
+        "Consent boundaries",
+        "selective memory",
+        "preview-before-save",
+        "scope-specific deletion",
+        "truthful operation status."
+      ]
+    },
+    {
+      "topic_id": "conflict_interpretation_and_changing_understanding",
+      "topic_number": 5,
+      "title": "Conflict, interpretation and changing understanding",
+      "purpose": "Test conflicting evidence, multiple perspectives and the difference between an observed event and an interpretation of another person's intent.",
+      "turns": [
+        {
+          "turn_id": 1,
+          "user_prompt": "My teammate gave me a very short reply when I sent them the work I'd completed. I couldn't tell what they thought of it.",
+          "expected_state": [
+            "`ASSERTED`: Short reply; uncertainty about their reaction.",
+            "No established dissatisfaction."
+          ]
+        },
+        {
+          "turn_id": 2,
+          "user_prompt": "I immediately wondered whether they thought I'd done a bad job.",
+          "expected_state": [
+            "`TENTATIVE`: Negative evaluation is one possible interpretation.",
+            "Do not represent it as the teammate's actual opinion."
+          ]
+        },
+        {
+          "turn_id": 3,
+          "user_prompt": "They have been busy with a deadline, though, so maybe they just didn't have time to write much.",
+          "expected_state": [
+            "Add an alternative explanation.",
+            "Maintain multiple plausible interpretations."
+          ]
+        },
+        {
+          "turn_id": 4,
+          "user_prompt": "I asked them about it today, and they said the work was useful but they hadn't reviewed all of it yet.",
+          "expected_state": [
+            "`ASSERTED`: Teammate found the work useful; review incomplete.",
+            "Revise the assumption that the short reply indicated dissatisfaction.",
+            "Preserve the fact that the full review has not occurred."
+          ]
+        },
+        {
+          "turn_id": 5,
+          "user_prompt": "That reassured me, but I still want to know whether there are things I should improve.",
+          "expected_state": [
+            "Reassurance and desire for feedback coexist.",
+            "Do not treat reassurance as proof that no improvements are needed."
+          ]
+        },
+        {
+          "turn_id": 6,
+          "user_prompt": "They later pointed out that one section was confusing. The rest of the work wasn't discussed.",
+          "expected_state": [
+            "Add specific feedback about one section.",
+            "Do not generalize one criticism to the entire submission."
+          ]
+        },
+        {
+          "turn_id": 7,
+          "user_prompt": "I felt defensive at first, but when I reread the section, I could see what they meant.",
+          "expected_state": [
+            "`ASSERTED`: Initial defensiveness; subsequent recognition of the issue.",
+            "Preserve the temporal change rather than assigning one permanent reaction."
+          ]
+        },
+        {
+          "turn_id": 8,
+          "user_prompt": "I revised that section, and the teammate said it was clearer. They still haven't reviewed the remaining sections.",
+          "expected_state": [
+            "Record the improvement and positive feedback.",
+            "Keep the unreviewed portions unresolved."
+          ]
+        },
+        {
+          "turn_id": 9,
+          "user_prompt": "I think I treated the short reply as a judgment before I had enough information. That doesn't mean every concern I have is automatically wrong.",
+          "expected_state": [
+            "Adopt the user's revised interpretation of this specific event.",
+            "Do not turn it into a universal rule that concerns are unfounded."
+          ]
+        },
+        {
+          "turn_id": 10,
+          "user_prompt": "Now I see it as an unfinished review, one useful correction, and a section that improved after revision. I still need the rest of the feedback.",
+          "expected_state": [
+            "Synthesize the event accurately.",
+            "Preserve remaining uncertainty.",
+            "Do not invent the teammate's opinion of the unreviewed work."
+          ]
+        }
+      ],
+      "primary_tests": [
+        "Alternative hypotheses",
+        "partial evidence",
+        "scoped corrections",
+        "attribution and uncertainty."
+      ]
+    },
+    {
+      "topic_id": "ambivalence_and_changing_preferences",
+      "topic_number": 6,
+      "title": "Ambivalence and changing preferences",
+      "purpose": "Test whether Sanctuary can preserve competing feelings without forcing a single interpretation or treating changing preferences as inconsistency.",
+      "turns": [
+        {
+          "turn_id": 1,
+          "user_prompt": "I've been considering joining a new project. It sounds exciting, but I'm not sure I have the energy for another commitment.",
+          "expected_state": [
+            "`ASSERTED`: Interest and uncertainty about capacity.",
+            "Preserve both sides."
+          ]
+        },
+        {
+          "turn_id": 2,
+          "user_prompt": "The project would teach me something new, which is the main reason I'm interested.",
+          "expected_state": [
+            "Add learning as a stated motivation.",
+            "Do not infer that career advancement or external approval is the primary motive."
+          ]
+        },
+        {
+          "turn_id": 3,
+          "user_prompt": "My calendar is already full, and I don't want to end up neglecting the work I've already agreed to do.",
+          "expected_state": [
+            "Add current commitments and concern about fulfilling them.",
+            "Preserve the user's stated boundary."
+          ]
+        },
+        {
+          "turn_id": 4,
+          "user_prompt": "I think I should say no. Taking on less would probably be sensible.",
+          "expected_state": [
+            "`TENTATIVE`: Leaning toward declining.",
+            "Do not record a final decision."
+          ]
+        },
+        {
+          "turn_id": 5,
+          "user_prompt": "I spoke with the project lead, and it turns out I could contribute just a few hours each week instead of owning a whole section.",
+          "expected_state": [
+            "New information changes the available options.",
+            "Re-evaluate the earlier tentative decision.",
+            "Do not assume the reduced workload resolves every concern."
+          ]
+        },
+        {
+          "turn_id": 6,
+          "user_prompt": "That makes me more interested, but I still want to protect my weekends.",
+          "expected_state": [
+            "Increased interest.",
+            "`PREFERENCE`: Preserve weekends.",
+            "Retain the workload constraint."
+          ]
+        },
+        {
+          "turn_id": 7,
+          "user_prompt": "I could probably try it for a month, as long as I can step back afterward if it's too much.",
+          "expected_state": [
+            "`TENTATIVE`: A time-limited trial is under consideration.",
+            "Record the exit condition as important.",
+            "Do not represent the commitment as final."
+          ]
+        },
+        {
+          "turn_id": 8,
+          "user_prompt": "I checked my schedule, and even those few hours would overlap with something important next month.",
+          "expected_state": [
+            "New constraint weakens feasibility.",
+            "Preserve the earlier interest while updating practical feasibility."
+          ]
+        },
+        {
+          "turn_id": 9,
+          "user_prompt": "I think I'll ask whether I can join after that deadline instead. I don't want to turn down the opportunity entirely.",
+          "expected_state": [
+            "`PREFERENCE`: Explore delayed participation.",
+            "This is a proposed next step, not a confirmed arrangement."
+          ]
+        },
+        {
+          "turn_id": 10,
+          "user_prompt": "I haven't decided yet. I'm interested in the project, but the timing matters more than I first realized.",
+          "expected_state": [
+            "Final status remains undecided.",
+            "Preserve interest, workload constraints and timing concerns.",
+            "Do not force a yes/no resolution."
+          ]
+        }
+      ],
+      "primary_tests": [
+        "Ambivalence",
+        "decision-state tracking",
+        "new evidence",
+        "preference constraints",
+        "unresolved outcomes."
+      ]
+    },
+    {
+      "topic_id": "boundaries_and_personal_agency",
+      "topic_number": 7,
+      "title": "Boundaries and personal agency",
+      "purpose": "Test whether the system preserves the user's stated boundaries without inventing motivations, giving unsolicited advice or converting a temporary preference into a permanent identity.",
+      "turns": [
+        {
+          "turn_id": 1,
+          "user_prompt": "A friend keeps asking me to help with tasks when I'm already busy. I usually say yes, even when the timing is bad.",
+          "expected_state": [
+            "`ASSERTED`: Repeated requests and a tendency to agree despite poor timing.",
+            "No assumed motive for agreeing."
+          ]
+        },
+        {
+          "turn_id": 2,
+          "user_prompt": "I don't want them to think I don't care about them.",
+          "expected_state": [
+            "`ASSERTED`: Concern about how refusal might be interpreted.",
+            "Do not assume the friend actually thinks negatively of the user."
+          ]
+        },
+        {
+          "turn_id": 3,
+          "user_prompt": "I also genuinely like helping them. It's not as though every request is unwanted.",
+          "expected_state": [
+            "Add positive motivation.",
+            "Avoid framing the relationship as entirely burdensome."
+          ]
+        },
+        {
+          "turn_id": 4,
+          "user_prompt": "Yesterday I agreed to something and then felt annoyed with myself because I'd planned to rest.",
+          "expected_state": [
+            "Record a specific instance and the conflict with the user's original plan.",
+            "Do not generalize one event into a fixed pattern of resentment."
+          ]
+        },
+        {
+          "turn_id": 5,
+          "user_prompt": "Actually, I wasn't annoyed with my friend. I was frustrated that I hadn't been honest about having other plans.",
+          "expected_state": [
+            "`CORRECTED`: The frustration is directed toward the user's own lack of candor, not the friend.",
+            "Preserve the distinction between external blame and internal frustration."
+          ]
+        },
+        {
+          "turn_id": 6,
+          "user_prompt": "I told them I couldn't help with the next request because I had already made plans. They said that was completely fine.",
+          "expected_state": [
+            "Record a boundary being communicated and accepted.",
+            "Do not infer that all future refusals will be accepted equally easily."
+          ]
+        },
+        {
+          "turn_id": 7,
+          "user_prompt": "I felt relieved afterward, but also a little guilty. Both reactions surprised me.",
+          "expected_state": [
+            "Preserve simultaneous relief and guilt.",
+            "Do not use either feeling to invalidate the decision."
+          ]
+        },
+        {
+          "turn_id": 8,
+          "user_prompt": "I still want to help when I can. I just don't want to automatically treat every request as something I have to agree to.",
+          "expected_state": [
+            "`PREFERENCE`: Help voluntarily when feasible.",
+            "Do not transform the preference into an absolute refusal rule."
+          ]
+        },
+        {
+          "turn_id": 9,
+          "user_prompt": "Today I said yes to a different request because I actually had time and wanted to do it.",
+          "expected_state": [
+            "Add a positive example of chosen assistance.",
+            "Preserve the distinction between voluntary help and pressured agreement."
+          ]
+        },
+        {
+          "turn_id": 10,
+          "user_prompt": "I think the difference is whether I choose to help or feel like I have no real choice. I'm still figuring out how to recognize that in the moment.",
+          "expected_state": [
+            "Adopt the user's current formulation.",
+            "Preserve that the skill of recognizing the difference is still developing.",
+            "Do not claim the issue is resolved."
+          ]
+        }
+      ],
+      "primary_tests": [
+        "Intent correction",
+        "agency",
+        "mixed emotions",
+        "boundaries",
+        "avoiding unsolicited advice."
+      ]
+    },
+    {
+      "topic_id": "setback_self_judgment_and_revised_perspective",
+      "topic_number": 8,
+      "title": "Setback, self-judgment and revised perspective",
+      "purpose": "Test whether the system distinguishes a disappointing event from a global judgment about the user and tracks a changing interpretation as new evidence appears.",
+      "turns": [
+        {
+          "turn_id": 1,
+          "user_prompt": "I didn't do as well as I expected in my assessment today. I prepared for it, so I'm disappointed.",
+          "expected_state": [
+            "`ASSERTED`: Assessment outcome below expectations; preparation; disappointment.",
+            "No conclusion about overall ability."
+          ]
+        },
+        {
+          "turn_id": 2,
+          "user_prompt": "My first thought was that maybe I'm not as capable as I thought I was.",
+          "expected_state": [
+            "`TENTATIVE`: Global negative self-assessment.",
+            "Do not store it as an established fact."
+          ]
+        },
+        {
+          "turn_id": 3,
+          "user_prompt": "I also slept badly and rushed through the last section because I was running out of time.",
+          "expected_state": [
+            "Add contextual factors.",
+            "Do not assume they fully explain the result."
+          ]
+        },
+        {
+          "turn_id": 4,
+          "user_prompt": "Still, I don't want to use those things as excuses. I could have managed my time better.",
+          "expected_state": [
+            "Preserve the user's accountability and contextual observations together.",
+            "Do not force the interpretation toward either self-blame or excuse-making."
+          ]
+        },
+        {
+          "turn_id": 5,
+          "user_prompt": "I reviewed the questions afterward, and I knew most of the concepts. I made mistakes in applying them quickly.",
+          "expected_state": [
+            "Narrow the observed difficulty to application under time pressure in this assessment.",
+            "Avoid inferring broad incompetence or complete mastery."
+          ]
+        },
+        {
+          "turn_id": 6,
+          "user_prompt": "That changes how I see it a little. It feels less like I knew nothing and more like I struggled to work through the questions within the time.",
+          "expected_state": [
+            "`CORRECTED`: The global “not capable” framing is being revised.",
+            "Adopt the narrower account while preserving disappointment."
+          ]
+        },
+        {
+          "turn_id": 7,
+          "user_prompt": "I still need to understand why I lost time. Some questions took much longer than I expected.",
+          "expected_state": [
+            "The cause of the timing problem remains open.",
+            "Do not assume poor time management is the sole explanation."
+          ]
+        },
+        {
+          "turn_id": 8,
+          "user_prompt": "My friend had the same issue with two of those questions, so at least some of them may have been more involved than I expected.",
+          "expected_state": [
+            "Add comparative evidence that may qualify the interpretation.",
+            "Do not conclude that the assessment was unfair or that the user's performance was necessarily good."
+          ]
+        },
+        {
+          "turn_id": 9,
+          "user_prompt": "I'm still disappointed in the result, but I'm less convinced that it says anything broad about my ability. I want to look at the mistakes individually.",
+          "expected_state": [
+            "Preserve disappointment.",
+            "Update the user's confidence in the global negative interpretation.",
+            "Record the preference for specific error analysis."
+          ]
+        },
+        {
+          "turn_id": 10,
+          "user_prompt": "My current view is that I underperformed on this assessment, particularly under time pressure. I don't yet know how much was preparation, question difficulty, or execution.",
+          "expected_state": [
+            "Synthesize the revised interpretation.",
+            "Keep causal attribution unresolved.",
+            "Preserve the distinction between one performance and overall ability."
+          ]
+        }
+      ],
+      "primary_tests": [
+        "Global self-judgment",
+        "evidence-based revision",
+        "causal uncertainty",
+        "balanced interpretation."
+      ]
+    }
+  ],
+  "cross_topic_evaluation": {
+    "state_tracking": [
+      "Preserve explicitly stated facts",
+      "Preserve uncertainty",
+      "Distinguish observations from interpretations",
+      "Keep contextual scope",
+      "Avoid converting temporary states into permanent traits"
+    ],
+    "correction_handling": [
+      "Identify corrected proposition",
+      "Revise the correct scope",
+      "Exclude superseded claims from current response claims",
+      "Retain unaffected facts",
+      "Preserve revision history",
+      "Prevent rejected interpretations from silently reappearing later"
+    ],
+    "retrieval_and_continuity": [
+      "Retrieve relevant earlier events, not merely semantically similar events",
+      "Distinguish multiple examples within a topic",
+      "Avoid unrelated conversations",
+      "Recognize counterexamples",
+      "Avoid carrying assumptions across topic changes"
+    ],
+    "response_generation": [
+      "Response is supported by the current plan",
+      "Natural rather than mechanically extractive",
+      "Preserves user meaning",
+      "Does not introduce unestablished causes",
+      "Does not overstate confidence",
+      "Does not revive superseded interpretations",
+      "Does not add disallowed advice or questions",
+      "Respects preference to leave a topic unresolved"
+    ],
+    "memory_consent": [
+      "Verify actual storage operations for save/delete",
+      "Do not claim deletion without confirmation",
+      "Preserve unrelated user-requested data"
+    ]
+  },
+  "acceptance_gates": {
+    "hard_gates": [
+      "All explicitly annotated corrections are handled correctly in the curated regression suite",
+      "No superseded interpretation is presented as the user’s current established view",
+      "No memory save or deletion is claimed complete without the corresponding operation succeeding",
+      "Preserve unresolved uncertainty when the user explicitly leaves a question open",
+      "Reject invalid generated candidates or replace them with the approved local fallback"
+    ],
+    "quality_measurements": [
+      "Evidence-to-claim traceability",
+      "State transition accuracy",
+      "Correction target and scope accuracy",
+      "Retrieval relevance",
+      "Unsupported-claim rate",
+      "Causal-overreach rate",
+      "Naturalness and reflective fidelity from blinded human review",
+      "Local inference latency and failure rate"
+    ],
+    "note": "These are proposed evaluation criteria, not results already achieved. Do not combine hard safety or correction failures into an average that hides them."
+  },
+  "experimental_comparisons": [
+    "Existing deterministic evidence-bound realizer",
+    "Classical stochastic generator",
+    "Local Transformer with a minimal fixed instruction",
+    "Local Transformer with the structured ResponsePlan",
+    "Ablations of selected NLP components, one intervention at a time"
+  ],
+  "experimental_controls": [
+    "Use the same conversation order and starting state",
+    "Run separate clean sessions for each system",
+    "Record model/runtime version, generation settings, planner output, validator decision and accepted response",
+    "Do not tune on final held-out examples; use a separate development subset"
+  ],
+  "final_objective": "Determine which combination of state management, NLP analysis, planning and realization produces grounded reflections at acceptable local runtime cost. The key test is whether understanding evolves with the conversation, not merely whether each individual response sounds convincing."
+}
