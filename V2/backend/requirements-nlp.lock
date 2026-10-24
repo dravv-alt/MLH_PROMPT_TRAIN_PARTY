@@ -1,0 +1,26 @@
+# Tested direct runtime/tool dependencies; Python 3.12. This is a direct-version lock,
+# not a full transitive hash lock. Keep model/vectorizer versions in analysis data.
+fastapi==0.128.0
+uvicorn==0.40.0
+pydantic==2.11.7
+python-dotenv==1.2.1
+SQLAlchemy==2.0.38
+PyJWT[crypto]==2.10.1
+google-generativeai==0.8.5
+spacy==3.8.4
+en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
+numpy==1.26.4
+scikit-learn==1.6.1
+openai==1.65.2
+httpx==0.28.1
+pytest==9.0.2
+filterpy==1.4.5
+playwright==1.55.0
+nltk==3.9.1
+benepar==0.2.0
+torch-struct==0.5
+gdown==5.2.0
+sentencepiece==0.2.0
+torch==2.4.0
+transformers==4.37.2
+tokenizers==0.15.2
