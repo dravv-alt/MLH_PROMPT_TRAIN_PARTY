@@ -14,27 +14,63 @@ dist/
 */build/
 */dist/
 
-# Environment Variables (IMPORTANT)
+# Environment Variables & Secrets (IMPORTANT)
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-frontend/.env
-backend/.env
+.env.*
 *.env
+**/.env
+**/.env.*
+!**/.env.example
 
-# Documentation
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+
+# Large ML Weights & Binary Checkpoints (>50MB)
+*.safetensors
+*.torchsave
+*.bin
+*.pt
+*.pth
+*.onnx
+*.zip
+V2/backend/models/
+
+# Runtime & Test Caches
+.runtime/
+**/.runtime/
+**/.test-*
+**/.test_*
+**/.testdeps/
+**/pytest-cache-*
+**/.pytest-nlp-tmp/
+**/.pytest-neural*/
+**/submission-output/
+**/tmp/
+.pytest_cache/
+
+# External Cloned Repositories (Safe Local Preservation)
+sanctuary_v2/models/dmrst_parser/
+
+# Documentation (as per repo configuration)
 *.md
+!README.md
 
 # Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.log
+**/*.log
 
-# System Files
+# System & Workspace Files
 .DS_Store
 Thumbs.db
+.obsidian/
 
 # IDEs
 .idea
@@ -47,6 +83,9 @@ Thumbs.db
 
 # Python
 __pycache__/
+**/__pycache__/
 venv/
 .venv/
+.venv_nlp/
 *.pyc
+*.pyo
