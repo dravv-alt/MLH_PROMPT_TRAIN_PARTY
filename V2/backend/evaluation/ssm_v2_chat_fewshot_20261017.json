@@ -1,0 +1,2238 @@
+{
+  "schema_version": "sanctuary.dataset-evaluation.v1",
+  "dataset": {
+    "name": "Sanctuary V2 — Multi-Turn Narrative Understanding & Local NLG Evaluation Dataset",
+    "version": "1.0",
+    "sha256": "83cbe65175b9c8fce2c2f7098a02d420f2e1f290637eb28e969ec41ba0d93d30"
+  },
+  "inference_contract": {
+    "model_visible_dataset_fields": [
+      "user_prompt"
+    ],
+    "model_visible_context": "state derived only from prior user_prompt values in the same topic",
+    "evaluator_only_fields": [
+      "expected_state",
+      "annotation_labels",
+      "evaluation_dimensions",
+      "acceptance_gates"
+    ],
+    "gold_leakage_prevented_by": "inference_only(prompt, state, service, mode, profile) has no gold parameter",
+    "persistent_application_writes": false,
+    "hosted_provider": false
+  },
+  "configuration": {
+    "mode": "local",
+    "mathematical_profile": "balanced",
+    "topic_filter": null,
+    "limit": 3
+  },
+  "summary": {
+    "turns_executed": 3,
+    "topics_executed": 1,
+    "policy_valid": 3,
+    "traceable_claim_spans": 3,
+    "expected_correction_turns": 1,
+    "expected_corrections_detected": 1,
+    "expected_uncertainty_turns": 2,
+    "expected_uncertainty_with_tentative_plan_claim": 1,
+    "generation_modes": {
+      "classical_local_fallback": 3
+    },
+    "strategies": {
+      "standard": 2,
+      "correction": 1
+    },
+    "mean_latency_seconds": 13.2137,
+    "median_latency_seconds": 3.063,
+    "total_runtime_seconds": 39.641,
+    "semantic_state_accuracy": null,
+    "semantic_state_accuracy_reason": "expected_state is free text and has not been independently adjudicated or mapped to a frozen scoring rubric"
+  },
+  "topic_summaries": [
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turns": 3,
+      "policy_valid": 3,
+      "traceable": 3,
+      "corrections_expected": 1,
+      "corrections_detected": 1,
+      "mean_latency_seconds": 13.2137
+    }
+  ],
+  "records": [
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "topic_title": "Achievement, exhaustion and the meaning of success",
+      "turn_id": 1,
+      "user_prompt": "I finally got the internship I've been working toward for months. Everyone's congratulating me, and I know I should be happy. But honestly, I just feel tired. Now I'm already thinking about what I need to achieve next.",
+      "response_text": "You finally got the internship you've been working toward for months, and you feel tired. You're already thinking about the next goal.",
+      "response_mode": "classical_local_fallback",
+      "latency_seconds": 34.734,
+      "strategy": "standard",
+      "topic_assignment": "t000001",
+      "response_plan": {
+        "schema_version": "sanctuary.response-plan.v2",
+        "plan_id": "rp_d8ba9fd9912b012d",
+        "session_id": null,
+        "source_turn_id": 1,
+        "state_revision": 0,
+        "intent": "reflect_current_meaning",
+        "strategy": "standard",
+        "claims_to_communicate": [
+          {
+            "id": "claim_1",
+            "text": "I finally got the internship I've been working toward for months.",
+            "span": [
+              0,
+              65
+            ],
+            "kind": "achievement",
+            "provenance": "direct_user_statement",
+            "epistemic_status": "asserted",
+            "required": true
+          },
+          {
+            "id": "claim_4",
+            "text": "But honestly, I just feel tired.",
+            "span": [
+              126,
+              158
+            ],
+            "kind": "physical_exhaustion",
+            "provenance": "direct_user_statement",
+            "epistemic_status": "asserted",
+            "required": true
+          },
+          {
+            "id": "claim_5",
+            "text": "Now I'm already thinking about what I need to achieve next.",
+            "span": [
+              159,
+              218
+            ],
+            "kind": "next_orientation",
+            "provenance": "direct_user_statement",
+            "epistemic_status": "asserted",
+            "required": true
+          }
+        ],
+        "evidence_ids": [
+          "ev_2790540cfa7d",
+          "ev_2a63291273ec1223",
+          "ev_52a40da00f22",
+          "ev_6334a60a0ac7286c",
+          "ev_68fdb3828e06c12c",
+          "ev_693d80cd655d",
+          "ev_746ba9cd5561",
+          "ev_7dcdad08f563b331",
+          "ev_82289a151a4fb485",
+          "ev_889a3bd65e55",
+          "ev_8fcdf3ae2afe30e7",
+          "ev_a1f8b2f160d6",
+          "ev_e927f65d1bfa39e5",
+          "ev_f42f82d2c795"
+        ],
+        "relevant_proposition_ids": [
+          "as_1d4fd9db032e6a2c",
+          "as_3a0817b9585ec8ff",
+          "as_4ae26416b7d15a83",
+          "as_914c19f2a7e42d2f",
+          "as_aaf9ee2fef689e90",
+          "as_df8619ff816dcaf8",
+          "as_fde6c27a46eb7b94"
+        ],
+        "relevant_graph_node_ids": [
+          "as_1d4fd9db032e6a2c",
+          "as_3a0817b9585ec8ff",
+          "as_4ae26416b7d15a83",
+          "as_914c19f2a7e42d2f",
+          "as_aaf9ee2fef689e90",
+          "as_df8619ff816dcaf8",
+          "as_fde6c27a46eb7b94"
+        ],
+        "relevant_graph_edge_ids": [],
+        "memory_context": {
+          "packet_id": "ctx_7a1d1ad97c0b1504",
+          "task": "reflect_current_narrative",
+          "historical_evidence": [],
+          "corrections_and_supersessions": [],
+          "unresolved_conflicts": [],
+          "abstained_from_history": true,
+          "excluded_superseded_ids": [],
+          "memory_generation": "evaluation-ephemeral",
+          "state_revision": 1
+        },
+        "correction_context": {
+          "is_correction": false,
+          "rejected_current_claims": [],
+          "superseded_propositions": []
+        },
+        "required_semantic_relations": [],
+        "proposition_frames": [
+          {
+            "id": "dp_5ddcf9ab5bf5",
+            "predicate": "get",
+            "actors": [
+              {
+                "role": "agent",
+                "text": "I"
+              },
+              {
+                "role": "patient",
+                "text": "internship"
+              }
+            ],
+            "polarity": "positive",
+            "modality": [],
+            "status": "asserted",
+            "scope_spans": [
+              [
+                0,
+                28
+              ],
+              [
+                64,
+                65
+              ]
+            ]
+          },
+          {
+            "id": "dp_4a60a07f35cb",
+            "predicate": "work",
+            "actors": [
+              {
+                "role": "agent",
+                "text": "I"
+              },
+              {
+                "role": "patient",
+                "text": "months"
+              }
+            ],
+            "polarity": "positive",
+            "modality": [],
+            "status": "asserted",
+            "scope_spans": [
+              [
+                29,
+                64
+              ]
+            ]
+          },
+          {
+            "id": "dp_4566107d97c9",
+            "predicate": "congratulate",
+            "actors": [
+              {
+                "role": "agent",
+                "text": "Everyone"
+              },
+              {
+                "role": "patient",
+                "text": "me"
+              }
+            ],
+            "polarity": "positive",
+            "modality": [],
+            "status": "asserted",
+            "scope_spans": [
+              [
+                66,
+                99
+              ]
+            ]
+          },
+          {
+            "id": "dp_30245e194dd9",
+            "predicate": "know",
+            "actors": [
+              {
+                "role": "agent",
+                "text": "I"
+              }
+            ],
+            "polarity": "positive",
+            "modality": [],
+            "status": "asserted",
+            "scope_spans": [
+              [
+                100,
+                106
+              ]
+            ]
+          },
+          {
+            "id": "dp_0435ed729056",
+            "predicate": "be",
+            "actors": [
+              {
+                "role": "agent",
+                "text": "I"
+              }
+            ],
+            "polarity": "positive",
+            "modality": [
+              "deontic"
+            ],
+            "status": "asserted",
+            "scope_spans": [
+              [
+                107,
+                125
+              ]
+            ]
+          },
+          {
+            "id": "dp_2ea457a3c422",
+            "predicate": "feel",
+            "actors": [
+              {
+                "role": "agent",
+                "text": "I"
+              }
+            ],
+            "polarity": "positive",
+            "modality": [],
+            "status": "asserted",
+            "scope_spans": [
+              [
+                126,
+                158
+              ]
+            ]
+          },
+          {
+            "id": "dp_82064f1dac75",
+            "predicate": "think",
+            "actors": [
+              {
+                "role": "agent",
+                "text": "I"
+              },
+              {
+                "role": "patient",
+                "text": "what"
+              },
+              {
+                "role": "agent",
+                "text": "I"
+              }
+            ],
+            "polarity": "positive",
+            "modality": [
+              "epistemic",
+              "deontic"
+            ],
+            "status": "tentative",
+            "scope_spans": [
+              [
+                159,
+                218
+              ]
+            ]
+          }
+        ],
+        "revision_links": [],
+        "prohibited_claims": [
+          "Do not diagnose, advise, ask a question, minimize, or invent a cause.",
+          "Do not turn a temporary experience into a permanent identity claim.",
+          "Do not present retrieval, NLI, filter, or graph scores as facts."
+        ],
+        "uncertainty_constraints": [],
+        "interaction_policy": {
+          "questions": false,
+          "advice": false,
+          "diagnosis": false,
+          "maximum_sentences": 2,
+          "maximum_words": 70
+        },
+        "style_constraints": {
+          "tone": "clear, warm, and precise",
+          "voice": "second_person_reflection"
+        },
+        "fallback_policy": "local_evidence_bound_classical",
+        "situational_structure": {
+          "event": {
+            "event_type": "other",
+            "actors": [
+              "self"
+            ],
+            "action_taken": null,
+            "action_desired": null,
+            "outcome": "unresolved"
+          },
+          "constraints": {
+            "freedom_to_refuse": null,
+            "conflict_cost": null,
+            "relationship_risk": null,
+            "expectation_pressure": null,
+            "power_asymmetry": null,
+            "emotional_safety": null
+          },
+          "reaction": {
+            "primary_reaction": "unknown",
+            "secondary_reaction": null,
+            "after_effects": [],
+            "intensity": null,
+            "duration": "chronic"
+          },
+          "meaning": {
+            "self_interpretation": "unknown",
+            "perceived_failure": null,
+            "identity_threat": "unknown",
+            "control_belief": "unclear",
+            "fairness_evaluation": "unclear"
+          },
+          "temporal": {
+            "is_recurring": false,
+            "pattern_signature": "other -> None -> unknown",
+            "progression": "unknown",
+            "resolution_state": "unresolved"
+          },
+          "language": {
+            "tone": "neutral",
+            "certainty": "medium",
+            "emotional_directness": "high",
+            "language_field": {
+              "energy_level": "medium",
+              "abstraction_level": "mixed",
+              "sentence_rhythm": "mixed",
+              "vocabulary_density": "balanced",
+              "emotional_intensity": "medium"
+            }
+          },
+          "confidence_score": 0.4
+        },
+        "ssm_metadata": {
+          "version": "ssm.v2",
+          "scope": "current_session",
+          "method": "conservative_lexical_rules",
+          "validated": false,
+          "confidence_score_kind": "legacy_heuristic_not_probability",
+          "constraint_scale": "self_rating_or_ordinal_engineering_score",
+          "constraint_version": "ssm-constraint-cues.v1",
+          "constraint_evidence": {
+            "freedom_to_refuse": {
+              "method": "unavailable",
+              "spans": []
+            },
+            "conflict_cost": {
+              "method": "unavailable",
+              "spans": []
+            },
+            "relationship_risk": {
+              "method": "unavailable",
+              "spans": []
+            },
+            "expectation_pressure": {
+              "method": "unavailable",
+              "spans": []
+            },
+            "power_asymmetry": {
+              "method": "unavailable",
+              "spans": []
+            },
+            "emotional_safety": {
+              "method": "unavailable",
+              "spans": []
+            }
+          }
+        }
+      },
+      "generation": {
+        "status": "fallback",
+        "mode": "classical_local_fallback",
+        "reason": "no_transformer_candidate_passed",
+        "profile": "balanced",
+        "attempts": [
+          {
+            "attempt": 1,
+            "profile": "balanced",
+            "status": "semantic_rejected",
+            "validation": {
+              "is_valid": true,
+              "violations": [],
+              "failure_patterns": {},
+              "required_claim_coverage": {
+                "claim_1": true,
+                "claim_4": true,
+                "claim_5": false
+              }
+            },
+            "input_tokens": 785,
+            "output_tokens": 15,
+            "generation_seconds": 1.328,
+            "assistant_prefill": "You",
+            "raw_draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+            "extracted_draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+            "extraction_changed": false,
+            "repair_applied": false,
+            "semantic_validation": {
+              "status": "unavailable",
+              "reason": "warming",
+              "is_valid": false,
+              "score": 0.6778523489932886,
+              "copy_similarity": 0.322148,
+              "violations": [],
+              "pairs": [],
+              "version": "sanctuary.response-semantics.v1"
+            }
+          },
+          {
+            "attempt": 2,
+            "profile": "precise",
+            "status": "semantic_rejected",
+            "validation": {
+              "is_valid": true,
+              "violations": [],
+              "failure_patterns": {},
+              "required_claim_coverage": {
+                "claim_1": true,
+                "claim_4": true,
+                "claim_5": false
+              }
+            },
+            "input_tokens": 785,
+            "output_tokens": 31,
+            "generation_seconds": 0.86,
+            "assistant_prefill": "You",
+            "raw_draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+            "extracted_draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+            "extraction_changed": true,
+            "repair_applied": false,
+            "semantic_validation": {
+              "status": "unavailable",
+              "reason": "warming",
+              "is_valid": false,
+              "score": 0.6778523489932886,
+              "copy_similarity": 0.322148,
+              "violations": [],
+              "pairs": [],
+              "version": "sanctuary.response-semantics.v1"
+            }
+          },
+          {
+            "attempt": 3,
+            "profile": "precise",
+            "status": "semantic_rejected",
+            "validation": {
+              "is_valid": true,
+              "violations": [],
+              "failure_patterns": {},
+              "required_claim_coverage": {
+                "claim_1": true,
+                "claim_4": true,
+                "claim_5": false
+              }
+            },
+            "input_tokens": 785,
+            "output_tokens": 31,
+            "generation_seconds": 0.906,
+            "assistant_prefill": "You",
+            "raw_draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+            "extracted_draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+            "extraction_changed": true,
+            "repair_applied": false,
+            "semantic_validation": {
+              "status": "unavailable",
+              "reason": "warming",
+              "is_valid": false,
+              "score": 0.6778523489932886,
+              "copy_similarity": 0.322148,
+              "violations": [],
+              "pairs": [],
+              "version": "sanctuary.response-semantics.v1"
+            }
+          }
+        ],
+        "fallback_validation": {
+          "is_valid": true,
+          "violations": [],
+          "failure_patterns": {},
+          "required_claim_coverage": {
+            "claim_1": true,
+            "claim_4": true,
+            "claim_5": true
+          }
+        },
+        "capabilities": {
+          "provider_version": "local-llama3.2-1b.response-plan.v2",
+          "model_id": "meta-llama/Llama-3.2-1B-Instruct",
+          "model_revision": "22e9fdbe3473c7affd8596fdc248e67e3a004da1",
+          "model_path": "C:\\Users\\bhavv\\.cache\\huggingface\\hub\\models--unsloth--llama-3.2-1b-instruct\\snapshots\\22e9fdbe3473c7affd8596fdc248e67e3a004da1",
+          "resources_present": true,
+          "ready": true,
+          "device": "cuda",
+          "dtype": "float16",
+          "load_seconds": 17.141,
+          "error": null,
+          "network_access": false,
+          "profiles": [
+            "precise",
+            "balanced",
+            "natural"
+          ]
+        }
+      },
+      "policy": {
+        "plan_response_valid": true,
+        "plan_violations": [],
+        "reflective_valid": true,
+        "reflective_violations": [],
+        "human_tone_valid": true,
+        "human_tone_violations": [],
+        "claim_spans_traceable": true,
+        "claim_count": 3
+      },
+      "state_observation": {
+        "correction_detected": false,
+        "superseded_count": 0,
+        "tentative_claim_count": 0,
+        "proposition_statuses": {
+          "explicitly_stated": 7
+        },
+        "graph_nodes": 21,
+        "graph_edges": 13,
+        "canonical_memory": {
+          "schema_version": "sanctuary.memory-harness.v1",
+          "revision": 1,
+          "active_assertion_count": 7,
+          "superseded_assertion_count": 0,
+          "unresolved_count": 0
+        },
+        "memory_operations": [
+          {
+            "operation": "ADD",
+            "assertion_id": "as_df8619ff816dcaf8",
+            "reason": "explicit_user_evidence"
+          },
+          {
+            "operation": "ADD",
+            "assertion_id": "as_fde6c27a46eb7b94",
+            "reason": "explicit_user_evidence"
+          },
+          {
+            "operation": "ADD",
+            "assertion_id": "as_1d4fd9db032e6a2c",
+            "reason": "explicit_user_evidence"
+          },
+          {
+            "operation": "ADD",
+            "assertion_id": "as_4ae26416b7d15a83",
+            "reason": "explicit_user_evidence"
+          },
+          {
+            "operation": "ADD",
+            "assertion_id": "as_aaf9ee2fef689e90",
+            "reason": "explicit_user_evidence"
+          },
+          {
+            "operation": "ADD",
+            "assertion_id": "as_914c19f2a7e42d2f",
+            "reason": "explicit_user_evidence"
+          },
+          {
+            "operation": "ADD",
+            "assertion_id": "as_3a0817b9585ec8ff",
+            "reason": "explicit_user_evidence"
+          }
+        ],
+        "retrieval_trace": {
+          "selected_assertion_ids": [
+            "as_1d4fd9db032e6a2c",
+            "as_3a0817b9585ec8ff",
+            "as_4ae26416b7d15a83",
+            "as_914c19f2a7e42d2f",
+            "as_aaf9ee2fef689e90",
+            "as_df8619ff816dcaf8",
+            "as_fde6c27a46eb7b94"
+          ],
+          "selected_graph_node_ids": [
+            "as_1d4fd9db032e6a2c",
+            "as_3a0817b9585ec8ff",
+            "as_4ae26416b7d15a83",
+            "as_914c19f2a7e42d2f",
+            "as_aaf9ee2fef689e90",
+            "as_df8619ff816dcaf8",
+            "as_fde6c27a46eb7b94"
+          ],
+          "selected_edge_ids": [],
+          "excluded_superseded_ids": [],
+          "unresolved_assertion_ids": [],
+          "retrieval_policy_version": "sanctuary.memory-retrieval.v1"
+        },
+        "historical_evidence_count": 0,
+        "retrieval_abstained": true
+      },
+      "evaluator_only": {
+        "expected_state": [
+          "`ASSERTED`: Internship achieved; tiredness; next-goal thoughts.",
+          "`ASSERTED`: Belief that the user should feel happy.",
+          "`UNRESOLVED`: Why the user feels tired.",
+          "Do not equate expected happiness with experienced happiness."
+        ],
+        "expected_labels": [
+          "ASSERTED",
+          "UNRESOLVED"
+        ],
+        "semantic_judgment": "not_scored_requires_human_or_machine_readable_rubric",
+        "expects_correction": false,
+        "expects_uncertainty": true
+      }
+    },
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "topic_title": "Achievement, exhaustion and the meaning of success",
+      "turn_id": 2,
+      "user_prompt": "I don't think the tiredness is necessarily from the internship itself. I think I'm exhausted by the feeling that I have to keep proving I'm worth the opportunity.",
+      "response_text": "You don't think the tiredness is necessarily from the internship itself, and it sounds like you're exhausted by the feeling that you have to keep proving you're worth the opportunity.",
+      "response_mode": "classical_local_fallback",
+      "latency_seconds": 1.844,
+      "strategy": "standard",
+      "topic_assignment": "t000002",
+      "response_plan": {
+        "schema_version": "sanctuary.response-plan.v2",
+        "plan_id": "rp_c8c1fc5ef60b9370",
+        "session_id": null,
+        "source_turn_id": 2,
+        "state_revision": 1,
+        "intent": "reflect_current_meaning",
+        "strategy": "standard",
+        "claims_to_communicate": [
+          {
+            "id": "claim_1",
+            "text": "I don't think the tiredness is necessarily from the internship itself.",
+            "span": [
+              0,
+              70
+            ],
+            "kind": "achievement",
+            "provenance": "direct_user_statement",
+            "epistemic_status": "asserted",
+            "required": true
+          },
+          {
+            "id": "claim_2",
+            "text": "I think I'm exhausted by the feeling that I have to keep proving I'm worth the opportunity.",
+            "span": [
+              71,
+              162
+            ],
+            "kind": "physical_exhaustion",
+            "provenance": "direct_user_statement",
+            "epistemic_status": "tentative",
+            "required": true
+          }
+        ],
+        "evidence_ids": [
+          "ev_0b8982f9bdea",
+          "ev_1796e25fc113342a",
+          "ev_5e806f6d34287a09",
+          "ev_6a41e0f9d8510195",
+          "ev_7052c16738b6",
+          "ev_71c097b937a8",
+          "ev_7dcdad08f563b331",
+          "ev_9364ad7feec6cb37",
+          "ev_97b6e9b1abc7",
+          "ev_a9318c09c538",
+          "ev_e6bc1a84a528da19",
+          "ev_eb66fff759b51739",
+          "ev_f8e54631f990"
+        ],
+        "relevant_proposition_ids": [
+          "as_055d3857c358c4d4",
+          "as_48fb4d8b21b15735",
+          "as_5f06a318eb7bbb86",
+          "as_6e6a3b5586ac7d6c",
+          "as_79c597051b64d22a",
+          "as_8864a62575b7fb27",
+          "as_914c19f2a7e42d2f"
+        ],
+        "relevant_graph_node_ids": [
+          "as_055d3857c358c4d4",
+          "as_48fb4d8b21b15735",
+          "as_5f06a318eb7bbb86",
+          "as_6e6a3b5586ac7d6c",
+          "as_79c597051b64d22a",
+          "as_8864a62575b7fb27",
+          "as_914c19f2a7e42d2f"
+        ],
+        "relevant_graph_edge_ids": [],
+        "memory_context": {
+          "packet_id": "ctx_55bcaeb1dca63297",
+          "task": "reflect_current_narrative",
+          "historical_evidence": [
+            {
+              "assertion_id": "as_914c19f2a7e42d2f",
+              "text": "But honestly, I just feel tired.",
+              "source_turn_index": 1,
+              "revision_status": "active",
+              "epistemic_status": "explicitly_reported",
+              "selection_routes": [
+                "lexical",
+                "rolling"
+              ],
+              "evidence_refs": [
+                "ev_7dcdad08f563b331"
+              ]
+            }
+          ],
+          "corrections_and_supersessions": [],
+          "unresolved_conflicts": [],
+          "abstained_from_history": false,
+          "excluded_superseded_ids": [],
+          "memory_generation": "evaluation-ephemeral",
+          "state_revision": 2
+        },
+        "correction_context": {
+          "is_correction": false,
+          "rejected_current_claims": [],
+          "superseded_propositions": []
+        },
+        "required_semantic_relations": [],
+        "proposition_frames": [
+          {
+            "id": "dp_d479c41caee0",
+            "predicate": "think",
+            "actors": [
+              {
+                "role": "agent",
+                "text": "I"
+              }
+            ],
+            "polarity": "negative",
+            "modality": [
+              "epistemic"
+            ],
+            "status": "tentative",
+            "scope_spans": [
+              [
+                0,
+                13
+              ],
+              [
+                69,
+                70
+              ]
+            ]
+          },
+          {
+            "id": "dp_4b6b3e57b72b",
+            "predicate": "be",
+            "actors": [
+              {
+                "role": "agent",
+                "text": "tiredness"
+              },
+              {
+                "role": "patient",
+                "text": "internship"
+              }
+            ],
+            "polarity": "positive",
+            "modality": [],
+            "status": "asserted",
+            "scope_spans": [
+              [
+                14,
+                69
+              ]
+            ]
+          },
+          {
+            "id": "dp_0645ed10688b",
+            "predicate": "think",
+            "actors": [
+              {
+                "role": "agent",
+                "text": "I"
+              }
+            ],
+            "polarity": "positive",
+            "modality": [
+              "epistemic"
+            ],
+            "status": "tentative",
+            "scope_spans": [
+              [
+                71,
+                78
+              ],
+              [
+                161,
+                162
+              ]
+            ]
+          },
+          {
+            "id": "dp_89b492b364f0",
+            "predicate": "exhaust",
+            "actors": [
+              {
+                "role": "agent",
+                "text": "I"
+              },
+              {
+                "role": "patient",
+                "text": "feeling"
+              }
+            ],
+            "polarity": "positive",
+            "modality": [],
+            "status": "asserted",
+            "scope_spans": [
+              [
+                79,
+                107
+              ]
+            ]
+          },
+          {
+            "id": "dp_45bee4c40d96",
+            "predicate": "have",
+            "actors": [
+              {
+                "role": "agent",
+                "text": "I"
+              }
+            ],
+            "polarity": "positive",
+            "modality": [],
+            "status": "asserted",
+            "scope_spans": [
+              [
+                108,
+                135
+              ]
+            ]
+          },
+          {
+            "id": "dp_5a5ae2abd720",
+            "predicate": "be",
+            "actors": [
+              {
+                "role": "agent",
+                "text": "I"
+              }
+            ],
+            "polarity": "positive",
+            "modality": [],
+            "status": "asserted",
+            "scope_spans": [
+              [
+                136,
+                161
+              ]
+            ]
+          }
+        ],
+        "revision_links": [],
+        "prohibited_claims": [
+          "Do not diagnose, advise, ask a question, minimize, or invent a cause.",
+          "Do not turn a temporary experience into a permanent identity claim.",
+          "Do not present retrieval, NLI, filter, or graph scores as facts."
+        ],
+        "uncertainty_constraints": [
+          "claim_2"
+        ],
+        "interaction_policy": {
+          "questions": false,
+          "advice": false,
+          "diagnosis": false,
+          "maximum_sentences": 2,
+          "maximum_words": 70
+        },
+        "style_constraints": {
+          "tone": "clear, warm, and precise",
+          "voice": "second_person_reflection"
+        },
+        "fallback_policy": "local_evidence_bound_classical",
+        "situational_structure": {
+          "event": {
+            "event_type": "other",
+            "actors": [
+              "self"
+            ],
+            "action_taken": null,
+            "action_desired": null,
+            "outcome": "unresolved"
+          },
+          "constraints": {
+            "freedom_to_refuse": null,
+            "conflict_cost": null,
+            "relationship_risk": null,
+            "expectation_pressure": null,
+            "power_asymmetry": null,
+            "emotional_safety": null
+          },
+          "reaction": {
+            "primary_reaction": "unknown",
+            "secondary_reaction": null,
+            "after_effects": [],
+            "intensity": null,
+            "duration": "unknown"
+          },
+          "meaning": {
+            "self_interpretation": "unknown",
+            "perceived_failure": null,
+            "identity_threat": "unknown",
+            "control_belief": "unclear",
+            "fairness_evaluation": "unclear"
+          },
+          "temporal": {
+            "is_recurring": false,
+            "pattern_signature": "other -> None -> unknown",
+            "progression": "unknown",
+            "resolution_state": "unresolved"
+          },
+          "language": {
+            "tone": "neutral",
+            "certainty": "medium",
+            "emotional_directness": "high",
+            "language_field": {
+              "energy_level": "medium",
+              "abstraction_level": "mixed",
+              "sentence_rhythm": "mixed",
+              "vocabulary_density": "analytical",
+              "emotional_intensity": "medium"
+            }
+          },
+          "confidence_score": 0.4
+        },
+        "ssm_metadata": {
+          "version": "ssm.v2",
+          "scope": "current_session",
+          "method": "conservative_lexical_rules",
+          "validated": false,
+          "confidence_score_kind": "legacy_heuristic_not_probability",
+          "constraint_scale": "self_rating_or_ordinal_engineering_score",
+          "constraint_version": "ssm-constraint-cues.v1",
+          "constraint_evidence": {
+            "freedom_to_refuse": {
+              "method": "unavailable",
+              "spans": []
+            },
+            "conflict_cost": {
+              "method": "unavailable",
+              "spans": []
+            },
+            "relationship_risk": {
+              "method": "unavailable",
+              "spans": []
+            },
+            "expectation_pressure": {
+              "method": "unavailable",
+              "spans": []
+            },
+            "power_asymmetry": {
+              "method": "unavailable",
+              "spans": []
+            },
+            "emotional_safety": {
+              "method": "unavailable",
+              "spans": []
+            }
+          }
+        }
+      },
+      "generation": {
+        "status": "fallback",
+        "mode": "classical_local_fallback",
+        "reason": "no_transformer_candidate_passed",
+        "profile": "balanced",
+        "attempts": [
+          {
+            "attempt": 1,
+            "profile": "balanced",
+            "status": "rejected",
+            "validation": {
+              "is_valid": false,
+              "violations": [
+                "tentative_claim_unqualified:claim_2"
+              ],
+              "failure_patterns": {
+                "tentative_claim_unqualified:claim_2": "\\b(?:maybe|perhaps|probably|possibly|seems?|sounds?\\s+like|might|may|could|wonder|guess|not\\s+sure|uncertain|haven't\\s+decided|have\\s+not\\s+decided|don't\\s+know|do\\s+not\\s+know)\\b"
+              },
+              "required_claim_coverage": {
+                "claim_1": true,
+                "claim_2": true
+              }
+            },
+            "input_tokens": 794,
+            "output_tokens": 15,
+            "generation_seconds": 0.531,
+            "assistant_prefill": "You",
+            "raw_draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+            "extracted_draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+            "extraction_changed": false,
+            "repair_applied": false,
+            "rejected_draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+            "failed_validator_patterns": {
+              "tentative_claim_unqualified:claim_2": "\\b(?:maybe|perhaps|probably|possibly|seems?|sounds?\\s+like|might|may|could|wonder|guess|not\\s+sure|uncertain|haven't\\s+decided|have\\s+not\\s+decided|don't\\s+know|do\\s+not\\s+know)\\b"
+            }
+          },
+          {
+            "attempt": 2,
+            "profile": "precise",
+            "status": "rejected",
+            "validation": {
+              "is_valid": false,
+              "violations": [
+                "tentative_claim_unqualified:claim_2"
+              ],
+              "failure_patterns": {
+                "tentative_claim_unqualified:claim_2": "\\b(?:maybe|perhaps|probably|possibly|seems?|sounds?\\s+like|might|may|could|wonder|guess|not\\s+sure|uncertain|haven't\\s+decided|have\\s+not\\s+decided|don't\\s+know|do\\s+not\\s+know)\\b"
+              },
+              "required_claim_coverage": {
+                "claim_1": true,
+                "claim_2": true
+              }
+            },
+            "input_tokens": 862,
+            "output_tokens": 15,
+            "generation_seconds": 0.563,
+            "assistant_prefill": "You",
+            "raw_draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+            "extracted_draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+            "extraction_changed": false,
+            "repair_applied": false,
+            "rejected_draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+            "failed_validator_patterns": {
+              "tentative_claim_unqualified:claim_2": "\\b(?:maybe|perhaps|probably|possibly|seems?|sounds?\\s+like|might|may|could|wonder|guess|not\\s+sure|uncertain|haven't\\s+decided|have\\s+not\\s+decided|don't\\s+know|do\\s+not\\s+know)\\b"
+            }
+          },
+          {
+            "attempt": 3,
+            "profile": "precise",
+            "status": "rejected",
+            "validation": {
+              "is_valid": false,
+              "violations": [
+                "tentative_claim_unqualified:claim_2"
+              ],
+              "failure_patterns": {
+                "tentative_claim_unqualified:claim_2": "\\b(?:maybe|perhaps|probably|possibly|seems?|sounds?\\s+like|might|may|could|wonder|guess|not\\s+sure|uncertain|haven't\\s+decided|have\\s+not\\s+decided|don't\\s+know|do\\s+not\\s+know)\\b"
+              },
+              "required_claim_coverage": {
+                "claim_1": true,
+                "claim_2": true
+              }
+            },
+            "input_tokens": 862,
+            "output_tokens": 15,
+            "generation_seconds": 0.531,
+            "assistant_prefill": "You",
+            "raw_draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+            "extracted_draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+            "extraction_changed": false,
+            "repair_applied": false,
+            "rejected_draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+            "failed_validator_patterns": {
+              "tentative_claim_unqualified:claim_2": "\\b(?:maybe|perhaps|probably|possibly|seems?|sounds?\\s+like|might|may|could|wonder|guess|not\\s+sure|uncertain|haven't\\s+decided|have\\s+not\\s+decided|don't\\s+know|do\\s+not\\s+know)\\b"
+            }
+          }
+        ],
+        "fallback_validation": {
+          "is_valid": true,
+          "violations": [],
+          "failure_patterns": {},
+          "required_claim_coverage": {
+            "claim_1": true,
+            "claim_2": true
+          }
+        },
+        "capabilities": {
+          "provider_version": "local-llama3.2-1b.response-plan.v2",
+          "model_id": "meta-llama/Llama-3.2-1B-Instruct",
+          "model_revision": "22e9fdbe3473c7affd8596fdc248e67e3a004da1",
+          "model_path": "C:\\Users\\bhavv\\.cache\\huggingface\\hub\\models--unsloth--llama-3.2-1b-instruct\\snapshots\\22e9fdbe3473c7affd8596fdc248e67e3a004da1",
+          "resources_present": true,
+          "ready": true,
+          "device": "cuda",
+          "dtype": "float16",
+          "load_seconds": 17.141,
+          "error": null,
+          "network_access": false,
+          "profiles": [
+            "precise",
+            "balanced",
+            "natural"
+          ]
+        }
+      },
+      "policy": {
+        "plan_response_valid": true,
+        "plan_violations": [],
+        "reflective_valid": true,
+        "reflective_violations": [],
+        "human_tone_valid": true,
+        "human_tone_violations": [],
+        "claim_spans_traceable": true,
+        "claim_count": 2
+      },
+      "state_observation": {
+        "correction_detected": false,
+        "superseded_count": 0,
+        "tentative_claim_count": 1,
+        "proposition_statuses": {
+          "explicitly_stated": 13
+        },
+        "graph_nodes": 39,
+        "graph_edges": 24,
+        "canonical_memory": {
+          "schema_version": "sanctuary.memory-harness.v1",
+          "revision": 2,
+          "active_assertion_count": 13,
+          "superseded_assertion_count": 0,
+          "unresolved_count": 0
+        },
+        "memory_operations": [
+          {
+            "operation": "ADD",
+            "assertion_id": "as_48fb4d8b21b15735",
+            "reason": "explicit_user_evidence"
+          },
+          {
+            "operation": "ADD",
+            "assertion_id": "as_055d3857c358c4d4",
+            "reason": "explicit_user_evidence"
+          },
+          {
+            "operation": "ADD",
+            "assertion_id": "as_6e6a3b5586ac7d6c",
+            "reason": "explicit_user_evidence"
+          },
+          {
+            "operation": "ADD",
+            "assertion_id": "as_8864a62575b7fb27",
+            "reason": "explicit_user_evidence"
+          },
+          {
+            "operation": "ADD",
+            "assertion_id": "as_79c597051b64d22a",
+            "reason": "explicit_user_evidence"
+          },
+          {
+            "operation": "ADD",
+            "assertion_id": "as_5f06a318eb7bbb86",
+            "reason": "explicit_user_evidence"
+          }
+        ],
+        "retrieval_trace": {
+          "selected_assertion_ids": [
+            "as_055d3857c358c4d4",
+            "as_48fb4d8b21b15735",
+            "as_5f06a318eb7bbb86",
+            "as_6e6a3b5586ac7d6c",
+            "as_79c597051b64d22a",
+            "as_8864a62575b7fb27",
+            "as_914c19f2a7e42d2f"
+          ],
+          "selected_graph_node_ids": [
+            "as_055d3857c358c4d4",
+            "as_48fb4d8b21b15735",
+            "as_5f06a318eb7bbb86",
+            "as_6e6a3b5586ac7d6c",
+            "as_79c597051b64d22a",
+            "as_8864a62575b7fb27",
+            "as_914c19f2a7e42d2f"
+          ],
+          "selected_edge_ids": [],
+          "excluded_superseded_ids": [],
+          "unresolved_assertion_ids": [],
+          "retrieval_policy_version": "sanctuary.memory-retrieval.v1"
+        },
+        "historical_evidence_count": 1,
+        "retrieval_abstained": false
+      },
+      "evaluator_only": {
+        "expected_state": [
+          "`TENTATIVE`: Tiredness may relate to perceived pressure to prove worth.",
+          "The cause is explicitly uncertain.",
+          "Add a candidate interpretation without treating it as established truth."
+        ],
+        "expected_labels": [
+          "TENTATIVE"
+        ],
+        "semantic_judgment": "not_scored_requires_human_or_machine_readable_rubric",
+        "expects_correction": false,
+        "expects_uncertainty": true
+      }
+    },
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "topic_title": "Achievement, exhaustion and the meaning of success",
+      "turn_id": 3,
+      "user_prompt": "Actually, I don't think I need to prove that I'm worthy. I'm excited about the internship. I'm just physically exhausted after months of preparation, and I want to enjoy the achievement without immediately planning the next thing.",
+      "response_text": "You're excited about the internship, and you're just physically exhausted after months of preparation. You'd like to enjoy the achievement without immediately planning the next thing.",
+      "response_mode": "classical_local_fallback",
+      "latency_seconds": 3.063,
+      "strategy": "correction",
+      "topic_assignment": "t000003",
+      "response_plan": {
+        "schema_version": "sanctuary.response-plan.v2",
+        "plan_id": "rp_e270b3d05b3c19bc",
+        "session_id": null,
+        "source_turn_id": 3,
+        "state_revision": 2,
+        "intent": "reflect_current_meaning",
+        "strategy": "correction",
+        "claims_to_communicate": [
+          {
+            "id": "claim_2",
+            "text": "I'm excited about the internship.",
+            "span": [
+              57,
+              90
+            ],
+            "kind": "excitement",
+            "provenance": "direct_user_statement",
+            "epistemic_status": "asserted",
+            "required": true
+          },
+          {
+            "id": "claim_3",
+            "text": "I'm just physically exhausted after months of preparation",
+            "span": [
+              91,
+              148
+            ],
+            "kind": "physical_exhaustion",
+            "provenance": "direct_user_statement",
+            "epistemic_status": "asserted",
+            "required": true
+          },
+          {
+            "id": "claim_4",
+            "text": "I want to enjoy the achievement without immediately planning the next thing.",
+            "span": [
+              154,
+              230
+            ],
+            "kind": "present_enjoyment",
+            "provenance": "direct_user_statement",
+            "epistemic_status": "asserted",
+            "required": true
+          }
+        ],
+        "evidence_ids": [
+          "ev_0ec04cb1f116dd6e",
+          "ev_1796e25fc113342a",
+          "ev_17e6d3b990ff",
+          "ev_1d220d12e9b3590b",
+          "ev_273b7526faa5",
+          "ev_3e9ca827d5905999",
+          "ev_52a70d0dc3ad",
+          "ev_82289a151a4fb485",
+          "ev_af744b45fcb47264",
+          "ev_b4e671c7bd0165d8",
+          "ev_bd3e4aeabeb4",
+          "ev_c654b6a38f037236",
+          "ev_db1033c768ac",
+          "ev_f7c7528be66d"
+        ],
+        "relevant_proposition_ids": [
+          "as_25af2745bd796458",
+          "as_3a0817b9585ec8ff",
+          "as_402b7040e591081c",
+          "as_8864a62575b7fb27",
+          "as_dbff0568f45f6c35",
+          "as_e79b290c6b5228da",
+          "as_e7d643cea74afd8e",
+          "as_f36574d504d7ad20"
+        ],
+        "relevant_graph_node_ids": [
+          "as_25af2745bd796458",
+          "as_3a0817b9585ec8ff",
+          "as_402b7040e591081c",
+          "as_8864a62575b7fb27",
+          "as_dbff0568f45f6c35",
+          "as_e79b290c6b5228da",
+          "as_e7d643cea74afd8e",
+          "as_f36574d504d7ad20"
+        ],
+        "relevant_graph_edge_ids": [],
+        "memory_context": {
+          "packet_id": "ctx_1a34e35a368001d4",
+          "task": "reflect_changed_interpretation",
+          "historical_evidence": [
+            {
+              "assertion_id": "as_3a0817b9585ec8ff",
+              "text": "Now I'm already thinking about what I need to achieve next.",
+              "source_turn_index": 1,
+              "revision_status": "active",
+              "epistemic_status": "extracted_with_uncertainty",
+              "selection_routes": [
+                "lexical",
+                "rolling",
+                "semantic"
+              ],
+              "evidence_refs": [
+                "ev_82289a151a4fb485"
+              ]
+            },
+            {
+              "assertion_id": "as_8864a62575b7fb27",
+              "text": "I'm exhausted by the feeling",
+              "source_turn_index": 2,
+              "revision_status": "active",
+              "epistemic_status": "explicitly_reported",
+              "selection_routes": [
+                "lexical",
+                "rolling",
+                "semantic"
+              ],
+              "evidence_refs": [
+                "ev_1796e25fc113342a"
+              ]
+            }
+          ],
+          "corrections_and_supersessions": [
+            {
+              "edge_id": "edge_a9ba66d2d49ccc35",
+              "source": "as_402b7040e591081c",
+              "target": "as_5f06a318eb7bbb86",
+              "type": "supersedes",
+              "origin": "explicit_correction",
+              "status": "active",
+              "evidence_terms": [
+                "worth"
+              ]
+            },
+            {
+              "edge_id": "edge_ecc76ca83c4dc466",
+              "source": "as_402b7040e591081c",
+              "target": "as_79c597051b64d22a",
+              "type": "supersedes",
+              "origin": "explicit_correction",
+              "status": "active",
+              "evidence_terms": [
+                "prove"
+              ]
+            }
+          ],
+          "unresolved_conflicts": [],
+          "abstained_from_history": false,
+          "excluded_superseded_ids": [
+            "as_5f06a318eb7bbb86",
+            "as_79c597051b64d22a"
+          ],
+          "memory_generation": "evaluation-ephemeral",
+          "state_revision": 3
+        },
+        "correction_context": {
+          "is_correction": true,
+          "rejected_current_claims": [
+            {
+              "id": "claim_1",
+              "text": "Actually, I don't think I need to prove that I'm worthy.",
+              "span": [
+                0,
+                56
+              ],
+              "kind": "worth_pressure",
+              "provenance": "direct_user_statement",
+              "epistemic_status": "rejected_by_user",
+              "required": false
+            }
+          ],
+          "superseded_propositions": [
+            {
+              "id": "pr_1942539c5151",
+              "text": "Now I'm already thinking about what I need to achieve next.",
+              "kind": "user_statement"
+            },
+            {
+              "id": "as_79c597051b64d22a",
+              "text": "that I have to keep proving",
+              "kind": "canonical_assertion"
+            },
+            {
+              "id": "as_5f06a318eb7bbb86",
+              "text": "I'm worth the opportunity",
+              "kind": "canonical_assertion"
+            }
+          ]
+        },
+        "required_semantic_relations": [],
+        "proposition_frames": [
+          {
+            "id": "dp_7c927f53f439",
+            "predicate": "think",
+            "actors": [
+              {
+                "role": "agent",
+                "text": "I"
+              }
+            ],
+            "polarity": "negative",
+            "modality": [
+              "epistemic"
+            ],
+            "status": "tentative",
+            "scope_spans": [
+              [
+                0,
+                23
+              ],
+              [
+                55,
+                56
+              ]
+            ]
+          },
+          {
+            "id": "dp_254b4ccbe400",
+            "predicate": "need",
+            "actors": [
+              {
+                "role": "agent",
+                "text": "I"
+              }
+            ],
+            "polarity": "positive",
+            "modality": [
+              "deontic"
+            ],
+            "status": "asserted",
+            "scope_spans": [
+              [
+                24,
+                39
+              ]
+            ]
+          },
+          {
+            "id": "dp_f853f1bfe616",
+            "predicate": "be",
+            "actors": [
+              {
+                "role": "agent",
+                "text": "I"
+              }
+            ],
+            "polarity": "positive",
+            "modality": [],
+            "status": "asserted",
+            "scope_spans": [
+              [
+                40,
+                55
+              ]
+            ]
+          },
+          {
+            "id": "dp_559c76e58c7f",
+            "predicate": "be",
+            "actors": [
+              {
+                "role": "agent",
+                "text": "I"
+              },
+              {
+                "role": "patient",
+                "text": "internship"
+              }
+            ],
+            "polarity": "positive",
+            "modality": [],
+            "status": "asserted",
+            "scope_spans": [
+              [
+                57,
+                90
+              ]
+            ]
+          },
+          {
+            "id": "dp_9999e9dbe267",
+            "predicate": "be",
+            "actors": [
+              {
+                "role": "agent",
+                "text": "I"
+              },
+              {
+                "role": "patient",
+                "text": "months"
+              },
+              {
+                "role": "patient",
+                "text": "preparation"
+              }
+            ],
+            "polarity": "positive",
+            "modality": [],
+            "status": "asserted",
+            "scope_spans": [
+              [
+                91,
+                153
+              ]
+            ]
+          },
+          {
+            "id": "dp_66d3d99cd010",
+            "predicate": "want",
+            "actors": [
+              {
+                "role": "agent",
+                "text": "I"
+              },
+              {
+                "role": "patient",
+                "text": "achievement"
+              },
+              {
+                "role": "patient",
+                "text": "thing"
+              }
+            ],
+            "polarity": "positive",
+            "modality": [
+              "volitional",
+              "volitional"
+            ],
+            "status": "preference",
+            "scope_spans": [
+              [
+                154,
+                230
+              ]
+            ]
+          }
+        ],
+        "revision_links": [
+          {
+            "source": "dp_7c927f53f439",
+            "target": "dp_d479c41caee0",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_7c927f53f439",
+            "target": "dp_4b6b3e57b72b",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_7c927f53f439",
+            "target": "dp_0645ed10688b",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_7c927f53f439",
+            "target": "dp_89b492b364f0",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_7c927f53f439",
+            "target": "dp_45bee4c40d96",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_7c927f53f439",
+            "target": "dp_5a5ae2abd720",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_254b4ccbe400",
+            "target": "dp_d479c41caee0",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_254b4ccbe400",
+            "target": "dp_4b6b3e57b72b",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_254b4ccbe400",
+            "target": "dp_0645ed10688b",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_254b4ccbe400",
+            "target": "dp_89b492b364f0",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_254b4ccbe400",
+            "target": "dp_45bee4c40d96",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_254b4ccbe400",
+            "target": "dp_5a5ae2abd720",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_f853f1bfe616",
+            "target": "dp_d479c41caee0",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_f853f1bfe616",
+            "target": "dp_4b6b3e57b72b",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_f853f1bfe616",
+            "target": "dp_0645ed10688b",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_f853f1bfe616",
+            "target": "dp_89b492b364f0",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_f853f1bfe616",
+            "target": "dp_45bee4c40d96",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_f853f1bfe616",
+            "target": "dp_5a5ae2abd720",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_559c76e58c7f",
+            "target": "dp_d479c41caee0",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_559c76e58c7f",
+            "target": "dp_4b6b3e57b72b",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_559c76e58c7f",
+            "target": "dp_0645ed10688b",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_559c76e58c7f",
+            "target": "dp_89b492b364f0",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_559c76e58c7f",
+            "target": "dp_45bee4c40d96",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_559c76e58c7f",
+            "target": "dp_5a5ae2abd720",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_9999e9dbe267",
+            "target": "dp_d479c41caee0",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_9999e9dbe267",
+            "target": "dp_4b6b3e57b72b",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_9999e9dbe267",
+            "target": "dp_0645ed10688b",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_9999e9dbe267",
+            "target": "dp_89b492b364f0",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_9999e9dbe267",
+            "target": "dp_45bee4c40d96",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_9999e9dbe267",
+            "target": "dp_5a5ae2abd720",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_66d3d99cd010",
+            "target": "dp_d479c41caee0",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_66d3d99cd010",
+            "target": "dp_4b6b3e57b72b",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_66d3d99cd010",
+            "target": "dp_0645ed10688b",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_66d3d99cd010",
+            "target": "dp_89b492b364f0",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_66d3d99cd010",
+            "target": "dp_45bee4c40d96",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          },
+          {
+            "source": "dp_66d3d99cd010",
+            "target": "dp_5a5ae2abd720",
+            "relation": "supersession_candidate",
+            "status": "scope_unresolved",
+            "reason": "explicit_revision_cue"
+          }
+        ],
+        "prohibited_claims": [
+          "Do not diagnose, advise, ask a question, minimize, or invent a cause.",
+          "Do not turn a temporary experience into a permanent identity claim.",
+          "Do not present retrieval, NLI, filter, or graph scores as facts.",
+          "Do not reassert as current: Now I'm already thinking about what I need to achieve next.",
+          "Do not reassert as current: that I have to keep proving",
+          "Do not reassert as current: I'm worth the opportunity",
+          "Do not reverse this explicit rejection: Actually, I don't think I need to prove that I'm worthy.",
+          "Do not revive canonical assertions excluded by revision status: as_5f06a318eb7bbb86, as_79c597051b64d22a"
+        ],
+        "uncertainty_constraints": [],
+        "interaction_policy": {
+          "questions": false,
+          "advice": false,
+          "diagnosis": false,
+          "maximum_sentences": 2,
+          "maximum_words": 70
+        },
+        "style_constraints": {
+          "tone": "clear, warm, and precise",
+          "voice": "second_person_reflection"
+        },
+        "fallback_policy": "local_evidence_bound_classical",
+        "situational_structure": {
+          "event": {
+            "event_type": "achievement_strain",
+            "actors": [
+              "self"
+            ],
+            "action_taken": null,
+            "action_desired": null,
+            "outcome": "unresolved"
+          },
+          "constraints": {
+            "freedom_to_refuse": null,
+            "conflict_cost": null,
+            "relationship_risk": null,
+            "expectation_pressure": null,
+            "power_asymmetry": null,
+            "emotional_safety": null
+          },
+          "reaction": {
+            "primary_reaction": "unknown",
+            "secondary_reaction": null,
+            "after_effects": [],
+            "intensity": null,
+            "duration": "unknown"
+          },
+          "meaning": {
+            "self_interpretation": "unknown",
+            "perceived_failure": null,
+            "identity_threat": "unknown",
+            "control_belief": "unclear",
+            "fairness_evaluation": "unclear"
+          },
+          "temporal": {
+            "is_recurring": false,
+            "pattern_signature": "achievement_strain -> None -> unknown",
+            "progression": "unknown",
+            "resolution_state": "unresolved"
+          },
+          "language": {
+            "tone": "neutral",
+            "certainty": "medium",
+            "emotional_directness": "high",
+            "language_field": {
+              "energy_level": "medium",
+              "abstraction_level": "mixed",
+              "sentence_rhythm": "mixed",
+              "vocabulary_density": "analytical",
+              "emotional_intensity": "medium"
+            }
+          },
+          "confidence_score": 0.58
+        },
+        "ssm_metadata": {
+          "version": "ssm.v2",
+          "scope": "current_session",
+          "method": "conservative_lexical_rules",
+          "validated": false,
+          "confidence_score_kind": "legacy_heuristic_not_probability",
+          "constraint_scale": "self_rating_or_ordinal_engineering_score",
+          "constraint_version": "ssm-constraint-cues.v1",
+          "constraint_evidence": {
+            "freedom_to_refuse": {
+              "method": "unavailable",
+              "spans": []
+            },
+            "conflict_cost": {
+              "method": "unavailable",
+              "spans": []
+            },
+            "relationship_risk": {
+              "method": "unavailable",
+              "spans": []
+            },
+            "expectation_pressure": {
+              "method": "unavailable",
+              "spans": []
+            },
+            "power_asymmetry": {
+              "method": "unavailable",
+              "spans": []
+            },
+            "emotional_safety": {
+              "method": "unavailable",
+              "spans": []
+            }
+          }
+        }
+      },
+      "generation": {
+        "status": "fallback",
+        "mode": "classical_local_fallback",
+        "reason": "no_transformer_candidate_passed",
+        "profile": "balanced",
+        "attempts": [
+          {
+            "attempt": 1,
+            "profile": "balanced",
+            "status": "semantic_rejected",
+            "validation": {
+              "is_valid": true,
+              "violations": [],
+              "failure_patterns": {},
+              "required_claim_coverage": {
+                "claim_2": false,
+                "claim_3": true,
+                "claim_4": false
+              }
+            },
+            "input_tokens": 944,
+            "output_tokens": 31,
+            "generation_seconds": 0.938,
+            "assistant_prefill": "You",
+            "raw_draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+            "extracted_draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+            "extraction_changed": true,
+            "repair_applied": false,
+            "semantic_validation": {
+              "status": "unavailable",
+              "reason": "warming",
+              "is_valid": false,
+              "score": 0.6125,
+              "copy_similarity": 0.3875,
+              "violations": [],
+              "pairs": [],
+              "version": "sanctuary.response-semantics.v1"
+            }
+          },
+          {
+            "attempt": 2,
+            "profile": "precise",
+            "status": "semantic_rejected",
+            "validation": {
+              "is_valid": true,
+              "violations": [],
+              "failure_patterns": {},
+              "required_claim_coverage": {
+                "claim_2": false,
+                "claim_3": false,
+                "claim_4": false
+              }
+            },
+            "input_tokens": 944,
+            "output_tokens": 19,
+            "generation_seconds": 1.078,
+            "assistant_prefill": "You",
+            "raw_draft": "You feel worn out from completing a task, possibly due to pressure rather than the event itself.",
+            "extracted_draft": "You feel worn out from completing a task, possibly due to pressure rather than the event itself.",
+            "extraction_changed": false,
+            "repair_applied": false,
+            "semantic_validation": {
+              "status": "unavailable",
+              "reason": "warming",
+              "is_valid": false,
+              "score": 0.6976744186046512,
+              "copy_similarity": 0.302326,
+              "violations": [],
+              "pairs": [],
+              "version": "sanctuary.response-semantics.v1"
+            }
+          },
+          {
+            "attempt": 3,
+            "profile": "precise",
+            "status": "semantic_rejected",
+            "validation": {
+              "is_valid": true,
+              "violations": [],
+              "failure_patterns": {},
+              "required_claim_coverage": {
+                "claim_2": false,
+                "claim_3": false,
+                "claim_4": false
+              }
+            },
+            "input_tokens": 944,
+            "output_tokens": 19,
+            "generation_seconds": 0.766,
+            "assistant_prefill": "You",
+            "raw_draft": "You feel worn out from completing a task, possibly due to pressure rather than the event itself.",
+            "extracted_draft": "You feel worn out from completing a task, possibly due to pressure rather than the event itself.",
+            "extraction_changed": false,
+            "repair_applied": false,
+            "semantic_validation": {
+              "status": "unavailable",
+              "reason": "warming",
+              "is_valid": false,
+              "score": 0.6976744186046512,
+              "copy_similarity": 0.302326,
+              "violations": [],
+              "pairs": [],
+              "version": "sanctuary.response-semantics.v1"
+            }
+          }
+        ],
+        "fallback_validation": {
+          "is_valid": true,
+          "violations": [],
+          "failure_patterns": {},
+          "required_claim_coverage": {
+            "claim_2": true,
+            "claim_3": true,
+            "claim_4": true
+          }
+        },
+        "capabilities": {
+          "provider_version": "local-llama3.2-1b.response-plan.v2",
+          "model_id": "meta-llama/Llama-3.2-1B-Instruct",
+          "model_revision": "22e9fdbe3473c7affd8596fdc248e67e3a004da1",
+          "model_path": "C:\\Users\\bhavv\\.cache\\huggingface\\hub\\models--unsloth--llama-3.2-1b-instruct\\snapshots\\22e9fdbe3473c7affd8596fdc248e67e3a004da1",
+          "resources_present": true,
+          "ready": true,
+          "device": "cuda",
+          "dtype": "float16",
+          "load_seconds": 17.141,
+          "error": null,
+          "network_access": false,
+          "profiles": [
+            "precise",
+            "balanced",
+            "natural"
+          ]
+        }
+      },
+      "policy": {
+        "plan_response_valid": true,
+        "plan_violations": [],
+        "reflective_valid": true,
+        "reflective_violations": [],
+        "human_tone_valid": true,
+        "human_tone_violations": [],
+        "claim_spans_traceable": true,
+        "claim_count": 3
+      },
+      "state_observation": {
+        "correction_detected": true,
+        "superseded_count": 3,
+        "tentative_claim_count": 0,
+        "proposition_statuses": {
+          "explicitly_stated": 18,
+          "superseded": 1
+        },
+        "graph_nodes": 57,
+        "graph_edges": 36,
+        "canonical_memory": {
+          "schema_version": "sanctuary.memory-harness.v1",
+          "revision": 3,
+          "active_assertion_count": 17,
+          "superseded_assertion_count": 2,
+          "unresolved_count": 0
+        },
+        "memory_operations": [
+          {
+            "operation": "ADD",
+            "assertion_id": "as_402b7040e591081c",
+            "reason": "explicit_user_evidence"
+          },
+          {
+            "operation": "ADD",
+            "assertion_id": "as_f36574d504d7ad20",
+            "reason": "explicit_user_evidence"
+          },
+          {
+            "operation": "ADD",
+            "assertion_id": "as_dbff0568f45f6c35",
+            "reason": "explicit_user_evidence"
+          },
+          {
+            "operation": "ADD",
+            "assertion_id": "as_25af2745bd796458",
+            "reason": "explicit_user_evidence"
+          },
+          {
+            "operation": "ADD",
+            "assertion_id": "as_e7d643cea74afd8e",
+            "reason": "explicit_user_evidence"
+          },
+          {
+            "operation": "ADD",
+            "assertion_id": "as_e79b290c6b5228da",
+            "reason": "explicit_user_evidence"
+          },
+          {
+            "operation": "CORRECT",
+            "assertion_id": "as_402b7040e591081c",
+            "target_assertion_id": "as_5f06a318eb7bbb86",
+            "reason": "explicit_correction_with_shared_evidence_scope"
+          },
+          {
+            "operation": "CORRECT",
+            "assertion_id": "as_402b7040e591081c",
+            "target_assertion_id": "as_79c597051b64d22a",
+            "reason": "explicit_correction_with_shared_evidence_scope"
+          },
+          {
+            "operation": "SUPERSEDE",
+            "assertion_id": "as_5f06a318eb7bbb86",
+            "target_assertion_id": "as_402b7040e591081c",
+            "reason": "targeted_explicit_correction"
+          },
+          {
+            "operation": "SUPERSEDE",
+            "assertion_id": "as_79c597051b64d22a",
+            "target_assertion_id": "as_402b7040e591081c",
+            "reason": "targeted_explicit_correction"
+          }
+        ],
+        "retrieval_trace": {
+          "selected_assertion_ids": [
+            "as_25af2745bd796458",
+            "as_3a0817b9585ec8ff",
+            "as_402b7040e591081c",
+            "as_8864a62575b7fb27",
+            "as_dbff0568f45f6c35",
+            "as_e79b290c6b5228da",
+            "as_e7d643cea74afd8e",
+            "as_f36574d504d7ad20"
+          ],
+          "selected_graph_node_ids": [
+            "as_25af2745bd796458",
+            "as_3a0817b9585ec8ff",
+            "as_402b7040e591081c",
+            "as_8864a62575b7fb27",
+            "as_dbff0568f45f6c35",
+            "as_e79b290c6b5228da",
+            "as_e7d643cea74afd8e",
+            "as_f36574d504d7ad20"
+          ],
+          "selected_edge_ids": [],
+          "excluded_superseded_ids": [
+            "as_5f06a318eb7bbb86",
+            "as_79c597051b64d22a"
+          ],
+          "unresolved_assertion_ids": [],
+          "retrieval_policy_version": "sanctuary.memory-retrieval.v1"
+        },
+        "historical_evidence_count": 2,
+        "retrieval_abstained": false
+      },
+      "evaluator_only": {
+        "expected_state": [
+          "`CORRECTED`: The earlier self-worth interpretation is rejected.",
+          "`SUPERSEDED`: Treating the need to prove worth as the user's current explanation.",
+          "`ASSERTED`: Excitement, physical exhaustion after preparation, desire to enjoy the achievement.",
+          "Preserve the original achievement and next-goal context."
+        ],
+        "expected_labels": [
+          "ASSERTED",
+          "CORRECTED",
+          "SUPERSEDED"
+        ],
+        "semantic_judgment": "not_scored_requires_human_or_machine_readable_rubric",
+        "expects_correction": true,
+        "expects_uncertainty": false
+      }
+    }
+  ]
+}

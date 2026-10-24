@@ -1,0 +1,28 @@
+{
+  "turns": 24,
+  "transformer_accepted_turns": 2,
+  "transformer_accepted_rate": 0.08333333333333333,
+  "mean_edit_distance_from_fallback": 0.6547434386051996,
+  "violation_histogram": {
+    "tentative_claim_unqualified:claim_1": 4,
+    "tentative_claim_unqualified:claim_2": 3,
+    "tentative_claim_unqualified:claim_3": 3,
+    "no_questions": 1,
+    "no_advice": 2
+  },
+  "accepted_outputs": [
+    {
+      "topic_id": "resistance_to_interpretation",
+      "user_prompt": "Maybe I'm upset with them, but I can't point to anything specific.",
+      "output": "You might be feeling frustrated when interacting with someone, but it's hard to pinpoint exactly what's bothering you. Your emotions are complex, and it's possible that your feelings are a mix of different things.",
+      "fallback": "Maybe you're upset with them, and you can't point to anything specific."
+    },
+    {
+      "topic_id": "resistance_to_interpretation",
+      "user_prompt": "I did have a busy week, and by the time I meet them I sometimes don't have much energy left to talk.",
+      "output": "You 've had a whirlwind week, and when you finally catch up with someone, you often feel drained from all the excitement.",
+      "fallback": "You did have a busy week, and by the time you meet them you sometimes don't have much energy left to talk."
+    }
+  ],
+  "gate_verdict": "implement_optional_hosted_default_off"
+}

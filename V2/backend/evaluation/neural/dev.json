@@ -1,0 +1,3427 @@
+{
+  "synthetic_scaffolds": true,
+  "turns": [
+    {
+      "id": "dev-event-0000",
+      "conversation_id": "dev-event-0000",
+      "stratum": "paraphrase",
+      "text": "I dread speaking in front of people. Entry 0.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0001",
+      "conversation_id": "dev-event-0001",
+      "stratum": "same_topic_different_event",
+      "text": "The office meeting was about a different report. Entry 1.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0002",
+      "conversation_id": "dev-event-0002",
+      "stratum": "lexical_false_match",
+      "text": "The meeting room is quiet; I am describing its furniture, not a discussion. Entry 2.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0003",
+      "conversation_id": "dev-event-0003",
+      "stratum": "negation",
+      "text": "I am not planning to quit my job. Entry 3.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0004",
+      "conversation_id": "dev-event-0004",
+      "stratum": "short",
+      "text": "Maybe. Entry 4.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0005",
+      "conversation_id": "dev-event-0005",
+      "stratum": "long",
+      "text": "I wanted to discuss the report, but stayed quiet. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines.  Entry 5.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0006",
+      "conversation_id": "dev-event-0006",
+      "stratum": "ambiguous",
+      "text": "That could mean several things. Entry 6.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0007",
+      "conversation_id": "dev-event-0007",
+      "stratum": "no_match",
+      "text": "A comet crossed the sky. Entry 7.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0008",
+      "conversation_id": "dev-event-0008",
+      "stratum": "paraphrase",
+      "text": "I dread speaking in front of people. Entry 8.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0009",
+      "conversation_id": "dev-event-0009",
+      "stratum": "same_topic_different_event",
+      "text": "The office meeting was about a different report. Entry 9.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0010",
+      "conversation_id": "dev-event-0010",
+      "stratum": "lexical_false_match",
+      "text": "The meeting room is quiet; I am describing its furniture, not a discussion. Entry 10.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0011",
+      "conversation_id": "dev-event-0011",
+      "stratum": "negation",
+      "text": "I am not planning to quit my job. Entry 11.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0012",
+      "conversation_id": "dev-event-0012",
+      "stratum": "short",
+      "text": "Maybe. Entry 12.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0013",
+      "conversation_id": "dev-event-0013",
+      "stratum": "long",
+      "text": "I wanted to discuss the report, but stayed quiet. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines.  Entry 13.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0014",
+      "conversation_id": "dev-event-0014",
+      "stratum": "ambiguous",
+      "text": "That could mean several things. Entry 14.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0015",
+      "conversation_id": "dev-event-0015",
+      "stratum": "no_match",
+      "text": "A comet crossed the sky. Entry 15.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0016",
+      "conversation_id": "dev-event-0016",
+      "stratum": "paraphrase",
+      "text": "I dread speaking in front of people. Entry 16.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0017",
+      "conversation_id": "dev-event-0017",
+      "stratum": "same_topic_different_event",
+      "text": "The office meeting was about a different report. Entry 17.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0018",
+      "conversation_id": "dev-event-0018",
+      "stratum": "lexical_false_match",
+      "text": "The meeting room is quiet; I am describing its furniture, not a discussion. Entry 18.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0019",
+      "conversation_id": "dev-event-0019",
+      "stratum": "negation",
+      "text": "I am not planning to quit my job. Entry 19.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0020",
+      "conversation_id": "dev-event-0020",
+      "stratum": "short",
+      "text": "Maybe. Entry 20.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0021",
+      "conversation_id": "dev-event-0021",
+      "stratum": "long",
+      "text": "I wanted to discuss the report, but stayed quiet. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines.  Entry 21.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0022",
+      "conversation_id": "dev-event-0022",
+      "stratum": "ambiguous",
+      "text": "That could mean several things. Entry 22.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0023",
+      "conversation_id": "dev-event-0023",
+      "stratum": "no_match",
+      "text": "A comet crossed the sky. Entry 23.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0024",
+      "conversation_id": "dev-event-0024",
+      "stratum": "paraphrase",
+      "text": "I dread speaking in front of people. Entry 24.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0025",
+      "conversation_id": "dev-event-0025",
+      "stratum": "same_topic_different_event",
+      "text": "The office meeting was about a different report. Entry 25.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0026",
+      "conversation_id": "dev-event-0026",
+      "stratum": "lexical_false_match",
+      "text": "The meeting room is quiet; I am describing its furniture, not a discussion. Entry 26.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0027",
+      "conversation_id": "dev-event-0027",
+      "stratum": "negation",
+      "text": "I am not planning to quit my job. Entry 27.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0028",
+      "conversation_id": "dev-event-0028",
+      "stratum": "short",
+      "text": "Maybe. Entry 28.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0029",
+      "conversation_id": "dev-event-0029",
+      "stratum": "long",
+      "text": "I wanted to discuss the report, but stayed quiet. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines.  Entry 29.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0030",
+      "conversation_id": "dev-event-0030",
+      "stratum": "ambiguous",
+      "text": "That could mean several things. Entry 30.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0031",
+      "conversation_id": "dev-event-0031",
+      "stratum": "no_match",
+      "text": "A comet crossed the sky. Entry 31.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0032",
+      "conversation_id": "dev-event-0032",
+      "stratum": "paraphrase",
+      "text": "I dread speaking in front of people. Entry 32.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0033",
+      "conversation_id": "dev-event-0033",
+      "stratum": "same_topic_different_event",
+      "text": "The office meeting was about a different report. Entry 33.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0034",
+      "conversation_id": "dev-event-0034",
+      "stratum": "lexical_false_match",
+      "text": "The meeting room is quiet; I am describing its furniture, not a discussion. Entry 34.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0035",
+      "conversation_id": "dev-event-0035",
+      "stratum": "negation",
+      "text": "I am not planning to quit my job. Entry 35.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0036",
+      "conversation_id": "dev-event-0036",
+      "stratum": "short",
+      "text": "Maybe. Entry 36.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0037",
+      "conversation_id": "dev-event-0037",
+      "stratum": "long",
+      "text": "I wanted to discuss the report, but stayed quiet. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines.  Entry 37.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0038",
+      "conversation_id": "dev-event-0038",
+      "stratum": "ambiguous",
+      "text": "That could mean several things. Entry 38.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0039",
+      "conversation_id": "dev-event-0039",
+      "stratum": "no_match",
+      "text": "A comet crossed the sky. Entry 39.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0040",
+      "conversation_id": "dev-event-0040",
+      "stratum": "paraphrase",
+      "text": "I dread speaking in front of people. Entry 40.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0041",
+      "conversation_id": "dev-event-0041",
+      "stratum": "same_topic_different_event",
+      "text": "The office meeting was about a different report. Entry 41.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0042",
+      "conversation_id": "dev-event-0042",
+      "stratum": "lexical_false_match",
+      "text": "The meeting room is quiet; I am describing its furniture, not a discussion. Entry 42.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0043",
+      "conversation_id": "dev-event-0043",
+      "stratum": "negation",
+      "text": "I am not planning to quit my job. Entry 43.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0044",
+      "conversation_id": "dev-event-0044",
+      "stratum": "short",
+      "text": "Maybe. Entry 44.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0045",
+      "conversation_id": "dev-event-0045",
+      "stratum": "long",
+      "text": "I wanted to discuss the report, but stayed quiet. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines.  Entry 45.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0046",
+      "conversation_id": "dev-event-0046",
+      "stratum": "ambiguous",
+      "text": "That could mean several things. Entry 46.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0047",
+      "conversation_id": "dev-event-0047",
+      "stratum": "no_match",
+      "text": "A comet crossed the sky. Entry 47.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0048",
+      "conversation_id": "dev-event-0048",
+      "stratum": "paraphrase",
+      "text": "I dread speaking in front of people. Entry 48.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0049",
+      "conversation_id": "dev-event-0049",
+      "stratum": "same_topic_different_event",
+      "text": "The office meeting was about a different report. Entry 49.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0050",
+      "conversation_id": "dev-event-0050",
+      "stratum": "lexical_false_match",
+      "text": "The meeting room is quiet; I am describing its furniture, not a discussion. Entry 50.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0051",
+      "conversation_id": "dev-event-0051",
+      "stratum": "negation",
+      "text": "I am not planning to quit my job. Entry 51.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0052",
+      "conversation_id": "dev-event-0052",
+      "stratum": "short",
+      "text": "Maybe. Entry 52.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0053",
+      "conversation_id": "dev-event-0053",
+      "stratum": "long",
+      "text": "I wanted to discuss the report, but stayed quiet. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines.  Entry 53.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0054",
+      "conversation_id": "dev-event-0054",
+      "stratum": "ambiguous",
+      "text": "That could mean several things. Entry 54.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0055",
+      "conversation_id": "dev-event-0055",
+      "stratum": "no_match",
+      "text": "A comet crossed the sky. Entry 55.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0056",
+      "conversation_id": "dev-event-0056",
+      "stratum": "paraphrase",
+      "text": "I dread speaking in front of people. Entry 56.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0057",
+      "conversation_id": "dev-event-0057",
+      "stratum": "same_topic_different_event",
+      "text": "The office meeting was about a different report. Entry 57.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0058",
+      "conversation_id": "dev-event-0058",
+      "stratum": "lexical_false_match",
+      "text": "The meeting room is quiet; I am describing its furniture, not a discussion. Entry 58.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0059",
+      "conversation_id": "dev-event-0059",
+      "stratum": "negation",
+      "text": "I am not planning to quit my job. Entry 59.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0060",
+      "conversation_id": "dev-event-0060",
+      "stratum": "short",
+      "text": "Maybe. Entry 60.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0061",
+      "conversation_id": "dev-event-0061",
+      "stratum": "long",
+      "text": "I wanted to discuss the report, but stayed quiet. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines.  Entry 61.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0062",
+      "conversation_id": "dev-event-0062",
+      "stratum": "ambiguous",
+      "text": "That could mean several things. Entry 62.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0063",
+      "conversation_id": "dev-event-0063",
+      "stratum": "no_match",
+      "text": "A comet crossed the sky. Entry 63.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0064",
+      "conversation_id": "dev-event-0064",
+      "stratum": "paraphrase",
+      "text": "I dread speaking in front of people. Entry 64.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0065",
+      "conversation_id": "dev-event-0065",
+      "stratum": "same_topic_different_event",
+      "text": "The office meeting was about a different report. Entry 65.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0066",
+      "conversation_id": "dev-event-0066",
+      "stratum": "lexical_false_match",
+      "text": "The meeting room is quiet; I am describing its furniture, not a discussion. Entry 66.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0067",
+      "conversation_id": "dev-event-0067",
+      "stratum": "negation",
+      "text": "I am not planning to quit my job. Entry 67.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0068",
+      "conversation_id": "dev-event-0068",
+      "stratum": "short",
+      "text": "Maybe. Entry 68.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0069",
+      "conversation_id": "dev-event-0069",
+      "stratum": "long",
+      "text": "I wanted to discuss the report, but stayed quiet. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines.  Entry 69.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0070",
+      "conversation_id": "dev-event-0070",
+      "stratum": "ambiguous",
+      "text": "That could mean several things. Entry 70.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0071",
+      "conversation_id": "dev-event-0071",
+      "stratum": "no_match",
+      "text": "A comet crossed the sky. Entry 71.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0072",
+      "conversation_id": "dev-event-0072",
+      "stratum": "paraphrase",
+      "text": "I dread speaking in front of people. Entry 72.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0073",
+      "conversation_id": "dev-event-0073",
+      "stratum": "same_topic_different_event",
+      "text": "The office meeting was about a different report. Entry 73.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0074",
+      "conversation_id": "dev-event-0074",
+      "stratum": "lexical_false_match",
+      "text": "The meeting room is quiet; I am describing its furniture, not a discussion. Entry 74.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0075",
+      "conversation_id": "dev-event-0075",
+      "stratum": "negation",
+      "text": "I am not planning to quit my job. Entry 75.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0076",
+      "conversation_id": "dev-event-0076",
+      "stratum": "short",
+      "text": "Maybe. Entry 76.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0077",
+      "conversation_id": "dev-event-0077",
+      "stratum": "long",
+      "text": "I wanted to discuss the report, but stayed quiet. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines.  Entry 77.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0078",
+      "conversation_id": "dev-event-0078",
+      "stratum": "ambiguous",
+      "text": "That could mean several things. Entry 78.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0079",
+      "conversation_id": "dev-event-0079",
+      "stratum": "no_match",
+      "text": "A comet crossed the sky. Entry 79.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0080",
+      "conversation_id": "dev-event-0080",
+      "stratum": "paraphrase",
+      "text": "I dread speaking in front of people. Entry 80.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0081",
+      "conversation_id": "dev-event-0081",
+      "stratum": "same_topic_different_event",
+      "text": "The office meeting was about a different report. Entry 81.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0082",
+      "conversation_id": "dev-event-0082",
+      "stratum": "lexical_false_match",
+      "text": "The meeting room is quiet; I am describing its furniture, not a discussion. Entry 82.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0083",
+      "conversation_id": "dev-event-0083",
+      "stratum": "negation",
+      "text": "I am not planning to quit my job. Entry 83.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0084",
+      "conversation_id": "dev-event-0084",
+      "stratum": "short",
+      "text": "Maybe. Entry 84.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0085",
+      "conversation_id": "dev-event-0085",
+      "stratum": "long",
+      "text": "I wanted to discuss the report, but stayed quiet. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines.  Entry 85.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0086",
+      "conversation_id": "dev-event-0086",
+      "stratum": "ambiguous",
+      "text": "That could mean several things. Entry 86.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0087",
+      "conversation_id": "dev-event-0087",
+      "stratum": "no_match",
+      "text": "A comet crossed the sky. Entry 87.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0088",
+      "conversation_id": "dev-event-0088",
+      "stratum": "paraphrase",
+      "text": "I dread speaking in front of people. Entry 88.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0089",
+      "conversation_id": "dev-event-0089",
+      "stratum": "same_topic_different_event",
+      "text": "The office meeting was about a different report. Entry 89.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0090",
+      "conversation_id": "dev-event-0090",
+      "stratum": "lexical_false_match",
+      "text": "The meeting room is quiet; I am describing its furniture, not a discussion. Entry 90.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0091",
+      "conversation_id": "dev-event-0091",
+      "stratum": "negation",
+      "text": "I am not planning to quit my job. Entry 91.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0092",
+      "conversation_id": "dev-event-0092",
+      "stratum": "short",
+      "text": "Maybe. Entry 92.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0093",
+      "conversation_id": "dev-event-0093",
+      "stratum": "long",
+      "text": "I wanted to discuss the report, but stayed quiet. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines. The office project has several deadlines.  Entry 93.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0094",
+      "conversation_id": "dev-event-0094",
+      "stratum": "ambiguous",
+      "text": "That could mean several things. Entry 94.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0095",
+      "conversation_id": "dev-event-0095",
+      "stratum": "no_match",
+      "text": "A comet crossed the sky. Entry 95.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0096",
+      "conversation_id": "dev-event-0096",
+      "stratum": "paraphrase",
+      "text": "I dread speaking in front of people. Entry 96.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0097",
+      "conversation_id": "dev-event-0097",
+      "stratum": "same_topic_different_event",
+      "text": "The office meeting was about a different report. Entry 97.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0098",
+      "conversation_id": "dev-event-0098",
+      "stratum": "lexical_false_match",
+      "text": "The meeting room is quiet; I am describing its furniture, not a discussion. Entry 98.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-event-0099",
+      "conversation_id": "dev-event-0099",
+      "stratum": "negation",
+      "text": "I am not planning to quit my job. Entry 99.",
+      "annotations": [
+        {
+          "annotator": "A",
+          "labels": null
+        },
+        {
+          "annotator": "B",
+          "labels": null
+        }
+      ],
+      "gold": null
+    }
+  ],
+  "queries": [
+    {
+      "id": "dev-query-0000",
+      "conversation_id": "dev-query-0000",
+      "stratum": "paraphrase",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0000-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0000-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0000-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0000-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0000-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0000-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0001",
+      "conversation_id": "dev-query-0001",
+      "stratum": "same_topic_different_event",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0001-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0001-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0001-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0001-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0001-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0001-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0002",
+      "conversation_id": "dev-query-0002",
+      "stratum": "lexical_false_match",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0002-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0002-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0002-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0002-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0002-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0002-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0003",
+      "conversation_id": "dev-query-0003",
+      "stratum": "negation",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0003-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0003-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0003-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0003-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0003-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0003-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0004",
+      "conversation_id": "dev-query-0004",
+      "stratum": "short",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0004-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0004-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0004-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0004-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0004-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0004-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0005",
+      "conversation_id": "dev-query-0005",
+      "stratum": "long",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0005-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0005-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0005-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0005-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0005-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0005-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0006",
+      "conversation_id": "dev-query-0006",
+      "stratum": "ambiguous",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0006-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0006-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0006-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0006-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0006-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0006-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0007",
+      "conversation_id": "dev-query-0007",
+      "stratum": "no_match",
+      "query": "I remember a comet.",
+      "scenes": [
+        {
+          "id": "dev-query-0007-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0007-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0007-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0007-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0007-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0007-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0008",
+      "conversation_id": "dev-query-0008",
+      "stratum": "paraphrase",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0008-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0008-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0008-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0008-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0008-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0008-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0009",
+      "conversation_id": "dev-query-0009",
+      "stratum": "same_topic_different_event",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0009-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0009-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0009-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0009-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0009-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0009-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0010",
+      "conversation_id": "dev-query-0010",
+      "stratum": "lexical_false_match",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0010-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0010-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0010-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0010-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0010-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0010-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0011",
+      "conversation_id": "dev-query-0011",
+      "stratum": "negation",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0011-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0011-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0011-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0011-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0011-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0011-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0012",
+      "conversation_id": "dev-query-0012",
+      "stratum": "short",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0012-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0012-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0012-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0012-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0012-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0012-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0013",
+      "conversation_id": "dev-query-0013",
+      "stratum": "long",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0013-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0013-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0013-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0013-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0013-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0013-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0014",
+      "conversation_id": "dev-query-0014",
+      "stratum": "ambiguous",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0014-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0014-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0014-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0014-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0014-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0014-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0015",
+      "conversation_id": "dev-query-0015",
+      "stratum": "no_match",
+      "query": "I remember a comet.",
+      "scenes": [
+        {
+          "id": "dev-query-0015-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0015-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0015-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0015-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0015-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0015-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0016",
+      "conversation_id": "dev-query-0016",
+      "stratum": "paraphrase",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0016-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0016-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0016-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0016-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0016-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0016-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0017",
+      "conversation_id": "dev-query-0017",
+      "stratum": "same_topic_different_event",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0017-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0017-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0017-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0017-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0017-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0017-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0018",
+      "conversation_id": "dev-query-0018",
+      "stratum": "lexical_false_match",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0018-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0018-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0018-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0018-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0018-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0018-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0019",
+      "conversation_id": "dev-query-0019",
+      "stratum": "negation",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0019-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0019-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0019-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0019-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0019-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0019-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0020",
+      "conversation_id": "dev-query-0020",
+      "stratum": "short",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0020-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0020-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0020-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0020-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0020-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0020-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0021",
+      "conversation_id": "dev-query-0021",
+      "stratum": "long",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0021-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0021-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0021-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0021-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0021-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0021-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0022",
+      "conversation_id": "dev-query-0022",
+      "stratum": "ambiguous",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0022-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0022-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0022-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0022-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0022-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0022-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0023",
+      "conversation_id": "dev-query-0023",
+      "stratum": "no_match",
+      "query": "I remember a comet.",
+      "scenes": [
+        {
+          "id": "dev-query-0023-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0023-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0023-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0023-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0023-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0023-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0024",
+      "conversation_id": "dev-query-0024",
+      "stratum": "paraphrase",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0024-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0024-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0024-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0024-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0024-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0024-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0025",
+      "conversation_id": "dev-query-0025",
+      "stratum": "same_topic_different_event",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0025-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0025-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0025-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0025-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0025-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0025-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0026",
+      "conversation_id": "dev-query-0026",
+      "stratum": "lexical_false_match",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0026-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0026-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0026-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0026-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0026-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0026-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0027",
+      "conversation_id": "dev-query-0027",
+      "stratum": "negation",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0027-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0027-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0027-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0027-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0027-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0027-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0028",
+      "conversation_id": "dev-query-0028",
+      "stratum": "short",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0028-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0028-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0028-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0028-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0028-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0028-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0029",
+      "conversation_id": "dev-query-0029",
+      "stratum": "long",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0029-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0029-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0029-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0029-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0029-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0029-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0030",
+      "conversation_id": "dev-query-0030",
+      "stratum": "ambiguous",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0030-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0030-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0030-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0030-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0030-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0030-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0031",
+      "conversation_id": "dev-query-0031",
+      "stratum": "no_match",
+      "query": "I remember a comet.",
+      "scenes": [
+        {
+          "id": "dev-query-0031-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0031-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0031-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0031-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0031-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0031-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0032",
+      "conversation_id": "dev-query-0032",
+      "stratum": "paraphrase",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0032-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0032-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0032-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0032-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0032-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0032-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0033",
+      "conversation_id": "dev-query-0033",
+      "stratum": "same_topic_different_event",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0033-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0033-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0033-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0033-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0033-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0033-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0034",
+      "conversation_id": "dev-query-0034",
+      "stratum": "lexical_false_match",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0034-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0034-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0034-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0034-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0034-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0034-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0035",
+      "conversation_id": "dev-query-0035",
+      "stratum": "negation",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0035-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0035-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0035-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0035-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0035-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0035-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0036",
+      "conversation_id": "dev-query-0036",
+      "stratum": "short",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0036-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0036-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0036-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0036-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0036-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0036-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0037",
+      "conversation_id": "dev-query-0037",
+      "stratum": "long",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0037-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0037-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0037-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0037-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0037-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0037-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0038",
+      "conversation_id": "dev-query-0038",
+      "stratum": "ambiguous",
+      "query": "I feel nervous about presenting my report.",
+      "scenes": [
+        {
+          "id": "dev-query-0038-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0038-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0038-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0038-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0038-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0038-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    },
+    {
+      "id": "dev-query-0039",
+      "conversation_id": "dev-query-0039",
+      "stratum": "no_match",
+      "query": "I remember a comet.",
+      "scenes": [
+        {
+          "id": "dev-query-0039-s0",
+          "text": "I dread speaking in front of people."
+        },
+        {
+          "id": "dev-query-0039-s1",
+          "text": "The report discusses furniture purchases."
+        },
+        {
+          "id": "dev-query-0039-s2",
+          "text": "Another presentation occurred at a different event."
+        },
+        {
+          "id": "dev-query-0039-s3",
+          "text": "I am not worried about presenting."
+        },
+        {
+          "id": "dev-query-0039-s4",
+          "text": "I prepared dinner."
+        },
+        {
+          "id": "dev-query-0039-s5",
+          "text": "The meeting room contains a table."
+        }
+      ],
+      "annotations": [
+        {
+          "annotator": "A",
+          "relevant_scene_ids": null
+        },
+        {
+          "annotator": "B",
+          "relevant_scene_ids": null
+        }
+      ],
+      "gold": null
+    }
+  ]
+}

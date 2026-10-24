@@ -1,0 +1,145 @@
+{
+  "schema_version": "sanctuary.hosted-memory-evaluation.v1",
+  "dataset_sha256": "83cbe65175b9c8fce2c2f7098a02d420f2e1f290637eb28e969ec41ba0d93d30",
+  "contract": {
+    "hosted_provider": "groq",
+    "hosted_model": "openai/gpt-oss-20b",
+    "persistent_application_writes": false,
+    "fallback_as_result": false,
+    "provider_receives": "redacted current fallback, approved current claims, and up to three redacted memory-harness excerpts",
+    "provider_never_receives": [
+      "raw user text",
+      "identifier mappings",
+      "expected_state",
+      "gold annotations"
+    ],
+    "report_excludes": [
+      "raw user text",
+      "restored output",
+      "identifier mappings"
+    ]
+  },
+  "configuration": {
+    "min_interval_seconds": 1.5,
+    "max_attempts": 5,
+    "limit": 1
+  },
+  "summary": {
+    "turns": 1,
+    "accepted": 1,
+    "validator_rejected": 0,
+    "provider_unavailable": 0,
+    "mean_provider_call_seconds": 1.602,
+    "runtime_seconds": 21.969
+  },
+  "records": [
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turn_id": 1,
+      "redacted_input": "I finally got the internship I've been working toward for months. Everyone's congratulating me, and I know I should be happy. But honestly, I just feel tired. Now I'm already thinking about what I need to achieve next.",
+      "provider_prompt": "Task: rewrite the supplied reflection so it sounds warmer and more natural.\nKeep every current fact. Add nothing. Preserve uncertainty wording.\nUse relevant prior context only to avoid contradicting it; do not introduce a new fact from it.\nAt most 2 sentences and 70 words. Output only the reflection.\nDo not ask, advise, diagnose, explain the task, or mention instructions.\n\nGrounded current reflection:\nYou finally got the internship you've been working toward for months, and you feel tired. You're already thinking about the next goal.\n\nApproved current claims (second-person wording):\n- You finally got the internship You've been working toward for months.\n- But honestly, You just feel tired.\n- Now You're already thinking about what You need to achieve next.",
+      "provider_response_redacted": "You finally landed the internship you’ve been working toward for months, and you’re feeling a bit exhausted. You’re already looking ahead to what comes next.",
+      "status": "accepted",
+      "attempts": [
+        {
+          "attempt": 1,
+          "received": false,
+          "latency_seconds": 2.344
+        },
+        {
+          "attempt": 2,
+          "received": true,
+          "latency_seconds": 0.86
+        }
+      ],
+      "memory": {
+        "historical_evidence_count": 0,
+        "historical_excerpt_count_sent": 0,
+        "retrieval_trace": {
+          "selected_assertion_ids": [
+            "as_1d4fd9db032e6a2c",
+            "as_3a0817b9585ec8ff",
+            "as_4ae26416b7d15a83",
+            "as_914c19f2a7e42d2f",
+            "as_aaf9ee2fef689e90",
+            "as_df8619ff816dcaf8",
+            "as_fde6c27a46eb7b94"
+          ],
+          "selected_graph_node_ids": [
+            "as_1d4fd9db032e6a2c",
+            "as_3a0817b9585ec8ff",
+            "as_4ae26416b7d15a83",
+            "as_914c19f2a7e42d2f",
+            "as_aaf9ee2fef689e90",
+            "as_df8619ff816dcaf8",
+            "as_fde6c27a46eb7b94"
+          ],
+          "selected_edge_ids": [],
+          "excluded_superseded_ids": [],
+          "unresolved_assertion_ids": [],
+          "retrieval_policy_version": "sanctuary.memory-retrieval.v1"
+        }
+      },
+      "policy": {
+        "plan": {
+          "is_valid": true,
+          "violations": [],
+          "failure_patterns": {},
+          "required_claim_coverage": {
+            "claim_1": true,
+            "claim_4": true,
+            "claim_5": true
+          }
+        },
+        "semantic": {
+          "status": "ready",
+          "is_valid": true,
+          "score": 0.636717,
+          "semantic_score": 0.566447,
+          "copy_similarity": 0.531532,
+          "violations": [],
+          "pairs": [
+            {
+              "id": "candidate_0:support",
+              "purpose": "evidence_support",
+              "scores": {
+                "contradiction": 0.00011659286974463612,
+                "entailment": 0.9962993264198303,
+                "neutral": 0.0035840445198118687
+              }
+            },
+            {
+              "id": "candidate_0:claim:0",
+              "purpose": "claim_coverage",
+              "scores": {
+                "contradiction": 0.2609683573246002,
+                "entailment": 0.7170330286026001,
+                "neutral": 0.02199864387512207
+              }
+            },
+            {
+              "id": "candidate_0:claim:1",
+              "purpose": "claim_coverage",
+              "scores": {
+                "contradiction": 0.00040702734258957207,
+                "entailment": 0.02812027558684349,
+                "neutral": 0.9714726209640503
+              }
+            },
+            {
+              "id": "candidate_0:claim:2",
+              "purpose": "claim_coverage",
+              "scores": {
+                "contradiction": 0.052227798849344254,
+                "entailment": 0.8380534052848816,
+                "neutral": 0.10971884429454803
+              }
+            }
+          ],
+          "version": "nli.fa2804872c3b.surrogate1.eagercpu1.repeatcheck1.topics-functions1.null1.4fdf43c6f9",
+          "notice": "NLI scores are uncalibrated comparative signals, not probabilities of truth."
+        }
+      }
+    }
+  ]
+}

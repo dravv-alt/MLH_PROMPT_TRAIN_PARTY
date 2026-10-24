@@ -1,0 +1,630 @@
+{
+  "schema_version": "sanctuary.context-algorithm-lab.v1",
+  "topic": "achievement_exhaustion_and_the_meaning_of_success",
+  "turns": 10,
+  "production_changes": false,
+  "tokenization_and_morphology": {
+    "sample": "I finally got the internship I've been working toward for months. Everyone's congratulating me, and I know I should be happy. But honestly, I just feel tired. Now I'm already thinking about what I need to achieve next.",
+    "regex": {
+      "count": 38,
+      "tokens": [
+        "i",
+        "finally",
+        "got",
+        "the",
+        "internship",
+        "i've",
+        "been",
+        "working",
+        "toward",
+        "for",
+        "months",
+        "everyone's",
+        "congratulating",
+        "me",
+        "and",
+        "i",
+        "know",
+        "i",
+        "should",
+        "be",
+        "happy",
+        "but",
+        "honestly",
+        "i",
+        "just",
+        "feel",
+        "tired",
+        "now",
+        "i'm",
+        "already",
+        "thinking",
+        "about",
+        "what",
+        "i",
+        "need",
+        "to",
+        "achieve",
+        "next"
+      ]
+    },
+    "spacy": {
+      "count": 47,
+      "tokens": [
+        "I",
+        "finally",
+        "got",
+        "the",
+        "internship",
+        "I",
+        "'ve",
+        "been",
+        "working",
+        "toward",
+        "for",
+        "months",
+        ".",
+        "Everyone",
+        "'s",
+        "congratulating",
+        "me",
+        ",",
+        "and",
+        "I",
+        "know",
+        "I",
+        "should",
+        "be",
+        "happy",
+        ".",
+        "But",
+        "honestly",
+        ",",
+        "I",
+        "just",
+        "feel",
+        "tired",
+        ".",
+        "Now",
+        "I",
+        "'m",
+        "already",
+        "thinking",
+        "about",
+        "what",
+        "I",
+        "need",
+        "to",
+        "achieve",
+        "next",
+        "."
+      ]
+    },
+    "minilm_wordpiece": {
+      "count": 52,
+      "tokens": [
+        "i",
+        "finally",
+        "got",
+        "the",
+        "internship",
+        "i",
+        "'",
+        "ve",
+        "been",
+        "working",
+        "toward",
+        "for",
+        "months",
+        ".",
+        "everyone",
+        "'",
+        "s",
+        "cong",
+        "##rat",
+        "##ulating",
+        "me",
+        ",",
+        "and",
+        "i",
+        "know",
+        "i",
+        "should",
+        "be",
+        "happy",
+        ".",
+        "but",
+        "honestly",
+        ",",
+        "i",
+        "just",
+        "feel",
+        "tired",
+        ".",
+        "now",
+        "i",
+        "'",
+        "m",
+        "already",
+        "thinking",
+        "about",
+        "what",
+        "i",
+        "need",
+        "to",
+        "achieve",
+        "next",
+        "."
+      ]
+    },
+    "porter": [
+      {
+        "surface": "i",
+        "stem": "i"
+      },
+      {
+        "surface": "finally",
+        "stem": "final"
+      },
+      {
+        "surface": "got",
+        "stem": "got"
+      },
+      {
+        "surface": "the",
+        "stem": "the"
+      },
+      {
+        "surface": "internship",
+        "stem": "internship"
+      },
+      {
+        "surface": "i've",
+        "stem": "i'v"
+      },
+      {
+        "surface": "been",
+        "stem": "been"
+      },
+      {
+        "surface": "working",
+        "stem": "work"
+      },
+      {
+        "surface": "toward",
+        "stem": "toward"
+      },
+      {
+        "surface": "for",
+        "stem": "for"
+      },
+      {
+        "surface": "months",
+        "stem": "month"
+      },
+      {
+        "surface": "everyone's",
+        "stem": "everyone'"
+      },
+      {
+        "surface": "congratulating",
+        "stem": "congratul"
+      },
+      {
+        "surface": "me",
+        "stem": "me"
+      },
+      {
+        "surface": "and",
+        "stem": "and"
+      },
+      {
+        "surface": "i",
+        "stem": "i"
+      },
+      {
+        "surface": "know",
+        "stem": "know"
+      },
+      {
+        "surface": "i",
+        "stem": "i"
+      },
+      {
+        "surface": "should",
+        "stem": "should"
+      },
+      {
+        "surface": "be",
+        "stem": "be"
+      },
+      {
+        "surface": "happy",
+        "stem": "happi"
+      },
+      {
+        "surface": "but",
+        "stem": "but"
+      },
+      {
+        "surface": "honestly",
+        "stem": "honestli"
+      },
+      {
+        "surface": "i",
+        "stem": "i"
+      },
+      {
+        "surface": "just",
+        "stem": "just"
+      },
+      {
+        "surface": "feel",
+        "stem": "feel"
+      },
+      {
+        "surface": "tired",
+        "stem": "tire"
+      },
+      {
+        "surface": "now",
+        "stem": "now"
+      },
+      {
+        "surface": "i'm",
+        "stem": "i'm"
+      },
+      {
+        "surface": "already",
+        "stem": "alreadi"
+      },
+      {
+        "surface": "thinking",
+        "stem": "think"
+      },
+      {
+        "surface": "about",
+        "stem": "about"
+      },
+      {
+        "surface": "what",
+        "stem": "what"
+      },
+      {
+        "surface": "i",
+        "stem": "i"
+      },
+      {
+        "surface": "need",
+        "stem": "need"
+      },
+      {
+        "surface": "to",
+        "stem": "to"
+      },
+      {
+        "surface": "achieve",
+        "stem": "achiev"
+      },
+      {
+        "surface": "next",
+        "stem": "next"
+      }
+    ],
+    "finite_state_suffix_transducer": [
+      {
+        "surface": "i",
+        "stem": "i",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "finally",
+        "stem": "finally",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "got",
+        "stem": "got",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "the",
+        "stem": "the",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "internship",
+        "stem": "internship",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "i've",
+        "stem": "i've",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "been",
+        "stem": "been",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "working",
+        "stem": "work",
+        "feature": "progressive_or_gerund",
+        "accepted": true
+      },
+      {
+        "surface": "toward",
+        "stem": "toward",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "for",
+        "stem": "for",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "months",
+        "stem": "month",
+        "feature": "plural_or_3sg",
+        "accepted": true
+      },
+      {
+        "surface": "everyone's",
+        "stem": "everyone'",
+        "feature": "plural_or_3sg",
+        "accepted": true
+      },
+      {
+        "surface": "congratulating",
+        "stem": "congratulat",
+        "feature": "progressive_or_gerund",
+        "accepted": true
+      },
+      {
+        "surface": "me",
+        "stem": "me",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "and",
+        "stem": "and",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "i",
+        "stem": "i",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "know",
+        "stem": "know",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "i",
+        "stem": "i",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "should",
+        "stem": "should",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "be",
+        "stem": "be",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "happy",
+        "stem": "happy",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "but",
+        "stem": "but",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "honestly",
+        "stem": "honestly",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "i",
+        "stem": "i",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "just",
+        "stem": "just",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "feel",
+        "stem": "feel",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "tired",
+        "stem": "tir",
+        "feature": "past_or_participle",
+        "accepted": true
+      },
+      {
+        "surface": "now",
+        "stem": "now",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "i'm",
+        "stem": "i'm",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "already",
+        "stem": "already",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "thinking",
+        "stem": "think",
+        "feature": "progressive_or_gerund",
+        "accepted": true
+      },
+      {
+        "surface": "about",
+        "stem": "about",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "what",
+        "stem": "what",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "i",
+        "stem": "i",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "need",
+        "stem": "need",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "to",
+        "stem": "to",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "achieve",
+        "stem": "achieve",
+        "feature": "unmarked",
+        "accepted": true
+      },
+      {
+        "surface": "next",
+        "stem": "next",
+        "feature": "unmarked",
+        "accepted": true
+      }
+    ],
+    "decision": "Keep spaCy lemmas for linguistic features and MiniLM WordPiece only for its model. Porter/FST outputs are diagnostics; replacing lemmas would lose context."
+  },
+  "language_models": {
+    "train_turns": 8,
+    "test_turns": 2,
+    "perplexity": {
+      "1gram_laplace": 156.098018,
+      "1gram_good_turing": 195.198262,
+      "2gram_laplace": 121.704177,
+      "2gram_good_turing": 130.455365,
+      "3gram_laplace": 124.90692,
+      "3gram_good_turing": 131.780942
+    },
+    "decision": "Useful as a fluency diagnostic only. Ten conversational turns are far too small for generation or prompt context."
+  },
+  "retrieval_representations": {
+    "tfidf_last_turn_neighbours": [
+      {
+        "turn_id": 3,
+        "score": 0.108515
+      },
+      {
+        "turn_id": 1,
+        "score": 0.06075
+      },
+      {
+        "turn_id": 9,
+        "score": 0.052424
+      }
+    ],
+    "lsa_last_turn_neighbours": [
+      {
+        "turn_id": 3,
+        "score": 0.717398
+      },
+      {
+        "turn_id": 2,
+        "score": 0.672234
+      },
+      {
+        "turn_id": 9,
+        "score": 0.304633
+      }
+    ],
+    "ppmi_last_turn_neighbours": [
+      {
+        "turn_id": 1,
+        "score": 0.0
+      },
+      {
+        "turn_id": 2,
+        "score": 0.0
+      },
+      {
+        "turn_id": 3,
+        "score": 0.0
+      }
+    ],
+    "vsa_last_turn_neighbours": [
+      {
+        "turn_id": 3,
+        "score": 0.470575
+      },
+      {
+        "turn_id": 1,
+        "score": 0.385767
+      },
+      {
+        "turn_id": 6,
+        "score": 0.344969
+      }
+    ],
+    "decision": "Compare against MiniLM with relevance labels; do not replace semantic retrieval from this demonstration."
+  },
+  "gated_experiments": {
+    "pcfg_cyk": "Implementation is possible, but no local constituency treebank or domain grammar exists; a toy grammar would not improve Sanctuary context.",
+    "grammar_induction_dmv_em": "Blocked from production by missing sentence-level dependency corpus and held-out parsing evaluation.",
+    "babelnet": "Unavailable offline: no checked-in BabelNet index or licensed API credentials. No network fallback attempted.",
+    "word2vec_glove_fasttext": "No versioned local pretrained artifacts. Training on ten turns would be statistically meaningless.",
+    "nce_infonce": "Requires defined positive/negative conversation pairs and a train/test split; no clean pairs currently exist.",
+    "hyperbolic_embeddings": "Requires a validated hierarchy objective; topic IDs alone do not establish a hierarchy.",
+    "discocat": "Requires a categorial grammar and tensor semantics corpus absent from the repository.",
+    "rnn_lstm_gru_cnn_s4_mamba_perceiver": "No architecture experiment is authorized as production context without a shared task, equivalent parameter budget, training data, and held-out metric.",
+    "lora": "Deferred until deterministic fidelity failures are fixed and clean response pairs exist."
+  },
+  "boundary": "Executed outputs are descriptive on one conversation. They are not evidence of production superiority."
+}

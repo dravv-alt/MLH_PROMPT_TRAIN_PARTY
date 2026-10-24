@@ -1,0 +1,99 @@
+{
+  "schema_version": "sanctuary.hosted-memory-evaluation.v1",
+  "dataset_sha256": "83cbe65175b9c8fce2c2f7098a02d420f2e1f290637eb28e969ec41ba0d93d30",
+  "contract": {
+    "hosted_provider": "groq",
+    "persistent_application_writes": false,
+    "fallback_as_result": false,
+    "provider_receives": "redacted current fallback, approved current claims, and up to three redacted memory-harness excerpts",
+    "provider_never_receives": [
+      "raw user text",
+      "identifier mappings",
+      "expected_state",
+      "gold annotations"
+    ],
+    "report_excludes": [
+      "raw user text",
+      "restored output",
+      "identifier mappings"
+    ]
+  },
+  "configuration": {
+    "min_interval_seconds": 1.25,
+    "max_attempts": 5,
+    "limit": 1
+  },
+  "summary": {
+    "turns": 1,
+    "accepted": 0,
+    "validator_rejected": 0,
+    "provider_unavailable": 1,
+    "mean_provider_call_seconds": 9.4562,
+    "runtime_seconds": 78.0
+  },
+  "records": [
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turn_id": 1,
+      "redacted_input": "I finally got the internship I've been working toward for months. Everyone's congratulating me, and I know I should be happy. But honestly, I just feel tired. Now I'm already thinking about what I need to achieve next.",
+      "provider_prompt": "Task: rewrite the supplied reflection so it sounds warmer and more natural.\nKeep every current fact. Add nothing. Preserve uncertainty wording.\nUse relevant prior context only to avoid contradicting it; do not introduce a new fact from it.\nAt most 2 sentences and 70 words. Output only the reflection.\nDo not ask, advise, diagnose, explain the task, or mention instructions.\n\nGrounded current reflection:\nYou finally got the internship you've been working toward for months, and you feel tired. You're already thinking about the next goal.\n\nApproved current claims (second-person wording):\n- I finally got the internship I've been working toward for months.\n- But honestly, I just feel tired.\n- Now I'm already thinking about what I need to achieve next.",
+      "provider_response_redacted": null,
+      "status": "provider_unavailable_after_retries",
+      "attempts": [
+        {
+          "attempt": 1,
+          "received": false,
+          "latency_seconds": 9.656
+        },
+        {
+          "attempt": 2,
+          "received": false,
+          "latency_seconds": 9.391
+        },
+        {
+          "attempt": 3,
+          "received": false,
+          "latency_seconds": 9.375
+        },
+        {
+          "attempt": 4,
+          "received": false,
+          "latency_seconds": 9.5
+        },
+        {
+          "attempt": 5,
+          "received": false,
+          "latency_seconds": 9.359
+        }
+      ],
+      "memory": {
+        "historical_evidence_count": 0,
+        "retrieval_trace": {
+          "selected_assertion_ids": [
+            "as_1d4fd9db032e6a2c",
+            "as_3a0817b9585ec8ff",
+            "as_4ae26416b7d15a83",
+            "as_914c19f2a7e42d2f",
+            "as_aaf9ee2fef689e90",
+            "as_df8619ff816dcaf8",
+            "as_fde6c27a46eb7b94"
+          ],
+          "selected_graph_node_ids": [
+            "as_1d4fd9db032e6a2c",
+            "as_3a0817b9585ec8ff",
+            "as_4ae26416b7d15a83",
+            "as_914c19f2a7e42d2f",
+            "as_aaf9ee2fef689e90",
+            "as_df8619ff816dcaf8",
+            "as_fde6c27a46eb7b94"
+          ],
+          "selected_edge_ids": [],
+          "excluded_superseded_ids": [],
+          "unresolved_assertion_ids": [],
+          "retrieval_policy_version": "sanctuary.memory-retrieval.v1"
+        }
+      },
+      "policy": null
+    }
+  ]
+}

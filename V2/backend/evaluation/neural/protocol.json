@@ -1,0 +1,29 @@
+{
+  "status": "DATA_BLOCKED_NO_HUMAN_JUDGMENTS",
+  "taxonomy": [
+    "work",
+    "education",
+    "relationships",
+    "finances",
+    "daily activities",
+    "technology",
+    "personal goals",
+    "reporting an event",
+    "explaining a cause",
+    "expressing uncertainty",
+    "describing a contrast/conflict",
+    "stating an intention",
+    "closing the conversation"
+  ],
+  "retrieval_arms": [
+    "hashed",
+    "semantic_pooled",
+    "semantic_max_window",
+    "rrf"
+  ],
+  "window_comparisons": [
+    "128/32",
+    "224/32"
+  ],
+  "requirements": "Replace repeated template text with distinct conversation/event cases; obtain two independent annotations and adjudicated gold before evaluation. Never treat scaffold examples as accuracy evidence."
+}

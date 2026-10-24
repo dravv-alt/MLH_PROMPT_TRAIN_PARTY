@@ -1,0 +1,2163 @@
+{
+  "source": "evaluation\\ssm_v2_generation_acceptance_24_20261017.json",
+  "rejections": 43,
+  "classification_counts": {
+    "a": 19,
+    "c": 24
+  },
+  "records": [
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turn": null,
+      "attempt": 1,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+      "approved_claims": [
+        "I finally got the internship I've been working toward for months.",
+        "But honestly, I just feel tired.",
+        "Now I'm already thinking about what I need to achieve next."
+      ],
+      "semantic_score": null,
+      "classification": "a",
+      "classification_reason": "No claim-level paraphrase evidence; treat as unsupported rather than relaxing the gate.",
+      "content_overlap": [
+        "completed/internship",
+        "exhaustion/tired"
+      ],
+      "failed_checks": []
+    },
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turn": null,
+      "attempt": 2,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "I finally got the internship I've been working toward for months.",
+        "But honestly, I just feel tired.",
+        "Now I'm already thinking about what I need to achieve next."
+      ],
+      "semantic_score": null,
+      "classification": "a",
+      "classification_reason": "No claim-level paraphrase evidence; treat as unsupported rather than relaxing the gate.",
+      "content_overlap": [
+        "completed/internship",
+        "exhaustion/tired"
+      ],
+      "failed_checks": []
+    },
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turn": null,
+      "attempt": 3,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "I finally got the internship I've been working toward for months.",
+        "But honestly, I just feel tired.",
+        "Now I'm already thinking about what I need to achieve next."
+      ],
+      "semantic_score": null,
+      "classification": "a",
+      "classification_reason": "No claim-level paraphrase evidence; treat as unsupported rather than relaxing the gate.",
+      "content_overlap": [
+        "completed/internship",
+        "exhaustion/tired"
+      ],
+      "failed_checks": []
+    },
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turn": null,
+      "attempt": 1,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "I'm excited about the internship.",
+        "I'm just physically exhausted after months of preparation",
+        "I want to enjoy the achievement without immediately planning the next thing."
+      ],
+      "semantic_score": null,
+      "classification": "a",
+      "classification_reason": "No claim-level paraphrase evidence; treat as unsupported rather than relaxing the gate.",
+      "content_overlap": [
+        "achievement/completed/internship",
+        "exhausted/exhaustion"
+      ],
+      "failed_checks": []
+    },
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turn": null,
+      "attempt": 2,
+      "draft": "You feel worn out from completing a task, which suggests that you're experiencing physical exhaustion. This might be due to the pressure of meeting expectations, rather than the actual event itself.",
+      "approved_claims": [
+        "I'm excited about the internship.",
+        "I'm just physically exhausted after months of preparation",
+        "I want to enjoy the achievement without immediately planning the next thing."
+      ],
+      "semantic_score": null,
+      "classification": "a",
+      "classification_reason": "No claim-level paraphrase evidence; treat as unsupported rather than relaxing the gate.",
+      "content_overlap": [
+        "achievement/internship/task",
+        "exhausted/exhaustion/worn"
+      ],
+      "failed_checks": []
+    },
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turn": null,
+      "attempt": 3,
+      "draft": "You feel worn out from completing a task, which suggests that you're experiencing physical exhaustion. This might be due to the pressure of meeting expectations, rather than the actual event itself.",
+      "approved_claims": [
+        "I'm excited about the internship.",
+        "I'm just physically exhausted after months of preparation",
+        "I want to enjoy the achievement without immediately planning the next thing."
+      ],
+      "semantic_score": null,
+      "classification": "a",
+      "classification_reason": "No claim-level paraphrase evidence; treat as unsupported rather than relaxing the gate.",
+      "content_overlap": [
+        "achievement/internship/task",
+        "exhausted/exhaustion/worn"
+      ],
+      "failed_checks": []
+    },
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turn": null,
+      "attempt": 1,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+      "approved_claims": [
+        "Although, I did enjoy telling my closest friend about it [entity_e000001].",
+        "I wasn't thinking about my next goal then."
+      ],
+      "semantic_score": -0.031843,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_0:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0008655379060655832,
+            "entailment": 0.001213301788084209,
+            "neutral": 0.9979211688041687
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0005928969476372004,
+            "entailment": 0.0001815776340663433,
+            "neutral": 0.9992254972457886
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.09858837723731995,
+            "entailment": 0.00312177580781281,
+            "neutral": 0.8982898592948914
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turn": null,
+      "attempt": 2,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "Although, I did enjoy telling my closest friend about it [entity_e000001].",
+        "I wasn't thinking about my next goal then."
+      ],
+      "semantic_score": -0.031843,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_1:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0008655379060655832,
+            "entailment": 0.001213301788084209,
+            "neutral": 0.9979211688041687
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0005928969476372004,
+            "entailment": 0.0001815776340663433,
+            "neutral": 0.9992254972457886
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.09858837723731995,
+            "entailment": 0.00312177580781281,
+            "neutral": 0.8982898592948914
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turn": null,
+      "attempt": 3,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "Although, I did enjoy telling my closest friend about it [entity_e000001].",
+        "I wasn't thinking about my next goal then."
+      ],
+      "semantic_score": -0.031843,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_2:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0008655379060655832,
+            "entailment": 0.001213301788084209,
+            "neutral": 0.9979211688041687
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0005928969476372004,
+            "entailment": 0.0001815776340663433,
+            "neutral": 0.9992254972457886
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.09858837723731995,
+            "entailment": 0.00312177580781281,
+            "neutral": 0.8982898592948914
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turn": null,
+      "attempt": 1,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "My manager also said I don't need to know everything immediately.",
+        "That was reassuring, even though I still want to do well."
+      ],
+      "semantic_score": 0.013612,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [
+        "still"
+      ],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_0:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0006715079653076828,
+            "entailment": 0.002739847870543599,
+            "neutral": 0.9965887069702148
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0006819068803451955,
+            "entailment": 0.0001445234811399132,
+            "neutral": 0.9991735816001892
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.027176419273018837,
+            "entailment": 0.06648177653551102,
+            "neutral": 0.9063417315483093
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turn": null,
+      "attempt": 2,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "My manager also said I don't need to know everything immediately.",
+        "That was reassuring, even though I still want to do well."
+      ],
+      "semantic_score": 0.013612,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [
+        "still"
+      ],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_1:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0006715079653076828,
+            "entailment": 0.002739847870543599,
+            "neutral": 0.9965887069702148
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0006819068803451955,
+            "entailment": 0.0001445234811399132,
+            "neutral": 0.9991735816001892
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.027176419273018837,
+            "entailment": 0.06648177653551102,
+            "neutral": 0.9063417315483093
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turn": null,
+      "attempt": 3,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "My manager also said I don't need to know everything immediately.",
+        "That was reassuring, even though I still want to do well."
+      ],
+      "semantic_score": 0.013612,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [
+        "still"
+      ],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_2:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0006715079653076828,
+            "entailment": 0.002739847870543599,
+            "neutral": 0.9965887069702148
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0006819068803451955,
+            "entailment": 0.0001445234811399132,
+            "neutral": 0.9991735816001892
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.027176419273018837,
+            "entailment": 0.06648177653551102,
+            "neutral": 0.9063417315483093
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turn": null,
+      "attempt": 1,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "I noticed I felt better after I slept properly.",
+        "That makes me think the physical exhaustion was a bigger part of this than I first realized."
+      ],
+      "semantic_score": -0.324413,
+      "classification": "a",
+      "classification_reason": "NLI reports a contradiction to an approved claim; retain rejection pending manual review.",
+      "content_overlap": [
+        "exhaustion"
+      ],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_0:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0027684501837939024,
+            "entailment": 0.020736895501613617,
+            "neutral": 0.9764947295188904
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.9931097030639648,
+            "entailment": 0.00018512512906454504,
+            "neutral": 0.00670518446713686
+          },
+          "strongest": "contradiction",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.00013629187014885247,
+            "entailment": 0.0018528421642258763,
+            "neutral": 0.9980109333992004
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turn": null,
+      "attempt": 2,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt seems like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "I noticed I felt better after I slept properly.",
+        "That makes me think the physical exhaustion was a bigger part of this than I first realized."
+      ],
+      "semantic_score": -0.324413,
+      "classification": "a",
+      "classification_reason": "NLI reports a contradiction to an approved claim; retain rejection pending manual review.",
+      "content_overlap": [
+        "exhaustion"
+      ],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_1:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0027684501837939024,
+            "entailment": 0.020736895501613617,
+            "neutral": 0.9764947295188904
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.9931097030639648,
+            "entailment": 0.00018512512906454504,
+            "neutral": 0.00670518446713686
+          },
+          "strongest": "contradiction",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.00013629187014885247,
+            "entailment": 0.0018528421642258763,
+            "neutral": 0.9980109333992004
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turn": null,
+      "attempt": 3,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt seems like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "I noticed I felt better after I slept properly.",
+        "That makes me think the physical exhaustion was a bigger part of this than I first realized."
+      ],
+      "semantic_score": -0.324413,
+      "classification": "a",
+      "classification_reason": "NLI reports a contradiction to an approved claim; retain rejection pending manual review.",
+      "content_overlap": [
+        "exhaustion"
+      ],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_2:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0027684501837939024,
+            "entailment": 0.020736895501613617,
+            "neutral": 0.9764947295188904
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.9931097030639648,
+            "entailment": 0.00018512512906454504,
+            "neutral": 0.00670518446713686
+          },
+          "strongest": "contradiction",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.00013629187014885247,
+            "entailment": 0.0018528421642258763,
+            "neutral": 0.9980109333992004
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turn": null,
+      "attempt": 1,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "I'm still thinking about what comes next, but it doesn't feel as urgent [entity_e000002].",
+        "I can be excited and tired at the same time."
+      ],
+      "semantic_score": -0.028387,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [
+        "exhaustion/tired",
+        "still"
+      ],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_0:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.006107494235038757,
+            "entailment": 0.20224831998348236,
+            "neutral": 0.7916441559791565
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.3114383816719055,
+            "entailment": 0.008071918040513992,
+            "neutral": 0.6804896593093872
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.00130172458011657,
+            "entailment": 0.023367835208773613,
+            "neutral": 0.9753304123878479
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turn": null,
+      "attempt": 2,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "I'm still thinking about what comes next, but it doesn't feel as urgent [entity_e000002].",
+        "I can be excited and tired at the same time."
+      ],
+      "semantic_score": -0.028387,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [
+        "exhaustion/tired",
+        "still"
+      ],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_1:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.006107494235038757,
+            "entailment": 0.20224831998348236,
+            "neutral": 0.7916441559791565
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.3114383816719055,
+            "entailment": 0.008071918040513992,
+            "neutral": 0.6804896593093872
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.00130172458011657,
+            "entailment": 0.023367835208773613,
+            "neutral": 0.9753304123878479
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "turn": null,
+      "attempt": 3,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "I'm still thinking about what comes next, but it doesn't feel as urgent [entity_e000002].",
+        "I can be excited and tired at the same time."
+      ],
+      "semantic_score": -0.028387,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [
+        "exhaustion/tired",
+        "still"
+      ],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_2:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.006107494235038757,
+            "entailment": 0.20224831998348236,
+            "neutral": 0.7916441559791565
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.3114383816719055,
+            "entailment": 0.008071918040513992,
+            "neutral": 0.6804896593093872
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.00130172458011657,
+            "entailment": 0.023367835208773613,
+            "neutral": 0.9753304123878479
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "the_recurring_pattern",
+      "turn": null,
+      "attempt": 1,
+      "draft": "You notice that you often feel worn out after completing tasks, even if you made a detailed plan beforehand.",
+      "approved_claims": [
+        "I've noticed that whenever I start something important, I make a very detailed plan before I actually begin."
+      ],
+      "semantic_score": -0.686298,
+      "classification": "a",
+      "classification_reason": "NLI reports a contradiction to an approved claim; retain rejection pending manual review.",
+      "content_overlap": [
+        "detailed",
+        "plan"
+      ],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_0:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.41228511929512024,
+            "entailment": 0.00030150500242598355,
+            "neutral": 0.5874133706092834
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.9644298553466797,
+            "entailment": 0.003817921970039606,
+            "neutral": 0.03175225481390953
+          },
+          "strongest": "contradiction",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "the_recurring_pattern",
+      "turn": null,
+      "attempt": 2,
+      "draft": "You notice that you often feel worn out after completing tasks, even if they were well-planned beforehand.",
+      "approved_claims": [
+        "I've noticed that whenever I start something important, I make a very detailed plan before I actually begin."
+      ],
+      "semantic_score": -0.568813,
+      "classification": "a",
+      "classification_reason": "NLI reports a contradiction to an approved claim; retain rejection pending manual review.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_1:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.14655837416648865,
+            "entailment": 0.00016801286255940795,
+            "neutral": 0.8532736301422119
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.9913522005081177,
+            "entailment": 0.00011600762081798166,
+            "neutral": 0.008531766943633556
+          },
+          "strongest": "contradiction",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "the_recurring_pattern",
+      "turn": null,
+      "attempt": 3,
+      "draft": "You notice that you often feel worn out after completing tasks, even if they were well-planned beforehand.",
+      "approved_claims": [
+        "I've noticed that whenever I start something important, I make a very detailed plan before I actually begin."
+      ],
+      "semantic_score": -0.568813,
+      "classification": "a",
+      "classification_reason": "NLI reports a contradiction to an approved claim; retain rejection pending manual review.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_2:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.14655837416648865,
+            "entailment": 0.00016801286255940795,
+            "neutral": 0.8532736301422119
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.9913522005081177,
+            "entailment": 0.00011600762081798166,
+            "neutral": 0.008531766943633556
+          },
+          "strongest": "contradiction",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "the_recurring_pattern",
+      "turn": null,
+      "attempt": 1,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+      "approved_claims": [
+        "It happened with my last assignment too.",
+        "I spent almost two evenings organizing everything before writing the first paragraph."
+      ],
+      "semantic_score": -0.000721,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_0:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0009090540697798133,
+            "entailment": 0.0008405836997553706,
+            "neutral": 0.9982503056526184
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0007287163170985878,
+            "entailment": 0.00013890826085116714,
+            "neutral": 0.9991324543952942
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0016100275097414851,
+            "entailment": 0.00010431317059556022,
+            "neutral": 0.9982855916023254
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "the_recurring_pattern",
+      "turn": null,
+      "attempt": 2,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "It happened with my last assignment too.",
+        "I spent almost two evenings organizing everything before writing the first paragraph."
+      ],
+      "semantic_score": -0.000721,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_1:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0009090540697798133,
+            "entailment": 0.0008405836997553706,
+            "neutral": 0.9982503056526184
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0007287163170985878,
+            "entailment": 0.00013890826085116714,
+            "neutral": 0.9991324543952942
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0016100275097414851,
+            "entailment": 0.00010431317059556022,
+            "neutral": 0.9982855916023254
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "the_recurring_pattern",
+      "turn": null,
+      "attempt": 3,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "It happened with my last assignment too.",
+        "I spent almost two evenings organizing everything before writing the first paragraph."
+      ],
+      "semantic_score": -0.000721,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_2:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0009090540697798133,
+            "entailment": 0.0008405836997553706,
+            "neutral": 0.9982503056526184
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0007287163170985878,
+            "entailment": 0.00013890826085116714,
+            "neutral": 0.9991324543952942
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0016100275097414851,
+            "entailment": 0.00010431317059556022,
+            "neutral": 0.9982855916023254
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "the_recurring_pattern",
+      "turn": null,
+      "attempt": 1,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "Actually, that isn't always it.",
+        "Sometimes I plan because I genuinely enjoy organizing a complicated problem."
+      ],
+      "semantic_score": -0.001567,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_0:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0027775310445576906,
+            "entailment": 0.0011852702591568232,
+            "neutral": 0.9960371851921082
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0007542796083725989,
+            "entailment": 0.003267406253144145,
+            "neutral": 0.9959782361984253
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0064885541796684265,
+            "entailment": 0.0008671770920045674,
+            "neutral": 0.992644190788269
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "the_recurring_pattern",
+      "turn": null,
+      "attempt": 2,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "Actually, that isn't always it.",
+        "Sometimes I plan because I genuinely enjoy organizing a complicated problem."
+      ],
+      "semantic_score": -0.001567,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_1:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0027775310445576906,
+            "entailment": 0.0011852702591568232,
+            "neutral": 0.9960371851921082
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0007542796083725989,
+            "entailment": 0.003267406253144145,
+            "neutral": 0.9959782361984253
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0064885541796684265,
+            "entailment": 0.0008671770920045674,
+            "neutral": 0.992644190788269
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "the_recurring_pattern",
+      "turn": null,
+      "attempt": 3,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "Actually, that isn't always it.",
+        "Sometimes I plan because I genuinely enjoy organizing a complicated problem."
+      ],
+      "semantic_score": -0.001567,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_2:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0027775310445576906,
+            "entailment": 0.0011852702591568232,
+            "neutral": 0.9960371851921082
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0007542796083725989,
+            "entailment": 0.003267406253144145,
+            "neutral": 0.9959782361984253
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0064885541796684265,
+            "entailment": 0.0008671770920045674,
+            "neutral": 0.992644190788269
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "the_recurring_pattern",
+      "turn": null,
+      "attempt": 1,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+      "approved_claims": [
+        "With the assignment, though, I was definitely avoiding the writing.",
+        "I kept finding more things to organize instead."
+      ],
+      "semantic_score": -0.311918,
+      "classification": "a",
+      "classification_reason": "NLI reports a contradiction to an approved claim; retain rejection pending manual review.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_0:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.000968999695032835,
+            "entailment": 0.0004982696264050901,
+            "neutral": 0.998532772064209
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.9344112873077393,
+            "entailment": 0.0012587410164996982,
+            "neutral": 0.06432996690273285
+          },
+          "strongest": "contradiction",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.002392771653831005,
+            "entailment": 0.00026140938280150294,
+            "neutral": 0.9973458647727966
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "the_recurring_pattern",
+      "turn": null,
+      "attempt": 2,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "With the assignment, though, I was definitely avoiding the writing.",
+        "I kept finding more things to organize instead."
+      ],
+      "semantic_score": -0.311918,
+      "classification": "a",
+      "classification_reason": "NLI reports a contradiction to an approved claim; retain rejection pending manual review.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_1:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.000968999695032835,
+            "entailment": 0.0004982696264050901,
+            "neutral": 0.998532772064209
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.9344112873077393,
+            "entailment": 0.0012587410164996982,
+            "neutral": 0.06432996690273285
+          },
+          "strongest": "contradiction",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.002392771653831005,
+            "entailment": 0.00026140938280150294,
+            "neutral": 0.9973458647727966
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "the_recurring_pattern",
+      "turn": null,
+      "attempt": 3,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "With the assignment, though, I was definitely avoiding the writing.",
+        "I kept finding more things to organize instead."
+      ],
+      "semantic_score": -0.311918,
+      "classification": "a",
+      "classification_reason": "NLI reports a contradiction to an approved claim; retain rejection pending manual review.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_2:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.000968999695032835,
+            "entailment": 0.0004982696264050901,
+            "neutral": 0.998532772064209
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.9344112873077393,
+            "entailment": 0.0012587410164996982,
+            "neutral": 0.06432996690273285
+          },
+          "strongest": "contradiction",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.002392771653831005,
+            "entailment": 0.00026140938280150294,
+            "neutral": 0.9973458647727966
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "the_recurring_pattern",
+      "turn": null,
+      "attempt": 1,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+      "approved_claims": [
+        "Last weekend I started a small coding project without a plan and actually enjoyed figuring it out as I went."
+      ],
+      "semantic_score": -0.497415,
+      "classification": "a",
+      "classification_reason": "NLI reports a contradiction to an approved claim; retain rejection pending manual review.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_0:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.013961433432996273,
+            "entailment": 0.0006960869068279862,
+            "neutral": 0.9853425025939941
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.9815862774848938,
+            "entailment": 2.222610237367917e-05,
+            "neutral": 0.0183914415538311
+          },
+          "strongest": "contradiction",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "the_recurring_pattern",
+      "turn": null,
+      "attempt": 2,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "Last weekend I started a small coding project without a plan and actually enjoyed figuring it out as I went."
+      ],
+      "semantic_score": -0.497415,
+      "classification": "a",
+      "classification_reason": "NLI reports a contradiction to an approved claim; retain rejection pending manual review.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_1:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.013961433432996273,
+            "entailment": 0.0006960869068279862,
+            "neutral": 0.9853425025939941
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.9815862774848938,
+            "entailment": 2.222610237367917e-05,
+            "neutral": 0.0183914415538311
+          },
+          "strongest": "contradiction",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "the_recurring_pattern",
+      "turn": null,
+      "attempt": 3,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "Last weekend I started a small coding project without a plan and actually enjoyed figuring it out as I went."
+      ],
+      "semantic_score": -0.497415,
+      "classification": "a",
+      "classification_reason": "NLI reports a contradiction to an approved claim; retain rejection pending manual review.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_2:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.013961433432996273,
+            "entailment": 0.0006960869068279862,
+            "neutral": 0.9853425025939941
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.9815862774848938,
+            "entailment": 2.222610237367917e-05,
+            "neutral": 0.0183914415538311
+          },
+          "strongest": "contradiction",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "the_recurring_pattern",
+      "turn": null,
+      "attempt": 1,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+      "approved_claims": [
+        "I also realized that planning helps when the task is genuinely complicated.",
+        "It becomes a problem when I keep planning after I already know enough to begin."
+      ],
+      "semantic_score": -0.005482,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [
+        "completed/task"
+      ],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_0:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.01884111575782299,
+            "entailment": 0.0021703080274164677,
+            "neutral": 0.9789886474609375
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0006951981922611594,
+            "entailment": 0.0002075287193292752,
+            "neutral": 0.9990973472595215
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0016053931321948767,
+            "entailment": 0.002319284016266465,
+            "neutral": 0.9960753321647644
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "the_recurring_pattern",
+      "turn": null,
+      "attempt": 2,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "I also realized that planning helps when the task is genuinely complicated.",
+        "It becomes a problem when I keep planning after I already know enough to begin."
+      ],
+      "semantic_score": -0.005482,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [
+        "completed/task"
+      ],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_1:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.01884111575782299,
+            "entailment": 0.0021703080274164677,
+            "neutral": 0.9789886474609375
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0006951981922611594,
+            "entailment": 0.0002075287193292752,
+            "neutral": 0.9990973472595215
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0016053931321948767,
+            "entailment": 0.002319284016266465,
+            "neutral": 0.9960753321647644
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "the_recurring_pattern",
+      "turn": null,
+      "attempt": 3,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "I also realized that planning helps when the task is genuinely complicated.",
+        "It becomes a problem when I keep planning after I already know enough to begin."
+      ],
+      "semantic_score": -0.005482,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [
+        "completed/task"
+      ],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_2:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.01884111575782299,
+            "entailment": 0.0021703080274164677,
+            "neutral": 0.9789886474609375
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0006951981922611594,
+            "entailment": 0.0002075287193292752,
+            "neutral": 0.9990973472595215
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0016053931321948767,
+            "entailment": 0.002319284016266465,
+            "neutral": 0.9960753321647644
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "the_recurring_pattern",
+      "turn": null,
+      "attempt": 1,
+      "draft": "You started a report after making only a rough outline, yet you still feel uncertain about its progress.",
+      "approved_claims": [
+        "[entity_e000001] I started the report after making only a rough outline.",
+        "I still felt uncertain",
+        "I could make progress."
+      ],
+      "semantic_score": 0.241157,
+      "classification": "a",
+      "classification_reason": "NLI reports a contradiction to an approved claim; retain rejection pending manual review.",
+      "content_overlap": [
+        "making",
+        "only",
+        "outline",
+        "progress",
+        "report",
+        "rough",
+        "started",
+        "still",
+        "uncertain"
+      ],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_0:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.9899836778640747,
+            "entailment": 0.00393762718886137,
+            "neutral": 0.006078741513192654
+          },
+          "strongest": "contradiction",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:2",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0069732582196593285,
+            "entailment": 0.001869763946160674,
+            "neutral": 0.991157054901123
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "resistance_to_interpretation",
+      "turn": null,
+      "attempt": 1,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "I've been quieter than usual around my friends lately.",
+        "I don't really know why."
+      ],
+      "semantic_score": 0.000482,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_0:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0004622717679012567,
+            "entailment": 0.00015839452680666,
+            "neutral": 0.9993792772293091
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.002077072625979781,
+            "entailment": 0.00025026671937666833,
+            "neutral": 0.9976726174354553
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0012560597388073802,
+            "entailment": 0.0048322235234081745,
+            "neutral": 0.9939117431640625
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "resistance_to_interpretation",
+      "turn": null,
+      "attempt": 2,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "I've been quieter than usual around my friends lately.",
+        "I don't really know why."
+      ],
+      "semantic_score": 0.000482,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_1:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0004622717679012567,
+            "entailment": 0.00015839452680666,
+            "neutral": 0.9993792772293091
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.002077072625979781,
+            "entailment": 0.00025026671937666833,
+            "neutral": 0.9976726174354553
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0012560597388073802,
+            "entailment": 0.0048322235234081745,
+            "neutral": 0.9939117431640625
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "resistance_to_interpretation",
+      "turn": null,
+      "attempt": 3,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt sounds like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "I've been quieter than usual around my friends lately.",
+        "I don't really know why."
+      ],
+      "semantic_score": 0.000482,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_2:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0004622717679012567,
+            "entailment": 0.00015839452680666,
+            "neutral": 0.9993792772293091
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.002077072625979781,
+            "entailment": 0.00025026671937666833,
+            "neutral": 0.9976726174354553
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:1",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0012560597388073802,
+            "entailment": 0.0048322235234081745,
+            "neutral": 0.9939117431640625
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "resistance_to_interpretation",
+      "turn": null,
+      "attempt": 1,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion.",
+      "approved_claims": [
+        "I did have a busy week, and by the time I meet them I sometimes don't have much energy left to talk."
+      ],
+      "semantic_score": 0.00021,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_0:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.00023099941608961672,
+            "entailment": 0.0005038076778873801,
+            "neutral": 0.9992651343345642
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_0:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0004068327834829688,
+            "entailment": 0.0005534685333259404,
+            "neutral": 0.9990397095680237
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "resistance_to_interpretation",
+      "turn": null,
+      "attempt": 2,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt seems like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "I did have a busy week, and by the time I meet them I sometimes don't have much energy left to talk."
+      ],
+      "semantic_score": 0.00021,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_1:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.00023099941608961672,
+            "entailment": 0.0005038076778873801,
+            "neutral": 0.9992651343345642
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_1:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0004068327834829688,
+            "entailment": 0.0005534685333259404,
+            "neutral": 0.9990397095680237
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    },
+    {
+      "topic_id": "resistance_to_interpretation",
+      "turn": null,
+      "attempt": 3,
+      "draft": "You completed something important, yet the effort is still showing up as exhaustion. \nIt seems like the pressure may be weighing more heavily than the event itself.",
+      "approved_claims": [
+        "I did have a busy week, and by the time I meet them I sometimes don't have much energy left to talk."
+      ],
+      "semantic_score": 0.00021,
+      "classification": "c",
+      "classification_reason": "Draft is generic and harmless but does not identify enough approved content.",
+      "content_overlap": [],
+      "failed_checks": [
+        {
+          "pair_id": "candidate_2:support",
+          "purpose": "evidence_support",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.00023099941608961672,
+            "entailment": 0.0005038076778873801,
+            "neutral": 0.9992651343345642
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        },
+        {
+          "pair_id": "candidate_2:claim:0",
+          "purpose": "claim_coverage",
+          "premise": null,
+          "hypothesis": null,
+          "scores": {
+            "contradiction": 0.0004068327834829688,
+            "entailment": 0.0005534685333259404,
+            "neutral": 0.9990397095680237
+          },
+          "strongest": "neutral",
+          "threshold": "argmax class must not be neutral or contradiction",
+          "method": "local NLI three-class argmax"
+        }
+      ]
+    }
+  ],
+  "method_notice": "Original production gate used local NLI only; no lexical-overlap or embedding threshold was used for rejection."
+}

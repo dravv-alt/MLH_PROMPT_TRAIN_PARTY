@@ -1,0 +1,238 @@
+{
+  "schema_version": "sanctuary.dataset-local-generation.v1",
+  "source_analysis": "C:\\Users\\bhavv\\OneDrive\\Desktop\\Dravvya(4th Sem)\\Projects\\MAIN\\MAIN\\Sanctuary\\MLH_PROMPT_TRAIN_PARTY\\V2\\backend\\evaluation\\sanctuary_v2_dataset_classical_results.json",
+  "dataset": {
+    "name": "Sanctuary V2 — Multi-Turn Narrative Understanding & Local NLG Evaluation Dataset",
+    "version": "1.0",
+    "sha256": "83cbe65175b9c8fce2c2f7098a02d420f2e1f290637eb28e969ec41ba0d93d30"
+  },
+  "inference_contract": {
+    "model_visible_fields": [
+      "response_plan"
+    ],
+    "evaluator_only_fields": [
+      "expected_state",
+      "expected_labels",
+      "topic metadata",
+      "acceptance gates"
+    ],
+    "gold_leakage_prevented_by": "LocalGenerationProvider.generate receives plan, never the source record",
+    "hosted_provider": false,
+    "persistent_application_writes": false
+  },
+  "configuration": {
+    "profile": "balanced",
+    "limit": 1
+  },
+  "summary": {
+    "turns_generated": 1,
+    "local_transformer_responses": 0,
+    "classical_fallbacks": 1,
+    "policy_valid": 1,
+    "rejected_candidates": 2,
+    "generation_errors": 0,
+    "mean_generation_latency_seconds": 30.891,
+    "median_generation_latency_seconds": 30.891,
+    "total_runtime_seconds": 30.891,
+    "semantic_state_accuracy": null,
+    "semantic_state_accuracy_reason": "requires human review or a frozen machine-readable rubric"
+  },
+  "records": [
+    {
+      "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+      "topic_title": "Achievement, exhaustion and the meaning of success",
+      "turn_id": 1,
+      "user_prompt": "I finally got the internship I've been working toward for months. Everyone's congratulating me, and I know I should be happy. But honestly, I just feel tired. Now I'm already thinking about what I need to achieve next.",
+      "response_plan": {
+        "schema_version": "sanctuary.response-plan.v1",
+        "plan_id": "rp_d8ba9fd9912b012d",
+        "session_id": null,
+        "source_turn_id": 1,
+        "state_revision": 0,
+        "intent": "reflect_current_meaning",
+        "strategy": "standard",
+        "claims_to_communicate": [
+          {
+            "id": "claim_1",
+            "text": "I finally got the internship I've been working toward for months.",
+            "span": [
+              0,
+              65
+            ],
+            "kind": "achievement",
+            "provenance": "direct_user_statement",
+            "epistemic_status": "asserted",
+            "required": true
+          },
+          {
+            "id": "claim_4",
+            "text": "But honestly, I just feel tired.",
+            "span": [
+              126,
+              158
+            ],
+            "kind": "physical_exhaustion",
+            "provenance": "direct_user_statement",
+            "epistemic_status": "asserted",
+            "required": true
+          },
+          {
+            "id": "claim_5",
+            "text": "Now I'm already thinking about what I need to achieve next.",
+            "span": [
+              159,
+              218
+            ],
+            "kind": "next_orientation",
+            "provenance": "direct_user_statement",
+            "epistemic_status": "asserted",
+            "required": true
+          }
+        ],
+        "evidence_ids": [
+          "ev_52a40da00f22",
+          "ev_a1f8b2f160d6",
+          "ev_746ba9cd5561",
+          "ev_2790540cfa7d",
+          "ev_693d80cd655d",
+          "ev_f42f82d2c795",
+          "ev_889a3bd65e55"
+        ],
+        "relevant_proposition_ids": [
+          "pr_5c24d0e47286",
+          "pr_ba983c21096b",
+          "pr_1e6b25af74b6",
+          "pr_b3fe8fda28e7",
+          "pr_dc61cfd1e901",
+          "pr_24bb7b7d90d1",
+          "pr_1942539c5151"
+        ],
+        "relevant_graph_node_ids": [],
+        "correction_context": {
+          "is_correction": false,
+          "rejected_current_claims": [],
+          "superseded_propositions": []
+        },
+        "required_semantic_relations": [],
+        "prohibited_claims": [
+          "Do not diagnose, advise, ask a question, minimize, or invent a cause.",
+          "Do not turn a temporary experience into a permanent identity claim.",
+          "Do not present retrieval, NLI, filter, or graph scores as facts."
+        ],
+        "uncertainty_constraints": [],
+        "interaction_policy": {
+          "questions": false,
+          "advice": false,
+          "diagnosis": false,
+          "maximum_sentences": 2,
+          "maximum_words": 70
+        },
+        "style_constraints": {
+          "tone": "clear, warm, and precise",
+          "voice": "second_person_reflection"
+        },
+        "fallback_policy": "local_evidence_bound_classical"
+      },
+      "response_text": "You finally got the internship you've been working toward for months, and you feel tired. You're already thinking about the next goal.",
+      "response_mode": "classical_local_fallback",
+      "generation": {
+        "status": "fallback",
+        "mode": "classical_local_fallback",
+        "reason": "no_transformer_candidate_passed",
+        "profile": "balanced",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "rejected",
+            "validation": {
+              "is_valid": false,
+              "violations": [
+                "missing_required_claim:claim_1",
+                "missing_required_claim:claim_4",
+                "no_advice"
+              ],
+              "required_claim_coverage": {
+                "claim_1": false,
+                "claim_4": false,
+                "claim_5": true
+              }
+            },
+            "input_tokens": 340,
+            "output_tokens": 46,
+            "generation_seconds": 3.328
+          },
+          {
+            "attempt": 2,
+            "status": "rejected",
+            "validation": {
+              "is_valid": false,
+              "violations": [
+                "missing_required_claim:claim_4",
+                "sentence_count_1_to_2"
+              ],
+              "required_claim_coverage": {
+                "claim_1": true,
+                "claim_4": false,
+                "claim_5": true
+              }
+            },
+            "input_tokens": 371,
+            "output_tokens": 54,
+            "generation_seconds": 1.766
+          }
+        ],
+        "fallback_validation": {
+          "is_valid": true,
+          "violations": [],
+          "required_claim_coverage": {
+            "claim_1": true,
+            "claim_4": true,
+            "claim_5": true
+          }
+        },
+        "capabilities": {
+          "provider_version": "local-llama3.2-1b.response-plan.v1",
+          "model_id": "meta-llama/Llama-3.2-1B-Instruct",
+          "model_revision": "22e9fdbe3473c7affd8596fdc248e67e3a004da1",
+          "model_path": "C:\\Users\\bhavv\\.cache\\huggingface\\hub\\models--unsloth--llama-3.2-1b-instruct\\snapshots\\22e9fdbe3473c7affd8596fdc248e67e3a004da1",
+          "resources_present": true,
+          "ready": true,
+          "device": "cuda",
+          "dtype": "float16",
+          "load_seconds": 25.688,
+          "error": null,
+          "network_access": false,
+          "profiles": [
+            "precise",
+            "balanced",
+            "natural"
+          ]
+        }
+      },
+      "generation_latency_seconds": 30.891,
+      "policy": {
+        "plan_response_valid": true,
+        "plan_violations": [],
+        "reflective_valid": true,
+        "reflective_violations": [],
+        "human_tone_valid": true,
+        "human_tone_violations": []
+      },
+      "evaluator_only": {
+        "expected_state": [
+          "`ASSERTED`: Internship achieved; tiredness; next-goal thoughts.",
+          "`ASSERTED`: Belief that the user should feel happy.",
+          "`UNRESOLVED`: Why the user feels tired.",
+          "Do not equate expected happiness with experienced happiness."
+        ],
+        "expected_labels": [
+          "ASSERTED",
+          "UNRESOLVED"
+        ],
+        "semantic_judgment": "not_scored_requires_human_or_machine_readable_rubric",
+        "expects_correction": false,
+        "expects_uncertainty": true
+      }
+    }
+  ]
+}

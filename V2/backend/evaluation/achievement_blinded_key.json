@@ -1,0 +1,58 @@
+{
+  "system_a": "C:\\Users\\bhavv\\OneDrive\\Desktop\\Dravvya(4th Sem)\\Projects\\MAIN\\MAIN\\Sanctuary\\MLH_PROMPT_TRAIN_PARTY\\V2\\backend\\evaluation\\sanctuary_v2_dataset_local_results.json",
+  "system_b": "C:\\Users\\bhavv\\OneDrive\\Desktop\\Dravvya(4th Sem)\\Projects\\MAIN\\MAIN\\Sanctuary\\MLH_PROMPT_TRAIN_PARTY\\V2\\backend\\evaluation\\achievement_10turn_reflective_v2.json",
+  "items": [
+    {
+      "item_id": "4bfa7fef567e",
+      "response_a_source": "system_a",
+      "response_b_source": "system_b"
+    },
+    {
+      "item_id": "c62f1cf0592a",
+      "response_a_source": "system_a",
+      "response_b_source": "system_b"
+    },
+    {
+      "item_id": "c45de180a0f6",
+      "response_a_source": "system_a",
+      "response_b_source": "system_b"
+    },
+    {
+      "item_id": "915bede581ae",
+      "response_a_source": "system_a",
+      "response_b_source": "system_b"
+    },
+    {
+      "item_id": "5c45fd55ccad",
+      "response_a_source": "system_b",
+      "response_b_source": "system_a"
+    },
+    {
+      "item_id": "a0b57370b689",
+      "response_a_source": "system_a",
+      "response_b_source": "system_b"
+    },
+    {
+      "item_id": "9ba3af494ca0",
+      "response_a_source": "system_a",
+      "response_b_source": "system_b"
+    },
+    {
+      "item_id": "fca214c76b38",
+      "response_a_source": "system_a",
+      "response_b_source": "system_b"
+    },
+    {
+      "item_id": "411e842eef0a",
+      "response_a_source": "system_a",
+      "response_b_source": "system_b"
+    },
+    {
+      "item_id": "4630b96ee478",
+      "response_a_source": "system_a",
+      "response_b_source": "system_b"
+    }
+  ],
+  "status": "awaiting_independent_human_ratings",
+  "minimum_required_raters": 2
+}
