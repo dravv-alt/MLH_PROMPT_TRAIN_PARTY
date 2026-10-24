@@ -1,0 +1,2178 @@
+[
+  {
+    "turn_id": "dev_t01_01",
+    "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+    "topic_title": "Achievement, exhaustion and the meaning of success",
+    "text": "I finally got the internship I've been working toward for months. Everyone's congratulating me, and I know I should be happy. But honestly, I just feel tired. Now I'm already thinking about what I need to achieve next.",
+    "commitments": [
+      {
+        "predicate": "get",
+        "agent": "user",
+        "patient": "internship",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          10,
+          13
+        ]
+      },
+      {
+        "predicate": "feel",
+        "agent": "user",
+        "patient": "tired",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": true,
+        "span": [
+          152,
+          157
+        ]
+      },
+      {
+        "predicate": "should_be",
+        "agent": "user",
+        "patient": "expectation",
+        "polarity": "positive",
+        "modality": "obligation",
+        "hedge": false,
+        "span": [
+          109,
+          115
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "type": "contrast",
+        "arg1_span": [
+          0,
+          126
+        ],
+        "arg2_span": [
+          126,
+          218
+        ],
+        "explicit_connective": "but"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t01_01_unfilled_reason",
+        "type": "unfilled_role",
+        "target_span": [
+          152,
+          157
+        ],
+        "predicate": "feel",
+        "description": "Unfilled causal role for feeling tired."
+      },
+      {
+        "gap_id": "gap_dev_t01_01_counterfactual_obligation",
+        "type": "counterfactual_obligation",
+        "target_span": [
+          109,
+          115
+        ],
+        "predicate": "should",
+        "description": "Stated obligation with unresolved tension."
+      },
+      {
+        "gap_id": "gap_dev_t01_01_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What was happening around you when you began feeling tired?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t01_02",
+    "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+    "topic_title": "Achievement, exhaustion and the meaning of success",
+    "text": "I don't think the tiredness is necessarily from the internship itself. I think I'm exhausted by the feeling that I have to keep proving I'm worth the opportunity.",
+    "commitments": [
+      {
+        "predicate": "feel",
+        "agent": "user",
+        "patient": "tired",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": true,
+        "span": [
+          18,
+          23
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [
+      {
+        "is_correction": true,
+        "cue": "correction_cue",
+        "target": "prior_clause",
+        "status": "resolved"
+      }
+    ],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t01_02_unfilled_reason",
+        "type": "unfilled_role",
+        "target_span": [
+          18,
+          23
+        ],
+        "predicate": "feel",
+        "description": "Unfilled causal role for feeling tired."
+      },
+      {
+        "gap_id": "gap_dev_t01_02_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What was happening around you when you began feeling tired?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t01_03",
+    "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+    "topic_title": "Achievement, exhaustion and the meaning of success",
+    "text": "Actually, I don't think I need to prove that I'm worthy. I'm excited about the internship. I'm just physically exhausted after months of preparation, and I want to enjoy the achievement without immediately planning the next thing.",
+    "commitments": [
+      {
+        "predicate": "feel",
+        "agent": "user",
+        "patient": "exhausted",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          111,
+          120
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [
+      {
+        "is_correction": true,
+        "cue": "correction_cue",
+        "target": "prior_clause",
+        "status": "resolved"
+      }
+    ],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t01_03_unfilled_reason",
+        "type": "unfilled_role",
+        "target_span": [
+          111,
+          120
+        ],
+        "predicate": "feel",
+        "description": "Unfilled causal role for feeling exhausted."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What was happening around you when you began feeling exhausted?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t01_04",
+    "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+    "topic_title": "Achievement, exhaustion and the meaning of success",
+    "text": "I think I've spent so long preparing for this that I don't really know how to stop preparing. Even when something goes right, part of me is already looking for the next task.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t01_04_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t01_05",
+    "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+    "topic_title": "Achievement, exhaustion and the meaning of success",
+    "text": "Although, I did enjoy telling my closest friend about it yesterday. I wasn't thinking about my next goal then.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t01_06",
+    "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+    "topic_title": "Achievement, exhaustion and the meaning of success",
+    "text": "Maybe I don't need to stop thinking about the future completely. I just don't want every good thing to turn into another deadline.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t01_06_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t01_07",
+    "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+    "topic_title": "Achievement, exhaustion and the meaning of success",
+    "text": "My manager also said I don't need to know everything immediately. That was reassuring, even though I still want to do well.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t01_08",
+    "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+    "topic_title": "Achievement, exhaustion and the meaning of success",
+    "text": "I noticed I felt better after I slept properly. That makes me think the physical exhaustion was a bigger part of this than I first realized.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t01_09",
+    "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+    "topic_title": "Achievement, exhaustion and the meaning of success",
+    "text": "I'm still thinking about what comes next, but it doesn't feel as urgent today. I can be excited and tired at the same time.",
+    "commitments": [
+      {
+        "predicate": "feel",
+        "agent": "user",
+        "patient": "tired",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          100,
+          105
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "type": "contrast",
+        "arg1_span": [
+          0,
+          42
+        ],
+        "arg2_span": [
+          42,
+          123
+        ],
+        "explicit_connective": "but"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t01_09_unfilled_reason",
+        "type": "unfilled_role",
+        "target_span": [
+          100,
+          105
+        ],
+        "predicate": "feel",
+        "description": "Unfilled causal role for feeling tired."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What was happening around you when you began feeling tired?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t01_10",
+    "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+    "topic_title": "Achievement, exhaustion and the meaning of success",
+    "text": "If I had to describe the whole thing now, I'd say I'm proud of what I achieved, physically tired from getting here, and trying to give myself room to enjoy it before moving on.",
+    "commitments": [
+      {
+        "predicate": "feel",
+        "agent": "user",
+        "patient": "tired",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          91,
+          96
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t01_10_unfilled_reason",
+        "type": "unfilled_role",
+        "target_span": [
+          91,
+          96
+        ],
+        "predicate": "feel",
+        "description": "Unfilled causal role for feeling tired."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What was happening around you when you began feeling tired?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t02_01",
+    "topic_id": "the_recurring_pattern",
+    "topic_title": "The recurring pattern",
+    "text": "I've noticed that whenever I start something important, I make a very detailed plan before I actually begin.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t02_02",
+    "topic_id": "the_recurring_pattern",
+    "topic_title": "The recurring pattern",
+    "text": "It happened with my last assignment too. I spent almost two evenings organizing everything before writing the first paragraph.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t02_03",
+    "topic_id": "the_recurring_pattern",
+    "topic_title": "The recurring pattern",
+    "text": "I guess I do this because I'm afraid of doing things badly.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "causal",
+        "arg1_span": [
+          0,
+          18
+        ],
+        "arg2_span": [
+          18,
+          59
+        ],
+        "explicit_connective": "because"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t02_03_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t02_04",
+    "topic_id": "the_recurring_pattern",
+    "topic_title": "The recurring pattern",
+    "text": "Actually, that isn't always it. Sometimes I plan because I genuinely enjoy organizing a complicated problem.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "causal",
+        "arg1_span": [
+          0,
+          49
+        ],
+        "arg2_span": [
+          49,
+          108
+        ],
+        "explicit_connective": "because"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t02_05",
+    "topic_id": "the_recurring_pattern",
+    "topic_title": "The recurring pattern",
+    "text": "With the assignment, though, I was definitely avoiding the writing. I kept finding more things to organize instead.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t02_06",
+    "topic_id": "the_recurring_pattern",
+    "topic_title": "The recurring pattern",
+    "text": "Last weekend I started a small coding project without a plan and actually enjoyed figuring it out as I went.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t02_07",
+    "topic_id": "the_recurring_pattern",
+    "topic_title": "The recurring pattern",
+    "text": "The difference might be that the coding project didn't feel like anyone was going to judge the result.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t02_08",
+    "topic_id": "the_recurring_pattern",
+    "topic_title": "The recurring pattern",
+    "text": "I also realized that planning helps when the task is genuinely complicated. It becomes a problem when I keep planning after I already know enough to begin.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t02_09",
+    "topic_id": "the_recurring_pattern",
+    "topic_title": "The recurring pattern",
+    "text": "Today I started the report after making only a rough outline. I still felt uncertain, but I could make progress.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "contrast",
+        "arg1_span": [
+          0,
+          86
+        ],
+        "arg2_span": [
+          86,
+          112
+        ],
+        "explicit_connective": "but"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t02_10",
+    "topic_id": "the_recurring_pattern",
+    "topic_title": "The recurring pattern",
+    "text": "So maybe the pattern isn't that I always procrastinate. It's that, with work I expect people to judge, I sometimes keep preparing after preparation has stopped helping.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t02_10_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t03_01",
+    "topic_id": "resistance_to_interpretation",
+    "topic_title": "Resistance to interpretation",
+    "text": "I've been quieter than usual around my friends lately. I don't really know why.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t03_02",
+    "topic_id": "resistance_to_interpretation",
+    "topic_title": "Resistance to interpretation",
+    "text": "Maybe I'm upset with them, but I can't point to anything specific.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "contrast",
+        "arg1_span": [
+          0,
+          27
+        ],
+        "arg2_span": [
+          27,
+          66
+        ],
+        "explicit_connective": "but"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t03_02_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t03_03",
+    "topic_id": "resistance_to_interpretation",
+    "topic_title": "Resistance to interpretation",
+    "text": "I did have a busy week, and by the time I meet them I sometimes don't have much energy left to talk.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t03_04",
+    "topic_id": "resistance_to_interpretation",
+    "topic_title": "Resistance to interpretation",
+    "text": "I wonder if I'm pulling away because I'm afraid they'll notice I've changed.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "causal",
+        "arg1_span": [
+          0,
+          29
+        ],
+        "arg2_span": [
+          29,
+          76
+        ],
+        "explicit_connective": "because"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t03_05",
+    "topic_id": "resistance_to_interpretation",
+    "topic_title": "Resistance to interpretation",
+    "text": "You keep making this sound like I'm afraid of something. I haven't said that it's fear. I'm trying to work out what's happening.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t03_06",
+    "topic_id": "resistance_to_interpretation",
+    "topic_title": "Resistance to interpretation",
+    "text": "I might be a little uncomfortable, but mostly I'm tired and less talkative. That's all I can confidently say right now.",
+    "commitments": [
+      {
+        "predicate": "feel",
+        "agent": "user",
+        "patient": "tired",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          50,
+          55
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "type": "contrast",
+        "arg1_span": [
+          0,
+          35
+        ],
+        "arg2_span": [
+          35,
+          119
+        ],
+        "explicit_connective": "but"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t03_06_unfilled_reason",
+        "type": "unfilled_role",
+        "target_span": [
+          50,
+          55
+        ],
+        "predicate": "feel",
+        "description": "Unfilled causal role for feeling tired."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What was happening around you when you began feeling tired?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t03_07",
+    "topic_id": "resistance_to_interpretation",
+    "topic_title": "Resistance to interpretation",
+    "text": "Yesterday I spent an entire evening with one friend and felt completely normal. It seems to happen more in groups.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t03_08",
+    "topic_id": "resistance_to_interpretation",
+    "topic_title": "Resistance to interpretation",
+    "text": "Actually, one group conversation was fine too. I think it depends on the day and how much energy I have.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t03_08_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t03_09",
+    "topic_id": "resistance_to_interpretation",
+    "topic_title": "Resistance to interpretation",
+    "text": "I don't want to force an explanation just so the story makes sense. I'm okay with not knowing yet.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t03_10",
+    "topic_id": "resistance_to_interpretation",
+    "topic_title": "Resistance to interpretation",
+    "text": "For now, the most accurate description is that I've been quieter sometimes, especially when tired. I don't yet know whether there's a deeper reason.",
+    "commitments": [
+      {
+        "predicate": "feel",
+        "agent": "user",
+        "patient": "tired",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          92,
+          97
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t03_10_unfilled_reason",
+        "type": "unfilled_role",
+        "target_span": [
+          92,
+          97
+        ],
+        "predicate": "feel",
+        "description": "Unfilled causal role for feeling tired."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What was happening around you when you began feeling tired?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t04_01",
+    "topic_id": "memory_consent",
+    "topic_title": "Memory consent",
+    "text": "I had a really meaningful conversation with my sister today. I don't want to lose how it felt, but I don't know if I want to write down all the details.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "contrast",
+        "arg1_span": [
+          0,
+          95
+        ],
+        "arg2_span": [
+          95,
+          152
+        ],
+        "explicit_connective": "but"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t04_02",
+    "topic_id": "memory_consent",
+    "topic_title": "Memory consent",
+    "text": "What I want to remember is that I felt understood. The exact things we said aren't that important.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t04_03",
+    "topic_id": "memory_consent",
+    "topic_title": "Memory consent",
+    "text": "She also apologized for something that happened last year, and I wasn't expecting that.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t04_04",
+    "topic_id": "memory_consent",
+    "topic_title": "Memory consent",
+    "text": "I think I want to remember the apology too, but not the argument that led up to it.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "contrast",
+        "arg1_span": [
+          0,
+          44
+        ],
+        "arg2_span": [
+          44,
+          83
+        ],
+        "explicit_connective": "but"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t04_04_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t04_05",
+    "topic_id": "memory_consent",
+    "topic_title": "Memory consent",
+    "text": "Actually, even saying that I felt understood might be enough. I don't need a detailed record of this.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t04_06",
+    "topic_id": "memory_consent",
+    "topic_title": "Memory consent",
+    "text": "Can you show me exactly what would be saved before anything is stored?",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t04_07",
+    "topic_id": "memory_consent",
+    "topic_title": "Memory consent",
+    "text": "The preview sounds right, but please don't include my sister's name.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "contrast",
+        "arg1_span": [
+          0,
+          26
+        ],
+        "arg2_span": [
+          26,
+          68
+        ],
+        "explicit_connective": "but"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t04_08",
+    "topic_id": "memory_consent",
+    "topic_title": "Memory consent",
+    "text": "Okay, save that short version.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t04_09",
+    "topic_id": "memory_consent",
+    "topic_title": "Memory consent",
+    "text": "Looking at it again, I don't want this kept as a permanent memory. I'd rather have it only in my journal for now.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t04_10",
+    "topic_id": "memory_consent",
+    "topic_title": "Memory consent",
+    "text": "I still want to keep the journal entry, just not a separate remembered-moment card.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t05_01",
+    "topic_id": "conflict_interpretation_and_changing_understanding",
+    "topic_title": "Conflict, interpretation and changing understanding",
+    "text": "My teammate gave me a very short reply when I sent them the work I'd completed. I couldn't tell what they thought of it.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [
+      {
+        "pronoun": "they",
+        "span": [
+          101,
+          105
+        ],
+        "antecedent": "discourse_context",
+        "status": "resolved"
+      }
+    ],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t05_02",
+    "topic_id": "conflict_interpretation_and_changing_understanding",
+    "topic_title": "Conflict, interpretation and changing understanding",
+    "text": "I immediately wondered whether they thought I'd done a bad job.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [
+      {
+        "pronoun": "they",
+        "span": [
+          31,
+          35
+        ],
+        "antecedent": "discourse_context",
+        "status": "resolved"
+      }
+    ],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t05_03",
+    "topic_id": "conflict_interpretation_and_changing_understanding",
+    "topic_title": "Conflict, interpretation and changing understanding",
+    "text": "They have been busy with a deadline, though, so maybe they just didn't have time to write much.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [
+      {
+        "pronoun": "they",
+        "span": [
+          54,
+          58
+        ],
+        "antecedent": "discourse_context",
+        "status": "resolved"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t05_03_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t05_04",
+    "topic_id": "conflict_interpretation_and_changing_understanding",
+    "topic_title": "Conflict, interpretation and changing understanding",
+    "text": "I asked them about it today, and they said the work was useful but they hadn't reviewed all of it yet.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "contrast",
+        "arg1_span": [
+          0,
+          63
+        ],
+        "arg2_span": [
+          63,
+          102
+        ],
+        "explicit_connective": "but"
+      }
+    ],
+    "corrections": [],
+    "references": [
+      {
+        "pronoun": "they",
+        "span": [
+          33,
+          37
+        ],
+        "antecedent": "discourse_context",
+        "status": "resolved"
+      }
+    ],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t05_05",
+    "topic_id": "conflict_interpretation_and_changing_understanding",
+    "topic_title": "Conflict, interpretation and changing understanding",
+    "text": "That reassured me, but I still want to know whether there are things I should improve.",
+    "commitments": [
+      {
+        "predicate": "should_be",
+        "agent": "user",
+        "patient": "expectation",
+        "polarity": "positive",
+        "modality": "obligation",
+        "hedge": false,
+        "span": [
+          71,
+          77
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "type": "contrast",
+        "arg1_span": [
+          0,
+          19
+        ],
+        "arg2_span": [
+          19,
+          86
+        ],
+        "explicit_connective": "but"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t05_05_counterfactual_obligation",
+        "type": "counterfactual_obligation",
+        "target_span": [
+          71,
+          77
+        ],
+        "predicate": "should",
+        "description": "Stated obligation with unresolved tension."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What expectation was in place when that happened?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t05_06",
+    "topic_id": "conflict_interpretation_and_changing_understanding",
+    "topic_title": "Conflict, interpretation and changing understanding",
+    "text": "They later pointed out that one section was confusing. The rest of the work wasn't discussed.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t05_07",
+    "topic_id": "conflict_interpretation_and_changing_understanding",
+    "topic_title": "Conflict, interpretation and changing understanding",
+    "text": "I felt defensive at first, but when I reread the section, I could see what they meant.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "contrast",
+        "arg1_span": [
+          0,
+          27
+        ],
+        "arg2_span": [
+          27,
+          86
+        ],
+        "explicit_connective": "but"
+      }
+    ],
+    "corrections": [],
+    "references": [
+      {
+        "pronoun": "they",
+        "span": [
+          75,
+          79
+        ],
+        "antecedent": "discourse_context",
+        "status": "resolved"
+      }
+    ],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t05_08",
+    "topic_id": "conflict_interpretation_and_changing_understanding",
+    "topic_title": "Conflict, interpretation and changing understanding",
+    "text": "I revised that section, and the teammate said it was clearer. They still haven't reviewed the remaining sections.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [
+      {
+        "pronoun": "they",
+        "span": [
+          62,
+          66
+        ],
+        "antecedent": "discourse_context",
+        "status": "resolved"
+      }
+    ],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t05_09",
+    "topic_id": "conflict_interpretation_and_changing_understanding",
+    "topic_title": "Conflict, interpretation and changing understanding",
+    "text": "I think I treated the short reply as a judgment before I had enough information. That doesn't mean every concern I have is automatically wrong.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t05_09_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t05_10",
+    "topic_id": "conflict_interpretation_and_changing_understanding",
+    "topic_title": "Conflict, interpretation and changing understanding",
+    "text": "Now I see it as an unfinished review, one useful correction, and a section that improved after revision. I still need the rest of the feedback.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t06_01",
+    "topic_id": "ambivalence_and_changing_preferences",
+    "topic_title": "Ambivalence and changing preferences",
+    "text": "I've been considering joining a new project. It sounds exciting, but I'm not sure I have the energy for another commitment.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "contrast",
+        "arg1_span": [
+          0,
+          65
+        ],
+        "arg2_span": [
+          65,
+          123
+        ],
+        "explicit_connective": "but"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t06_02",
+    "topic_id": "ambivalence_and_changing_preferences",
+    "topic_title": "Ambivalence and changing preferences",
+    "text": "The project would teach me something new, which is the main reason I'm interested.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t06_03",
+    "topic_id": "ambivalence_and_changing_preferences",
+    "topic_title": "Ambivalence and changing preferences",
+    "text": "My calendar is already full, and I don't want to end up neglecting the work I've already agreed to do.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t06_04",
+    "topic_id": "ambivalence_and_changing_preferences",
+    "topic_title": "Ambivalence and changing preferences",
+    "text": "I think I should say no. Taking on less would probably be sensible.",
+    "commitments": [
+      {
+        "predicate": "should_be",
+        "agent": "user",
+        "patient": "expectation",
+        "polarity": "positive",
+        "modality": "obligation",
+        "hedge": false,
+        "span": [
+          10,
+          16
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t06_04_counterfactual_obligation",
+        "type": "counterfactual_obligation",
+        "target_span": [
+          10,
+          16
+        ],
+        "predicate": "should",
+        "description": "Stated obligation with unresolved tension."
+      },
+      {
+        "gap_id": "gap_dev_t06_04_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What expectation was in place when that happened?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t06_05",
+    "topic_id": "ambivalence_and_changing_preferences",
+    "topic_title": "Ambivalence and changing preferences",
+    "text": "I spoke with the project lead, and it turns out I could contribute just a few hours each week instead of owning a whole section.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t06_06",
+    "topic_id": "ambivalence_and_changing_preferences",
+    "topic_title": "Ambivalence and changing preferences",
+    "text": "That makes me more interested, but I still want to protect my weekends.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "contrast",
+        "arg1_span": [
+          0,
+          31
+        ],
+        "arg2_span": [
+          31,
+          71
+        ],
+        "explicit_connective": "but"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t06_07",
+    "topic_id": "ambivalence_and_changing_preferences",
+    "topic_title": "Ambivalence and changing preferences",
+    "text": "I could probably try it for a month, as long as I can step back afterward if it's too much.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t06_08",
+    "topic_id": "ambivalence_and_changing_preferences",
+    "topic_title": "Ambivalence and changing preferences",
+    "text": "I checked my schedule, and even those few hours would overlap with something important next month.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t06_09",
+    "topic_id": "ambivalence_and_changing_preferences",
+    "topic_title": "Ambivalence and changing preferences",
+    "text": "I think I'll ask whether I can join after that deadline instead. I don't want to turn down the opportunity entirely.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t06_09_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t06_10",
+    "topic_id": "ambivalence_and_changing_preferences",
+    "topic_title": "Ambivalence and changing preferences",
+    "text": "I haven't decided yet. I'm interested in the project, but the timing matters more than I first realized.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "contrast",
+        "arg1_span": [
+          0,
+          54
+        ],
+        "arg2_span": [
+          54,
+          104
+        ],
+        "explicit_connective": "but"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t07_01",
+    "topic_id": "boundaries_and_personal_agency",
+    "topic_title": "Boundaries and personal agency",
+    "text": "A friend keeps asking me to help with tasks when I'm already busy. I usually say yes, even when the timing is bad.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t07_02",
+    "topic_id": "boundaries_and_personal_agency",
+    "topic_title": "Boundaries and personal agency",
+    "text": "I don't want them to think I don't care about them.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t07_03",
+    "topic_id": "boundaries_and_personal_agency",
+    "topic_title": "Boundaries and personal agency",
+    "text": "I also genuinely like helping them. It's not as though every request is unwanted.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t07_04",
+    "topic_id": "boundaries_and_personal_agency",
+    "topic_title": "Boundaries and personal agency",
+    "text": "Yesterday I agreed to something and then felt annoyed with myself because I'd planned to rest.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "causal",
+        "arg1_span": [
+          0,
+          66
+        ],
+        "arg2_span": [
+          66,
+          94
+        ],
+        "explicit_connective": "because"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t07_05",
+    "topic_id": "boundaries_and_personal_agency",
+    "topic_title": "Boundaries and personal agency",
+    "text": "Actually, I wasn't annoyed with my friend. I was frustrated that I hadn't been honest about having other plans.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t07_06",
+    "topic_id": "boundaries_and_personal_agency",
+    "topic_title": "Boundaries and personal agency",
+    "text": "I told them I couldn't help with the next request because I had already made plans. They said that was completely fine.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "causal",
+        "arg1_span": [
+          0,
+          50
+        ],
+        "arg2_span": [
+          50,
+          119
+        ],
+        "explicit_connective": "because"
+      }
+    ],
+    "corrections": [],
+    "references": [
+      {
+        "pronoun": "they",
+        "span": [
+          84,
+          88
+        ],
+        "antecedent": "discourse_context",
+        "status": "resolved"
+      }
+    ],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t07_07",
+    "topic_id": "boundaries_and_personal_agency",
+    "topic_title": "Boundaries and personal agency",
+    "text": "I felt relieved afterward, but also a little guilty. Both reactions surprised me.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "contrast",
+        "arg1_span": [
+          0,
+          27
+        ],
+        "arg2_span": [
+          27,
+          81
+        ],
+        "explicit_connective": "but"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t07_08",
+    "topic_id": "boundaries_and_personal_agency",
+    "topic_title": "Boundaries and personal agency",
+    "text": "I still want to help when I can. I just don't want to automatically treat every request as something I have to agree to.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t07_09",
+    "topic_id": "boundaries_and_personal_agency",
+    "topic_title": "Boundaries and personal agency",
+    "text": "Today I said yes to a different request because I actually had time and wanted to do it.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "causal",
+        "arg1_span": [
+          0,
+          40
+        ],
+        "arg2_span": [
+          40,
+          88
+        ],
+        "explicit_connective": "because"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t07_10",
+    "topic_id": "boundaries_and_personal_agency",
+    "topic_title": "Boundaries and personal agency",
+    "text": "I think the difference is whether I choose to help or feel like I have no real choice. I'm still figuring out how to recognize that in the moment.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t07_10_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t08_01",
+    "topic_id": "setback_self_judgment_and_revised_perspective",
+    "topic_title": "Setback, self-judgment and revised perspective",
+    "text": "I didn't do as well as I expected in my assessment today. I prepared for it, so I'm disappointed.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t08_02",
+    "topic_id": "setback_self_judgment_and_revised_perspective",
+    "topic_title": "Setback, self-judgment and revised perspective",
+    "text": "My first thought was that maybe I'm not as capable as I thought I was.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t08_02_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t08_03",
+    "topic_id": "setback_self_judgment_and_revised_perspective",
+    "topic_title": "Setback, self-judgment and revised perspective",
+    "text": "I also slept badly and rushed through the last section because I was running out of time.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "causal",
+        "arg1_span": [
+          0,
+          55
+        ],
+        "arg2_span": [
+          55,
+          89
+        ],
+        "explicit_connective": "because"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t08_04",
+    "topic_id": "setback_self_judgment_and_revised_perspective",
+    "topic_title": "Setback, self-judgment and revised perspective",
+    "text": "Still, I don't want to use those things as excuses. I could have managed my time better.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t08_05",
+    "topic_id": "setback_self_judgment_and_revised_perspective",
+    "topic_title": "Setback, self-judgment and revised perspective",
+    "text": "I reviewed the questions afterward, and I knew most of the concepts. I made mistakes in applying them quickly.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t08_06",
+    "topic_id": "setback_self_judgment_and_revised_perspective",
+    "topic_title": "Setback, self-judgment and revised perspective",
+    "text": "That changes how I see it a little. It feels less like I knew nothing and more like I struggled to work through the questions within the time.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t08_07",
+    "topic_id": "setback_self_judgment_and_revised_perspective",
+    "topic_title": "Setback, self-judgment and revised perspective",
+    "text": "I still need to understand why I lost time. Some questions took much longer than I expected.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t08_08",
+    "topic_id": "setback_self_judgment_and_revised_perspective",
+    "topic_title": "Setback, self-judgment and revised perspective",
+    "text": "My friend had the same issue with two of those questions, so at least some of them may have been more involved than I expected.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t08_09",
+    "topic_id": "setback_self_judgment_and_revised_perspective",
+    "topic_title": "Setback, self-judgment and revised perspective",
+    "text": "I'm still disappointed in the result, but I'm less convinced that it says anything broad about my ability. I want to look at the mistakes individually.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "contrast",
+        "arg1_span": [
+          0,
+          38
+        ],
+        "arg2_span": [
+          38,
+          151
+        ],
+        "explicit_connective": "but"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t08_10",
+    "topic_id": "setback_self_judgment_and_revised_perspective",
+    "topic_title": "Setback, self-judgment and revised perspective",
+    "text": "My current view is that I underperformed on this assessment, particularly under time pressure. I don't yet know how much was preparation, question difficulty, or execution.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  }
+]

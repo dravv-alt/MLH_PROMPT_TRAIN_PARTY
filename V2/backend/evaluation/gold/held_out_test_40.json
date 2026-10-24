@@ -1,0 +1,1638 @@
+[
+  {
+    "turn_id": "test_01_causal_juxtaposition",
+    "text": "I left the room. He was loud.",
+    "is_hard_negative": true,
+    "hard_negative_category": "causal",
+    "commitments": [
+      {
+        "predicate": "leave",
+        "agent": "user",
+        "patient": "room",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          16
+        ]
+      },
+      {
+        "predicate": "be",
+        "agent": "he",
+        "patient": "loud",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          17,
+          29
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [
+      {
+        "pronoun": "he",
+        "span": [
+          17,
+          19
+        ],
+        "antecedent": null,
+        "status": "unresolved"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_id": "gap_t01_unfilled",
+        "type": "unfilled_role",
+        "target_span": [
+          0,
+          16
+        ],
+        "predicate": "leave",
+        "description": "Unstated reason for leaving."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What prompted your decision to leave the room?"
+  },
+  {
+    "turn_id": "test_02_causal_because_of_noun",
+    "text": "I arrived late to work because of the transit strike.",
+    "is_hard_negative": true,
+    "hard_negative_category": "causal",
+    "commitments": [
+      {
+        "predicate": "arrive",
+        "agent": "user",
+        "patient": "work",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          23
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "type": "causal",
+        "arg1_span": [
+          0,
+          23
+        ],
+        "arg2_span": [
+          24,
+          53
+        ],
+        "explicit_connective": "because of"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_03_causal_since_temporal",
+    "text": "Since last winter, I have been staying in Bandra.",
+    "is_hard_negative": true,
+    "hard_negative_category": "causal",
+    "commitments": [
+      {
+        "predicate": "stay",
+        "agent": "user",
+        "patient": "Bandra",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          19,
+          49
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "type": "temporal",
+        "arg1_span": [
+          0,
+          17
+        ],
+        "arg2_span": [
+          19,
+          49
+        ],
+        "explicit_connective": "since"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_04_causal_thats_why",
+    "text": "I didn't receive any confirmation email. That's why I didn't travel to the office today.",
+    "is_hard_negative": true,
+    "hard_negative_category": "causal",
+    "commitments": [
+      {
+        "predicate": "receive",
+        "agent": "user",
+        "patient": "email",
+        "polarity": "negative",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          40
+        ]
+      },
+      {
+        "predicate": "travel",
+        "agent": "user",
+        "patient": "office",
+        "polarity": "negative",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          53,
+          88
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "type": "causal",
+        "arg1_span": [
+          0,
+          40
+        ],
+        "arg2_span": [
+          42,
+          88
+        ],
+        "explicit_connective": "that's why"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_05_causal_which_is_why",
+    "text": "My laptop battery died completely, which is why I missed the second half of the presentation.",
+    "is_hard_negative": true,
+    "hard_negative_category": "causal",
+    "commitments": [
+      {
+        "predicate": "die",
+        "agent": "battery",
+        "patient": null,
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          33
+        ]
+      },
+      {
+        "predicate": "miss",
+        "agent": "user",
+        "patient": "presentation",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          48,
+          94
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "type": "causal",
+        "arg1_span": [
+          0,
+          33
+        ],
+        "arg2_span": [
+          35,
+          94
+        ],
+        "explicit_connective": "which is why"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_06_causal_led_to",
+    "text": "The persistent downpour led to severe waterlogging outside Kurla station.",
+    "is_hard_negative": true,
+    "hard_negative_category": "causal",
+    "commitments": [
+      {
+        "predicate": "lead_to",
+        "agent": "downpour",
+        "patient": "waterlogging",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          73
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "type": "causal",
+        "arg1_span": [
+          0,
+          23
+        ],
+        "arg2_span": [
+          31,
+          73
+        ],
+        "explicit_connective": "led to"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_07_causal_made_me",
+    "text": "His abrupt dismissal of the proposal made me reconsider the entire partnership.",
+    "is_hard_negative": true,
+    "hard_negative_category": "causal",
+    "commitments": [
+      {
+        "predicate": "make_reconsider",
+        "agent": "dismissal",
+        "patient": "partnership",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          79
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "type": "causal",
+        "arg1_span": [
+          0,
+          36
+        ],
+        "arg2_span": [
+          45,
+          79
+        ],
+        "explicit_connective": "made me"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_t07_unfilled",
+        "type": "unfilled_role",
+        "target_span": [
+          45,
+          79
+        ],
+        "predicate": "reconsider",
+        "description": "Unstated outcome of reconsideration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What direction did your thoughts take when reconsidering the partnership?"
+  },
+  {
+    "turn_id": "test_08_contrast_nothing_but",
+    "text": "During the inspection, the auditor showed nothing but professional courtesy.",
+    "is_hard_negative": true,
+    "hard_negative_category": "contrast",
+    "commitments": [
+      {
+        "predicate": "show",
+        "agent": "auditor",
+        "patient": "courtesy",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          23,
+          76
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_09_contrast_all_but",
+    "text": "The renovation work on the lab is all but completed.",
+    "is_hard_negative": true,
+    "hard_negative_category": "contrast",
+    "commitments": [
+      {
+        "predicate": "be_completed",
+        "agent": "renovation",
+        "patient": null,
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          52
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_10_contrast_final_though",
+    "text": "I submitted the revised proposal on time though.",
+    "is_hard_negative": true,
+    "hard_negative_category": "contrast",
+    "commitments": [
+      {
+        "predicate": "submit",
+        "agent": "user",
+        "patient": "proposal",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          43
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "type": "contrast",
+        "arg1_span": [],
+        "arg2_span": [
+          0,
+          48
+        ],
+        "explicit_connective": "though"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_t10_contrast_arm",
+        "type": "contrast_thin_arm",
+        "target_span": [
+          0,
+          48
+        ],
+        "predicate": "submit",
+        "description": "Contrast with unstated prior hurdle."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What was occurring that made submitting it on time notable?"
+  },
+  {
+    "turn_id": "test_11_negation_never_mind",
+    "text": "Never mind what I said about the server; the deployment completed successfully.",
+    "is_hard_negative": true,
+    "hard_negative_category": "negation",
+    "commitments": [
+      {
+        "predicate": "complete",
+        "agent": "deployment",
+        "patient": null,
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          41,
+          79
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [
+      {
+        "is_correction": true,
+        "cue": "never mind",
+        "target": "prior_server_claim",
+        "status": "resolved"
+      }
+    ],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_12_negation_not_only_but_also",
+    "text": "Not only the dean but also the department head signed the clearance certificate.",
+    "is_hard_negative": true,
+    "hard_negative_category": "negation",
+    "commitments": [
+      {
+        "predicate": "sign",
+        "agent": "dean and head",
+        "patient": "certificate",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          80
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_13_negation_raising",
+    "text": "I don't think I am angry with Priya.",
+    "is_hard_negative": true,
+    "hard_negative_category": "negation",
+    "commitments": [
+      {
+        "predicate": "be_angry",
+        "agent": "user",
+        "patient": "Priya",
+        "polarity": "negative",
+        "modality": "asserted",
+        "hedge": true,
+        "span": [
+          0,
+          36
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_t13_hedged",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          36
+        ],
+        "predicate": "be_angry",
+        "description": "Hedged denial of anger."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "How would you describe what you experienced toward Priya?"
+  },
+  {
+    "turn_id": "test_14_negation_no_one",
+    "text": "No one answered the phone when I called the reception desk.",
+    "is_hard_negative": true,
+    "hard_negative_category": "negation",
+    "commitments": [
+      {
+        "predicate": "answer",
+        "agent": "no one",
+        "patient": "phone",
+        "polarity": "negative",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          25
+        ]
+      },
+      {
+        "predicate": "call",
+        "agent": "user",
+        "patient": "reception desk",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          31,
+          59
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "type": "temporal",
+        "arg1_span": [
+          31,
+          59
+        ],
+        "arg2_span": [
+          0,
+          25
+        ],
+        "explicit_connective": "when"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_15_negation_cant_help_but",
+    "text": "I can't help but feel relieved that the audit is over.",
+    "is_hard_negative": true,
+    "hard_negative_category": "negation",
+    "commitments": [
+      {
+        "predicate": "feel_relieved",
+        "agent": "user",
+        "patient": "audit conclusion",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          54
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_16_negation_double_litotes",
+    "text": "I am not unhappy with how the review was conducted.",
+    "is_hard_negative": true,
+    "hard_negative_category": "negation",
+    "commitments": [
+      {
+        "predicate": "satisfaction",
+        "agent": "user",
+        "patient": "review conduct",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": true,
+        "span": [
+          0,
+          51
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_t16_hedged",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          51
+        ],
+        "predicate": "satisfaction",
+        "description": "Litotes construction expressing hedged evaluation."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What aspects of how the review went stood out to you?"
+  },
+  {
+    "turn_id": "test_17_roles_passive_recovery",
+    "text": "I was blamed by my sister after the family gathering.",
+    "is_hard_negative": true,
+    "hard_negative_category": "roles",
+    "commitments": [
+      {
+        "predicate": "blame",
+        "agent": "sister",
+        "patient": "user",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          25
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "type": "temporal",
+        "arg1_span": [
+          26,
+          53
+        ],
+        "arg2_span": [
+          0,
+          25
+        ],
+        "explicit_connective": "after"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_t17_unfilled_reason",
+        "type": "unfilled_role",
+        "target_span": [
+          0,
+          25
+        ],
+        "predicate": "blame",
+        "description": "Unfilled reason for sister's blame."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What matter was raised when your sister expressed that blame?"
+  },
+  {
+    "turn_id": "test_18_roles_she_told_me",
+    "text": "She told me he was wrong about the launch schedule.",
+    "is_hard_negative": true,
+    "hard_negative_category": "roles",
+    "commitments": [
+      {
+        "predicate": "tell",
+        "agent": "she",
+        "patient": "user",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          11
+        ]
+      },
+      {
+        "predicate": "be_wrong",
+        "agent": "he",
+        "patient": "schedule",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          12,
+          51
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [
+      {
+        "pronoun": "she",
+        "span": [
+          0,
+          3
+        ],
+        "antecedent": null,
+        "status": "unresolved"
+      },
+      {
+        "pronoun": "he",
+        "span": [
+          12,
+          14
+        ],
+        "antecedent": null,
+        "status": "unresolved"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_id": "gap_t18_reported",
+        "type": "reported_claim",
+        "target_span": [
+          12,
+          51
+        ],
+        "predicate": "be_wrong",
+        "description": "Reported claim with no user stance."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What was your perspective regarding the launch schedule?"
+  },
+  {
+    "turn_id": "test_19_roles_i_told_her",
+    "text": "I told her he was wrong about the launch schedule.",
+    "is_hard_negative": true,
+    "hard_negative_category": "roles",
+    "commitments": [
+      {
+        "predicate": "tell",
+        "agent": "user",
+        "patient": "her",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          10
+        ]
+      },
+      {
+        "predicate": "be_wrong",
+        "agent": "he",
+        "patient": "schedule",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          11,
+          50
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [
+      {
+        "pronoun": "her",
+        "span": [
+          7,
+          10
+        ],
+        "antecedent": null,
+        "status": "unresolved"
+      },
+      {
+        "pronoun": "he",
+        "span": [
+          11,
+          13
+        ],
+        "antecedent": null,
+        "status": "unresolved"
+      }
+    ],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge",
+      "ask"
+    ],
+    "gold_qud": "How did she respond when you mentioned that?"
+  },
+  {
+    "turn_id": "test_20_corrections_explicit_repair",
+    "text": "No wait, I meant my sister was the one who called the doctor.",
+    "is_hard_negative": true,
+    "hard_negative_category": "corrections",
+    "commitments": [
+      {
+        "predicate": "call",
+        "agent": "sister",
+        "patient": "doctor",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          17,
+          61
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [
+      {
+        "is_correction": true,
+        "cue": "no wait, I meant",
+        "target": "prior_caller",
+        "status": "resolved"
+      }
+    ],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_21_corrections_conversational_refusal",
+    "text": "No, I don't want to talk about that topic right now.",
+    "is_hard_negative": true,
+    "hard_negative_category": "corrections",
+    "commitments": [
+      {
+        "predicate": "want_to_talk",
+        "agent": "user",
+        "patient": "topic",
+        "polarity": "negative",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          4,
+          51
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "hold"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_22_corrections_filler_actually",
+    "text": "Actually, the workshop exceeded all my expectations.",
+    "is_hard_negative": true,
+    "hard_negative_category": "corrections",
+    "commitments": [
+      {
+        "predicate": "exceed",
+        "agent": "workshop",
+        "patient": "expectations",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          10,
+          52
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_23_corrections_non_nearest_target",
+    "text": "No, I meant the second draft of the report, not the earlier outline.",
+    "is_hard_negative": true,
+    "hard_negative_category": "corrections",
+    "commitments": [
+      {
+        "predicate": "refer_to",
+        "agent": "user",
+        "patient": "second draft",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          4,
+          67
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [
+      {
+        "is_correction": true,
+        "cue": "no, I meant",
+        "target": "earlier outline",
+        "status": "resolved"
+      }
+    ],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_24_references_ambiguous_pronoun",
+    "text": "My mother told my sister she was mistaken about the date.",
+    "is_hard_negative": true,
+    "hard_negative_category": "references",
+    "commitments": [
+      {
+        "predicate": "tell",
+        "agent": "mother",
+        "patient": "sister",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          24
+        ]
+      },
+      {
+        "predicate": "be_mistaken",
+        "agent": "she",
+        "patient": "date",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          25,
+          56
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [
+      {
+        "pronoun": "she",
+        "span": [
+          25,
+          28
+        ],
+        "antecedent": null,
+        "status": "ambiguous"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_id": "gap_t24_unresolved_ref",
+        "type": "unresolved_reference",
+        "target_span": [
+          25,
+          28
+        ],
+        "predicate": "she",
+        "description": "Ambiguous antecedent between mother and sister."
+      }
+    ],
+    "acceptable_moves": [
+      "clarify",
+      "ask"
+    ],
+    "gold_qud": "Did your mother mean that she herself or your sister had the date mixed up?"
+  },
+  {
+    "turn_id": "test_25_references_no_antecedent",
+    "text": "They decided to postpone the deployment without informing our team.",
+    "is_hard_negative": true,
+    "hard_negative_category": "references",
+    "commitments": [
+      {
+        "predicate": "postpone",
+        "agent": "they",
+        "patient": "deployment",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          39
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [
+      {
+        "pronoun": "they",
+        "span": [
+          0,
+          4
+        ],
+        "antecedent": null,
+        "status": "unresolved"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_id": "gap_t25_unresolved_ref",
+        "type": "unresolved_reference",
+        "target_span": [
+          0,
+          4
+        ],
+        "predicate": "they",
+        "description": "Pronoun with no nominal antecedent."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "clarify"
+    ],
+    "gold_qud": "Who made the decision to postpone the deployment?"
+  },
+  {
+    "turn_id": "test_26_entities_name_inside_quote",
+    "text": "The manager said 'Vikram has completed the database migration'.",
+    "is_hard_negative": true,
+    "hard_negative_category": "entities",
+    "commitments": [
+      {
+        "predicate": "say",
+        "agent": "manager",
+        "patient": "quote",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          16
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_27_entities_lowercase_names",
+    "text": "i spoke with rohan at churchgate station yesterday.",
+    "is_hard_negative": true,
+    "hard_negative_category": "entities",
+    "commitments": [
+      {
+        "predicate": "speak",
+        "agent": "user",
+        "patient": "rohan",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          21
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_t27_unfilled_topic",
+        "type": "unfilled_role",
+        "target_span": [
+          0,
+          21
+        ],
+        "predicate": "speak",
+        "description": "Unfilled subject of conversation."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What did you and Rohan discuss at Churchgate?"
+  },
+  {
+    "turn_id": "test_28_entities_literal_placeholder",
+    "text": "The system logged [PERSON_1] as the authorized signee.",
+    "is_hard_negative": true,
+    "hard_negative_category": "entities",
+    "commitments": [
+      {
+        "predicate": "log",
+        "agent": "system",
+        "patient": "[PERSON_1]",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          53
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_29_entities_common_noun_joy",
+    "text": "We welcomed Joy to the backend engineering division today.",
+    "is_hard_negative": true,
+    "hard_negative_category": "entities",
+    "commitments": [
+      {
+        "predicate": "welcome",
+        "agent": "team",
+        "patient": "Joy",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          58
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_30_entities_common_noun_summer",
+    "text": "Summer coordinated the whole workshop smoothly.",
+    "is_hard_negative": true,
+    "hard_negative_category": "entities",
+    "commitments": [
+      {
+        "predicate": "coordinate",
+        "agent": "Summer",
+        "patient": "workshop",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          47
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_31_open_vocab_neutral_logistics",
+    "text": "I'm moving flats to Chembur next month and need to split the security deposit.",
+    "is_hard_negative": true,
+    "hard_negative_category": "open_vocabulary_logistics",
+    "commitments": [
+      {
+        "predicate": "move",
+        "agent": "user",
+        "patient": "Chembur",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          38
+        ]
+      },
+      {
+        "predicate": "need_split",
+        "agent": "user",
+        "patient": "deposit",
+        "polarity": "positive",
+        "modality": "obligation",
+        "hedge": false,
+        "span": [
+          43,
+          77
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_t31_unfilled_split",
+        "type": "unfilled_role",
+        "target_span": [
+          43,
+          77
+        ],
+        "predicate": "split",
+        "description": "Unstated party with whom deposit is being split."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "How are you arranging the deposit split for the new place?"
+  },
+  {
+    "turn_id": "test_32_open_vocab_factual_narration",
+    "text": "The delivery package arrived at 4 PM and the security guard placed it in the lobby.",
+    "is_hard_negative": true,
+    "hard_negative_category": "open_vocabulary_factual",
+    "commitments": [
+      {
+        "predicate": "arrive",
+        "agent": "package",
+        "patient": null,
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          36
+        ]
+      },
+      {
+        "predicate": "place",
+        "agent": "guard",
+        "patient": "package",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          41,
+          83
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "type": "temporal",
+        "arg1_span": [
+          0,
+          36
+        ],
+        "arg2_span": [
+          41,
+          83
+        ],
+        "explicit_connective": "and"
+      }
+    ],
+    "corrections": [],
+    "references": [
+      {
+        "pronoun": "it",
+        "span": [
+          70,
+          72
+        ],
+        "antecedent": "package",
+        "status": "resolved"
+      }
+    ],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge",
+      "hold"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_33_open_vocab_humor_sarcasm",
+    "text": "Great, another two-hour sync that could easily have been a two-sentence email.",
+    "is_hard_negative": true,
+    "hard_negative_category": "open_vocabulary_humor",
+    "commitments": [
+      {
+        "predicate": "have_sync",
+        "agent": "user",
+        "patient": "meeting",
+        "polarity": "positive",
+        "modality": "counterfactual",
+        "hedge": false,
+        "span": [
+          0,
+          77
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge",
+      "hold"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_34_open_vocab_good_news",
+    "text": "I got selected for the fellowship! Flights to Munich are confirmed for October.",
+    "is_hard_negative": true,
+    "hard_negative_category": "open_vocabulary_good_news",
+    "commitments": [
+      {
+        "predicate": "be_selected",
+        "agent": "user",
+        "patient": "fellowship",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          34
+        ]
+      },
+      {
+        "predicate": "confirm",
+        "agent": "flights",
+        "patient": "Munich",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          35,
+          79
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_t34_unfilled_focus",
+        "type": "unfilled_role",
+        "target_span": [
+          0,
+          34
+        ],
+        "predicate": "be_selected",
+        "description": "Unstated area of research focus."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What will your project focus on during the fellowship?"
+  },
+  {
+    "turn_id": "test_35_open_vocab_stated_plan",
+    "text": "Tomorrow morning I will push the PR, update the Jira ticket, and sign off before noon.",
+    "is_hard_negative": true,
+    "hard_negative_category": "open_vocabulary_plan",
+    "commitments": [
+      {
+        "predicate": "push",
+        "agent": "user",
+        "patient": "PR",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          17,
+          35
+        ]
+      },
+      {
+        "predicate": "update",
+        "agent": "user",
+        "patient": "ticket",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          37,
+          59
+        ]
+      },
+      {
+        "predicate": "sign_off",
+        "agent": "user",
+        "patient": null,
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          65,
+          86
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "type": "temporal",
+        "arg1_span": [
+          17,
+          35
+        ],
+        "arg2_span": [
+          65,
+          86
+        ],
+        "explicit_connective": "before"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_36_open_vocab_venting_no_questions",
+    "text": "I just needed to say all that out loud, please don't ask me any questions about it.",
+    "is_hard_negative": true,
+    "hard_negative_category": "open_vocabulary_venting",
+    "commitments": [
+      {
+        "predicate": "say",
+        "agent": "user",
+        "patient": "thoughts",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          38
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "hold"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_37_open_vocab_short_turn_ok",
+    "text": "ok",
+    "is_hard_negative": true,
+    "hard_negative_category": "open_vocabulary_short_turn",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "hold"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_38_open_vocab_short_turn_hm",
+    "text": "hm",
+    "is_hard_negative": true,
+    "hard_negative_category": "open_vocabulary_short_turn",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "hold"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_39_open_vocab_code_mixed_hinglish",
+    "text": "Arre yaar, Dadar station pe itni bheed thi, ghar pe aate hi I just went to sleep.",
+    "is_hard_negative": true,
+    "hard_negative_category": "open_vocabulary_codemixed",
+    "commitments": [
+      {
+        "predicate": "be_crowded",
+        "agent": "Dadar station",
+        "patient": null,
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          0,
+          42
+        ]
+      },
+      {
+        "predicate": "sleep",
+        "agent": "user",
+        "patient": null,
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          60,
+          80
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "type": "temporal",
+        "arg1_span": [
+          44,
+          59
+        ],
+        "arg2_span": [
+          60,
+          80
+        ],
+        "explicit_connective": "hi"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": null
+  },
+  {
+    "turn_id": "test_40_open_vocab_explicit_hold",
+    "text": "Just let me talk for five minutes without any questions please.",
+    "is_hard_negative": true,
+    "hard_negative_category": "open_vocabulary_hold",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "hold"
+    ],
+    "gold_qud": null
+  }
+]

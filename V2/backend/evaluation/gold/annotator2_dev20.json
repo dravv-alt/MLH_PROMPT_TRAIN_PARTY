@@ -1,0 +1,648 @@
+[
+  {
+    "turn_id": "dev_t01_01",
+    "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+    "topic_title": "Achievement, exhaustion and the meaning of success",
+    "text": "I finally got the internship I've been working toward for months. Everyone's congratulating me, and I know I should be happy. But honestly, I just feel tired. Now I'm already thinking about what I need to achieve next.",
+    "commitments": [
+      {
+        "predicate": "get",
+        "agent": "user",
+        "patient": "internship",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          10,
+          13
+        ]
+      },
+      {
+        "predicate": "feel",
+        "agent": "user",
+        "patient": "tired",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": true,
+        "span": [
+          152,
+          157
+        ]
+      },
+      {
+        "predicate": "should_be",
+        "agent": "user",
+        "patient": "expectation",
+        "polarity": "positive",
+        "modality": "obligation",
+        "hedge": false,
+        "span": [
+          109,
+          115
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "type": "contrast",
+        "arg1_span": [
+          0,
+          126
+        ],
+        "arg2_span": [
+          126,
+          218
+        ],
+        "explicit_connective": "but"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t01_01_unfilled_reason",
+        "type": "unfilled_role",
+        "target_span": [
+          152,
+          157
+        ],
+        "predicate": "feel",
+        "description": "Unfilled causal role for feeling tired."
+      },
+      {
+        "gap_id": "gap_dev_t01_01_counterfactual_obligation",
+        "type": "counterfactual_obligation",
+        "target_span": [
+          109,
+          115
+        ],
+        "predicate": "should",
+        "description": "Stated obligation with unresolved tension."
+      },
+      {
+        "gap_id": "gap_dev_t01_01_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What was happening around you when you began feeling tired?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t01_02",
+    "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+    "topic_title": "Achievement, exhaustion and the meaning of success",
+    "text": "I don't think the tiredness is necessarily from the internship itself. I think I'm exhausted by the feeling that I have to keep proving I'm worth the opportunity.",
+    "commitments": [
+      {
+        "predicate": "feel",
+        "agent": "user",
+        "patient": "tired",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": true,
+        "span": [
+          18,
+          23
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [
+      {
+        "is_correction": true,
+        "cue": "correction_cue",
+        "target": "prior_clause",
+        "status": "resolved"
+      }
+    ],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t01_02_unfilled_reason",
+        "type": "unfilled_role",
+        "target_span": [
+          18,
+          23
+        ],
+        "predicate": "feel",
+        "description": "Unfilled causal role for feeling tired."
+      },
+      {
+        "gap_id": "gap_dev_t01_02_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What was happening around you when you began feeling tired?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t01_03",
+    "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+    "topic_title": "Achievement, exhaustion and the meaning of success",
+    "text": "Actually, I don't think I need to prove that I'm worthy. I'm excited about the internship. I'm just physically exhausted after months of preparation, and I want to enjoy the achievement without immediately planning the next thing.",
+    "commitments": [
+      {
+        "predicate": "feel",
+        "agent": "user",
+        "patient": "exhausted",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          111,
+          120
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [
+      {
+        "is_correction": true,
+        "cue": "correction_cue",
+        "target": "prior_clause",
+        "status": "resolved"
+      }
+    ],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t01_03_unfilled_reason",
+        "type": "unfilled_role",
+        "target_span": [
+          111,
+          120
+        ],
+        "predicate": "feel",
+        "description": "Unfilled causal role for feeling exhausted."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What was happening around you when you began feeling exhausted?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t01_04",
+    "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+    "topic_title": "Achievement, exhaustion and the meaning of success",
+    "text": "I think I've spent so long preparing for this that I don't really know how to stop preparing. Even when something goes right, part of me is already looking for the next task.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t01_04_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t01_05",
+    "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+    "topic_title": "Achievement, exhaustion and the meaning of success",
+    "text": "Although, I did enjoy telling my closest friend about it yesterday. I wasn't thinking about my next goal then.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t01_06",
+    "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+    "topic_title": "Achievement, exhaustion and the meaning of success",
+    "text": "Maybe I don't need to stop thinking about the future completely. I just don't want every good thing to turn into another deadline.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t01_06_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t01_07",
+    "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+    "topic_title": "Achievement, exhaustion and the meaning of success",
+    "text": "My manager also said I don't need to know everything immediately. That was reassuring, even though I still want to do well.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t01_08",
+    "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+    "topic_title": "Achievement, exhaustion and the meaning of success",
+    "text": "I noticed I felt better after I slept properly. That makes me think the physical exhaustion was a bigger part of this than I first realized.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t01_09",
+    "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+    "topic_title": "Achievement, exhaustion and the meaning of success",
+    "text": "I'm still thinking about what comes next, but it doesn't feel as urgent today. I can be excited and tired at the same time.",
+    "commitments": [
+      {
+        "predicate": "feel",
+        "agent": "user",
+        "patient": "tired",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          100,
+          105
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "type": "contrast",
+        "arg1_span": [
+          0,
+          42
+        ],
+        "arg2_span": [
+          42,
+          123
+        ],
+        "explicit_connective": "but"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t01_09_unfilled_reason",
+        "type": "unfilled_role",
+        "target_span": [
+          100,
+          105
+        ],
+        "predicate": "feel",
+        "description": "Unfilled causal role for feeling tired."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What was happening around you when you began feeling tired?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t01_10",
+    "topic_id": "achievement_exhaustion_and_the_meaning_of_success",
+    "topic_title": "Achievement, exhaustion and the meaning of success",
+    "text": "If I had to describe the whole thing now, I'd say I'm proud of what I achieved, physically tired from getting here, and trying to give myself room to enjoy it before moving on.",
+    "commitments": [
+      {
+        "predicate": "feel",
+        "agent": "user",
+        "patient": "tired",
+        "polarity": "positive",
+        "modality": "asserted",
+        "hedge": false,
+        "span": [
+          91,
+          96
+        ]
+      }
+    ],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t01_10_unfilled_reason",
+        "type": "unfilled_role",
+        "target_span": [
+          91,
+          96
+        ],
+        "predicate": "feel",
+        "description": "Unfilled causal role for feeling tired."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "What was happening around you when you began feeling tired?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t02_01",
+    "topic_id": "the_recurring_pattern",
+    "topic_title": "The recurring pattern",
+    "text": "I've noticed that whenever I start something important, I make a very detailed plan before I actually begin.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t02_02",
+    "topic_id": "the_recurring_pattern",
+    "topic_title": "The recurring pattern",
+    "text": "It happened with my last assignment too. I spent almost two evenings organizing everything before writing the first paragraph.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t02_03",
+    "topic_id": "the_recurring_pattern",
+    "topic_title": "The recurring pattern",
+    "text": "I guess I do this because I'm afraid of doing things badly.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "causal",
+        "arg1_span": [
+          0,
+          18
+        ],
+        "arg2_span": [
+          18,
+          59
+        ],
+        "explicit_connective": "because"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t02_03_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t02_04",
+    "topic_id": "the_recurring_pattern",
+    "topic_title": "The recurring pattern",
+    "text": "Actually, that isn't always it. Sometimes I plan because I genuinely enjoy organizing a complicated problem.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "causal",
+        "arg1_span": [
+          0,
+          49
+        ],
+        "arg2_span": [
+          49,
+          108
+        ],
+        "explicit_connective": "because"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t02_05",
+    "topic_id": "the_recurring_pattern",
+    "topic_title": "The recurring pattern",
+    "text": "With the assignment, though, I was definitely avoiding the writing. I kept finding more things to organize instead.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t02_06",
+    "topic_id": "the_recurring_pattern",
+    "topic_title": "The recurring pattern",
+    "text": "Last weekend I started a small coding project without a plan and actually enjoyed figuring it out as I went.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t02_07",
+    "topic_id": "the_recurring_pattern",
+    "topic_title": "The recurring pattern",
+    "text": "The difference might be that the coding project didn't feel like anyone was going to judge the result.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t02_08",
+    "topic_id": "the_recurring_pattern",
+    "topic_title": "The recurring pattern",
+    "text": "I also realized that planning helps when the task is genuinely complicated. It becomes a problem when I keep planning after I already know enough to begin.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t02_09",
+    "topic_id": "the_recurring_pattern",
+    "topic_title": "The recurring pattern",
+    "text": "Today I started the report after making only a rough outline. I still felt uncertain, but I could make progress.",
+    "commitments": [],
+    "relations": [
+      {
+        "type": "contrast",
+        "arg1_span": [
+          0,
+          86
+        ],
+        "arg2_span": [
+          86,
+          112
+        ],
+        "explicit_connective": "but"
+      }
+    ],
+    "corrections": [],
+    "references": [],
+    "gaps": [],
+    "acceptable_moves": [
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  },
+  {
+    "turn_id": "dev_t02_10",
+    "topic_id": "the_recurring_pattern",
+    "topic_title": "The recurring pattern",
+    "text": "So maybe the pattern isn't that I always procrastinate. It's that, with work I expect people to judge, I sometimes keep preparing after preparation has stopped helping.",
+    "commitments": [],
+    "relations": [],
+    "corrections": [],
+    "references": [],
+    "gaps": [
+      {
+        "gap_id": "gap_dev_t02_10_hedged_commitment",
+        "type": "hedged_commitment",
+        "target_span": [
+          0,
+          15
+        ],
+        "predicate": "epistemic_hedge",
+        "description": "Proposition hedged without underlying elaboration."
+      }
+    ],
+    "acceptable_moves": [
+      "ask",
+      "acknowledge"
+    ],
+    "gold_qud": "Could you share what happened next?",
+    "is_hard_negative": false,
+    "hard_negative_category": null
+  }
+]
