@@ -1,0 +1,15 @@
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import {AnalysisWorkspace} from '../src/pages/AnalysisPage';
+import {ChatWorkspace} from '../src/pages/ChatPage';
+import {BrowserRouter} from 'react-router-dom';
+import '../src/index.css';
+import '../src/integration.css';
+import {MemoryWorkspace} from '../src/pages/MemoryPage';
+import {SettingsWorkspace} from '../src/pages/SettingsPage';
+import {SavedMomentsWorkspace} from '../src/pages/SavedMomentsPage';
+import {JournalWorkspace} from '../src/pages/JournalPage';
+const getToken=async()=> 'browser-fixture-token';
+const page=new URLSearchParams(location.search).get('page') || (location.search.includes('chat')?'chat':'analysis');
+const workspace={chat:<ChatWorkspace getToken={getToken}/>,analysis:<AnalysisWorkspace getToken={getToken}/>,memory:<MemoryWorkspace getToken={getToken}/>,settings:<SettingsWorkspace getToken={getToken}/>,moments:<SavedMomentsWorkspace getToken={getToken}/>,journal:<JournalWorkspace getToken={getToken}/>}[page];
+createRoot(document.getElementById('root')).render(<BrowserRouter><main className="integrated-content">{workspace}</main></BrowserRouter>);
