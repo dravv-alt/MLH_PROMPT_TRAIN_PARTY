@@ -167,24 +167,58 @@ def execute_question_pipeline(
             "diagnostics_status": "safety_override",
         }
 
-    # 2. Structural Gap Detection (Task T2.1 & T2.2)
+    # 2. Uptake Classification of previous question (Task T4.1)
+    from app.services.uptake_classifier import classify_answer_uptake
+    last_turn = prior_turns[-1] if prior_turns else None
+    uptake_result = classify_answer_uptake(analysis, last_turn, current_text=text)
+    answered_ids = {uptake_result["targeted_gap_id"]} if uptake_result["uptake"] == "answered" and uptake_result.get("targeted_gap_id") else set()
+    deflected_ids = {uptake_result["targeted_gap_id"]} if uptake_result["uptake"] == "deflected" and uptake_result.get("targeted_gap_id") else set()
+
+    # 3. Structural Gap Detection (Task T2.1 & T2.2)
     from app.services.gaps import rank_gaps_by_salience
     raw_gaps = detect_structural_gaps(analysis, prior_turns)
     gaps = rank_gaps_by_salience(raw_gaps, analysis, prior_turns)
     parser_fallback = analysis.get("parser_fallback")
     diag_status = "degraded" if parser_fallback else "ok"
 
-    # 3. QUD Stack Maintenance (Task T2.3)
+    # 4. QUD Stack Maintenance (Tasks T2.3 & T4.3)
     correction_context = analysis.get("response_plan", {}).get("correction_context")
     updated_qud_stack = merge_and_update_qud_stack(
         session_qud_stack or [],
         gaps,
         turn_index,
         correction_context=correction_context,
+        answered_gap_ids=answered_ids,
+        deflected_gap_ids=deflected_ids,
+        current_propositions=propositions,
     )
     active_quds = get_active_quds(updated_qud_stack)
 
-    # 4. Dialogue Move Selection (Task T3.1)
+    # 5. Backoff & Pacing Policy (Task T4.2)
+    from app.services.backoff_policy import ConversationPolicyTracker
+    policy = ConversationPolicyTracker()
+    allow_q, enforced_move, policy_reason = policy.evaluate_question_policy(
+        text, prior_turns, updated_qud_stack, turn_index
+    )
+    if not allow_q:
+        return {
+            "move": enforced_move or "hold",
+            "selected_question": None,
+            "question_trace": {
+                "reason": policy_reason or "Policy backoff enforced.",
+                "move": enforced_move or "hold",
+                "gap_id": None,
+                "spans": [],
+                "presuppositions_checked": [],
+                "score": 0.0,
+            },
+            "gaps": gaps,
+            "qud_stack": updated_qud_stack,
+            "diagnostics_status": diag_status,
+            "uptake": uptake_result["uptake"],
+        }
+
+    # 6. Dialogue Move Selection (Task T3.1)
     # Check explicit hold or very short turn
     if check_explicit_hold_signal(text) or len(text.strip().split()) <= 2:
         return {
@@ -201,6 +235,7 @@ def execute_question_pipeline(
             "gaps": gaps,
             "qud_stack": updated_qud_stack,
             "diagnostics_status": diag_status,
+            "uptake": uptake_result["uptake"],
         }
 
     # Check direct factual/external question to system
@@ -219,6 +254,7 @@ def execute_question_pipeline(
             "gaps": gaps,
             "qud_stack": updated_qud_stack,
             "diagnostics_status": diag_status,
+            "uptake": uptake_result["uptake"],
         }
 
     # Check user commands, privacy settings, or explicit boundaries
@@ -237,6 +273,7 @@ def execute_question_pipeline(
             "gaps": gaps,
             "qud_stack": updated_qud_stack,
             "diagnostics_status": diag_status,
+            "uptake": uptake_result["uptake"],
         }
 
     # Check consecutive deflections / question budget backoff
@@ -255,6 +292,7 @@ def execute_question_pipeline(
             "gaps": gaps,
             "qud_stack": updated_qud_stack,
             "diagnostics_status": diag_status,
+            "uptake": uptake_result["uptake"],
         }
 
     # If no structural gaps exist in the current turn or no active QUDs, move is acknowledge
@@ -274,11 +312,31 @@ def execute_question_pipeline(
             "qud_stack": updated_qud_stack,
             "diagnostics_status": diag_status,
             "reason": "no_gap_detected",
+            "uptake": uptake_result["uptake"],
         }
 
     # 5. Target Top Salient Gap
     from app.services.gaps import score_gap_salience
-    target_gap = gaps[0]
+    available_gaps = [g for g in gaps if not policy.is_gap_suppressed(g.get("gap_id"), updated_qud_stack, turn_index)]
+    if not available_gaps:
+        return {
+            "move": "acknowledge",
+            "selected_question": None,
+            "question_trace": {
+                "reason": "All detected gaps are currently suppressed by backoff window policy.",
+                "move": "acknowledge",
+                "gap_id": None,
+                "spans": [],
+                "presuppositions_checked": [],
+                "score": 0.0,
+            },
+            "gaps": gaps,
+            "qud_stack": updated_qud_stack,
+            "diagnostics_status": diag_status,
+            "uptake": uptake_result["uptake"],
+        }
+
+    target_gap = available_gaps[0]
     salience = score_gap_salience(target_gap, analysis, prior_turns)
     salience_score = salience[0] if isinstance(salience, tuple) else salience
     if salience_score < 0.12:
@@ -296,6 +354,7 @@ def execute_question_pipeline(
             "gaps": gaps,
             "qud_stack": updated_qud_stack,
             "diagnostics_status": diag_status,
+            "uptake": uptake_result["uptake"],
         }
 
     target_qud = next((q for q in active_quds if q.get("gap_id") == target_gap.get("gap_id")), active_quds[0])
@@ -337,6 +396,7 @@ def execute_question_pipeline(
             "gaps": gaps,
             "qud_stack": updated_qud_stack,
             "diagnostics_status": "presupposition_fallback",
+            "uptake": uptake_result["uptake"],
         }
 
     # Re-verify presuppositions on final realized question
@@ -356,10 +416,17 @@ def execute_question_pipeline(
             "gaps": gaps,
             "qud_stack": updated_qud_stack,
             "diagnostics_status": "presupposition_fallback",
+            "uptake": uptake_result["uptake"],
         }
 
     move_type = "clarify" if target_gap.get("type") in {GAP_UNRESOLVED_REFERENCE, GAP_CORRECTION_LINK} else "ask"
     human_reason = format_human_reason(target_gap)
+
+    # Mark the asked QUD entry with last_asked_turn so suppression policy knows
+    for q_entry in updated_qud_stack:
+        if q_entry.get("gap_id") == target_gap.get("gap_id"):
+            q_entry["last_asked_turn"] = turn_index
+            break
 
     trace = {
         "gap_id": target_gap.get("gap_id"),
@@ -380,4 +447,5 @@ def execute_question_pipeline(
         "gaps": gaps,
         "qud_stack": updated_qud_stack,
         "diagnostics_status": diag_status,
+        "uptake": uptake_result["uptake"],
     }

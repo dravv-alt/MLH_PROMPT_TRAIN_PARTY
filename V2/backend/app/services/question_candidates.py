@@ -50,22 +50,27 @@ GAP_TEMPLATES = {
     GAP_UNRESOLVED_REFERENCE: [
         "Who was involved in that particular moment?",
         "Could you clarify who you were referring to?",
+        "Which person was participating in that interaction?",
     ],
     GAP_CORRECTION_LINK: [
         "Could you clarify which part of that you were adjusting?",
         "Which detail did you mean to focus on?",
+        "What specific point did you wish to adjust?",
     ],
     GAP_COUNTERFACTUAL_OBLIGATION: [
         "What expectation was in place when that happened?",
         "What was leading you to feel that was expected?",
+        "How did that obligation arise in that context?",
     ],
     GAP_CONTRAST_THIN_ARM: [
         "What was occurring on the other side of that contrast?",
         "Could you share what happened next in that situation?",
+        "How did the other aspect compare in that instance?",
     ],
     GAP_RECURRING_TOPIC: [
         "How has that matter developed since you first mentioned it?",
         "What has changed regarding that since earlier?",
+        "Where does that situation currently stand?",
     ],
 }
 
@@ -139,13 +144,16 @@ def score_candidate(
     if word_count < 5 or word_count > 25:
         score -= 2.0
 
-    # 6. Novelty penalty against earlier questions
+    # 6. Novelty penalty against earlier questions and stems
     if prior_questions:
-        cand_stem = " ".join(candidate.split()[:4]).lower()
+        cand_lower = candidate.strip().lower()
+        cand_stem = " ".join(candidate.split()[:3]).lower()
         for prior in prior_questions:
-            prior_stem = " ".join(prior.split()[:4]).lower()
-            if cand_stem == prior_stem:
-                score -= 4.0
+            prior_lower = prior.strip().lower()
+            if cand_lower == prior_lower:
+                score -= 50.0
+            elif cand_stem == " ".join(prior.split()[:3]).lower():
+                score -= 6.0
 
     return score
 
@@ -169,8 +177,13 @@ def rank_and_select_candidate(
         sc = score_candidate(cand, gap, user_text, prior_questions)
         scored.append((cand, sc))
 
+    # Filter out candidates with non-positive scores (e.g. repeated questions or heavy penalties)
+    valid_scored = [item for item in scored if item[1] > 0.0]
+    if not valid_scored:
+        return None, 0.0, rejections
+
     # Sort descending by score, ties broken deterministically by string length then alphabetical
-    scored.sort(key=lambda item: (-item[1], -len(item[0]), item[0]))
-    best_cand, best_score = scored[0]
+    valid_scored.sort(key=lambda item: (-item[1], -len(item[0]), item[0]))
+    best_cand, best_score = valid_scored[0]
 
     return best_cand, best_score, rejections

@@ -154,6 +154,9 @@ def test_static_no_emotion_or_sentiment_lexicons():
         Path(__file__).resolve().parents[1] / "app" / "services" / "gaps.py",
         Path(__file__).resolve().parents[1] / "app" / "services" / "qud_stack.py",
         Path(__file__).resolve().parents[1] / "app" / "services" / "question_candidates.py",
+        Path(__file__).resolve().parents[1] / "app" / "services" / "uptake_classifier.py",
+        Path(__file__).resolve().parents[1] / "app" / "services" / "backoff_policy.py",
+        Path(__file__).resolve().parents[1] / "app" / "services" / "question_pipeline.py",
     ]
 
     prohibited_modules = {

@@ -1,8 +1,9 @@
-"""Sanctuary V2 Question Under Discussion (QUD) Stack (Task T2.3).
+"""Sanctuary V2 Question Under Discussion (QUD) Stack (Tasks T2.3 & T4.3).
 
 Maintains a persistent list of open discourse questions raised by structural gaps.
 Stored entirely within the existing session state JSON snapshot (no new tables).
-Enforces valid status transitions, frame merging, and supersession updates.
+Enforces valid status transitions, frame merging, abandonment after N turns,
+supersession updates, and automatic resolution when later frames fill gaps.
 """
 from __future__ import annotations
 
@@ -40,6 +41,7 @@ def create_qud_entry(
         "spans": spans,
         "created_turn": turn_index,
         "last_touched": turn_index,
+        "recurrence_count": 1,
     }
 
 
@@ -66,16 +68,20 @@ def merge_and_update_qud_stack(
     correction_context: Optional[Dict[str, Any]] = None,
     answered_gap_ids: Optional[Set[str]] = None,
     deflected_gap_ids: Optional[Set[str]] = None,
+    current_propositions: Optional[List[Dict[str, Any]]] = None,
+    abandon_threshold: int = 4,
 ) -> List[Dict[str, Any]]:
     """Update the QUD stack across turns:
     1. Mark answered or deflected gaps from uptake classifier
-    2. Mark superseded gaps if correction retracted the base frame
-    3. Merge new gaps targeting existing active frames
-    4. Append newly raised gaps
+    2. Check if current propositions fill open gaps
+    3. Mark superseded gaps if correction retracted the base frame
+    4. Mark abandoned after abandon_threshold untouched turns
+    5. Merge new gaps targeting existing active frames and increment recurrence
+    6. Append newly raised gaps
     """
     stack = copy.deepcopy(qud_stack or [])
-    answered_ids = answered_gap_ids or set()
-    deflected_ids = deflected_gap_ids or set()
+    answered_ids = set(answered_gap_ids or [])
+    deflected_ids = set(deflected_gap_ids or [])
 
     # 1. Apply uptake updates to existing stack
     for entry in stack:
@@ -85,7 +91,18 @@ def merge_and_update_qud_stack(
         elif gid in deflected_ids:
             transition_qud_status(entry, STATUS_DEFLECTED, turn_index)
 
-    # 2. Check for supersession from correction context
+    # 2. Check if current propositions fill open gaps
+    if current_propositions:
+        for entry in stack:
+            if entry.get("status") == STATUS_OPEN:
+                target_frame = str(entry.get("frame_id", "")).lower()
+                for prop in current_propositions:
+                    pred = str(prop.get("predicate", {}).get("lemma") if isinstance(prop.get("predicate"), dict) else prop.get("predicate", "")).lower()
+                    if pred and (pred == target_frame or target_frame in pred):
+                        transition_qud_status(entry, STATUS_ANSWERED, turn_index)
+                        break
+
+    # 3. Check for supersession from correction context
     if correction_context and correction_context.get("is_correction"):
         superseded_propositions = set(correction_context.get("superseded_propositions", []))
         for entry in stack:
@@ -93,7 +110,14 @@ def merge_and_update_qud_stack(
             if fid in superseded_propositions:
                 transition_qud_status(entry, STATUS_SUPERSEDED, turn_index)
 
-    # 3. Merge new gaps pointing at same frame or append new
+    # 4. Mark abandoned after untouched threshold
+    for entry in stack:
+        if entry.get("status") == STATUS_OPEN:
+            last_touch = entry.get("last_touched", entry.get("created_turn", turn_index))
+            if (turn_index - last_touch) >= abandon_threshold:
+                transition_qud_status(entry, STATUS_ABANDONED, turn_index)
+
+    # 5. Merge new gaps pointing at same frame or append new
     existing_by_frame = {e.get("frame_id"): e for e in stack if e.get("status") == STATUS_OPEN}
     existing_by_gap = {e.get("gap_id"): e for e in stack}
 
@@ -103,11 +127,11 @@ def merge_and_update_qud_stack(
         question_form = gap.get("neutral_question_form") or f"Could you share more about {gap.get('description', 'that')}?"
         spans = gap.get("spans", [])
 
-        # Hard negative check: Merge gaps pointing at same frame
+        # Merge gaps pointing at same frame
         if fid in existing_by_frame:
             existing_entry = existing_by_frame[fid]
             existing_entry["last_touched"] = turn_index
-            # Combine spans without duplicates
+            existing_entry["recurrence_count"] = existing_entry.get("recurrence_count", 1) + 1
             for s in spans:
                 if s not in existing_entry.get("spans", []):
                     existing_entry["spans"].append(s)
@@ -116,7 +140,9 @@ def merge_and_update_qud_stack(
             if existing_entry.get("status") == STATUS_DEFLECTED:
                 # User unprompted return reopens deflected gap
                 transition_qud_status(existing_entry, STATUS_OPEN, turn_index)
+                existing_entry.pop("last_asked_turn", None)
             existing_entry["last_touched"] = turn_index
+            existing_entry["recurrence_count"] = existing_entry.get("recurrence_count", 1) + 1
         else:
             new_entry = create_qud_entry(
                 gap_id=gid,
