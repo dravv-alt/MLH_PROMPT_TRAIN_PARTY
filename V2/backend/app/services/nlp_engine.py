@@ -497,7 +497,7 @@ def analyze_turn(text, state_snapshot=None, config=None):
     closure = re.fullmatch(r"(?:thank you|we can (?:stop|pause) here|that is enough for now)[.!\s]*", text.strip(), re.I)
     prior_similarity=cosine(v,turns[-1].get("vector",{})) if turns and v else 0.
     correction,response_span=response_evidence(redacted,bool(turns),prior_similarity,turns)
-    correction["supersedes_turn"] = turns[-1]["turn_index"] if correction["detected"] else None
+    correction["supersedes_turn"] = turns[-1].get("turn_index", len(turns)) if (correction["detected"] and turns) else None
     strategy = "closure" if closure else "insufficient" if len(content) < 4 else "correction" if correction["detected"] else "contrast" if any(e["relation"] == "contrast" for e in edges) else "recurring" if prior_count >= 2 else "explanation" if any(e["relation"] in {"cause", "result"} for e in edges) else "standard"
     evidence = {"content_tokens": len(content), "prior_topic_turns": prior_count, "relation_ids": [e["id"] for e in edges], "closure": bool(closure), "correction": correction}
     current = {"turn_index": turn_index, "text": redacted, "vector": v, "topic_id": topic_id, "entities": ids, "correction_of_turn": correction["supersedes_turn"]}

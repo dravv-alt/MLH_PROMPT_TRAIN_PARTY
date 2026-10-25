@@ -127,12 +127,27 @@ class ChatResponse(BaseModel):
     nlp_analysis: dict | None = None
     turn_id: int | None = None
     revision: int | None = None
+    gaps: list[dict] = Field(default_factory=list)
+    qud_stack: list[dict] = Field(default_factory=list)
+    diagnostics_status: str = "ok"
+    question_trace: dict | None = None
 
 
 class AnalyzeRequest(BaseModel):
     text: str = Field(min_length=1, max_length=2000)
     session_id: str | None = None
     mathematical_profile: Literal['low_resource', 'balanced', 'high_fidelity', 'responsive', 'stable'] = 'balanced'
+
+
+class AnalyzeResponse(BaseModel):
+    status: str
+    revision: int
+    nlp_analysis: dict
+    gaps: list[dict] = Field(default_factory=list)
+    qud_stack: list[dict] = Field(default_factory=list)
+    diagnostics_status: str = "ok"
+    reason: str | None = None
+
 
 
 class CalendarMood(BaseModel):

@@ -118,8 +118,12 @@ def execute_question_pipeline(
             "diagnostics_status": "safety_override",
         }
 
-    # 2. Structural Gap Detection (Task T2.1)
-    gaps = detect_structural_gaps(analysis, prior_turns)
+    # 2. Structural Gap Detection (Task T2.1 & T2.2)
+    from app.services.gaps import rank_gaps_by_salience
+    raw_gaps = detect_structural_gaps(analysis, prior_turns)
+    gaps = rank_gaps_by_salience(raw_gaps, analysis, prior_turns)
+    parser_fallback = analysis.get("parser_fallback")
+    diag_status = "degraded" if parser_fallback else "ok"
 
     # 3. QUD Stack Maintenance (Task T2.3)
     correction_context = analysis.get("response_plan", {}).get("correction_context")
@@ -146,7 +150,7 @@ def execute_question_pipeline(
             },
             "gaps": gaps,
             "qud_stack": updated_qud_stack,
-            "diagnostics_status": "ok",
+            "diagnostics_status": diag_status,
         }
 
     # If no active structural gaps exist, move is acknowledge
@@ -155,7 +159,7 @@ def execute_question_pipeline(
             "move": "acknowledge",
             "selected_question": None,
             "question_trace": {
-                "reason": "No unaddressed structural discourse gaps detected in user utterance.",
+                "reason": "no_gap_detected",
                 "move": "acknowledge",
                 "gap_id": None,
                 "spans": [],
@@ -163,7 +167,8 @@ def execute_question_pipeline(
             },
             "gaps": gaps,
             "qud_stack": updated_qud_stack,
-            "diagnostics_status": "ok",
+            "diagnostics_status": diag_status,
+            "reason": "no_gap_detected",
         }
 
     # 5. Target Top Salient Gap
@@ -230,5 +235,5 @@ def execute_question_pipeline(
         "question_trace": trace,
         "gaps": gaps,
         "qud_stack": updated_qud_stack,
-        "diagnostics_status": "ok",
+        "diagnostics_status": diag_status,
     }

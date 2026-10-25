@@ -108,6 +108,7 @@ def detect_unfilled_roles(analysis: Dict[str, Any], status: str = "ok") -> List[
                 gaps.append({
                     "gap_id": f"gap_unfilled_role_{clause_id}_{pred}",
                     "type": GAP_UNFILLED_ROLE,
+                    "predicate": pred,
                     "spans": spans,
                     "evidence": {"predicate": pred, "clause_id": clause_id},
                     "detector_id": "detector_unfilled_role",
@@ -132,8 +133,9 @@ def detect_hedged_commitments(analysis: Dict[str, Any], status: str = "ok") -> L
         gaps.append({
             "gap_id": f"gap_hedged_{start}_{end}",
             "type": GAP_HEDGED_COMMITMENT,
+            "predicate": "epistemic_hedge",
             "spans": [span],
-            "evidence": {"hedge_span": span, "hedge_text": span_text},
+            "evidence": {"predicate": "epistemic_hedge", "hedge_span": span, "hedge_text": span_text},
             "detector_id": "detector_hedged_commitment",
             "status": status,
             "description": f"Epistemically hedged assertion '{span_text}'.",
@@ -141,22 +143,35 @@ def detect_hedged_commitments(analysis: Dict[str, Any], status: str = "ok") -> L
     return gaps
 
 
+REPORTED_EVALUATION_PATTERNS = [
+    r"\b(?:which\s+is\s+|that\s+is\s+|it\s+is\s+)?(?:completely\s+|totally\s+)?(?:untrue|false|wrong|a\s+lie|nonsense|ridiculous|unfair|not\s+true|true|fair)\b",
+    r"\bi\s+(?:don['’]t\s+believe|do\s+not\s+believe|disagree|agree|doubt)\b",
+    r"\b(?:which|that)\s+i\s+(?:know|knew|think)\s+is\s+(?:not\s+true|false|untrue|wrong)\b",
+]
+
+
+def _has_user_evaluation_of_report(text: str) -> bool:
+    lower = text.lower()
+    return any(re.search(pat, lower) for pat in REPORTED_EVALUATION_PATTERNS)
+
+
 # Detector 3: Reported Claim with No User Stance
 def detect_reported_claims(analysis: Dict[str, Any], status: str = "ok") -> List[Dict[str, Any]]:
     gaps = []
     text = analysis.get("redacted_text", "")
+    if _has_user_evaluation_of_report(text):
+        return []
     propositions = analysis.get("discourse_context", {}).get("current_propositions", [])
 
     for prop in propositions:
         pred = extract_predicate_lemma(prop)
         if pred in REPORTING_VERBS:
-            # Check if user stated an evaluation
-            # If user text does not contain explicit stance marker
             clause_id = prop.get("clause_id")
             spans = prop.get("spans", [[0, len(text)]])
             gaps.append({
                 "gap_id": f"gap_reported_{clause_id}_{pred}",
                 "type": GAP_REPORTED_CLAIM,
+                "predicate": pred,
                 "spans": spans,
                 "evidence": {"predicate": pred, "clause_id": clause_id},
                 "detector_id": "detector_reported_claim",
@@ -182,8 +197,9 @@ def detect_unresolved_references(analysis: Dict[str, Any], status: str = "ok") -
             gaps.append({
                 "gap_id": f"gap_unresolved_ref_{span[0]}_{span[1]}",
                 "type": GAP_UNRESOLVED_REFERENCE,
+                "predicate": p.get("pronoun", "pronoun"),
                 "spans": [span],
-                "evidence": {"pronoun": p.get("pronoun"), "resolution_status": p_status},
+                "evidence": {"predicate": p.get("pronoun", "pronoun"), "pronoun": p.get("pronoun"), "resolution_status": p_status},
                 "detector_id": "detector_unresolved_reference",
                 "status": status,
                 "description": f"Reference '{p.get('pronoun')}' is {p_status}.",
@@ -201,6 +217,7 @@ def detect_correction_links(analysis: Dict[str, Any], status: str = "ok") -> Lis
             gaps.append({
                 "gap_id": f"gap_correction_link_{link.get('id', 'rev')}",
                 "type": GAP_CORRECTION_LINK,
+                "predicate": "correction",
                 "spans": [span] if span != [0, 0] else [[0, 10]],
                 "evidence": link,
                 "detector_id": "detector_correction_link",
@@ -242,14 +259,20 @@ def detect_counterfactual_obligations(analysis: Dict[str, Any], status: str = "o
         if any(c in {"obligation", "counterfactual", "deontic"} for c in cats):
             spans = prop.get("scope_spans", prop.get("spans", [[0, 10]]))
             pred = extract_predicate_lemma(prop)
+            modal_lemma = pred
+            for m in modality:
+                if isinstance(m, dict) and m.get("lemma") in {"should", "must", "ought", "would", "could", "might"}:
+                    modal_lemma = m.get("lemma")
+                    break
             gaps.append({
                 "gap_id": f"gap_modality_{prop.get('id', 'm')}",
                 "type": GAP_COUNTERFACTUAL_OBLIGATION,
+                "predicate": modal_lemma,
                 "spans": spans,
-                "evidence": {"predicate": pred, "modality": modality},
+                "evidence": {"predicate": modal_lemma, "base_predicate": pred, "modality": modality},
                 "detector_id": "detector_counterfactual_obligation",
                 "status": status,
-                "description": f"Unexplored obligation/counterfactual modality on '{pred}'.",
+                "description": f"Unexplored obligation/counterfactual modality on '{modal_lemma}'.",
             })
     return gaps
 
@@ -273,8 +296,9 @@ def detect_contrast_thin_arms(analysis: Dict[str, Any], status: str = "ok") -> L
                     gaps.append({
                         "gap_id": f"gap_contrast_thin_{thin_arm.get('id')}",
                         "type": GAP_CONTRAST_THIN_ARM,
+                        "predicate": "contrast",
                         "spans": thin_arm.get("spans", [[0, 10]]),
-                        "evidence": {"relation": rel, "underdeveloped_arm": thin_arm.get("id")},
+                        "evidence": {"predicate": "contrast", "relation": rel, "underdeveloped_arm": thin_arm.get("id")},
                         "detector_id": "detector_contrast_thin_arm",
                         "status": status,
                         "description": f"Contrast where arm '{thin_arm.get('id')}' is underdeveloped.",
@@ -293,8 +317,9 @@ def detect_recurring_topics(analysis: Dict[str, Any], prior_turns: List[Dict[str
             gaps.append({
                 "gap_id": f"gap_recurring_topic_{current_topic_id}",
                 "type": GAP_RECURRING_TOPIC,
+                "predicate": "recurring_topic",
                 "spans": [[0, min(20, len(analysis.get("redacted_text", "")))]],
-                "evidence": {"topic_id": current_topic_id, "recurrence_count": t.get("count")},
+                "evidence": {"predicate": "recurring_topic", "topic_id": current_topic_id, "recurrence_count": t.get("count")},
                 "detector_id": "detector_recurring_topic",
                 "status": status,
                 "description": f"Recurring topic '{current_topic_id}' discussed across {t.get('count')} turns.",
@@ -318,3 +343,115 @@ def detect_structural_gaps(analysis: Dict[str, Any], prior_turns: List[Dict[str,
     all_gaps.extend(detect_recurring_topics(analysis, prior_turns, status))
 
     return all_gaps
+
+
+DEFAULT_SALIENCE_WEIGHTS = {
+    "recency": 0.25,
+    "hedge_strength": 0.20,
+    "repetition": 0.25,
+    "contrast_or_correction": 0.20,
+    "unprompted_return": 0.10,
+}
+
+
+def score_gap_salience(
+    gap: Dict[str, Any],
+    analysis: Dict[str, Any],
+    prior_turns: List[Dict[str, Any]] = None,
+    weights: Dict[str, float] = None,
+) -> Tuple[float, Dict[str, float]]:
+    """Compute explicit inspectable structural salience score for a gap."""
+    w = weights or DEFAULT_SALIENCE_WEIGHTS
+    text = analysis.get("redacted_text", "")
+    text_len = max(len(text), 1)
+
+    spans = gap.get("spans", [[0, 0]])
+    span_start = spans[0][0] if spans and spans[0] else 0
+    span_end = spans[0][1] if spans and spans[0] else 0
+
+    # 1. Recency: later in the turn -> higher recency
+    f_recency = min(max(span_start / text_len, 0.0), 1.0)
+
+    # 2. Hedge strength: from hedge detector / hedge ratio
+    f_hedge = 0.0
+    if gap.get("type") == GAP_HEDGED_COMMITMENT:
+        f_hedge = float(analysis.get("features", {}).get("hedge") or 0.7)
+    elif analysis.get("hedge_spans"):
+        for h_span in analysis["hedge_spans"]:
+            if max(span_start, h_span[0]) < min(span_end, h_span[1]):
+                f_hedge = float(analysis.get("features", {}).get("hedge") or 0.5)
+                break
+
+    # 3. Repetition across turns (topic recurrence)
+    f_repetition = 0.0
+    if gap.get("type") == GAP_RECURRING_TOPIC:
+        count = gap.get("evidence", {}).get("recurrence_count", 2)
+        f_repetition = min(count / 5.0, 1.0)
+    else:
+        topic_count = analysis.get("strategy_evidence", {}).get("prior_topic_turns", 0)
+        f_repetition = min(topic_count / 5.0, 1.0)
+
+    # 4. Co-occurrence with contrast or correction
+    f_contrast_correction = 0.0
+    if gap.get("type") in {GAP_CONTRAST_THIN_ARM, GAP_CORRECTION_LINK}:
+        f_contrast_correction = 1.0
+    else:
+        relations = analysis.get("relations", [])
+        if any(rel.get("type") == "contrast" for rel in relations):
+            f_contrast_correction = 0.5
+        if analysis.get("strategy_evidence", {}).get("correction", {}).get("detected"):
+            f_contrast_correction = max(f_contrast_correction, 0.8)
+
+    # 5. Unprompted return: user returned to a topic/predicate without being prompted
+    f_unprompted_return = 0.0
+    if prior_turns and len(prior_turns) >= 2:
+        pred = extract_predicate_lemma(gap.get("evidence", {}).get("predicate", ""))
+        for turn in prior_turns[:-1]:
+            if pred and pred in turn.get("text", "").lower():
+                f_unprompted_return = 1.0
+                break
+
+    features = {
+        "recency": round(f_recency, 4),
+        "hedge_strength": round(f_hedge, 4),
+        "repetition": round(f_repetition, 4),
+        "contrast_or_correction": round(f_contrast_correction, 4),
+        "unprompted_return": round(f_unprompted_return, 4),
+    }
+
+    score = (
+        w.get("recency", 0.25) * f_recency
+        + w.get("hedge_strength", 0.20) * f_hedge
+        + w.get("repetition", 0.25) * f_repetition
+        + w.get("contrast_or_correction", 0.20) * f_contrast_correction
+        + w.get("unprompted_return", 0.10) * f_unprompted_return
+    )
+
+    return round(score, 4), features
+
+
+def rank_gaps_by_salience(
+    gaps: List[Dict[str, Any]],
+    analysis: Dict[str, Any],
+    prior_turns: List[Dict[str, Any]] = None,
+    weights: Dict[str, float] = None,
+) -> List[Dict[str, Any]]:
+    """Rank detected gaps deterministically by structural salience features."""
+    if not gaps:
+        return []
+
+    scored = []
+    for gap in gaps:
+        score, feats = score_gap_salience(gap, analysis, prior_turns, weights)
+        gap_copy = dict(gap)
+        gap_copy["salience_score"] = score
+        gap_copy["salience_features"] = feats
+        scored.append(gap_copy)
+
+    def _sort_key(g):
+        spans = g.get("spans", [[0, 0]])
+        start = spans[0][0] if spans and spans[0] else 0
+        return (-g["salience_score"], -start, g.get("gap_id", ""))
+
+    scored.sort(key=_sort_key)
+    return scored

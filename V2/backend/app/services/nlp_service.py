@@ -121,7 +121,37 @@ class NLPService:
             memory_generation=state["neural_metadata"].get("generation", ""),
             session_id=session_id,
         )
-        return {"status": "preview", "revision": revision, "nlp_analysis": analysis}
+        from app.services.gaps import detect_structural_gaps, rank_gaps_by_salience
+        from app.services.qud_stack import merge_and_update_qud_stack
+        raw_gaps = detect_structural_gaps(analysis, state.get("turns", []))
+        ranked_gaps = rank_gaps_by_salience(raw_gaps, analysis, state.get("turns", []))
+        correction_context = analysis.get("strategy_evidence", {}).get("correction")
+        turn_index = len(state.get("turns", [])) + 1
+        updated_qud_stack = merge_and_update_qud_stack(
+            state.get("qud_stack", []),
+            ranked_gaps,
+            turn_index,
+            correction_context=correction_context,
+        )
+        parser_fallback = analysis.get("parser_fallback")
+        diagnostics_status = "degraded" if parser_fallback else "ok"
+        reason = "no_gap_detected" if not ranked_gaps else None
+
+        analysis["gaps"] = ranked_gaps
+        analysis["qud_stack"] = updated_qud_stack
+        analysis["diagnostics_status"] = diagnostics_status
+        if reason:
+            analysis["diagnostics_reason"] = reason
+
+        return {
+            "status": "preview",
+            "revision": revision,
+            "nlp_analysis": analysis,
+            "gaps": ranked_gaps,
+            "qud_stack": updated_qud_stack,
+            "diagnostics_status": diagnostics_status,
+            "reason": reason,
+        }
 
     def enrich(self,user,analysis,state,budget=2,limit=3,local_text=None):
         from app.services.nlp_engine import vector, parse
@@ -236,6 +266,19 @@ class NLPService:
             memory_generation=state["neural_metadata"].get("generation", ""),
             session_id=payload.session_id,
         )
+        from app.services.question_pipeline import execute_question_pipeline
+        pipeline_res = execute_question_pipeline(
+            analysis,
+            state.get("turns", []),
+            session_qud_stack=state.get("qud_stack", []),
+            turn_index=len(state.get("turns", [])) + 1,
+        )
+        analysis["gaps"] = pipeline_res["gaps"]
+        analysis["qud_stack"] = pipeline_res["qud_stack"]
+        analysis["diagnostics_status"] = pipeline_res["diagnostics_status"]
+        analysis["question_trace"] = pipeline_res["question_trace"]
+        delta["qud_stack"] = pipeline_res["qud_stack"]
+
         delta['_neural_metadata']=state['neural_metadata'];delta['_embedding']=embedding
         if preferences.get('store_local_unredacted_memory'):
             delta['_raw_context']={'text':payload.message,'offset_map':ephemeral['offset_map'],'vector':query_vector}
@@ -423,7 +466,20 @@ class NLPService:
             )
             world.world=delta['world']
             flag_modified(world,'world')
-            result = {"session_id": session_id, "response_text": response, "identity_stripped_input": analysis["redacted_text"], "safety_mode": mode, "narrative_structure": structure.model_dump(), "nlp_analysis": analysis, "turn_id": turn.id, "revision": revision+1}
+            result = {
+                "session_id": session_id,
+                "response_text": response,
+                "identity_stripped_input": analysis["redacted_text"],
+                "safety_mode": mode,
+                "narrative_structure": structure.model_dump(),
+                "nlp_analysis": analysis,
+                "turn_id": turn.id,
+                "revision": revision+1,
+                "gaps": analysis.get("gaps", []),
+                "qud_stack": analysis.get("qud_stack", []),
+                "diagnostics_status": analysis.get("diagnostics_status", "ok"),
+                "question_trace": analysis.get("question_trace"),
+            }
             db.add(NLPRecord(turn_id=turn.id, session_id=session_id, user_id=user_id, request_id=request_id, input_digest=digest, analysis=analysis, result=result))
             for topic in delta["topics"]:
                 row = db.get(NLPTopic, (session_id, topic["id"]))

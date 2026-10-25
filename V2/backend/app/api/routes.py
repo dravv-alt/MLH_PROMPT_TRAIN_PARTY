@@ -8,6 +8,7 @@ from app.models.schemas import (
     ChatRequest,
     ChatResponse,
     AnalyzeRequest,
+    AnalyzeResponse,
     MemoryReviewRequest,
     MemorySearchRequest,
     NeuralPreferencesRequest,
@@ -143,9 +144,9 @@ def generation_status(user_id: Annotated[str, Depends(get_current_user_id)]):
     return {'local': local, 'hosted': hosted_status(), 'default_provider': 'local'}
 
 
-@router.post("/nlp/analyze")
-def preview_analysis(payload: AnalyzeRequest, user_id: Annotated[str, Depends(get_current_user_id)]):
-    return get_nlp_service().preview(user_id, payload.text, payload.session_id, payload.mathematical_profile)
+@router.post("/nlp/analyze", response_model=AnalyzeResponse)
+def preview_analysis(payload: AnalyzeRequest, user_id: Annotated[str, Depends(get_current_user_id)]) -> AnalyzeResponse:
+    return AnalyzeResponse(**get_nlp_service().preview(user_id, payload.text, payload.session_id, payload.mathematical_profile))
 
 
 @router.post('/nlp/experiments')
