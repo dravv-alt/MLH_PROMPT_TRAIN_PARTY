@@ -250,8 +250,14 @@ def presupposition_violation_rate(questions: List[str], user_commitments: List[D
 
     violations = 0
     user_words = set(re.findall(r"\w+", user_text.lower()))
-    committed_predicates = {c.get("predicate", "").lower() for c in user_commitments}
-    committed_patients = {str(c.get("patient", "")).lower() for c in user_commitments}
+    committed_predicates = set()
+    for c in user_commitments:
+        p = c.get("predicate", "")
+        if isinstance(p, dict):
+            p = p.get("lemma") or p.get("text", "")
+        if p:
+            committed_predicates.add(str(p).lower())
+    committed_patients = {str(c.get("patient", "")).lower() for c in user_commitments if c.get("patient")}
 
     for q in questions:
         ps = extract_presuppositions(q)

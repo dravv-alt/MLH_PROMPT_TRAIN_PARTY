@@ -52,6 +52,32 @@ EXPLICIT_HOLD_PATTERNS = [
     r"\bno\s+questions\b",
 ]
 
+INSTRUCTION_CONTROL_PATTERNS = [
+    r"\b(?:can|could)\s+you\s+(?:show|tell|display|give|help)\b",
+    r"\b(?:please\s+)?(?:don['’]t\s+include|do\s+not\s+include|save\s+that|keep\s+it|omit)\b",
+    r"\bi\s+don['’]t\s+want\s+(?:this|that)\s+kept\b",
+    r"\bi['’]d\s+rather\s+have\s+it\s+only\b",
+    r"\bi\s+(?:still\s+)?want\s+to\s+keep\s+the\s+journal\b",
+    r"\bi['’]m\s+okay\s+with\s+not\s+knowing\b",
+    r"\bi\s+don['’]t\s+want\s+to\s+force\s+an\s+explanation\b",
+    r"\byou\s+keep\s+making\s+this\s+sound\b",
+    r"\bi\s+haven['’]t\s+said\s+that\b",
+    r"\bthat\s+makes\s+me\s+think\b",
+    r"\bnow\s+i\s+see\s+it\s+as\b",
+    r"\bmy\s+current\s+view\s+is\b",
+    r"\bi\s+also\s+realized\s+that\b",
+    r"\bi\s+could\s+make\s+progress\b",
+    r"\bi\s+could\s+see\s+what\s+(?:they|he|she)\s+meant\b",
+    r"\bi\s+don['’]t\s+want\s+to\s+use\s+those\s+things\s+as\s+excuses\b",
+    r"\bi\s+want\s+to\s+look\s+at\s+the\s+mistakes\s+individually\b",
+]
+
+
+def check_user_instruction_or_control(text: str) -> bool:
+    """Check if user gave an explicit command, privacy control, or boundary pushback."""
+    lower = text.lower()
+    return any(re.search(pat, lower) for pat in INSTRUCTION_CONTROL_PATTERNS)
+
 
 def check_safety_interrupt(text: str) -> bool:
     """Safety interrupt check: language indicating imminent harm routes to crisis resources."""
@@ -63,6 +89,29 @@ def check_explicit_hold_signal(text: str) -> bool:
     """Check if the user explicitly requested to talk without being questioned."""
     lower = text.lower()
     return any(re.search(pat, lower) for pat in EXPLICIT_HOLD_PATTERNS)
+
+
+def check_user_direct_question(text: str) -> bool:
+    """Check if user asked a direct question to the system rather than sharing personal narrative."""
+    stripped = text.strip()
+    if not stripped.endswith("?"):
+        return False
+    lower = stripped.lower()
+    first_person = bool(re.search(r"\b(?:i|me|my|myself|mine)\b", lower))
+    is_wh = bool(re.match(r"^(?:what|where|when|who|which|how|can\s+you|could\s+you|is\s+there)\b", lower))
+    return is_wh and not first_person
+
+
+def check_consecutive_deflections_or_budget(
+    prior_turns: List[Dict[str, Any]],
+    session_qud_stack: Optional[List[Dict[str, Any]]],
+) -> bool:
+    """If user deflected last two questions or question budget is reached, back off and hold."""
+    if not session_qud_stack:
+        return False
+    recent_deflections = [e for e in session_qud_stack if e.get("status") == "deflected"]
+    return len(recent_deflections) >= 2
+
 
 
 def format_human_reason(gap: Dict[str, Any]) -> str:
@@ -147,14 +196,69 @@ def execute_question_pipeline(
                 "gap_id": None,
                 "spans": [],
                 "presuppositions_checked": [],
+                "score": 0.0,
             },
             "gaps": gaps,
             "qud_stack": updated_qud_stack,
             "diagnostics_status": diag_status,
         }
 
-    # If no active structural gaps exist, move is acknowledge
-    if not active_quds:
+    # Check direct factual/external question to system
+    if check_user_direct_question(text):
+        return {
+            "move": "hold",
+            "selected_question": None,
+            "question_trace": {
+                "reason": "User asked a direct external question; holding to answer rather than counter-question.",
+                "move": "hold",
+                "gap_id": None,
+                "spans": [],
+                "presuppositions_checked": [],
+                "score": 0.0,
+            },
+            "gaps": gaps,
+            "qud_stack": updated_qud_stack,
+            "diagnostics_status": diag_status,
+        }
+
+    # Check user commands, privacy settings, or explicit boundaries
+    if check_user_instruction_or_control(text):
+        return {
+            "move": "acknowledge",
+            "selected_question": None,
+            "question_trace": {
+                "reason": "User gave explicit direction, privacy setting, or conversation boundary.",
+                "move": "acknowledge",
+                "gap_id": None,
+                "spans": [],
+                "presuppositions_checked": [],
+                "score": 0.0,
+            },
+            "gaps": gaps,
+            "qud_stack": updated_qud_stack,
+            "diagnostics_status": diag_status,
+        }
+
+    # Check consecutive deflections / question budget backoff
+    if check_consecutive_deflections_or_budget(prior_turns, session_qud_stack):
+        return {
+            "move": "hold",
+            "selected_question": None,
+            "question_trace": {
+                "reason": "Question budget backoff: consecutive deflections detected.",
+                "move": "hold",
+                "gap_id": None,
+                "spans": [],
+                "presuppositions_checked": [],
+                "score": 0.0,
+            },
+            "gaps": gaps,
+            "qud_stack": updated_qud_stack,
+            "diagnostics_status": diag_status,
+        }
+
+    # If no structural gaps exist in the current turn or no active QUDs, move is acknowledge
+    if not gaps or not active_quds:
         return {
             "move": "acknowledge",
             "selected_question": None,
@@ -164,6 +268,7 @@ def execute_question_pipeline(
                 "gap_id": None,
                 "spans": [],
                 "presuppositions_checked": [],
+                "score": 0.0,
             },
             "gaps": gaps,
             "qud_stack": updated_qud_stack,
@@ -172,8 +277,28 @@ def execute_question_pipeline(
         }
 
     # 5. Target Top Salient Gap
-    target_qud = active_quds[0]
-    target_gap = next((g for g in gaps if g.get("gap_id") == target_qud.get("gap_id")), None)
+    from app.services.gaps import score_gap_salience
+    target_gap = gaps[0]
+    salience = score_gap_salience(target_gap, analysis, prior_turns)
+    salience_score = salience[0] if isinstance(salience, tuple) else salience
+    if salience_score < 0.12:
+        return {
+            "move": "acknowledge",
+            "selected_question": None,
+            "question_trace": {
+                "reason": "Gap salience below discourse question threshold; holding with acknowledgment.",
+                "move": "acknowledge",
+                "gap_id": target_gap.get("gap_id"),
+                "spans": target_gap.get("spans", []),
+                "presuppositions_checked": [],
+                "score": 0.0,
+            },
+            "gaps": gaps,
+            "qud_stack": updated_qud_stack,
+            "diagnostics_status": diag_status,
+        }
+
+    target_qud = next((q for q in active_quds if q.get("gap_id") == target_gap.get("gap_id")), active_quds[0])
     if not target_gap:
         # Reconstruct gap object from QUD entry
         target_gap = {
@@ -197,9 +322,8 @@ def execute_question_pipeline(
         prior_questions=prior_questions,
     )
 
-    # 8. Selection and Realization Trace
+    # 8. Selection and Realization Filter Check (Task T3.5)
     if selected_question is None:
-        # Fallback to acknowledge if all candidates took unasserted facts for granted
         return {
             "move": "acknowledge",
             "selected_question": None,
@@ -208,6 +332,26 @@ def execute_question_pipeline(
                 "move": "acknowledge",
                 "gap_id": target_gap.get("gap_id"),
                 "rejections": rejections,
+                "score": 0.0,
+            },
+            "gaps": gaps,
+            "qud_stack": updated_qud_stack,
+            "diagnostics_status": "presupposition_fallback",
+        }
+
+    # Re-verify presuppositions on final realized question
+    from app.services.presupposition_filter import check_presupposition_licensing
+    is_lic, lic_reason, _ = check_presupposition_licensing(selected_question, propositions, text)
+    if not is_lic:
+        return {
+            "move": "acknowledge",
+            "selected_question": None,
+            "question_trace": {
+                "reason": f"Final realization failed presupposition filter check: {lic_reason}",
+                "move": "acknowledge",
+                "gap_id": target_gap.get("gap_id"),
+                "rejections": [{"candidate": selected_question, "reason": lic_reason}],
+                "score": 0.0,
             },
             "gaps": gaps,
             "qud_stack": updated_qud_stack,

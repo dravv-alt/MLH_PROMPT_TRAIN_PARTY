@@ -82,6 +82,9 @@ def detect_unfilled_roles(analysis: Dict[str, Any], status: str = "ok") -> List[
             causal_clauses.add(rel.get("arg1"))
             causal_clauses.add(rel.get("arg2"))
 
+    lower_text = text.lower()
+    has_explicit_grounding = bool(re.search(r"\b(?:because|after\s+i|since\s+i|due\s+to|so\s+that|when\s+i|why\s+i)\b", lower_text))
+
     for prop in propositions:
         clause_id = prop.get("clause_id")
         pred = extract_predicate_lemma(prop)
@@ -98,11 +101,14 @@ def detect_unfilled_roles(analysis: Dict[str, Any], status: str = "ok") -> List[
             if not spans:
                 spans = [[0, min(len(text), 30)]]
 
-            # Don't flag if it's already a complete routine narration
-            actors = prop.get("actors", [])
-            has_agent = any(a.get("role") in {"agent", "nsubj"} for a in actors)
-            has_patient = any(a.get("role") in {"patient", "dobj"} for a in actors)
-            
+            # Don't flag if it's already a complete routine narration or causally grounded
+            if has_explicit_grounding and pred in {"feel", "notice", "start", "leave", "struggle", "reconsider"}:
+                continue
+
+            # Don't flag linking/copular predicates with complete evaluative complements
+            if pred == "feel" and any(adj in lower_text for adj in ["better", "completely normal", "understood", "meaningful"]):
+                continue
+
             # If experiential predicate or action lacking reason
             if pred in {"feel", "worry", "struggle", "hesitate", "reconsider", "doubt", "leave", "resign", "miss"}:
                 gaps.append({
@@ -147,6 +153,13 @@ REPORTED_EVALUATION_PATTERNS = [
     r"\b(?:which\s+is\s+|that\s+is\s+|it\s+is\s+)?(?:completely\s+|totally\s+)?(?:untrue|false|wrong|a\s+lie|nonsense|ridiculous|unfair|not\s+true|true|fair)\b",
     r"\bi\s+(?:don['’]t\s+believe|do\s+not\s+believe|disagree|agree|doubt)\b",
     r"\b(?:which|that)\s+i\s+(?:know|knew|think)\s+is\s+(?:not\s+true|false|untrue|wrong)\b",
+    r"\b(?:that|which|it)\s+was\s+(?:reassuring|comforting|helpful|relieving|good|nice|encouraging|useful|clearer)\b",
+    r"\b(?:that|which|it)\s+(?:reassured|helped|comforted)\b",
+    r"\bi\s+(?:felt|was)\s+(?:reassured|relieved|comforted|glad)\b",
+    r"\bi\s+could\s+see\s+what\s+(?:they|he|she)\s+meant\b",
+    r"\bthey\s+said\s+that\s+was\s+(?:completely\s+)?fine\b",
+    r"\byou\s+keep\s+making\s+this\s+sound\b",
+    r"\bi\s+haven['’]t\s+said\s+that\b",
 ]
 
 
@@ -166,6 +179,11 @@ def detect_reported_claims(analysis: Dict[str, Any], status: str = "ok") -> List
     for prop in propositions:
         pred = extract_predicate_lemma(prop)
         if pred in REPORTING_VERBS:
+            agent = str(prop.get("agent", "")).lower()
+            if agent in {"user", "i", "me", "we"}:
+                continue
+            if re.search(r"\b(?:i|we|today\s+i|yesterday\s+i)\s+(?:said|told|asked)\b", text.lower()):
+                continue
             clause_id = prop.get("clause_id")
             spans = prop.get("spans", [[0, len(text)]])
             gaps.append({
@@ -254,6 +272,8 @@ def detect_counterfactual_obligations(analysis: Dict[str, Any], status: str = "o
     gaps = []
     propositions = analysis.get("discourse_context", {}).get("current_propositions", [])
     for prop in propositions:
+        if prop.get("polarity") == "negative":
+            continue
         modality = prop.get("modality", [])
         cats = _extract_modality_categories(modality)
         if any(c in {"obligation", "counterfactual", "deontic"} for c in cats):

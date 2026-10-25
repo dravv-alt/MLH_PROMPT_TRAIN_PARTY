@@ -93,13 +93,14 @@ def _extract_actors_and_roles(head: Any, tokens: list[Any], text: str) -> tuple[
         nsubj_count = 0
         for token in tokens:
             if token.dep_ in {"nsubj", "csubj"}:
-                nsubj_count += 1
+                if token.head == head:
+                    nsubj_count += 1
                 actors.append({"role": "agent", "voice": "active", "grammatical_role": token.dep_, **_surface(text, token)})
             elif token.dep_ in OBJECT_DEPS:
                 actors.append({"role": "patient", "voice": "active", "grammatical_role": token.dep_, **_surface(text, token)})
 
-        # Check for multiple conflicting subjects without coordination
-        if nsubj_count > 1 and not any(t.dep_ == "conj" for t in tokens if t.dep_ in {"nsubj", "csubj"}):
+        # Check for multiple conflicting subjects of the same verb without coordination
+        if nsubj_count > 1 and not any(t.dep_ == "conj" for t in tokens if t.dep_ in {"nsubj", "csubj"} and t.head == head):
             role_certainty = "uncertain"
 
     return actors, role_certainty

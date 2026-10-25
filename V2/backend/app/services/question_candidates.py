@@ -27,6 +27,7 @@ from app.services.gaps import (
     GAP_COUNTERFACTUAL_OBLIGATION,
     GAP_CONTRAST_THIN_ARM,
     GAP_RECURRING_TOPIC,
+    extract_predicate_lemma,
 )
 
 # Template bank for LLM-off path (clean, open, neutral)
@@ -123,11 +124,15 @@ def score_candidate(
     if any(re.search(pat, lower) for pat in ADVICE_PATTERNS):
         score -= 8.0
 
-    # 4. Anchoring to user words
+    # 4. Anchoring to user words and gap predicate
     user_words = set(re.findall(r"\w+", user_text.lower()))
     cand_words = set(re.findall(r"\w+", lower))
     overlap = len(cand_words & user_words)
     score += min(2.0, overlap * 0.5)
+
+    gap_pred = extract_predicate_lemma(gap.get("evidence", {}).get("predicate", "")) or extract_predicate_lemma(gap.get("predicate", ""))
+    if gap_pred and gap_pred.lower() in lower:
+        score += 3.0
 
     # 5. Length penalty: ideal question is 8 to 18 words
     word_count = len(candidate.split())
@@ -165,7 +170,7 @@ def rank_and_select_candidate(
         scored.append((cand, sc))
 
     # Sort descending by score, ties broken deterministically by string length then alphabetical
-    scored.sort(key=lambda item: (-item[1], len(item[0]), item[0]))
+    scored.sort(key=lambda item: (-item[1], -len(item[0]), item[0]))
     best_cand, best_score = scored[0]
 
     return best_cand, best_score, rejections

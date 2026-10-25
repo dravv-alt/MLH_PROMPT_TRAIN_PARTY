@@ -14,23 +14,38 @@ from app.services.gaps import extract_predicate_lemma
 
 
 PRESUPPOSITION_PATTERNS = [
-    # Wh-causative / factive / action
-    (r"\bwhy\s+did\s+(?:that|it|this|you|they|he|she)\s+([^?]+)", "wh_action"),
-    (r"\bwhat\s+made\s+(?:you|them|him|her)\s+(?:feel|think|decide|conclude)?\s*([^?]+)", "causative_factive"),
-    (r"\bwhy\s+(?:do|are|were)\s+you\s+([^?]+)", "wh_action"),
+    # Wh-causative / factive / action (matches any subject)
+    (r"\bwhy\s+(?:did|does|do|is|are|was|were|has|have|had|would|could|should)\s+([^?]+)", "wh_action"),
+    (r"\bwhat\s+(?:made|caused)\s+([^?]+)", "causative_factive"),
+    (r"\bhow\s+come\s+([^?]+)", "wh_how_come"),
+    # Feeling queries
+    (r"\bhow\s+(?:did|do|can|could|would)\s+(?:you\s+)?feel\s*([^?]*)", "feel_query"),
+    (r"\bwhy\s+(?:do|did|are)\s+you\s+feel\s+([^?]+)", "wh_feel_state"),
     # Change of state
     (r"\bwhen\s+did\s+you\s+stop\s+([^?]+)", "change_of_state_stop"),
     (r"\bwhen\s+did\s+you\s+start\s+([^?]+)", "change_of_state_start"),
+    (r"\bwhen\s+did\s+you\s+(?:quit|begin|resume)\s+([^?]+)", "change_of_state"),
+    (r"\bwhy\s+did\s+you\s+(?:stop|start|quit|begin|resume)\s+([^?]+)", "change_of_state"),
     # Iteratives
-    (r"\bhow\s+long\s+have\s+you\s+(?:been|felt|noticed)\s+([^?]+)", "iterative_duration"),
+    (r"\bhow\s+long\s+have\s+you\s+(?:been|felt|noticed|known|had)\s+([^?]+)", "iterative_duration"),
+    (r"\b(?:do|did|are|were)\s+you\s+still\s+([^?]+)", "iterative_still"),
+    (r"\b(?:are|were|do|did)\s+you\s+again\s+([^?]+)", "iterative_again"),
     # Factives
-    (r"\bdo\s+you\s+regret\s+([^?]+)", "factive_regret"),
-    (r"\bhow\s+did\s+you\s+realize\s+(?:that\s+)?([^?]+)", "factive_realize"),
-    # Definite evaluations
-    (r"\byour\s+(guilt|shame|regret|fear|trauma|anger|depression|anxiety)\b", "unlicensed_affect_np"),
+    (r"\b(?:do|did)\s+you\s+regret\s+([^?]+)", "factive_regret"),
+    (r"\bhow\s+did\s+you\s+(?:realize|discover|find\s+out|learn)\s+(?:that\s+)?([^?]+)", "factive_realize"),
+    (r"\bhow\s+did\s+you\s+know\s+(?:that\s+)?([^?]+)", "factive_know"),
+    # Temporal clauses presupposition
+    (r"\bbefore\s+you\s+([^?,]+)", "temporal_clause_before"),
+    (r"\bafter\s+you\s+([^?,]+)", "temporal_clause_after"),
+    # Cleft constructions
+    (r"\b(?:was|is)\s+it\s+([^?]+)\s+who\b", "cleft_who"),
+    (r"\b(?:was|is)\s+it\s+([^?]+)\s+that\b", "cleft_that"),
+    # Definite evaluations & affect NPs
+    (r"\byour\s+(guilt|shame|regret|fear|trauma|anger|depression|anxiety|grief|jealousy|worry|doubt|insecurity|exhaustion|failure)\b", "unlicensed_affect_np"),
+    (r"\bthe\s+reason\s+(?:why\s+)?([^?]+)", "definite_reason"),
 ]
 
-# Stopwords that are closed-class grammar words or neutral question framing tokens
+# Stopwords that are strictly closed-class grammar words (function words only)
 PERMITTED_GRAMMAR_WORDS = {
     "a", "an", "the", "this", "that", "these", "those", "it", "its", "you", "your",
     "me", "my", "we", "our", "he", "his", "him", "she", "her", "they", "them", "their",
@@ -39,8 +54,8 @@ PERMITTED_GRAMMAR_WORDS = {
     "up", "about", "into", "over", "after", "before", "between", "out", "through",
     "when", "where", "why", "how", "what", "which", "who", "whom", "could", "would",
     "should", "can", "will", "may", "might", "must", "or", "and", "but", "if", "not",
-    "make", "made", "feel", "felt", "think", "thought", "say", "said", "tell", "told",
-    "regard", "regarding", "way", "moment", "situation", "thing", "things",
+    "make", "made", "let", "get", "got",
+    "so", "as", "than", "there", "then", "just", "more", "also", "such",
 }
 
 
