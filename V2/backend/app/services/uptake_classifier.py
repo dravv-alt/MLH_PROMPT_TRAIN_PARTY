@@ -81,7 +81,7 @@ def classify_answer_uptake(
             "reason": "No previous system turn.",
         }
 
-    last_move = last_system_turn.get("move")
+    last_move = last_system_turn.get("move") or last_system_turn.get("system_move")
     last_question = last_system_turn.get("question") or last_system_turn.get("selected_question")
     target_gap_id = last_system_turn.get("targeted_gap_id") or last_system_turn.get("gap_id")
 

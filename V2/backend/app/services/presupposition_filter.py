@@ -16,7 +16,8 @@ from app.services.gaps import extract_predicate_lemma
 PRESUPPOSITION_PATTERNS = [
     # Wh-causative / factive / action (matches any subject)
     (r"\bwhy\s+(?:did|does|do|is|are|was|were|has|have|had|would|could|should)\s+([^?]+)", "wh_action"),
-    (r"\bwhat\s+(?:made|caused)\s+([^?]+)", "causative_factive"),
+    (r"\bwhat\s+((?:made|caused)\s+[^?]+)", "causative_factive"),
+    (r"\bwho\s+((?:forced|compelled|pressured|pushed|ordered|told)\s+[^?]+)", "coercive_who"),
     (r"\bhow\s+come\s+([^?]+)", "wh_how_come"),
     # Feeling queries
     (r"\bhow\s+(?:did|do|can|could|would)\s+(?:you\s+)?feel\s*([^?]*)", "feel_query"),

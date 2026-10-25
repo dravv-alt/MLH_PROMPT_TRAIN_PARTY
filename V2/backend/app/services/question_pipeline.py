@@ -437,6 +437,7 @@ def execute_question_pipeline(
         "move": move_type,
         "score": round(score, 2),
         "human_reason": human_reason,
+        "reason": human_reason,
         "generation_mode": mode,
     }
 

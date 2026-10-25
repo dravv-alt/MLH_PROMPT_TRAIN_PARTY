@@ -1,0 +1,61 @@
+{
+  "demos": [
+    {
+      "demo": "Demo 1: Cooperative Elaboration",
+      "turn_1": {
+        "user": "I think I might struggle with how to proceed with the team assignment, but everyone expects results.",
+        "move": "ask",
+        "question": "What leads you to feel epistemic_hedge?"
+      },
+      "turn_2": {
+        "user": "I felt that because the manager moved the team assignment deadline forward without notice.",
+        "uptake": "answered",
+        "move": "acknowledge"
+      },
+      "status": "PASS"
+    },
+    {
+      "demo": "Demo 2: Boundary Deflection & Pushback",
+      "turn_1": {
+        "user": "I think I might struggle with how to manage this department, but everyone expects results.",
+        "move": "ask",
+        "question": "What leads you to feel epistemic_hedge?"
+      },
+      "turn_2": {
+        "user": "Leave it, I don't want to talk about that.",
+        "uptake": "deflected",
+        "move": "acknowledge"
+      },
+      "turn_3": {
+        "user": "Why do you keep asking me questions? Stop questioning me.",
+        "move": "hold",
+        "reason": "User pushback detected: user requested to stop questioning."
+      },
+      "status": "PASS"
+    },
+    {
+      "demo": "Demo 3: Presupposition Filter Guard",
+      "user_text": "I left the department meeting early.",
+      "rejections": [
+        "Unlicensed presupposition in 'wh_action': takes for granted ['feel', 'guilty'] not asserted by user.",
+        "Unlicensed presupposition in 'change_of_state_stop': takes for granted ['caring', 'meetings'] not asserted by user.",
+        "Unlicensed presupposition in 'coercive_who': takes for granted ['forced'] not asserted by user."
+      ],
+      "surviving_question": "What was occurring around you when you began to leave?",
+      "status": "PASS"
+    },
+    {
+      "demo": "Demo 4: Multi-Turn Correction & Supersession",
+      "turn_1": {
+        "text": "I was blamed by my sister for the broken vase.",
+        "qud_status": "open"
+      },
+      "turn_2": {
+        "text": "Nahi matlab, actually it was my cousin who blamed me, not my sister.",
+        "qud_status": "superseded"
+      },
+      "status": "PASS"
+    }
+  ],
+  "all_passed": true
+}
