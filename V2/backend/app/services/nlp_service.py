@@ -121,27 +121,23 @@ class NLPService:
             memory_generation=state["neural_metadata"].get("generation", ""),
             session_id=session_id,
         )
-        from app.services.gaps import detect_structural_gaps, rank_gaps_by_salience
-        from app.services.qud_stack import merge_and_update_qud_stack
-        raw_gaps = detect_structural_gaps(analysis, state.get("turns", []))
-        ranked_gaps = rank_gaps_by_salience(raw_gaps, analysis, state.get("turns", []))
-        correction_context = analysis.get("strategy_evidence", {}).get("correction")
+        from app.services.question_pipeline import execute_question_pipeline
         turn_index = len(state.get("turns", [])) + 1
-        updated_qud_stack = merge_and_update_qud_stack(
-            state.get("qud_stack", []),
-            ranked_gaps,
-            turn_index,
-            correction_context=correction_context,
+        pipeline_res = execute_question_pipeline(
+            analysis,
+            state.get("turns", []),
+            session_qud_stack=state.get("qud_stack", []),
+            turn_index=turn_index,
         )
-        parser_fallback = analysis.get("parser_fallback")
-        diagnostics_status = "degraded" if parser_fallback else "ok"
-        reason = "no_gap_detected" if not ranked_gaps else None
+        ranked_gaps = pipeline_res["gaps"]
+        updated_qud_stack = pipeline_res["qud_stack"]
+        diagnostics_status = pipeline_res["diagnostics_status"]
+        question_trace = pipeline_res.get("question_trace")
 
         analysis["gaps"] = ranked_gaps
         analysis["qud_stack"] = updated_qud_stack
         analysis["diagnostics_status"] = diagnostics_status
-        if reason:
-            analysis["diagnostics_reason"] = reason
+        analysis["question_trace"] = question_trace
 
         return {
             "status": "preview",
@@ -150,7 +146,8 @@ class NLPService:
             "gaps": ranked_gaps,
             "qud_stack": updated_qud_stack,
             "diagnostics_status": diagnostics_status,
-            "reason": reason,
+            "reason": question_trace.get("reason") if question_trace else None,
+            "question_trace": question_trace,
         }
 
     def enrich(self,user,analysis,state,budget=2,limit=3,local_text=None):
@@ -196,6 +193,201 @@ class NLPService:
         with self.factory() as db:
             rows = db.scalars(select(NLPRecord).where(NLPRecord.user_id == user_id, NLPRecord.session_id == session_id).order_by(NLPRecord.turn_id)).all()
             return {"session_id": session_id, "records": [{"turn_id": r.turn_id, "analysis": r.analysis} for r in rows]}
+
+    def diagnostic_map(self, user_id, session_id=None, text_value=None):
+        if session_id:
+            self.load(user_id, session_id)
+            with self.factory() as db:
+                records = db.scalars(select(NLPRecord).where(NLPRecord.user_id == user_id, NLPRecord.session_id == session_id).order_by(NLPRecord.turn_id)).all()
+                turns_data = []
+                for idx, r in enumerate(records):
+                    a = r.analysis or {}
+                    res = r.result or {}
+                    qt = a.get("question_trace") or {}
+                    turns_data.append({
+                        "turn_id": r.turn_id,
+                        "turn_index": idx + 1,
+                        "text": a.get("redacted_text", ""),
+                        "clauses": a.get("clauses", []),
+                        "relations": a.get("relations", []),
+                        "hedge_spans": a.get("hedge_spans", []),
+                        "gaps": a.get("gaps", []),
+                        "move": qt.get("move", "acknowledge"),
+                        "question_trace": qt,
+                        "uptake": qt.get("uptake") or res.get("uptake"),
+                        "response_text": res.get("response_text"),
+                    })
+                return {
+                    "session_id": session_id,
+                    "turns": turns_data,
+                    "diagnostics_status": "ok",
+                }
+        elif text_value:
+            preview_res = self.preview(user_id, text_value)
+            a = preview_res.get("nlp_analysis", {})
+            qt = preview_res.get("question_trace") or a.get("question_trace") or {}
+            return {
+                "session_id": None,
+                "turns": [{
+                    "turn_id": None,
+                    "turn_index": 1,
+                    "text": a.get("redacted_text", text_value),
+                    "clauses": a.get("clauses", []),
+                    "relations": a.get("relations", []),
+                    "hedge_spans": a.get("hedge_spans", []),
+                    "gaps": preview_res.get("gaps", []),
+                    "move": qt.get("move", "acknowledge"),
+                    "question_trace": qt,
+                    "uptake": qt.get("uptake"),
+                    "response_text": None,
+                }],
+                "diagnostics_status": preview_res.get("diagnostics_status", "ok"),
+            }
+        else:
+            fail("missing_parameter", "Provide either session_id or text.", 422)
+
+    def threads(self, user_id, session_id):
+        state, _ = self.load(user_id, session_id)
+        qud_stack = state.get("qud_stack", [])
+        active = [t for t in qud_stack if t.get("status") == "open"]
+        resolved = [t for t in qud_stack if t.get("status") in {"answered", "deflected", "abandoned", "superseded"}]
+        return {
+            "session_id": session_id,
+            "active_threads": active,
+            "resolved_threads": resolved,
+            "all_threads": qud_stack,
+        }
+
+    def dismiss_thread(self, user_id, session_id, gap_id):
+        with self.factory() as db:
+            if db.bind.dialect.name == "sqlite":
+                db.execute(text("BEGIN IMMEDIATE"))
+            state_row = db.get(NLPState, session_id)
+            if not state_row:
+                fail("not_found", "Session not found.", 404)
+            import copy
+            snapshot = copy.deepcopy(state_row.snapshot or {})
+            qud_stack = snapshot.get("qud_stack", [])
+            found = False
+            for entry in qud_stack:
+                if entry.get("gap_id") == gap_id:
+                    entry["status"] = "deflected"
+                    found = True
+                    break
+            if not found:
+                fail("not_found", f"Thread {gap_id} not found in session QUD stack.", 404)
+            snapshot["qud_stack"] = qud_stack
+            state_row.snapshot = snapshot
+            state_row.revision += 1
+            db.commit()
+            return {
+                "session_id": session_id,
+                "gap_id": gap_id,
+                "action": "dismiss",
+                "status": "deflected",
+                "updated_qud_stack": qud_stack,
+            }
+
+    def prioritize_thread(self, user_id, session_id, gap_id):
+        with self.factory() as db:
+            if db.bind.dialect.name == "sqlite":
+                db.execute(text("BEGIN IMMEDIATE"))
+            state_row = db.get(NLPState, session_id)
+            if not state_row:
+                fail("not_found", "Session not found.", 404)
+            import copy
+            snapshot = copy.deepcopy(state_row.snapshot or {})
+            qud_stack = snapshot.get("qud_stack", [])
+            found = False
+            curr_turn = len(snapshot.get("turns", []))
+            for entry in qud_stack:
+                if entry.get("gap_id") == gap_id:
+                    entry["status"] = "open"
+                    entry["recurrence_count"] = entry.get("recurrence_count", 1) + 1
+                    entry["last_touched"] = curr_turn
+                    found = True
+                    break
+            if not found:
+                fail("not_found", f"Thread {gap_id} not found in session QUD stack.", 404)
+            snapshot["qud_stack"] = qud_stack
+            state_row.snapshot = snapshot
+            state_row.revision += 1
+            db.commit()
+            return {
+                "session_id": session_id,
+                "gap_id": gap_id,
+                "action": "prioritize",
+                "status": "open",
+                "updated_qud_stack": qud_stack,
+            }
+
+    def rejected_candidates(self, user_id, session_id=None, turn_id=None):
+        with self.factory() as db:
+            query = select(NLPRecord).where(NLPRecord.user_id == user_id)
+            if session_id:
+                query = query.where(NLPRecord.session_id == session_id)
+            if turn_id:
+                query = query.where(NLPRecord.turn_id == turn_id)
+            rows = db.scalars(query.order_by(NLPRecord.turn_id)).all()
+            rejections = []
+            for r in rows:
+                a = r.analysis or {}
+                qt = a.get("question_trace") or {}
+                trace_rejections = qt.get("rejections") or []
+                for rej in trace_rejections:
+                    rejections.append({
+                        "turn_id": r.turn_id,
+                        "session_id": r.session_id,
+                        "candidate": rej.get("candidate"),
+                        "reason": rej.get("reason"),
+                        "triggers": rej.get("triggers", []),
+                    })
+            return {
+                "session_id": session_id,
+                "turn_id": turn_id,
+                "rejected_candidates": rejections,
+                "total_rejected": len(rejections),
+            }
+
+    def apply_correction(self, user_id, payload):
+        session_id = payload.session_id
+        with self.factory() as db:
+            if db.bind.dialect.name == "sqlite":
+                db.execute(text("BEGIN IMMEDIATE"))
+            state_row = db.get(NLPState, session_id)
+            if not state_row:
+                fail("not_found", "Session not found.", 404)
+            import copy
+            snapshot = copy.deepcopy(state_row.snapshot or {})
+            qud_stack = snapshot.get("qud_stack", [])
+            superseded = []
+
+            for entry in qud_stack:
+                if (payload.gap_id and entry.get("gap_id") == payload.gap_id) or \
+                   (payload.frame_id and entry.get("frame_id") == payload.frame_id):
+                    new_status = "superseded" if payload.correction_type == "retract" else "deflected"
+                    entry["status"] = new_status
+                    superseded.append(entry.get("gap_id"))
+
+            correction_event = {
+                "turn_id": payload.turn_id,
+                "user_note": payload.user_note,
+                "correction_type": payload.correction_type,
+                "superseded_gaps": superseded,
+            }
+            corrections = snapshot.setdefault("user_corrections", [])
+            corrections.append(correction_event)
+
+            snapshot["qud_stack"] = qud_stack
+            state_row.snapshot = snapshot
+            state_row.revision += 1
+            db.commit()
+            return {
+                "session_id": session_id,
+                "status": "corrected",
+                "applied_supersessions": superseded,
+                "updated_qud_stack": qud_stack,
+            }
 
     def delete_session(self,user_id,session_id):
         """Remove source scenes from world memory when their source session is deleted."""

@@ -147,6 +147,65 @@ class AnalyzeResponse(BaseModel):
     qud_stack: list[dict] = Field(default_factory=list)
     diagnostics_status: str = "ok"
     reason: str | None = None
+    question_trace: dict | None = None
+
+
+class DiagnosticMapTurn(BaseModel):
+    turn_id: Optional[int] = None
+    turn_index: int
+    text: str
+    clauses: list[dict] = Field(default_factory=list)
+    relations: list[dict] = Field(default_factory=list)
+    hedge_spans: list[list[int]] = Field(default_factory=list)
+    gaps: list[dict] = Field(default_factory=list)
+    move: str = "acknowledge"
+    question_trace: Optional[dict] = None
+    uptake: Optional[str] = None
+    response_text: Optional[str] = None
+
+
+class DiagnosticMapResponse(BaseModel):
+    session_id: Optional[str] = None
+    turns: list[DiagnosticMapTurn] = Field(default_factory=list)
+    diagnostics_status: str = "ok"
+
+
+class ThreadsResponse(BaseModel):
+    session_id: str
+    active_threads: list[dict] = Field(default_factory=list)
+    resolved_threads: list[dict] = Field(default_factory=list)
+    all_threads: list[dict] = Field(default_factory=list)
+
+
+class ThreadActionResponse(BaseModel):
+    session_id: str
+    gap_id: str
+    action: str
+    status: str
+    updated_qud_stack: list[dict] = Field(default_factory=list)
+
+
+class RejectedCandidatesResponse(BaseModel):
+    session_id: Optional[str] = None
+    turn_id: Optional[int] = None
+    rejected_candidates: list[dict] = Field(default_factory=list)
+    total_rejected: int = 0
+
+
+class CorrectionRequest(BaseModel):
+    session_id: str
+    turn_id: Optional[int] = None
+    gap_id: Optional[str] = None
+    frame_id: Optional[str] = None
+    correction_type: Literal["retract", "clarify", "dismiss"] = "clarify"
+    user_note: str = Field(min_length=1, max_length=1000)
+
+
+class CorrectionResponse(BaseModel):
+    session_id: str
+    status: str = "corrected"
+    applied_supersessions: list[str] = Field(default_factory=list)
+    updated_qud_stack: list[dict] = Field(default_factory=list)
 
 
 

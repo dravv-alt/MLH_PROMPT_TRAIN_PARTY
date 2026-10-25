@@ -9,6 +9,12 @@ from app.models.schemas import (
     ChatResponse,
     AnalyzeRequest,
     AnalyzeResponse,
+    DiagnosticMapResponse,
+    ThreadsResponse,
+    ThreadActionResponse,
+    RejectedCandidatesResponse,
+    CorrectionRequest,
+    CorrectionResponse,
     MemoryReviewRequest,
     MemorySearchRequest,
     NeuralPreferencesRequest,
@@ -243,6 +249,54 @@ def delete_world_memory(user_id: Annotated[str, Depends(get_current_user_id)]):
 @router.get("/sessions/{session_id}/analysis")
 def analysis_history(session_id: str, user_id: Annotated[str, Depends(get_current_user_id)]):
     return get_nlp_service().history(user_id, session_id)
+
+
+@router.get("/nlp/sessions/{session_id}/diagnostic_map", response_model=DiagnosticMapResponse)
+def session_diagnostic_map(session_id: str, user_id: Annotated[str, Depends(get_current_user_id)]) -> DiagnosticMapResponse:
+    """T5.2 Diagnostic map view: clause annotations, relations, hedges, gaps, and moves."""
+    return DiagnosticMapResponse(**get_nlp_service().diagnostic_map(user_id=user_id, session_id=session_id))
+
+
+@router.post("/nlp/diagnostic_map", response_model=DiagnosticMapResponse)
+def preview_diagnostic_map(payload: AnalyzeRequest, user_id: Annotated[str, Depends(get_current_user_id)]) -> DiagnosticMapResponse:
+    """T5.2 Diagnostic map preview: returns map view for text input with LLM off (Invariant 2)."""
+    return DiagnosticMapResponse(**get_nlp_service().diagnostic_map(user_id=user_id, text_value=payload.text))
+
+
+@router.get("/nlp/sessions/{session_id}/threads", response_model=ThreadsResponse)
+def session_threads(session_id: str, user_id: Annotated[str, Depends(get_current_user_id)]) -> ThreadsResponse:
+    """T5.3 Open-threads panel: returns active, resolved, and historical QUD threads."""
+    return ThreadsResponse(**get_nlp_service().threads(user_id=user_id, session_id=session_id))
+
+
+@router.post("/nlp/sessions/{session_id}/threads/{gap_id}/dismiss", response_model=ThreadActionResponse)
+def dismiss_thread(session_id: str, gap_id: str, user_id: Annotated[str, Depends(get_current_user_id)]) -> ThreadActionResponse:
+    """T5.3 Dismiss thread: marks QUD thread as deflected and updates session state."""
+    return ThreadActionResponse(**get_nlp_service().dismiss_thread(user_id=user_id, session_id=session_id, gap_id=gap_id))
+
+
+@router.post("/nlp/sessions/{session_id}/threads/{gap_id}/prioritize", response_model=ThreadActionResponse)
+def prioritize_thread(session_id: str, gap_id: str, user_id: Annotated[str, Depends(get_current_user_id)]) -> ThreadActionResponse:
+    """T5.3 Prioritize thread: sets QUD thread as open, bumps recurrence, and refreshes touch turn."""
+    return ThreadActionResponse(**get_nlp_service().prioritize_thread(user_id=user_id, session_id=session_id, gap_id=gap_id))
+
+
+@router.get("/nlp/sessions/{session_id}/rejected_candidates", response_model=RejectedCandidatesResponse)
+def session_rejected_candidates(session_id: str, user_id: Annotated[str, Depends(get_current_user_id)]) -> RejectedCandidatesResponse:
+    """T5.4 Rejected-candidates view: returns candidates rejected by presupposition filter across session."""
+    return RejectedCandidatesResponse(**get_nlp_service().rejected_candidates(user_id=user_id, session_id=session_id))
+
+
+@router.get("/nlp/turns/{turn_id}/rejected_candidates", response_model=RejectedCandidatesResponse)
+def turn_rejected_candidates(turn_id: int, user_id: Annotated[str, Depends(get_current_user_id)]) -> RejectedCandidatesResponse:
+    """T5.4 Rejected-candidates view: returns candidates rejected for a specific turn."""
+    return RejectedCandidatesResponse(**get_nlp_service().rejected_candidates(user_id=user_id, turn_id=turn_id))
+
+
+@router.patch("/nlp/analysis/correction", response_model=CorrectionResponse)
+def user_correction(payload: CorrectionRequest, user_id: Annotated[str, Depends(get_current_user_id)]) -> CorrectionResponse:
+    """T5.5 User correction: logs feedback/correction on detected gap and updates QUD supersessions."""
+    return CorrectionResponse(**get_nlp_service().apply_correction(user_id=user_id, payload=payload))
 
 
 @router.get("/sessions/{session_id}/turns", response_model=SessionTurnsResponse)
