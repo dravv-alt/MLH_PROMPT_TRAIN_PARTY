@@ -123,6 +123,8 @@ def format_human_reason(gap: Dict[str, Any]) -> str:
     if gtype == GAP_UNFILLED_ROLE:
         return f"You noted that you began to {pred}, and didn't mention what led up to that."
     elif gtype == GAP_HEDGED_COMMITMENT:
+        if pred in {"epistemic_hedge", "hedge", "that"}:
+            return "You expressed uncertainty without saying more about what brought that to mind."
         return f"You expressed uncertainty about {pred} without saying more about what brought that to mind."
     elif gtype == GAP_REPORTED_CLAIM:
         agent = evidence.get("agent", "someone")

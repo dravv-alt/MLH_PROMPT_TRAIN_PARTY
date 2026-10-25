@@ -38,7 +38,7 @@ GAP_TEMPLATES = {
         "Could you say more about what was happening when you {pred}?",
     ],
     GAP_HEDGED_COMMITMENT: [
-        "What leads you to feel {pred}?",
+        "What leads you to feel uncertain about that?",
         "How would you describe what was happening in that moment?",
         "Could you say a bit more about what brought that thought to mind?",
     ],
@@ -95,7 +95,11 @@ def generate_template_candidates(gap: Dict[str, Any], user_text: str) -> List[st
     gap_type = gap.get("type", GAP_UNFILLED_ROLE)
     templates = GAP_TEMPLATES.get(gap_type, GAP_TEMPLATES[GAP_UNFILLED_ROLE])
 
-    pred = gap.get("evidence", {}).get("predicate", "that")
+    raw_pred = gap.get("evidence", {}).get("predicate", "that")
+    if raw_pred in {"epistemic_hedge", "hedge", "unspecified", "none", ""}:
+        pred = "that"
+    else:
+        pred = extract_predicate_lemma(raw_pred) or raw_pred
     agent = gap.get("evidence", {}).get("agent", "they")
 
     candidates = []

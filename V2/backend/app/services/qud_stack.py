@@ -61,6 +61,38 @@ def transition_qud_status(entry: Dict[str, Any], new_status: str, current_turn: 
     return True
 
 
+def format_qud_question(gap: Dict[str, Any]) -> str:
+    """Format a clean, natural question representing the Question Under Discussion."""
+    if gap.get("neutral_question_form"):
+        return gap["neutral_question_form"]
+    gtype = gap.get("type", "")
+    evidence = gap.get("evidence", {})
+    raw_pred = evidence.get("predicate", "")
+    from app.services.gaps import extract_predicate_lemma
+    pred = extract_predicate_lemma(raw_pred) or raw_pred
+    if pred in {"epistemic_hedge", "hedge", ""}:
+        pred = "that"
+
+    if gtype == "unfilled_role":
+        return f"What was occurring around you when you began to {pred}?"
+    elif gtype == "hedged_commitment":
+        return "What leads you to feel uncertain about that?"
+    elif gtype == "reported_claim":
+        agent = evidence.get("agent", "they")
+        return f"What was your perspective when {agent} mentioned that?"
+    elif gtype == "unresolved_reference":
+        return "Who was involved in that particular moment?"
+    elif gtype == "counterfactual_obligation":
+        return f"What expectation was in place regarding {pred}?"
+    elif gtype == "contrast_thin_arm":
+        return "What was occurring on the other side of that contrast?"
+    elif gtype == "correction_link":
+        return "Could you clarify which part of that you were adjusting?"
+    elif gtype == "recurring_topic":
+        return "How has that situation developed since you first mentioned it?"
+    return "Could you say more about what was happening in that moment?"
+
+
 def merge_and_update_qud_stack(
     qud_stack: List[Dict[str, Any]],
     new_gaps: List[Dict[str, Any]],
@@ -124,7 +156,7 @@ def merge_and_update_qud_stack(
     for gap in new_gaps:
         gid = gap.get("gap_id")
         fid = gap.get("evidence", {}).get("clause_id") or gap.get("evidence", {}).get("predicate") or gid
-        question_form = gap.get("neutral_question_form") or f"Could you share more about {gap.get('description', 'that')}?"
+        question_form = format_qud_question(gap)
         spans = gap.get("spans", [])
 
         # Merge gaps pointing at same frame
