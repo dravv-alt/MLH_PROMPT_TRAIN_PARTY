@@ -32,11 +32,11 @@ STRATEGIES = {
     "standard": "Reflect the expressed experience with concise grounded wording.",
 }
 FALLBACKS = {
-    "closure": "This feels like a place to pause for now.",
+    "closure": "You have reached a place to pause for now.",
     "insufficient": "There is space for what you have expressed here.",
     "correction": "Your current clarification takes precedence over the earlier framing.",
-    "contrast": "Two different parts of this experience sit alongside each other.",
-    "recurring": "This topic has appeared across several of your reflections.",
+    "contrast": "You are holding two different parts of this experience alongside each other.",
+    "recurring": "You have returned to a topic that has appeared across several of your reflections.",
     "explanation": "You have connected what happened with the reason you described.",
     "standard": "You have put part of this experience into words.",
 }
@@ -376,7 +376,7 @@ def rank_turns(turns):
     return sorted(selected, key=lambda t: t["turn_index"])
 
 
-def response_evidence(text, has_prior, prior_similarity):
+def response_evidence(text, has_prior, prior_similarity, turns=None):
     """Select one current-turn sentence as auditable response evidence."""
     sentences=[]
     for match in re.finditer(r"[^.!?]+[.!?]?",text):
@@ -384,21 +384,58 @@ def response_evidence(text, has_prior, prior_similarity):
         while start<end and text[start].isspace():start+=1
         while end>start and text[end-1].isspace():end-=1
         if start<end:sentences.append([start,end])
-    correction_match = re.search(
-        r"(?:^|[.!?]\s+)(actually\b|i\s+(?:do\s+not|don't)\s+think\b|rather\b|instead\b|"
-        r"looking\s+at\s+it\s+again\b|that\s+changes\s+how\s+i\s+see\s+it\b|"
-        r"you\s+keep\s+making\s+this\s+sound\s+like\b|i\s+(?:have\s+not|haven't)\s+said\b)",
+    # Hard negative check: "no, I don't want to talk about that" is boundary/pushback, not a proposition correction
+    is_boundary_pushback = bool(re.search(
+        r"(?:^|[.!?]\s+)no\s*[,]?\s*(?:i\s+(?:do\s+not|don't)\s+(?:want\s+to\s+talk|feel\s+like\s+talking)|let'?s\s+not\s+talk|drop\s+it|leave\s+it)\b",
         text,
         re.I,
-    ) if has_prior else None
-    cue=correction_match.group(1).casefold() if correction_match else ""
-    # "I don't think" can be a fresh belief rather than a correction. Require
-    # lexical continuity for that weaker cue; explicit revision markers stand
-    # on their own when a prior turn exists.
-    weak_cue = bool(re.fullmatch(r"i\s+(?:do\s+not|don't)\s+think", cue))
-    detected=bool(correction_match and (not weak_cue or prior_similarity>=.30))
+    ))
+
+    correction_match = None
+    if has_prior and not is_boundary_pushback:
+        correction_match = re.search(
+            r"(?:^|[.!?]\s+)("
+            r"no\s+wait\b|"
+            r"(?:what\s+)?i\s+meant\b|"
+            r"scratch\s+that\b|"
+            r"(?:(?:nahi|nahin|na|\[entity_e\d+\])\s*[,]?\s*)?matlab\b|"
+            r"nahi\s+(?:yaar\b|nahi\b)|"
+            r"actually\s+it\s+was\b|"
+            r"actually\b|"
+            r"i\s+(?:do\s+not|don't)\s+think\b|"
+            r"rather\b|"
+            r"instead\b|"
+            r"looking\s+at\s+it\s+again\b|"
+            r"that\s+changes\s+how\s+i\s+see\s+it\b|"
+            r"you\s+keep\s+making\s+this\s+sound\s+like\b|"
+            r"i\s+(?:have\s+not|haven't)\s+said\b|"
+            r"that'?s\s+not\s+what\s+i\s+said\b"
+            r")",
+            text,
+            re.I,
+        )
+
+    cue = correction_match.group(1).casefold() if correction_match else ""
+
+    # "actually" as filler: if no negation and no lexical continuity with prior turn, treat as filler
+    has_prior_overlap = (prior_similarity >= .15)
+    if turns and isinstance(turns[-1], dict):
+        p_text = turns[-1].get("text", "").lower()
+        c_words = {w for w in re.findall(r"[a-z]{4,}", text.lower()) if w not in {"actually", "think", "that", "this", "with", "have"}}
+        if any(w in p_text for w in c_words):
+            has_prior_overlap = True
+
+    has_negation = bool(re.search(r"\b(?:not|n't|never|wasn't|didn't|meant|instead|wrong)\b", text, re.I))
+    is_filler_actually = bool(
+        re.fullmatch(r"actually", cue) and not (has_negation or has_prior_overlap)
+    )
+
+    weak_cue = bool(re.fullmatch(r"i\s+(?:do\s+not|don't)\s+think", cue)) or is_filler_actually
+    detected = bool(correction_match and not is_boundary_pushback and not is_filler_actually and (not weak_cue or prior_similarity >= .30))
+
     correction = {
         "detected": detected,
+        "cue": cue if detected else "",
         "cue_span": list(correction_match.span(1)) if detected else None,
         "prior_turn_similarity": prior_similarity if has_prior else None,
     }
@@ -459,14 +496,14 @@ def analyze_turn(text, state_snapshot=None, config=None):
     posterior = filtered(obs, [len(ids), len(clauses), len(lexical), len(content)], state.get("posterior"))
     closure = re.fullmatch(r"(?:thank you|we can (?:stop|pause) here|that is enough for now)[.!\s]*", text.strip(), re.I)
     prior_similarity=cosine(v,turns[-1].get("vector",{})) if turns and v else 0.
-    correction,response_span=response_evidence(redacted,bool(turns),prior_similarity)
+    correction,response_span=response_evidence(redacted,bool(turns),prior_similarity,turns)
     correction["supersedes_turn"] = turns[-1]["turn_index"] if correction["detected"] else None
     strategy = "closure" if closure else "insufficient" if len(content) < 4 else "correction" if correction["detected"] else "contrast" if any(e["relation"] == "contrast" for e in edges) else "recurring" if prior_count >= 2 else "explanation" if any(e["relation"] in {"cause", "result"} for e in edges) else "standard"
     evidence = {"content_tokens": len(content), "prior_topic_turns": prior_count, "relation_ids": [e["id"] for e in edges], "closure": bool(closure), "correction": correction}
     current = {"turn_index": turn_index, "text": redacted, "vector": v, "topic_id": topic_id, "entities": ids, "correction_of_turn": correction["supersedes_turn"]}
     all_turns = turns + [current]
     window = [t["topic_id"] for t in all_turns if t.get("topic_id")][-10:]
-    counts = {k: window.count(k) for k in sorted(set(window))}
+    counts = {k: window.count(k) for k in sorted(set(window), key=lambda x: str(x))}
     entropy = -sum((n/len(window))*math.log(n/len(window)) for n in counts.values())/math.log(len(counts)) if len(counts) > 1 else None
     from app.services.classical_nlp import lesk, discourse_entities
     from app.services.dmrst import parse_dmrst

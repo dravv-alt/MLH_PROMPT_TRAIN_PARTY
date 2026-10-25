@@ -132,18 +132,36 @@ def build_response_plan(
     claims: list[dict[str, Any]] = []
     rejected: list[dict[str, Any]] = []
 
+    discourse = analysis.get("discourse_context", {})
+    uncertain_spans = []
+    for prop in discourse.get("current_propositions", []):
+        if prop.get("role_certainty") == "uncertain" or prop.get("status") == "uncertain":
+            uncertain_spans.extend(prop.get("scope_spans", []))
+
     for index, sentence in enumerate(_claim_units(text), start=1):
         value = sentence["text"]
+        c_span = sentence["span"]
         claim = {
             "id": f"claim_{index}",
             "text": value,
-            "span": sentence["span"],
+            "span": c_span,
             "kind": _kind(value),
             "provenance": "direct_user_statement",
             "epistemic_status": "tentative" if UNCERTAINTY_RE.search(value) else "asserted",
             "required": True,
         }
-        if analysis.get("strategy_evidence", {}).get("correction", {}).get("detected") and NEGATED_CORRECTION_RE.search(value):
+
+        # Exclude claims with uncertain role mapping
+        overlaps_uncertain = any(
+            max(c_span[0], u_span[0]) < min(c_span[1], u_span[1])
+            for u_span in uncertain_spans
+        )
+
+        if overlaps_uncertain:
+            claim["epistemic_status"] = "uncertain_role_mapping"
+            claim["required"] = False
+            rejected.append(claim)
+        elif analysis.get("strategy_evidence", {}).get("correction", {}).get("detected") and NEGATED_CORRECTION_RE.search(value):
             claim["epistemic_status"] = "rejected_by_user"
             claim["required"] = False
             rejected.append(claim)
@@ -222,6 +240,8 @@ def build_response_plan(
             "predicate": row.get("predicate", {}).get("lemma"),
             "actors": [{"role": actor.get("role"), "text": actor.get("text")} for actor in row.get("actors", [])],
             "polarity": row.get("polarity"),
+            "voice": row.get("voice", "active"),
+            "role_certainty": row.get("role_certainty", "certain"),
             "modality": [item.get("category") for item in row.get("modality", [])],
             "status": row.get("status"),
             "scope_spans": row.get("scope_spans", []),
@@ -464,3 +484,48 @@ def validate_plan_response(plan: dict[str, Any], response: str) -> dict[str, Any
         "failure_patterns": {key: pattern_details[key] for key in sorted(set(violations)) if key in pattern_details},
         "required_claim_coverage": coverage,
     }
+
+
+def realize_plan_fallback(plan: dict[str, Any]) -> str:
+    """Generate a guaranteed compliant fallback response matching the validator contract."""
+    strategy = plan.get("strategy", "standard")
+    claims = plan.get("claims_to_communicate", [])
+    uncertainty_ids = set(plan.get("uncertainty_constraints", []))
+
+    # Check if ANY claim in plan is tentative or constrained by uncertainty
+    has_any_tentative = any(
+        c.get("epistemic_status") == "tentative" or c.get("id") in uncertainty_ids
+        for c in claims
+    )
+
+    # Check for closure strategy
+    if strategy == "closure":
+        if has_any_tentative:
+            return "Perhaps you have reached a place to pause for now."
+        return "You have reached a place to pause for now."
+
+    eligible_claims = [c for c in claims if c.get("epistemic_status") != "rejected_by_user"]
+    if not eligible_claims:
+        if has_any_tentative:
+            return "Perhaps you are reflecting on what you just shared."
+        return "You have shared what you are currently experiencing."
+
+    target_claim = eligible_claims[0]
+    raw_text = target_claim.get("text", "").strip(".!? ")
+    words = raw_text.split()
+    if len(words) > 18:
+        raw_text = " ".join(words[:16])
+
+    if has_any_tentative:
+        candidate = f"Perhaps you are considering that {raw_text}."
+    else:
+        candidate = f"You noted that {raw_text}."
+
+    validation = validate_plan_response(plan, candidate)
+    if validation["is_valid"]:
+        return candidate
+
+    # Fail closed with safe verified second-person reflection
+    if has_any_tentative:
+        return "Perhaps you are reflecting on what you just shared."
+    return "You have shared what you are currently experiencing."
