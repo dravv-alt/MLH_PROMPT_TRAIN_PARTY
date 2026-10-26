@@ -5,7 +5,7 @@
       "turn_1": {
         "user": "I think I might struggle with how to proceed with the team assignment, but everyone expects results.",
         "move": "ask",
-        "question": "What leads you to feel epistemic_hedge?"
+        "question": "How would you describe what was happening in that moment?"
       },
       "turn_2": {
         "user": "I felt that because the manager moved the team assignment deadline forward without notice.",
@@ -19,7 +19,7 @@
       "turn_1": {
         "user": "I think I might struggle with how to manage this department, but everyone expects results.",
         "move": "ask",
-        "question": "What leads you to feel epistemic_hedge?"
+        "question": "How would you describe what was happening in that moment?"
       },
       "turn_2": {
         "user": "Leave it, I don't want to talk about that.",

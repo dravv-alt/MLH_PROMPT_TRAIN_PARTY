@@ -423,12 +423,14 @@ class NLPService:
             db.delete(session);db.commit();invalidate(user_id);return True
 
     def chat(self, user_id, payload):
-        if payload.generation_provider == 'hosted' and not payload.hosted_consent:
-            fail('hosted_consent_required', 'Allow this redacted message to be sent to the hosted model before continuing.', 422)
+        realizer_setting = getattr(payload, "realizer", None) or os.getenv("SANCTUARY_REALIZER") or "hosted"
+        if realizer_setting in {"hosted", "hosted_groq", "hosted_gemini"} or payload.generation_provider == 'hosted':
+            if not payload.hosted_consent:
+                fail('hosted_consent_required', 'Allow this redacted message to be sent to the hosted model before continuing.', 422)
         request_id = str(payload.request_id)
         preferences=self.neural.metadata(user_id)
         canonical = json.dumps({"message": payload.message, "session_id": payload.session_id, "casual_mode": payload.casual_mode,'share_history_with_provider':preferences['share_history_with_provider'],'process_local_unredacted':preferences['process_local_unredacted'],'store_local_unredacted_memory':preferences['store_local_unredacted_memory']}, sort_keys=True)
-        canonical += json.dumps({'generation_provider': payload.generation_provider, 'hosted_consent': payload.hosted_consent}, sort_keys=True)
+        canonical += json.dumps({'generation_provider': payload.generation_provider, 'hosted_consent': payload.hosted_consent, 'realizer': realizer_setting}, sort_keys=True)
         digest = hmac.new(self.alias_key.encode(), canonical.encode(), hashlib.sha256).hexdigest()
         if payload.session_id:
             self.load(user_id, payload.session_id)  # Every request, including replay, checks owner.
@@ -458,28 +460,84 @@ class NLPService:
             memory_generation=state["neural_metadata"].get("generation", ""),
             session_id=payload.session_id,
         )
-        from app.services.question_pipeline import execute_question_pipeline
-        pipeline_res = execute_question_pipeline(
-            analysis,
-            state.get("turns", []),
-            session_qud_stack=state.get("qud_stack", []),
-            turn_index=len(state.get("turns", [])) + 1,
-        )
-        analysis["gaps"] = pipeline_res["gaps"]
-        analysis["qud_stack"] = pipeline_res["qud_stack"]
-        analysis["diagnostics_status"] = pipeline_res["diagnostics_status"]
-        analysis["question_trace"] = pipeline_res["question_trace"]
-        delta["qud_stack"] = pipeline_res["qud_stack"]
+        pipeline_res = None
+        try:
+            from app.services.question_pipeline import execute_question_pipeline
+            pipeline_res = execute_question_pipeline(
+                analysis,
+                state.get("turns", []),
+                session_qud_stack=state.get("qud_stack", []),
+                turn_index=len(state.get("turns", [])) + 1,
+            )
+        except Exception as exc:
+            import logging
+            logging.getLogger("sanctuary.nlp_service").exception("Question pipeline raised an exception, falling back to legacy generate: %s", exc)
+            pipeline_res = None
 
-        delta['_neural_metadata']=state['neural_metadata'];delta['_embedding']=embedding
+        producing_realizer = realizer_setting
+        if pipeline_res is not None:
+            analysis["gaps"] = pipeline_res["gaps"]
+            analysis["qud_stack"] = pipeline_res["qud_stack"]
+            analysis["diagnostics_status"] = pipeline_res["diagnostics_status"]
+            analysis["question_trace"] = pipeline_res["question_trace"]
+            delta["qud_stack"] = pipeline_res["qud_stack"]
+
+            from app.services.discourse_generator import build_discourse_plan, generate_discourse_reply
+            discourse_plan = build_discourse_plan(
+                analysis=analysis,
+                pipeline_res=pipeline_res,
+                prior_turns=state.get("turns", []),
+                current_text=payload.message,
+            )
+            analysis["discourse_plan"] = discourse_plan
+            response, mode, producing_realizer = generate_discourse_reply(
+                plan=discourse_plan,
+                current_text=payload.message,
+                prior_turns=state.get("turns", []),
+                realizer=realizer_setting,
+                hosted_consent=payload.hosted_consent,
+                generator=self.generator or LOCAL_GENERATOR,
+            )
+            move = discourse_plan.get("move", pipeline_res.get("move", "acknowledge"))
+
+            # Log which realizer produced each reply
+            import logging
+            logging.getLogger("sanctuary.realizer").info("Realizer [%s] produced reply: %s", producing_realizer, response)
+            pipeline_res["question_trace"]["realizer"] = producing_realizer
+            analysis["realizer"] = producing_realizer
+
+            # Persist targeted_gap_id, move, and realizer on each turn in session state
+            if delta.get("turns"):
+                last_turn = delta["turns"][-1]
+                target_gid = (
+                    pipeline_res.get("targeted_gap_id")
+                    or pipeline_res.get("gap_id")
+                    or pipeline_res.get("question_trace", {}).get("gap_id")
+                )
+                last_turn["move"] = move
+                last_turn["system_move"] = move
+                last_turn["targeted_gap_id"] = target_gid
+                last_turn["gap_id"] = target_gid
+                last_turn["question"] = pipeline_res.get("selected_question")
+                last_turn["selected_question"] = pipeline_res.get("selected_question")
+                last_turn["response_text"] = response
+                last_turn["question_trace"] = pipeline_res.get("question_trace")
+                last_turn["discourse_plan"] = discourse_plan
+                last_turn["realizer"] = producing_realizer
+        else:
+            response, mode = self.generate(analysis, payload.casual_mode, state.get('turns', []), effective['share_history_with_provider'], user_id,
+                                           provider=payload.generation_provider, hosted_consent=payload.hosted_consent)
+
+        delta['_neural_metadata'] = state['neural_metadata']
+        delta['_embedding'] = embedding
         if preferences.get('store_local_unredacted_memory'):
-            delta['_raw_context']={'text':payload.message,'offset_map':ephemeral['offset_map'],'vector':query_vector}
-        effective=self.neural.metadata(user_id)
-        if effective['preference_revision']!=preferences['preference_revision']:
-            fail('preferences_changed','History sharing changed. Refresh before resubmitting.',409)
-        response, mode = self.generate(analysis,payload.casual_mode,state.get('turns',[]),effective['share_history_with_provider'],user_id,
-                                       provider=payload.generation_provider, hosted_consent=payload.hosted_consent)
+            delta['_raw_context'] = {'text': payload.message, 'offset_map': ephemeral['offset_map'], 'vector': query_vector}
+        effective = self.neural.metadata(user_id)
+        if effective['preference_revision'] != preferences['preference_revision']:
+            fail('preferences_changed', 'History sharing changed. Refresh before resubmitting.', 409)
+
         result = self.commit(user_id, payload.session_id, revision, request_id, digest, analysis, delta, response, mode)
+        result["realizer"] = producing_realizer
         return self.display_result(result, ephemeral['mapping'])
 
     @staticmethod

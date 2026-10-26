@@ -27,6 +27,8 @@ from app.services.gaps import (
     GAP_COUNTERFACTUAL_OBLIGATION,
     GAP_CONTRAST_THIN_ARM,
     GAP_RECURRING_TOPIC,
+    GAP_INCOMPLETION_OVER_TIME,
+    GAP_BLOCKED_STATE,
     extract_predicate_lemma,
 )
 
@@ -71,6 +73,17 @@ GAP_TEMPLATES = {
         "How has that matter developed since you first mentioned it?",
         "What has changed regarding that since earlier?",
         "Where does that situation currently stand?",
+    ],
+    GAP_INCOMPLETION_OVER_TIME: [
+        "What's the part that isn't working right now?",
+        "Where does it stall first?",
+        "What's in the way of finishing that?",
+    ],
+    GAP_BLOCKED_STATE: [
+        "What's the part that isn't working right now?",
+        "What have you tried so far?",
+        "Where does it stall first?",
+        "What's in the way of the next step?",
     ],
 }
 

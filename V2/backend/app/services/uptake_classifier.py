@@ -83,7 +83,11 @@ def classify_answer_uptake(
 
     last_move = last_system_turn.get("move") or last_system_turn.get("system_move")
     last_question = last_system_turn.get("question") or last_system_turn.get("selected_question")
-    target_gap_id = last_system_turn.get("targeted_gap_id") or last_system_turn.get("gap_id")
+    target_gap_id = (
+        last_system_turn.get("targeted_gap_id")
+        or last_system_turn.get("gap_id")
+        or (last_system_turn.get("question_trace", {}).get("gap_id") if isinstance(last_system_turn.get("question_trace"), dict) else None)
+    )
 
     if last_move not in {"ask", "clarify"} or not last_question:
         return {

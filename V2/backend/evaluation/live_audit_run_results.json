@@ -1,0 +1,1066 @@
+[
+  {
+    "turn_id": 1,
+    "user_prompt": "I finally got the internship I've been working toward for months. Everyone's congratulating me, and I know I should be happy. But honestly, I just feel tired. Now I'm already thinking about what I need to achieve next.",
+    "reply": "What was leading you to feel that was expected?",
+    "display_reply": "What was leading you to feel that was expected?",
+    "move": "ask",
+    "target_gap_id": "gap_modality_dp_82064f1dac75",
+    "trace_spans": [
+      [
+        159,
+        218
+      ]
+    ],
+    "qud_stack": [
+      {
+        "gap_id": "gap_modality_dp_82064f1dac75",
+        "frame_id": "think",
+        "neutral_question_form": "What expectation was in place regarding think?",
+        "status": "open",
+        "spans": [
+          [
+            159,
+            218
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 1,
+        "recurrence_count": 1,
+        "last_asked_turn": 1
+      },
+      {
+        "gap_id": "gap_unfilled_role_c5_feel",
+        "frame_id": "c5",
+        "neutral_question_form": "What was occurring around you when you began to feel?",
+        "status": "open",
+        "spans": [
+          [
+            126,
+            158
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 1,
+        "recurrence_count": 1
+      },
+      {
+        "gap_id": "gap_modality_dp_0435ed729056",
+        "frame_id": "should",
+        "neutral_question_form": "What expectation was in place regarding should?",
+        "status": "open",
+        "spans": [
+          [
+            107,
+            125
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 1,
+        "recurrence_count": 1
+      }
+    ],
+    "question_trace": {
+      "gap_id": "gap_modality_dp_82064f1dac75",
+      "gap_type": "counterfactual_obligation",
+      "spans": [
+        [
+          159,
+          218
+        ]
+      ],
+      "detector_id": "detector_counterfactual_obligation",
+      "presuppositions_checked": [
+        "licensed_against_commitments"
+      ],
+      "move": "ask",
+      "score": 11.5,
+      "human_reason": "You noted an expectation about think that seemed unresolved.",
+      "reason": "You noted an expectation about think that seemed unresolved.",
+      "generation_mode": "template_llm_off"
+    }
+  },
+  {
+    "turn_id": 2,
+    "user_prompt": "I don't think the tiredness is necessarily from the internship itself. I think I'm exhausted by the feeling that I have to keep proving I'm worth the opportunity.",
+    "reply": "What leads you to feel uncertain about that?",
+    "display_reply": "What leads you to feel uncertain about that?",
+    "move": "ask",
+    "target_gap_id": "gap_hedged_71_78",
+    "trace_spans": [
+      [
+        71,
+        78
+      ]
+    ],
+    "qud_stack": [
+      {
+        "gap_id": "gap_modality_dp_82064f1dac75",
+        "frame_id": "think",
+        "neutral_question_form": "What expectation was in place regarding think?",
+        "status": "answered",
+        "spans": [
+          [
+            159,
+            218
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 2,
+        "recurrence_count": 1,
+        "last_asked_turn": 1
+      },
+      {
+        "gap_id": "gap_unfilled_role_c5_feel",
+        "frame_id": "c5",
+        "neutral_question_form": "What was occurring around you when you began to feel?",
+        "status": "open",
+        "spans": [
+          [
+            126,
+            158
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 1,
+        "recurrence_count": 1
+      },
+      {
+        "gap_id": "gap_modality_dp_0435ed729056",
+        "frame_id": "should",
+        "neutral_question_form": "What expectation was in place regarding should?",
+        "status": "open",
+        "spans": [
+          [
+            107,
+            125
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 1,
+        "recurrence_count": 1
+      },
+      {
+        "gap_id": "gap_hedged_71_78",
+        "frame_id": "epistemic_hedge",
+        "neutral_question_form": "What leads you to feel uncertain about that?",
+        "status": "open",
+        "spans": [
+          [
+            71,
+            78
+          ]
+        ],
+        "created_turn": 2,
+        "last_touched": 2,
+        "recurrence_count": 1,
+        "last_asked_turn": 2
+      }
+    ],
+    "question_trace": {
+      "gap_id": "gap_hedged_71_78",
+      "gap_type": "hedged_commitment",
+      "spans": [
+        [
+          71,
+          78
+        ]
+      ],
+      "detector_id": "detector_hedged_commitment",
+      "presuppositions_checked": [
+        "licensed_against_commitments"
+      ],
+      "move": "ask",
+      "score": 11.0,
+      "human_reason": "You expressed uncertainty without saying more about what brought that to mind.",
+      "reason": "You expressed uncertainty without saying more about what brought that to mind.",
+      "generation_mode": "template_llm_off"
+    }
+  },
+  {
+    "turn_id": 3,
+    "user_prompt": "Actually, I don't think I need to prove that I'm worthy. I'm excited about the internship. I'm just physically exhausted after months of preparation, and I want to enjoy the achievement without immediately planning the next thing.",
+    "reply": "I understand.",
+    "display_reply": "I understand.",
+    "move": "acknowledge",
+    "target_gap_id": null,
+    "trace_spans": [],
+    "qud_stack": [
+      {
+        "gap_id": "gap_modality_dp_82064f1dac75",
+        "frame_id": "think",
+        "neutral_question_form": "What expectation was in place regarding think?",
+        "status": "answered",
+        "spans": [
+          [
+            159,
+            218
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 2,
+        "recurrence_count": 1,
+        "last_asked_turn": 1
+      },
+      {
+        "gap_id": "gap_unfilled_role_c5_feel",
+        "frame_id": "c5",
+        "neutral_question_form": "What was occurring around you when you began to feel?",
+        "status": "open",
+        "spans": [
+          [
+            126,
+            158
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 1,
+        "recurrence_count": 1
+      },
+      {
+        "gap_id": "gap_modality_dp_0435ed729056",
+        "frame_id": "should",
+        "neutral_question_form": "What expectation was in place regarding should?",
+        "status": "open",
+        "spans": [
+          [
+            107,
+            125
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 1,
+        "recurrence_count": 1
+      },
+      {
+        "gap_id": "gap_hedged_71_78",
+        "frame_id": "epistemic_hedge",
+        "neutral_question_form": "What leads you to feel uncertain about that?",
+        "status": "answered",
+        "spans": [
+          [
+            71,
+            78
+          ]
+        ],
+        "created_turn": 2,
+        "last_touched": 3,
+        "recurrence_count": 1,
+        "last_asked_turn": 2
+      }
+    ],
+    "question_trace": {
+      "reason": "no_gap_detected",
+      "move": "acknowledge",
+      "gap_id": null,
+      "spans": [],
+      "presuppositions_checked": [],
+      "score": 0.0
+    }
+  },
+  {
+    "turn_id": 4,
+    "user_prompt": "I think I've spent so long preparing for this that I don't really know how to stop preparing. Even when something goes right, part of me is already looking for the next task.",
+    "reply": "How would you describe what was happening in that moment?",
+    "display_reply": "How would you describe what was happening in that moment?",
+    "move": "ask",
+    "target_gap_id": "gap_hedged_0_7",
+    "trace_spans": [
+      [
+        0,
+        7
+      ]
+    ],
+    "qud_stack": [
+      {
+        "gap_id": "gap_modality_dp_82064f1dac75",
+        "frame_id": "think",
+        "neutral_question_form": "What expectation was in place regarding think?",
+        "status": "answered",
+        "spans": [
+          [
+            159,
+            218
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 2,
+        "recurrence_count": 1,
+        "last_asked_turn": 1
+      },
+      {
+        "gap_id": "gap_unfilled_role_c5_feel",
+        "frame_id": "c5",
+        "neutral_question_form": "What was occurring around you when you began to feel?",
+        "status": "open",
+        "spans": [
+          [
+            126,
+            158
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 1,
+        "recurrence_count": 1
+      },
+      {
+        "gap_id": "gap_modality_dp_0435ed729056",
+        "frame_id": "should",
+        "neutral_question_form": "What expectation was in place regarding should?",
+        "status": "open",
+        "spans": [
+          [
+            107,
+            125
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 1,
+        "recurrence_count": 1
+      },
+      {
+        "gap_id": "gap_hedged_71_78",
+        "frame_id": "epistemic_hedge",
+        "neutral_question_form": "What leads you to feel uncertain about that?",
+        "status": "answered",
+        "spans": [
+          [
+            71,
+            78
+          ]
+        ],
+        "created_turn": 2,
+        "last_touched": 3,
+        "recurrence_count": 1,
+        "last_asked_turn": 2
+      },
+      {
+        "gap_id": "gap_hedged_0_7",
+        "frame_id": "epistemic_hedge",
+        "neutral_question_form": "What leads you to feel uncertain about that?",
+        "status": "open",
+        "spans": [
+          [
+            0,
+            7
+          ]
+        ],
+        "created_turn": 4,
+        "last_touched": 4,
+        "recurrence_count": 1,
+        "last_asked_turn": 4
+      }
+    ],
+    "question_trace": {
+      "gap_id": "gap_hedged_0_7",
+      "gap_type": "hedged_commitment",
+      "spans": [
+        [
+          0,
+          7
+        ]
+      ],
+      "detector_id": "detector_hedged_commitment",
+      "presuppositions_checked": [
+        "licensed_against_commitments"
+      ],
+      "move": "ask",
+      "score": 11.0,
+      "human_reason": "You expressed uncertainty without saying more about what brought that to mind.",
+      "reason": "You expressed uncertainty without saying more about what brought that to mind.",
+      "generation_mode": "template_llm_off"
+    }
+  },
+  {
+    "turn_id": 5,
+    "user_prompt": "Although, I did enjoy telling my closest friend about it yesterday. I wasn't thinking about my next goal then.",
+    "reply": "I understand.",
+    "display_reply": "I understand.",
+    "move": "acknowledge",
+    "target_gap_id": null,
+    "trace_spans": [],
+    "qud_stack": [
+      {
+        "gap_id": "gap_modality_dp_82064f1dac75",
+        "frame_id": "think",
+        "neutral_question_form": "What expectation was in place regarding think?",
+        "status": "answered",
+        "spans": [
+          [
+            159,
+            218
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 2,
+        "recurrence_count": 1,
+        "last_asked_turn": 1
+      },
+      {
+        "gap_id": "gap_unfilled_role_c5_feel",
+        "frame_id": "c5",
+        "neutral_question_form": "What was occurring around you when you began to feel?",
+        "status": "abandoned",
+        "spans": [
+          [
+            126,
+            158
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 5,
+        "recurrence_count": 1
+      },
+      {
+        "gap_id": "gap_modality_dp_0435ed729056",
+        "frame_id": "should",
+        "neutral_question_form": "What expectation was in place regarding should?",
+        "status": "abandoned",
+        "spans": [
+          [
+            107,
+            125
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 5,
+        "recurrence_count": 1
+      },
+      {
+        "gap_id": "gap_hedged_71_78",
+        "frame_id": "epistemic_hedge",
+        "neutral_question_form": "What leads you to feel uncertain about that?",
+        "status": "answered",
+        "spans": [
+          [
+            71,
+            78
+          ]
+        ],
+        "created_turn": 2,
+        "last_touched": 3,
+        "recurrence_count": 1,
+        "last_asked_turn": 2
+      },
+      {
+        "gap_id": "gap_hedged_0_7",
+        "frame_id": "epistemic_hedge",
+        "neutral_question_form": "What leads you to feel uncertain about that?",
+        "status": "open",
+        "spans": [
+          [
+            0,
+            7
+          ]
+        ],
+        "created_turn": 4,
+        "last_touched": 4,
+        "recurrence_count": 1,
+        "last_asked_turn": 4
+      }
+    ],
+    "question_trace": {
+      "reason": "no_gap_detected",
+      "move": "acknowledge",
+      "gap_id": null,
+      "spans": [],
+      "presuppositions_checked": [],
+      "score": 0.0
+    }
+  },
+  {
+    "turn_id": 6,
+    "user_prompt": "Maybe I don't need to stop thinking about the future completely. I just don't want every good thing to turn into another deadline.",
+    "reply": "Could you say a bit more about what brought that thought to mind?",
+    "display_reply": "Could you say a bit more about what brought that thought to mind?",
+    "move": "ask",
+    "target_gap_id": "gap_hedged_0_5",
+    "trace_spans": [
+      [
+        0,
+        5
+      ]
+    ],
+    "qud_stack": [
+      {
+        "gap_id": "gap_modality_dp_82064f1dac75",
+        "frame_id": "think",
+        "neutral_question_form": "What expectation was in place regarding think?",
+        "status": "answered",
+        "spans": [
+          [
+            159,
+            218
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 2,
+        "recurrence_count": 1,
+        "last_asked_turn": 1
+      },
+      {
+        "gap_id": "gap_unfilled_role_c5_feel",
+        "frame_id": "c5",
+        "neutral_question_form": "What was occurring around you when you began to feel?",
+        "status": "abandoned",
+        "spans": [
+          [
+            126,
+            158
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 5,
+        "recurrence_count": 1
+      },
+      {
+        "gap_id": "gap_modality_dp_0435ed729056",
+        "frame_id": "should",
+        "neutral_question_form": "What expectation was in place regarding should?",
+        "status": "abandoned",
+        "spans": [
+          [
+            107,
+            125
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 5,
+        "recurrence_count": 1
+      },
+      {
+        "gap_id": "gap_hedged_71_78",
+        "frame_id": "epistemic_hedge",
+        "neutral_question_form": "What leads you to feel uncertain about that?",
+        "status": "answered",
+        "spans": [
+          [
+            71,
+            78
+          ]
+        ],
+        "created_turn": 2,
+        "last_touched": 3,
+        "recurrence_count": 1,
+        "last_asked_turn": 2
+      },
+      {
+        "gap_id": "gap_hedged_0_7",
+        "frame_id": "epistemic_hedge",
+        "neutral_question_form": "What leads you to feel uncertain about that?",
+        "status": "open",
+        "spans": [
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            5
+          ]
+        ],
+        "created_turn": 4,
+        "last_touched": 6,
+        "recurrence_count": 2,
+        "last_asked_turn": 4
+      }
+    ],
+    "question_trace": {
+      "gap_id": "gap_hedged_0_5",
+      "gap_type": "hedged_commitment",
+      "spans": [
+        [
+          0,
+          5
+        ]
+      ],
+      "detector_id": "detector_hedged_commitment",
+      "presuppositions_checked": [
+        "licensed_against_commitments"
+      ],
+      "move": "ask",
+      "score": 8.0,
+      "human_reason": "You expressed uncertainty without saying more about what brought that to mind.",
+      "reason": "You expressed uncertainty without saying more about what brought that to mind.",
+      "generation_mode": "template_llm_off"
+    }
+  },
+  {
+    "turn_id": 7,
+    "user_prompt": "My manager also said I don't need to know everything immediately. That was reassuring, even though I still want to do well.",
+    "reply": "I understand.",
+    "display_reply": "I understand.",
+    "move": "acknowledge",
+    "target_gap_id": null,
+    "trace_spans": [],
+    "qud_stack": [
+      {
+        "gap_id": "gap_modality_dp_82064f1dac75",
+        "frame_id": "think",
+        "neutral_question_form": "What expectation was in place regarding think?",
+        "status": "answered",
+        "spans": [
+          [
+            159,
+            218
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 2,
+        "recurrence_count": 1,
+        "last_asked_turn": 1
+      },
+      {
+        "gap_id": "gap_unfilled_role_c5_feel",
+        "frame_id": "c5",
+        "neutral_question_form": "What was occurring around you when you began to feel?",
+        "status": "abandoned",
+        "spans": [
+          [
+            126,
+            158
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 5,
+        "recurrence_count": 1
+      },
+      {
+        "gap_id": "gap_modality_dp_0435ed729056",
+        "frame_id": "should",
+        "neutral_question_form": "What expectation was in place regarding should?",
+        "status": "abandoned",
+        "spans": [
+          [
+            107,
+            125
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 5,
+        "recurrence_count": 1
+      },
+      {
+        "gap_id": "gap_hedged_71_78",
+        "frame_id": "epistemic_hedge",
+        "neutral_question_form": "What leads you to feel uncertain about that?",
+        "status": "answered",
+        "spans": [
+          [
+            71,
+            78
+          ]
+        ],
+        "created_turn": 2,
+        "last_touched": 3,
+        "recurrence_count": 1,
+        "last_asked_turn": 2
+      },
+      {
+        "gap_id": "gap_hedged_0_7",
+        "frame_id": "epistemic_hedge",
+        "neutral_question_form": "What leads you to feel uncertain about that?",
+        "status": "open",
+        "spans": [
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            5
+          ]
+        ],
+        "created_turn": 4,
+        "last_touched": 6,
+        "recurrence_count": 2,
+        "last_asked_turn": 4
+      }
+    ],
+    "question_trace": {
+      "reason": "no_gap_detected",
+      "move": "acknowledge",
+      "gap_id": null,
+      "spans": [],
+      "presuppositions_checked": [],
+      "score": 0.0
+    }
+  },
+  {
+    "turn_id": 8,
+    "user_prompt": "I noticed I felt better after I slept properly. That makes me think the physical exhaustion was a bigger part of this than I first realized.",
+    "reply": "I understand.",
+    "display_reply": "I understand.",
+    "move": "acknowledge",
+    "target_gap_id": null,
+    "trace_spans": [],
+    "qud_stack": [
+      {
+        "gap_id": "gap_modality_dp_82064f1dac75",
+        "frame_id": "think",
+        "neutral_question_form": "What expectation was in place regarding think?",
+        "status": "answered",
+        "spans": [
+          [
+            159,
+            218
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 2,
+        "recurrence_count": 1,
+        "last_asked_turn": 1
+      },
+      {
+        "gap_id": "gap_unfilled_role_c5_feel",
+        "frame_id": "c5",
+        "neutral_question_form": "What was occurring around you when you began to feel?",
+        "status": "abandoned",
+        "spans": [
+          [
+            126,
+            158
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 5,
+        "recurrence_count": 1
+      },
+      {
+        "gap_id": "gap_modality_dp_0435ed729056",
+        "frame_id": "should",
+        "neutral_question_form": "What expectation was in place regarding should?",
+        "status": "abandoned",
+        "spans": [
+          [
+            107,
+            125
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 5,
+        "recurrence_count": 1
+      },
+      {
+        "gap_id": "gap_hedged_71_78",
+        "frame_id": "epistemic_hedge",
+        "neutral_question_form": "What leads you to feel uncertain about that?",
+        "status": "answered",
+        "spans": [
+          [
+            71,
+            78
+          ]
+        ],
+        "created_turn": 2,
+        "last_touched": 3,
+        "recurrence_count": 1,
+        "last_asked_turn": 2
+      },
+      {
+        "gap_id": "gap_hedged_0_7",
+        "frame_id": "epistemic_hedge",
+        "neutral_question_form": "What leads you to feel uncertain about that?",
+        "status": "open",
+        "spans": [
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            59,
+            67
+          ]
+        ],
+        "created_turn": 4,
+        "last_touched": 8,
+        "recurrence_count": 3,
+        "last_asked_turn": 4
+      }
+    ],
+    "question_trace": {
+      "reason": "User gave explicit direction, privacy setting, or conversation boundary.",
+      "move": "acknowledge",
+      "gap_id": null,
+      "spans": [],
+      "presuppositions_checked": [],
+      "score": 0.0
+    }
+  },
+  {
+    "turn_id": 9,
+    "user_prompt": "I'm still thinking about what comes next, but it doesn't feel as urgent today. I can be excited and tired at the same time.",
+    "reply": "What was occurring around you when you began to feel?",
+    "display_reply": "What was occurring around you when you began to feel?",
+    "move": "ask",
+    "target_gap_id": "gap_unfilled_role_c1_feel",
+    "trace_spans": [
+      [
+        46,
+        89
+      ]
+    ],
+    "qud_stack": [
+      {
+        "gap_id": "gap_modality_dp_82064f1dac75",
+        "frame_id": "think",
+        "neutral_question_form": "What expectation was in place regarding think?",
+        "status": "answered",
+        "spans": [
+          [
+            159,
+            218
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 2,
+        "recurrence_count": 1,
+        "last_asked_turn": 1
+      },
+      {
+        "gap_id": "gap_unfilled_role_c5_feel",
+        "frame_id": "c5",
+        "neutral_question_form": "What was occurring around you when you began to feel?",
+        "status": "abandoned",
+        "spans": [
+          [
+            126,
+            158
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 5,
+        "recurrence_count": 1
+      },
+      {
+        "gap_id": "gap_modality_dp_0435ed729056",
+        "frame_id": "should",
+        "neutral_question_form": "What expectation was in place regarding should?",
+        "status": "abandoned",
+        "spans": [
+          [
+            107,
+            125
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 5,
+        "recurrence_count": 1
+      },
+      {
+        "gap_id": "gap_hedged_71_78",
+        "frame_id": "epistemic_hedge",
+        "neutral_question_form": "What leads you to feel uncertain about that?",
+        "status": "answered",
+        "spans": [
+          [
+            71,
+            78
+          ]
+        ],
+        "created_turn": 2,
+        "last_touched": 3,
+        "recurrence_count": 1,
+        "last_asked_turn": 2
+      },
+      {
+        "gap_id": "gap_hedged_0_7",
+        "frame_id": "epistemic_hedge",
+        "neutral_question_form": "What leads you to feel uncertain about that?",
+        "status": "open",
+        "spans": [
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            59,
+            67
+          ]
+        ],
+        "created_turn": 4,
+        "last_touched": 8,
+        "recurrence_count": 3,
+        "last_asked_turn": 4
+      },
+      {
+        "gap_id": "gap_unfilled_role_c1_feel",
+        "frame_id": "c1",
+        "neutral_question_form": "What was occurring around you when you began to feel?",
+        "status": "open",
+        "spans": [
+          [
+            46,
+            89
+          ]
+        ],
+        "created_turn": 9,
+        "last_touched": 9,
+        "recurrence_count": 1,
+        "last_asked_turn": 9
+      }
+    ],
+    "question_trace": {
+      "gap_id": "gap_unfilled_role_c1_feel",
+      "gap_type": "unfilled_role",
+      "spans": [
+        [
+          46,
+          89
+        ]
+      ],
+      "detector_id": "detector_unfilled_role",
+      "presuppositions_checked": [
+        "licensed_against_commitments"
+      ],
+      "move": "ask",
+      "score": 14.0,
+      "human_reason": "You noted that you began to feel, and didn't mention what led up to that.",
+      "reason": "You noted that you began to feel, and didn't mention what led up to that.",
+      "generation_mode": "template_llm_off"
+    }
+  },
+  {
+    "turn_id": 10,
+    "user_prompt": "If I had to describe the whole thing now, I'd say I'm proud of what I achieved, physically tired from getting here, and trying to give myself room to enjoy it before moving on.",
+    "reply": "I understand.",
+    "display_reply": "I understand.",
+    "move": "acknowledge",
+    "target_gap_id": "gap_reported_c1_say",
+    "trace_spans": [
+      [
+        0,
+        176
+      ]
+    ],
+    "qud_stack": [
+      {
+        "gap_id": "gap_modality_dp_82064f1dac75",
+        "frame_id": "think",
+        "neutral_question_form": "What expectation was in place regarding think?",
+        "status": "answered",
+        "spans": [
+          [
+            159,
+            218
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 2,
+        "recurrence_count": 1,
+        "last_asked_turn": 1
+      },
+      {
+        "gap_id": "gap_unfilled_role_c5_feel",
+        "frame_id": "c5",
+        "neutral_question_form": "What was occurring around you when you began to feel?",
+        "status": "abandoned",
+        "spans": [
+          [
+            126,
+            158
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 5,
+        "recurrence_count": 1
+      },
+      {
+        "gap_id": "gap_modality_dp_0435ed729056",
+        "frame_id": "should",
+        "neutral_question_form": "What expectation was in place regarding should?",
+        "status": "abandoned",
+        "spans": [
+          [
+            107,
+            125
+          ]
+        ],
+        "created_turn": 1,
+        "last_touched": 5,
+        "recurrence_count": 1
+      },
+      {
+        "gap_id": "gap_hedged_71_78",
+        "frame_id": "epistemic_hedge",
+        "neutral_question_form": "What leads you to feel uncertain about that?",
+        "status": "answered",
+        "spans": [
+          [
+            71,
+            78
+          ]
+        ],
+        "created_turn": 2,
+        "last_touched": 3,
+        "recurrence_count": 1,
+        "last_asked_turn": 2
+      },
+      {
+        "gap_id": "gap_hedged_0_7",
+        "frame_id": "epistemic_hedge",
+        "neutral_question_form": "What leads you to feel uncertain about that?",
+        "status": "open",
+        "spans": [
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            59,
+            67
+          ]
+        ],
+        "created_turn": 4,
+        "last_touched": 8,
+        "recurrence_count": 3,
+        "last_asked_turn": 4
+      },
+      {
+        "gap_id": "gap_unfilled_role_c1_feel",
+        "frame_id": "c1",
+        "neutral_question_form": "What was occurring around you when you began to feel?",
+        "status": "open",
+        "spans": [
+          [
+            46,
+            89
+          ],
+          [
+            0,
+            176
+          ]
+        ],
+        "created_turn": 9,
+        "last_touched": 10,
+        "recurrence_count": 2,
+        "last_asked_turn": 9
+      }
+    ],
+    "question_trace": {
+      "reason": "Gap salience below discourse question threshold; holding with acknowledgment.",
+      "move": "acknowledge",
+      "gap_id": "gap_reported_c1_say",
+      "spans": [
+        [
+          0,
+          176
+        ]
+      ],
+      "presuppositions_checked": [],
+      "score": 0.0
+    }
+  }
+]

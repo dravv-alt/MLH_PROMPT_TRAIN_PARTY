@@ -25,6 +25,8 @@ from app.services.gaps import (
     GAP_COUNTERFACTUAL_OBLIGATION,
     GAP_CONTRAST_THIN_ARM,
     GAP_RECURRING_TOPIC,
+    GAP_INCOMPLETION_OVER_TIME,
+    GAP_BLOCKED_STATE,
 )
 from app.services.qud_stack import (
     merge_and_update_qud_stack,
@@ -37,6 +39,7 @@ from app.services.question_candidates import (
 )
 
 # Safety interrupt patterns (recall-first, bypasses question generation to standard safety resources)
+# Profanity/frustration is NOT safety interrupt; safety path is strictly for explicit self-harm/suicide.
 SAFETY_INTERRUPT_PATTERNS = [
     r"\b(?:kill|end)\s+(?:myself|my\s+life)\b",
     r"\b(?:commit\s+)?suicide\b",
@@ -44,13 +47,42 @@ SAFETY_INTERRUPT_PATTERNS = [
     r"\bhurt\s+myself\b",
 ]
 
+# Structural challenge aimed at the system
+SYSTEM_CHALLENGE_PATTERNS = [
+    r"\b(?:what\s+(?:the\s+fuck\s+)?(?:do|are|can)\s+you\s+(?:understand|listening|hear|know|mean|say))\b",
+    r"\b(?:what\s+are\s+you\s+listening(?:\s+to)?)\b",
+    r"\b(?:do\s+you\s+(?:even\s+)?(?:understand|get|hear)|are\s+you\s+(?:even\s+)?listening)\b",
+    r"\b(?:what\s+do\s+you\s+(?:even\s+)?understand)\b",
+    r"\b(?:just\s+)?(?:reply|answer|talk|respond|speak)\s+(?:norma+l+y|properly|like\s+a\s+human|to\s+me)\b",
+    r"\bjust\s+reply\b",
+    r"\breply\s+norma+l+y\b",
+    r"\b(?:stop\s+(?:repeating\s+yourself|repeating|saying|giving\s+me|asking)\b|don't\s+give\s+me\b)",
+    r"\b(?:why\s+do\s+you\s+keep\s+(?:asking|saying))\b",
+    r"\b(?:you\s+keep\s+(?:saying|asking|failing))\b",
+    r"\b(?:you\s+don't\s+understand\b|you\s+aren't\s+listening\b)",
+    r"\b(?:you\s+sound\s+like\s+a\s+robot)\b",
+]
+
+def check_system_challenge_or_repair(text: str) -> bool:
+    """Triggered by structure only: a second-person subject or an imperative aimed at the system,
+    or a question about the system's understanding."""
+    lower = text.lower()
+    return any(re.search(pat, lower) for pat in SYSTEM_CHALLENGE_PATTERNS)
+
 # Explicit user signals requesting silence or vent without questioning
 EXPLICIT_HOLD_PATTERNS = [
     r"\bjust\s+let\s+me\s+talk\b",
-    r"\bdon['’]t\s+ask\s+(?:me\s+)?(?:any\s+)?questions\b",
+    r"\bjust\s+need\s+to\s+talk\b",
+    r"\bdon['’]t\s+ask\s+(?:me\s+)?(?:any\s+)?(?:questions|stuff|things|anything)\b",
     r"\bstop\s+(?:asking|talking)\b",
     r"\bno\s+questions\b",
 ]
+
+
+def check_explicit_hold_signal(text: str) -> bool:
+    """Check if user explicitly asked not to be questioned or asked to just vent/talk."""
+    lower = text.lower()
+    return any(re.search(pat, lower) for pat in EXPLICIT_HOLD_PATTERNS)
 
 INSTRUCTION_CONTROL_PATTERNS = [
     r"\b(?:can|could)\s+you\s+(?:show|tell|display|give|help)\b",
@@ -62,7 +94,6 @@ INSTRUCTION_CONTROL_PATTERNS = [
     r"\bi\s+don['’]t\s+want\s+to\s+force\s+an\s+explanation\b",
     r"\byou\s+keep\s+making\s+this\s+sound\b",
     r"\bi\s+haven['’]t\s+said\s+that\b",
-    r"\bthat\s+makes\s+me\s+think\b",
     r"\bnow\s+i\s+see\s+it\s+as\b",
     r"\bmy\s+current\s+view\s+is\b",
     r"\bi\s+also\s+realized\s+that\b",
@@ -95,6 +126,8 @@ def check_user_direct_question(text: str) -> bool:
     """Check if user asked a direct question to the system rather than sharing personal narrative."""
     stripped = text.strip()
     if not stripped.endswith("?"):
+        return False
+    if check_system_challenge_or_repair(text):
         return False
     lower = stripped.lower()
     first_person = bool(re.search(r"\b(?:i|me|my|myself|mine)\b", lower))
@@ -139,6 +172,10 @@ def format_human_reason(gap: Dict[str, Any]) -> str:
         return "You brought up a contrast, but only described one side of it."
     elif gtype == GAP_RECURRING_TOPIC:
         return f"This topic has come up across multiple moments in our conversation."
+    elif gtype == GAP_INCOMPLETION_OVER_TIME:
+        return "You noted that this effort has been ongoing over time without reaching completion."
+    elif gtype == GAP_BLOCKED_STATE:
+        return "You described being stuck or that the work has stalled without a clear next step."
     return "You touched upon this point and left room to explore it further."
 
 
@@ -196,6 +233,42 @@ def execute_question_pipeline(
     )
     active_quds = get_active_quds(updated_qud_stack)
 
+    # Check for structural challenge / repair aimed at the system (Section 3 & 6A)
+    # Must precede backoff policy so repair is not suppressed by pacing rules
+    if check_system_challenge_or_repair(text):
+        lower = text.lower()
+        if "listening" in lower:
+            repair_q = "What's blocking you right now?"
+            challenge_kind = "listening"
+        elif "understand" in lower:
+            repair_q = "Which part matters most right now?"
+            challenge_kind = "understand"
+        else:
+            repair_q = "Where does it stall first?"
+            challenge_kind = "normal"
+
+        trace = {
+            "reason": "User challenged the system's previous response or understanding; initiating repair move.",
+            "move": "repair",
+            "challenge_kind": challenge_kind,
+            "gap_id": None,
+            "spans": [],
+            "presuppositions_checked": [],
+            "score": 1.0,
+            "human_reason": "You raised a concern about how I responded; shifting to address what is blocked.",
+        }
+        return {
+            "move": "repair",
+            "selected_question": repair_q,
+            "targeted_gap_id": None,
+            "gap_id": None,
+            "question_trace": trace,
+            "gaps": gaps,
+            "qud_stack": updated_qud_stack,
+            "diagnostics_status": diag_status,
+            "uptake": uptake_result["uptake"],
+        }
+
     # 5. Backoff & Pacing Policy (Task T4.2)
     from app.services.backoff_policy import ConversationPolicyTracker
     policy = ConversationPolicyTracker()
@@ -221,6 +294,7 @@ def execute_question_pipeline(
         }
 
     # 6. Dialogue Move Selection (Task T3.1)
+
     # Check explicit hold or very short turn
     if check_explicit_hold_signal(text) or len(text.strip().split()) <= 2:
         return {
@@ -446,6 +520,8 @@ def execute_question_pipeline(
     return {
         "move": move_type,
         "selected_question": selected_question,
+        "targeted_gap_id": target_gap.get("gap_id") if target_gap else None,
+        "gap_id": target_gap.get("gap_id") if target_gap else None,
         "question_trace": trace,
         "gaps": gaps,
         "qud_stack": updated_qud_stack,

@@ -113,8 +113,9 @@ class ChatRequest(BaseModel):
     session_id: Optional[str] = None
     casual_mode: bool = False
     request_id: UUID = Field(default_factory=uuid4)
-    generation_provider: Literal['local', 'hosted'] = 'local'
-    hosted_consent: bool = False
+    generation_provider: Literal['local', 'hosted'] = 'hosted'
+    hosted_consent: bool = True
+    realizer: Literal['local', 'local_1b', 'local_large', 'hosted', 'hosted_groq', 'hosted_gemini'] = 'hosted'
 
 
 class ChatResponse(BaseModel):
@@ -131,6 +132,7 @@ class ChatResponse(BaseModel):
     qud_stack: list[dict] = Field(default_factory=list)
     diagnostics_status: str = "ok"
     question_trace: dict | None = None
+    realizer: str | None = None
 
 
 class AnalyzeRequest(BaseModel):

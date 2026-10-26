@@ -18,6 +18,8 @@ GAP_CORRECTION_LINK = "correction_link"
 GAP_COUNTERFACTUAL_OBLIGATION = "counterfactual_obligation"
 GAP_CONTRAST_THIN_ARM = "contrast_thin_arm"
 GAP_RECURRING_TOPIC = "recurring_topic"
+GAP_INCOMPLETION_OVER_TIME = "incompletion_over_time"
+GAP_BLOCKED_STATE = "blocked_state"
 
 CANONICAL_GAP_TYPES = {
     GAP_UNFILLED_ROLE,
@@ -28,6 +30,8 @@ CANONICAL_GAP_TYPES = {
     GAP_COUNTERFACTUAL_OBLIGATION,
     GAP_CONTRAST_THIN_ARM,
     GAP_RECURRING_TOPIC,
+    GAP_INCOMPLETION_OVER_TIME,
+    GAP_BLOCKED_STATE,
 }
 
 REPORTING_VERBS = {
@@ -347,8 +351,110 @@ def detect_recurring_topics(analysis: Dict[str, Any], prior_turns: List[Dict[str
     return gaps
 
 
+# Detector 9: Incompletion Over Time (Duration + Unfinished/Unresolved Task)
+INCOMPLETION_DURATION_PATTERNS = [
+    r"\b(?:since\s+(?:weeks|months|days)|for\s+(?:weeks|months|days)|weeks\s+and\s+months|for\s+so\s+long)\b",
+    r"\b(?:trying\s+to\s+.*(?:weeks|months|days))\b",
+]
+
+INCOMPLETION_UNFINISHED_PATTERNS = [
+    r"\b(?:still\s+hasn't|still\s+haven't|hasn't\s+been|haven't\s+been|still\s+not|not\s+yet|yet\s+to\s+be|unfinished|incomplete|not\s+(?:completely\s+)?executed|not\s+finished|still\s+trying\s+to)\b",
+]
+
+def detect_incompletion_over_time(analysis: Dict[str, Any], status: str = "ok") -> List[Dict[str, Any]]:
+    gaps = []
+    text = analysis.get("redacted_text", "")
+    lower = text.lower()
+
+    dur_match = None
+    for pat in INCOMPLETION_DURATION_PATTERNS:
+        m = re.search(pat, lower)
+        if m:
+            dur_match = m
+            break
+
+    unf_match = None
+    for pat in INCOMPLETION_UNFINISHED_PATTERNS:
+        m = re.search(pat, lower)
+        if m:
+            unf_match = m
+            break
+
+    if dur_match or unf_match:
+        start = min(dur_match.start() if dur_match else 999999, unf_match.start() if unf_match else 999999)
+        end = max(dur_match.end() if dur_match else 0, unf_match.end() if unf_match else 0)
+        sent_start = text.rfind(".", 0, start)
+        sent_start = 0 if sent_start == -1 else sent_start + 1
+        sent_end = text.find(".", end)
+        sent_end = len(text) if sent_end == -1 else sent_end
+
+        span_start = max(0, sent_start)
+        span_end = min(len(text), sent_end)
+        clause_text = text[span_start:span_end].strip()
+
+        gaps.append({
+            "gap_id": f"gap_incompletion_{span_start}_{span_end}",
+            "type": GAP_INCOMPLETION_OVER_TIME,
+            "predicate": "incomplete_effort",
+            "spans": [[span_start, span_end]],
+            "evidence": {
+                "predicate": "incomplete_effort",
+                "span_text": clause_text,
+                "duration_cue": dur_match.group(0) if dur_match else "",
+                "incompletion_cue": unf_match.group(0) if unf_match else "",
+            },
+            "detector_id": "detector_incompletion_over_time",
+            "status": status,
+            "description": "Ongoing effort over duration that remains incomplete.",
+        })
+    return gaps
+
+
+# Detector 10: Blocked State / Dead End / Open Decision
+BLOCKED_STATE_PATTERNS = [
+    r"\b(?:stalled|getting\s+stalled|indefinitely\s+stalled|stuck|blocked|dead\s+end)\b",
+    r"\b(?:nothing\s+(?:is\s+)?working|nothing\s+works|nothing['’]s\s+working)\b",
+    r"\b(?:i\s+don['’]t\s+know\s+what\s+to\s+do|don['’]t\s+know\s+what\s+to\s+do|not\s+sure\s+what\s+to\s+do|at\s+a\s+loss)\b",
+    r"\b(?:can['’]t\s+(?:get\s+it\s+to\s+work|figure\s+(?:it\s+)?out|make\s+progress))\b",
+]
+
+def detect_blocked_states(analysis: Dict[str, Any], status: str = "ok") -> List[Dict[str, Any]]:
+    gaps = []
+    text = analysis.get("redacted_text", "")
+    lower = text.lower()
+
+    for pat in BLOCKED_STATE_PATTERNS:
+        for m in re.finditer(pat, lower):
+            start, end = m.span()
+            sent_start = text.rfind(".", 0, start)
+            sent_start = 0 if sent_start == -1 else sent_start + 1
+            sent_end = text.find(".", end)
+            sent_end = len(text) if sent_end == -1 else sent_end
+
+            span_start = max(0, sent_start)
+            span_end = min(len(text), sent_end)
+            clause_text = text[span_start:span_end].strip()
+
+            gaps.append({
+                "gap_id": f"gap_blocked_{span_start}_{span_end}",
+                "type": GAP_BLOCKED_STATE,
+                "predicate": "blocked_state",
+                "spans": [[span_start, span_end]],
+                "evidence": {
+                    "predicate": "blocked_state",
+                    "span_text": clause_text,
+                    "cue": m.group(0),
+                },
+                "detector_id": "detector_blocked_state",
+                "status": status,
+                "description": f"Blocked state or impasse triggered by '{m.group(0)}'.",
+            })
+            break
+    return gaps
+
+
 def detect_structural_gaps(analysis: Dict[str, Any], prior_turns: List[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
-    """Root entrypoint: executes all 8 structural gap detectors with zero sentiment/emotion lexicon."""
+    """Root entrypoint: executes all structural gap detectors with zero sentiment/emotion lexicon."""
     parser_fallback = analysis.get("parser_fallback")
     status = "unverified" if parser_fallback else "ok"
 
@@ -361,6 +467,8 @@ def detect_structural_gaps(analysis: Dict[str, Any], prior_turns: List[Dict[str,
     all_gaps.extend(detect_counterfactual_obligations(analysis, status))
     all_gaps.extend(detect_contrast_thin_arms(analysis, status))
     all_gaps.extend(detect_recurring_topics(analysis, prior_turns, status))
+    all_gaps.extend(detect_incompletion_over_time(analysis, status))
+    all_gaps.extend(detect_blocked_states(analysis, status))
 
     return all_gaps
 
@@ -431,12 +539,18 @@ def score_gap_salience(
                 f_unprompted_return = 1.0
                 break
 
+    # 6. Blocked state or incompletion over time has high discourse tension
+    f_blocked_incompletion = 0.0
+    if gap.get("type") in {GAP_BLOCKED_STATE, GAP_INCOMPLETION_OVER_TIME}:
+        f_blocked_incompletion = 1.0
+
     features = {
         "recency": round(f_recency, 4),
         "hedge_strength": round(f_hedge, 4),
         "repetition": round(f_repetition, 4),
         "contrast_or_correction": round(f_contrast_correction, 4),
         "unprompted_return": round(f_unprompted_return, 4),
+        "blocked_incompletion": round(f_blocked_incompletion, 4),
     }
 
     score = (
@@ -445,6 +559,7 @@ def score_gap_salience(
         + w.get("repetition", 0.25) * f_repetition
         + w.get("contrast_or_correction", 0.20) * f_contrast_correction
         + w.get("unprompted_return", 0.10) * f_unprompted_return
+        + 0.50 * f_blocked_incompletion
     )
 
     return round(score, 4), features
