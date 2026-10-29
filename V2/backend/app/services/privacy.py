@@ -183,10 +183,17 @@ def _infer_person_label(context: str) -> str:
 
 
 def _entity_placeholder_label(label: str, source_text: str, start: int, end: int) -> str:
+    entity_text = source_text[start:end]
+    place_markers = r"\b(?:pass|trail|peak|mountain|valley|lake|river|ridge|hill|forest|park|street|road|avenue|beach|island|temple|glacier)\b"
+    if re.search(place_markers, entity_text, re.I):
+        return "place_reference"
+
     if label == "PERSON":
         left = max(0, start - 48)
         right = min(len(source_text), end + 48)
         context = source_text[left:right]
+        if re.search(r"\b(?:trek|trip|travel|go|went|flying|drive|hike|head|headed)\s+to\b", context, re.I):
+            return "place_reference"
         return _infer_person_label(context)
 
     if label in {"GPE", "LOC"}:

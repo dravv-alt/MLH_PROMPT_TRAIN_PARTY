@@ -64,6 +64,7 @@ sanctuary_v2/models/dmrst_parser/
 !**/evaluation/THRESHOLDS.md
 !**/evaluation/gold/**
 !**/evaluation/baselines_t04_summary.md
+!RESEARCH_AND_EXPERIMENTATION_DOSSIER.md
 
 # Logs
 npm-debug.log*

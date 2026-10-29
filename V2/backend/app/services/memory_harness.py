@@ -131,6 +131,8 @@ def _assertion_from_frame(
     if not spans:
         return None
     value = " ".join(text[start:end].strip() for start, end in spans).strip()
+    value = re.sub(r"\s+([?.!,;:])", r"\1", value).strip()
+    value = re.sub(r"\s+\b(?:and|but|or|because|so|then|if)\b[.,;:!?]?$", "", value, flags=re.IGNORECASE).strip()
     if not value:
         return None
     assertion_id = _stable("as", turn_index, frame.get("id"), value.casefold())

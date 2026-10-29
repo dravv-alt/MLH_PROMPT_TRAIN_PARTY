@@ -23,6 +23,12 @@ BACKEND_DIR = Path(__file__).resolve().parents[1]
 if str(BACKEND_DIR) not in sys.path:
     sys.path.insert(0, str(BACKEND_DIR))
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv(BACKEND_DIR / ".env", override=False)
+except Exception:
+    pass
+
 from app.models.schemas import ChatRequest
 from app.services.nlp_service import get_nlp_service
 
@@ -39,13 +45,15 @@ def parse_args():
         "--realizer",
         "-r",
         choices=["local", "local_1b", "local_large", "hosted", "hosted_groq", "hosted_gemini"],
-        default="local",
-        help="Realizer setting: local_1b | local_large | hosted (default: local)",
+        default="hosted",
+        help="Realizer setting: hosted | hosted_groq | hosted_gemini | local_1b | local_large (default: hosted)",
     )
     parser.add_argument(
-        "--hosted-consent",
-        action="store_true",
-        help="Grant explicit consent for hosted realizer (required for hosted mode)",
+        "--no-hosted-consent",
+        dest="hosted_consent",
+        action="store_false",
+        default=True,
+        help="Revoke consent for hosted realizer",
     )
     return parser.parse_args()
 
@@ -182,4 +190,8 @@ def run_interactive_terminal(simple: bool = False, realizer: str = "local", host
 
 if __name__ == "__main__":
     args = parse_args()
-    run_interactive_terminal(simple=args.simple)
+    run_interactive_terminal(
+        simple=args.simple,
+        realizer=args.realizer,
+        hosted_consent=args.hosted_consent,
+    )

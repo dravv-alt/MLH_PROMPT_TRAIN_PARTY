@@ -110,5 +110,67 @@ class GroqReflector:
 
         return self._generate_via_http(prompt)
 
+    def chat(self, messages: list[dict[str, str]], system_instruction: Optional[str] = None) -> Optional[str]:
+        """Execute multi-turn chat with rolling memory and system instruction."""
+        if not self.enabled:
+            return None
+
+        payload_messages = []
+        if system_instruction:
+            payload_messages.append({"role": "system", "content": system_instruction})
+        for m in messages:
+            if m.get("content"):
+                payload_messages.append({"role": m.get("role", "user"), "content": m["content"]})
+
+        if not payload_messages:
+            return None
+
+        if self._client is not None:
+            try:
+                response = self._client.chat.completions.create(
+                    model=self.model_name,
+                    messages=payload_messages,
+                    temperature=self.temperature,
+                    max_tokens=self.max_tokens,
+                )
+                text = response.choices[0].message.content if response and response.choices else None
+                if text:
+                    return " ".join(str(text).split()).strip() or None
+            except Exception:
+                pass
+
+        try:
+            payload = {
+                "model": self.model_name,
+                "messages": payload_messages,
+                "temperature": self.temperature,
+                "max_tokens": self.max_tokens,
+            }
+            data = json.dumps(payload).encode("utf-8")
+            request = urllib.request.Request(
+                url=f"{self.base_url}/chat/completions",
+                data=data,
+                method="POST",
+                headers={
+                    "Authorization": f"Bearer {self.api_key}",
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "User-Agent": "sanctuary-v2-backend/1.0",
+                },
+            )
+            with urllib.request.urlopen(request, timeout=20) as response:
+                raw = response.read().decode("utf-8")
+            parsed = json.loads(raw)
+            choices = parsed.get("choices") or []
+            first = choices[0] if choices else {}
+            message = first.get("message") if isinstance(first, dict) else {}
+            content = message.get("content") if isinstance(message, dict) else None
+            if content:
+                return " ".join(str(content).split()).strip() or None
+        except Exception:
+            return None
+
+        return None
+
 
 groq_reflector = GroqReflector()

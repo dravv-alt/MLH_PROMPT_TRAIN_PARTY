@@ -218,14 +218,13 @@ def generate_hosted_discourse(
     consent_check: Any = None,
     provider: str = "auto",
 ) -> tuple[str | None, dict[str, Any]]:
-    """Execute hosted generation with strict privacy boundary, sending:
-    - redacted plan
-    - nucleus phrase
-    - closed list
-    - user_words
-    - last user turn (with names redacted)
-    - 4 few-shot examples chosen from Section 7 of the KB by move type
-    Never sends full history. Re-hydrates names locally.
+    """Execute hosted generation with complete multi-turn rolling context and strict privacy boundary.
+    Sends:
+    - Engineered system instruction: discourse directive, active QUD stack, retrieved narrative memory,
+      superseded constraints, and move-matched exemplars.
+    - Rolling multi-turn conversation history (names redacted locally).
+    - Current user turn (names redacted locally).
+    Re-hydrates names locally upon receiving the response.
     """
     if consent_check:
         consent_check()
@@ -234,6 +233,18 @@ def generate_hosted_discourse(
 
     # Redact names/identifiers from current_text locally
     redacted_text, placeholder_mapping = strip_identifiers_with_mapping(current_text)
+
+    # Redact names from rolling history turns as well
+    redacted_history = []
+    for turn in plan.get("rolling_history", []):
+        u_raw = turn.get("user", "").strip()
+        a_raw = turn.get("assistant", "").strip()
+        u_red, p_u = strip_identifiers_with_mapping(u_raw) if u_raw else ("", {})
+        a_red, p_a = strip_identifiers_with_mapping(a_raw) if a_raw else ("", {})
+        placeholder_mapping.update(p_u)
+        placeholder_mapping.update(p_a)
+        if u_red or a_red:
+            redacted_history.append({"user": u_red, "assistant": a_red})
 
     move = plan.get("move", "acknowledge")
     few_shots = get_few_shot_examples_for_move(move)
@@ -248,38 +259,64 @@ def generate_hosted_discourse(
             if template_q:
                 template_q = re.sub(re.escape(orig), token, template_q, flags=re.IGNORECASE)
 
-    redacted_plan = {
-        "move": move,
-        "stance": plan.get("stance"),
-        "register": plan.get("register"),
-        "template_question": template_q,
-    }
-
-    user_payload_data = {
-        "redacted_plan": redacted_plan,
-        "nucleus": nucleus,
-        "closed": plan.get("closed", []),
-        "user_words": plan.get("user_words", []),
-        "last_user_turn": redacted_text,
-        "few_shot_examples": few_shots,
-    }
-
     system_prompt = (
         "Task: Generate a natural, grounded reflection or question following the Sanctuary Response Knowledge Base.\n"
         "Rules:\n"
         "1. Under 40 words total.\n"
-        "2. Ground your words entirely in the user's statement and nucleus phrase. Add no advice, emotion, interpretation, cause, or diagnosis.\n"
+        "2. Ground your words entirely in the user's ongoing dialogue. Add no outside advice, emotion, interpretation, cause, or diagnosis.\n"
         "3. Respect the move:\n"
-        "   - ask: at most one question opening a door.\n"
-        "   - clarify: an either-or or grounding question from their words.\n"
-        "   - acknowledge / hold: zero questions.\n"
+        "   - ask: acknowledge the user, then ask EXACTLY one question opening a door.\n"
+        "   - clarify: acknowledge the user, then ask EXACTLY one either-or or grounding question from their words.\n"
+        "   - acknowledge / hold: exactly zero questions.\n"
         "   - repair: directly acknowledge the breakdown without excuses, fake empathy, or apologies.\n"
         "4. Never use canned empathy ('I understand', 'I hear you', 'That sounds hard', 'Take your time', 'I am sorry', 'Apologies', etc.).\n"
-        "5. Never mention closed phrases.\n"
-        "6. Output only the plain response text without quotes, label headers, or preamble."
+        "5. Never mention closed or retracted phrases.\n"
+        "6. Output only the plain response text without quotes, label headers, or preamble.\n"
     )
+
+    if move in {"ask", "clarify"} and template_q:
+        system_prompt += f"Mandatory Question Directive: Your reply MUST include exactly one question directed at: {template_q}\n"
+
+    # Engineered Context: Active QUDs
+    active_quds = plan.get("active_quds", [])
+    if active_quds:
+        qud_lines = [f"- {q.get('question')}" for q in active_quds if q.get("question")]
+        if qud_lines:
+            system_prompt += "\nActive Questions Under Discussion (open discourse threads):\n" + "\n".join(qud_lines[:3]) + "\n"
+
+    # Engineered Context: Stored Narrative Memory
+    relevant_mem = plan.get("relevant_memory", [])
+    if relevant_mem:
+        mem_lines = [f"- {m}" for m in relevant_mem if m]
+        if mem_lines:
+            system_prompt += "\nRetrieved Narrative Memory Context (prior established facts):\n" + "\n".join(mem_lines[:3]) + "\n"
+
+    # Engineered Context: Retracted / Superseded Facts to Avoid
+    superseded_mem = plan.get("superseded_memory", []) or plan.get("closed", [])
+    if superseded_mem:
+        sup_lines = [f"- {s}" for s in superseded_mem if s]
+        if sup_lines:
+            system_prompt += "\nRetracted/Superseded Claims (NEVER re-assert or assume):\n" + "\n".join(sup_lines[:3]) + "\n"
+
+    if few_shots:
+        system_prompt += "\nExemplars of desired style:\n"
+        for ex in few_shots[:3]:
+            system_prompt += f"User: {ex['user']}\nReply: {ex['reply']}\n"
+
     if feedback:
-        system_prompt += f"\nPrevious attempt failed validation ({feedback}). Correct this."
+        if "missing_required_question_for_move" in feedback:
+            system_prompt += f"\nCRITICAL CORRECTION: Your previous attempt had no question! You MUST include exactly one question asking about: {template_q or 'what is on their mind'}\n"
+        else:
+            system_prompt += f"\nPrevious attempt failed validation ({feedback}). Correct this."
+
+    # Build multi-turn chat messages
+    chat_messages = [{"role": "system", "content": system_prompt}]
+    for turn in redacted_history:
+        if turn["user"]:
+            chat_messages.append({"role": "user", "content": turn["user"]})
+        if turn["assistant"]:
+            chat_messages.append({"role": "assistant", "content": turn["assistant"]})
+    chat_messages.append({"role": "user", "content": redacted_text})
 
     groq_key = os.getenv("GROQ_API_KEY", "").strip()
     gemini_key = os.getenv("GEMINI_API_KEY", "").strip()
@@ -291,6 +328,17 @@ def generate_hosted_discourse(
     # If user explicitly requested gemini, do not try Groq first
     if target_provider in {"gemini", "hosted_gemini"}:
         try_groq = False
+
+    # Print exact outgoing LLM payload
+    print("\n" + "=" * 80, flush=True)
+    active_provider_label = "Groq" if try_groq else ("Gemini" if try_gemini else "None")
+    print(f">>> [LLM API DISPATCH] Target Provider: {active_provider_label}", flush=True)
+    print("=" * 80, flush=True)
+    print(f"System Instruction Sent to Model:\n{system_prompt}\n", flush=True)
+    print("Chat Messages Array (Multi-turn Context Sent to Model):", flush=True)
+    for m_idx, m in enumerate(chat_messages):
+        print(f"  [{m_idx}] Role: {m['role']:<10} | Content: \"{m['content']}\"", flush=True)
+    print("-" * 80 + "\n", flush=True)
 
     # Try Groq first if eligible
     if try_groq:
@@ -305,14 +353,12 @@ def generate_hosted_discourse(
             model_name = os.getenv("GROQ_MODEL", "qwen/qwen3.8-27b")
             resp = client.chat.completions.create(
                 model=model_name,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": json.dumps(user_payload_data, ensure_ascii=False)},
-                ],
+                messages=chat_messages,
                 temperature=0.3,
                 max_tokens=80,
             )
             raw = (resp.choices[0].message.content or "").strip()
+            print(f">>> [LLM API RAW RESPONSE] Provider: Groq ({model_name}) -> \"{raw}\"\n", flush=True)
             raw = re.sub(r"^(?:response|reflection|reply|ask|acknowledge|repair|clarify|hold)\s*:\s*", "", raw, flags=re.I).strip()
             draft = " ".join(raw.split()[:40]).strip('"')
             if draft:
@@ -333,12 +379,21 @@ def generate_hosted_discourse(
                 model_name=model_name,
                 system_instruction=system_prompt,
             )
+            gemini_contents = []
+            for turn in redacted_history:
+                if turn["user"]:
+                    gemini_contents.append({"role": "user", "parts": [turn["user"]]})
+                if turn["assistant"]:
+                    gemini_contents.append({"role": "model", "parts": [turn["assistant"]]})
+            gemini_contents.append({"role": "user", "parts": [redacted_text]})
+
             resp = g_model.generate_content(
-                json.dumps(user_payload_data, ensure_ascii=False),
+                gemini_contents,
                 generation_config={"temperature": 0.3, "max_output_tokens": 80},
                 request_options={"timeout": 15},
             )
             raw = (resp.text or "").strip()
+            print(f">>> [LLM API RAW RESPONSE] Provider: Gemini ({model_name}) -> \"{raw}\"\n", flush=True)
             raw = re.sub(r"^(?:response|reflection|reply|ask|acknowledge|repair|clarify|hold)\s*:\s*", "", raw, flags=re.I).strip()
             draft = " ".join(raw.split()[:40]).strip('"')
             if draft:

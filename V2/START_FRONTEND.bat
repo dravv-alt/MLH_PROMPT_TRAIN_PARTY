@@ -1,0 +1,5 @@
+@echo off
+title Sanctuary V2 Frontend
+cd /d "%~dp0frontend"
+npm.cmd run dev -- --host 127.0.0.1 --port 5173
+pause

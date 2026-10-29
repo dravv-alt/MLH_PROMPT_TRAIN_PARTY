@@ -18,6 +18,13 @@ import threading
 import time
 from typing import Any, Dict, List, Optional, Tuple
 
+try:
+    from pathlib import Path
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).resolve().parents[2] / ".env", override=False)
+except Exception:
+    pass
+
 logger = logging.getLogger("sanctuary.realizer")
 
 
@@ -194,6 +201,11 @@ def build_discourse_plan(
     # Closed meanings from corrections
     correction_context = analysis.get("response_plan", {}).get("correction_context", {})
     closed = [row.get("text") for row in correction_context.get("superseded_propositions", []) if row.get("text")]
+    correction_flag = bool(
+        analysis.get("strategy_evidence", {}).get("correction", {}).get("detected")
+        or analysis.get("strategy") == "correction"
+        or correction_context.get("is_correction")
+    )
 
     # Asked before
     asked_before = [
@@ -202,19 +214,167 @@ def build_discourse_plan(
         if t.get("question") or t.get("selected_question")
     ]
 
+    anchor = compress_user_clause_to_second_person(nucleus)
+
+    # 1. Rolling multi-turn conversation memory
+    rolling_history = []
+    for t in prior_turns[-6:]:
+        u_msg = t.get("user_text") or t.get("text") or t.get("stripped_input") or ""
+        a_msg = t.get("response_text") or t.get("display_response_text") or ""
+        if u_msg or a_msg:
+            rolling_history.append({
+                "user": u_msg.strip(),
+                "assistant": a_msg.strip(),
+                "move": t.get("system_move") or t.get("move", ""),
+                "question": t.get("selected_question") or t.get("question", ""),
+            })
+
+    # 2. QUD stack (Questions Under Discussion)
+    qud_stack = pipeline_res.get("qud_stack") or analysis.get("qud_stack", [])
+    active_quds = [
+        {
+            "gap_id": q.get("gap_id"),
+            "question": q.get("neutral_question_form"),
+            "recurrence": q.get("recurrence_count", 1),
+            "status": q.get("status"),
+        }
+        for q in qud_stack if q.get("status") == "open"
+    ]
+    recent_resolved = [
+        {
+            "gap_id": q.get("gap_id"),
+            "question": q.get("neutral_question_form"),
+            "status": q.get("status"),
+        }
+        for q in qud_stack if q.get("status") in {"answered", "deflected", "superseded", "abandoned"}
+    ][-3:]
+
+    # 3. Canonical narrative memory (from Memory Harness Context Packet)
+    def _clean_mem(t: Any) -> str:
+        if not t:
+            return ""
+        s = re.sub(r"\s+([?.!,;:])", r"\1", str(t).strip())
+        s = re.sub(r"\s+\b(?:and|but|or|because|so|then|if)\b[.,;:!?]?$", "", s, flags=re.IGNORECASE).strip()
+        return s
+
+    context_packet = analysis.get("context_packet", {})
+    relevant_memory = [
+        _clean_mem(row.get("text"))
+        for row in context_packet.get("relevant_prior_evidence", [])
+        if row.get("text") and len(_clean_mem(row.get("text"))) > 3
+    ][:4]
+    superseded_memory = [
+        _clean_mem(row.get("text"))
+        for row in context_packet.get("superseded_evidence", [])
+        if row.get("text") and len(_clean_mem(row.get("text"))) > 3
+    ][:4]
+    current_evidence = [
+        _clean_mem(row.get("text"))
+        for row in context_packet.get("current_turn_evidence", [])
+        if row.get("text") and len(_clean_mem(row.get("text"))) > 3
+    ][:4]
+
     return {
         "move": move,
         "nucleus": nucleus,
+        "anchor": anchor,
         "stance": stance,
         "user_words": user_words,
         "closed": closed,
+        "correction": correction_flag,
         "asked_before": asked_before[-5:],
         "last_uptake": pipeline_res.get("uptake", "none"),
         "register": register,
         "heaviest_clause": nucleus,
         "template_question": selected_question,
         "challenge_kind": trace.get("challenge_kind"),
+        "target_gap": target_gap,
+        "targeted_gap_id": target_gap_id,
+        "current_text": current_text,
+        "rolling_history": rolling_history,
+        "active_quds": active_quds,
+        "resolved_quds": recent_resolved,
+        "qud_stack": qud_stack,
+        "relevant_memory": relevant_memory,
+        "superseded_memory": superseded_memory,
+        "current_evidence": current_evidence,
     }
+
+
+def build_discourse_system_prompt(plan: Dict[str, Any], feedback: Optional[str] = None) -> str:
+    """Build a comprehensive system prompt incorporating engineered QUDs, memory, and discourse rules."""
+    move = plan.get("move", "acknowledge")
+    template_q = plan.get("template_question", "")
+    anchor = plan.get("anchor", "")
+
+    system = (
+        "You are Sanctuary's discourse realizer. Strictly follow these rules:\n"
+        "1. Stay under 40 words total.\n"
+        "2. Ground your response entirely in the user's ongoing dialogue. Add no outside advice, emotion, interpretation, or judgment.\n"
+        "3. Never output label words like 'Acknowledge', 'Hold', or 'Ask'. Write the conversational response directly.\n"
+        "4. Never use canned empathy tropes ('I understand', 'I hear you', 'That sounds hard', 'It is okay to feel', 'I am sorry', etc.).\n"
+        f"5. Move: {move}.\n"
+    )
+
+    if move in {"ask", "clarify"}:
+        system += f"Directive: Ask EXACTLY one question opening a door or clarifying. You must include a question mark (?). Suggested question direction: {template_q}\n"
+    elif move in {"acknowledge", "hold"}:
+        system += "Directive: Acknowledge the user without asking any questions. Exactly zero questions.\n"
+    elif move == "repair":
+        system += "Directive: Acknowledge the breakdown or complaint simply and neutrally, then focus on what is blocking them.\n"
+
+    # Active QUDs
+    active_quds = plan.get("active_quds", [])
+    if active_quds:
+        qud_lines = [f"- {q.get('question')}" for q in active_quds if q.get("question")]
+        if qud_lines:
+            system += "\nActive Open Questions Under Discussion (QUD Stack):\n" + "\n".join(qud_lines[:3]) + "\n"
+
+    # Stored Narrative Memory
+    relevant_mem = plan.get("relevant_memory", [])
+    if relevant_mem:
+        mem_lines = [f"- {m}" for m in relevant_mem if m]
+        if mem_lines:
+            system += "\nRetrieved Narrative Memory Context (prior established facts):\n" + "\n".join(mem_lines[:3]) + "\n"
+
+    # Retracted / Superseded Facts to Avoid
+    superseded_mem = plan.get("superseded_memory", []) or plan.get("closed", [])
+    if superseded_mem:
+        sup_lines = [f"- {s}" for s in superseded_mem if s]
+        if sup_lines:
+            system += "\nRetracted/Superseded Claims (NEVER re-assert or assume):\n" + "\n".join(sup_lines[:3]) + "\n"
+
+    if anchor:
+        system += f"\nAnchor grounding: {anchor}\n"
+
+    if feedback:
+        system += f"\nPrevious attempt was invalid ({feedback}). Correct this."
+
+    return system
+
+
+def build_discourse_chat_messages(
+    plan: Dict[str, Any],
+    current_text: str,
+    feedback: Optional[str] = None,
+) -> List[Dict[str, str]]:
+    """Build full multi-turn messages array containing rolling history and current turn."""
+    system = build_discourse_system_prompt(plan, feedback=feedback)
+    messages = [{"role": "system", "content": system}]
+
+    # Rolling multi-turn conversation memory
+    rolling_history = plan.get("rolling_history", [])
+    for turn in rolling_history:
+        u_msg = turn.get("user", "").strip()
+        a_msg = turn.get("assistant", "").strip()
+        if u_msg:
+            messages.append({"role": "user", "content": u_msg})
+        if a_msg:
+            messages.append({"role": "assistant", "content": a_msg})
+
+    # Current user turn
+    messages.append({"role": "user", "content": current_text.strip()})
+    return messages
 
 
 def build_dynamic_plan_fallback(
@@ -303,6 +463,8 @@ def validate_realizer_reply(
     q_count = cleaned.count("?")
     if move in {"acknowledge", "hold"} and q_count > 0:
         violations.append("question_not_allowed_for_move")
+    elif move in {"ask", "clarify"} and q_count == 0:
+        violations.append("missing_required_question_for_move")
     elif q_count > 1:
         violations.append(f"multiple_questions_{q_count}")
 
@@ -365,7 +527,7 @@ def generate_candidate_local_1b(
     current_text: str,
     feedback: Optional[str] = None,
 ) -> Optional[str]:
-    """Candidate generation using local 1B Transformer."""
+    """Candidate generation using local 1B Transformer with complete rolling context."""
     provider = get_local_1b_provider()
     if not provider or not provider._model or not provider._tokenizer:
         return None
@@ -374,30 +536,7 @@ def generate_candidate_local_1b(
     mod = provider._model
     dev = provider._device
 
-    move = plan.get("move", "acknowledge")
-    template_q = plan.get("template_question", "")
-    nucleus = plan.get("nucleus", current_text)
-
-    system = (
-        "You are Sanctuary's discourse realizer. Strictly follow these rules:\n"
-        "1. Stay under 40 words total.\n"
-        "2. Ground your response entirely in the user's words. Add no outside advice, emotion, interpretation, or judgment.\n"
-        "3. Never output label words like 'Acknowledge', 'Hold', or 'Ask'. Write the conversational response directly.\n"
-        f"4. Move: {move}.\n"
-    )
-    if move in {"ask", "clarify"}:
-        system += f"Ask at most one question opening a door. Suggested direction: {template_q}\n"
-    elif move in {"acknowledge", "hold"}:
-        system += "Acknowledge the user without asking any questions.\n"
-    elif move == "repair":
-        system += "Acknowledge the breakdown or complaint simply and neutrally, then focus on what is blocking them.\n"
-    if feedback:
-        system += f"\nPrevious attempt was invalid ({feedback}). Correct this."
-
-    messages = [
-        {"role": "system", "content": system},
-        {"role": "user", "content": f"User words: {nucleus}"},
-    ]
+    messages = build_discourse_chat_messages(plan, current_text, feedback=feedback)
 
     try:
         import torch
@@ -456,7 +595,7 @@ def generate_candidate_local_large(
     current_text: str,
     feedback: Optional[str] = None,
 ) -> Optional[str]:
-    """Candidate generation using local large model."""
+    """Candidate generation using local large model with complete rolling context."""
     provider = get_local_large_provider()
     if not provider or not provider._model or not provider._tokenizer:
         return None
@@ -465,29 +604,7 @@ def generate_candidate_local_large(
     mod = provider._model
     dev = provider._device
 
-    move = plan.get("move", "acknowledge")
-    template_q = plan.get("template_question", "")
-    nucleus = plan.get("nucleus", current_text)
-
-    system = (
-        "You are Sanctuary's discourse realizer. Strictly follow these rules:\n"
-        "1. Stay under 40 words total.\n"
-        "2. Ground your response entirely in the user's words. Add no outside advice, emotion, interpretation, or judgment.\n"
-        f"3. Move: {move}.\n"
-    )
-    if move in {"ask", "clarify"}:
-        system += f"Ask at most one question opening a door. Suggested direction: {template_q}\n"
-    elif move in {"acknowledge", "hold"}:
-        system += "Acknowledge the user without asking any questions.\n"
-    elif move == "repair":
-        system += "Acknowledge the breakdown or complaint simply and neutrally, then focus on what is blocking them.\n"
-    if feedback:
-        system += f"\nPrevious attempt was invalid ({feedback}). Correct this."
-
-    messages = [
-        {"role": "system", "content": system},
-        {"role": "user", "content": f"User words: {nucleus}"},
-    ]
+    messages = build_discourse_chat_messages(plan, current_text, feedback=feedback)
 
     try:
         import torch
@@ -549,97 +666,128 @@ def generate_discourse_reply(
     hosted_consent: bool = True,
     generator: Any = None,
 ) -> Tuple[str, str, str]:
-    """Execute chosen realizer (hosted, local_1b, local_large) with shared plan,
-    shared validators, regeneration rule, and logging.
+    """Execute reply_engine: choose_move and generate_reply with Groq LLM wrapper,
+    preserving the safety_interrupt branch.
 
     Returns:
         (response_text, safety_mode, producing_realizer)
     """
-    move = plan.get("move", "acknowledge")
-    if move in {"ask", "clarify"}:
-        mode = "question"
-    elif move == "repair":
-        mode = "repair"
-    elif move == "hold":
-        mode = "hold"
-    elif move == "safety_interrupt":
-        mode = "safety_override"
-    else:
-        mode = "acknowledgment"
+    # 1. Keep safety_interrupt branch as is
+    if plan.get("move") == "safety_interrupt":
+        reply = "If you are feeling overwhelmed or in crisis, please know you are not alone. Please reach out to emergency services or call/text 988 for free, confidential support available 24/7."
+        return reply, "safety_override", "safety_override"
 
-    # Normalize realizer setting
-    setting = (realizer or "hosted").lower().strip()
-    if setting in {"hosted", "hosted_groq", "hosted_gemini"}:
-        realizer_target = setting
-    elif setting == "local_large":
-        realizer_target = "local_large"
-    elif setting in {"local", "local_1b"}:
-        realizer_target = "local_1b"
-    else:
-        realizer_target = "hosted"
+    from app.services.reply_engine import choose_move, generate_reply
+    from app.services.privacy import strip_identifiers_with_mapping, restore_identifiers
+    from openai import OpenAI
 
-    last_5_replies = [
+    # 2. Build history = [{move, reply: response_text, uptake}] from prior turns
+    history = [
+        {
+            "move": t.get("final_move") or t.get("move") or t.get("system_move") or "acknowledge",
+            "reply": t.get("response_text") or t.get("display_response_text") or "",
+            "uptake": t.get("uptake") or (t.get("question_trace") or {}).get("uptake"),
+        }
+        for t in prior_turns
+    ]
+
+    # 3. Call choose_move(current_text, history, pipeline_move=plan move, correction=analysis correction flag)
+    pipeline_move = plan.get("move")
+    correction_flag = plan.get("correction", False)
+    final_move, move_reason = choose_move(
+        current_text,
+        history,
+        pipeline_move=pipeline_move,
+        correction=correction_flag,
+    )
+
+    # 4. Redact current_text and earlier user turns; prepare privacy mapping
+    redacted_current_text, placeholder_mapping = strip_identifiers_with_mapping(current_text)
+
+    earlier_user_turns = []
+    for t in prior_turns:
+        ut = t.get("user_text") or t.get("text") or t.get("stripped_input") or ""
+        if ut:
+            red_ut, p_map = strip_identifiers_with_mapping(ut)
+            placeholder_mapping.update(p_map)
+            earlier_user_turns.append(red_ut)
+
+    closed = plan.get("closed", [])
+    asked_before = [
+        t.get("question") or t.get("selected_question") or t.get("response_text")
+        for t in prior_turns
+        if t.get("question") or t.get("selected_question")
+    ]
+    recent_replies = [
         t.get("response_text") or t.get("display_response_text")
-        for t in prior_turns[-5:]
+        for t in prior_turns
         if t.get("response_text") or t.get("display_response_text")
     ]
 
-    candidate: Optional[str] = None
-    producing_realizer: str = realizer_target
-    violations: List[str] = []
+    # 5. llm_call wraps the existing Groq client: messages list in, text out, temperature 0.7, max_tokens 200, reasoning disabled if the provider allows
+    groq_key = os.getenv("GROQ_API_KEY", "").strip()
+    client = OpenAI(
+        api_key=groq_key,
+        base_url=os.getenv("GROQ_BASE_URL", "https://api.groq.com/openai/v1"),
+        timeout=15,
+        max_retries=0,
+    )
+    model_name = os.getenv("GROQ_MODEL", "qwen/qwen3.8-27b")
 
-    # Check hosted consent requirement
-    if realizer_target in {"hosted", "hosted_groq", "hosted_gemini"}:
-        if not hosted_consent:
-            raise ValueError("hosted_consent_required")
+    def llm_call(messages: List[Dict[str, str]]) -> str:
+        try:
+            resp = client.chat.completions.create(
+                model=model_name,
+                messages=messages,
+                temperature=0.7,
+                max_tokens=200,
+                extra_body={"reasoning_format": "hidden"},
+            )
+            return resp.choices[0].message.content or ""
+        except Exception:
+            resp = client.chat.completions.create(
+                model=model_name,
+                messages=messages,
+                temperature=0.7,
+                max_tokens=200,
+            )
+            return resp.choices[0].message.content or ""
 
-    # Attempt 1: Generate initial draft
-    if realizer_target == "local_1b":
-        candidate = generate_candidate_local_1b(plan, current_text)
-        producing_realizer = "local_1b"
-    elif realizer_target == "local_large":
-        candidate = generate_candidate_local_large(plan, current_text)
-        producing_realizer = "local_large"
-    elif realizer_target in {"hosted", "hosted_groq", "hosted_gemini"}:
-        provider_name = "groq" if realizer_target == "hosted_groq" else ("gemini" if realizer_target == "hosted_gemini" else "auto")
-        candidate, producing_realizer = generate_candidate_hosted(plan, current_text, provider=provider_name)
+    # 6. Call generate_reply
+    res = generate_reply(
+        redacted_current_text,
+        move=final_move,
+        llm_call=llm_call,
+        earlier_user_turns=earlier_user_turns,
+        closed=closed,
+        asked_before=asked_before,
+        recent_replies=recent_replies,
+        turn_index=len(history),
+    )
 
-    # Validate Attempt 1
-    is_valid = False
-    if candidate:
-        is_valid, violations = validate_realizer_reply(candidate, plan, last_5_replies)
+    # 7. Re-hydrate names after
+    raw_reply = res.get("reply", "")
+    restored_reply = restore_identifiers(raw_reply, placeholder_mapping)
 
-    # Regeneration Rule: If attempt 1 fails validation, regenerate once with feedback
-    if not is_valid:
-        feedback = ", ".join(violations) if violations else "generate_valid_draft"
-        logger.warning("Realizer [%s] attempt 1 failed validation (%s). Regenerating once.", producing_realizer, feedback)
+    # 8. Persist final move, nucleus, source, attempts and violations on the plan/turn
+    plan["move"] = final_move
+    plan["final_move"] = final_move
+    plan["move_reason"] = move_reason
+    plan["nucleus"] = res.get("nucleus", "")
+    plan["nucleus_type"] = res.get("nucleus_type", "")
+    plan["source"] = res.get("source", "fallback")
+    plan["attempts"] = res.get("attempts", 1)
+    plan["violations"] = res.get("violations", [])
+    plan["reply_engine_result"] = res
 
-        candidate_2 = None
-        if realizer_target == "local_1b":
-            candidate_2 = generate_candidate_local_1b(plan, current_text, feedback=feedback)
-        elif realizer_target == "local_large":
-            candidate_2 = generate_candidate_local_large(plan, current_text, feedback=feedback)
-        elif realizer_target in {"hosted", "hosted_groq", "hosted_gemini"}:
-            provider_name = "groq" if realizer_target == "hosted_groq" else ("gemini" if realizer_target == "hosted_gemini" else "auto")
-            candidate_2, path_2 = generate_candidate_hosted(plan, current_text, provider=provider_name, feedback=feedback)
-            if candidate_2:
-                producing_realizer = path_2
-
-        if candidate_2:
-            is_valid_2, violations_2 = validate_realizer_reply(candidate_2, plan, last_5_replies)
-            if is_valid_2:
-                candidate = candidate_2
-                is_valid = True
-            else:
-                logger.warning("Realizer [%s] attempt 2 failed validation (%s). Falling back to local template.", producing_realizer, violations_2)
-
-    # If still invalid or realizer produced no candidate, fall back dynamically from plan template
-    if not is_valid or not candidate:
-        logger.info("Realizer [%s] failed or unavailable. Falling back to dynamic plan template.", producing_realizer)
-        reply = build_dynamic_plan_fallback(plan, current_text, prior_turns, last_5_replies)
-        producing_realizer = "local_template_fallback"
+    if final_move in {"ask", "clarify"}:
+        mode = "question"
+    elif final_move == "repair":
+        mode = "repair"
+    elif final_move == "hold":
+        mode = "hold"
     else:
-        reply = candidate
+        mode = "acknowledgment"
 
-    logger.info("Producing path: [%s] -> %s", producing_realizer, reply)
-    return reply, mode, producing_realizer
+    producing_realizer = f"reply_engine_{res.get('source', 'unknown')}"
+    return restored_reply, mode, producing_realizer

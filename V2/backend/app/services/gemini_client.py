@@ -151,5 +151,46 @@ class GeminiReflector:
         normalized = " ".join(str(text).split()).strip()
         return normalized or None
 
+    def chat(self, messages: list[dict[str, str]], system_instruction: Optional[str] = None) -> Optional[str]:
+        """Execute multi-turn chat with rolling memory and system instruction."""
+        if not self.enabled:
+            return None
+
+        try:
+            import google.generativeai as genai
+            model_name = self.model_name or "gemini-flash-latest"
+            kwargs = {}
+            if system_instruction:
+                kwargs["system_instruction"] = system_instruction
+            g_model = genai.GenerativeModel(model_name=model_name, **kwargs)
+
+            contents = []
+            for msg in messages:
+                role = msg.get("role", "user")
+                content = msg.get("content", "")
+                if not content:
+                    continue
+                if role == "system" and not system_instruction:
+                    continue
+                gemini_role = "model" if role in {"model", "assistant"} else "user"
+                contents.append({"role": gemini_role, "parts": [content]})
+
+            if not contents:
+                return None
+
+            response = g_model.generate_content(
+                contents,
+                generation_config={
+                    "temperature": _env_float("GEMINI_TEMPERATURE", 0.3),
+                    "max_output_tokens": _env_int("GEMINI_MAX_TOKENS", 120),
+                },
+            )
+            text = getattr(response, "text", None)
+            if not text:
+                return None
+            return " ".join(str(text).split()).strip() or None
+        except Exception:
+            return None
+
 
 gemini_reflector = GeminiReflector()

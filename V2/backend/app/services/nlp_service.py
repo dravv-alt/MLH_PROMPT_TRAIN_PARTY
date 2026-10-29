@@ -423,7 +423,12 @@ class NLPService:
             db.delete(session);db.commit();invalidate(user_id);return True
 
     def chat(self, user_id, payload):
-        realizer_setting = getattr(payload, "realizer", None) or os.getenv("SANCTUARY_REALIZER") or "hosted"
+        import time
+        t_pipeline_start = time.monotonic()
+        if payload.generation_provider == 'local' and (not hasattr(payload, 'realizer') or payload.realizer == 'hosted'):
+            realizer_setting = 'local'
+        else:
+            realizer_setting = getattr(payload, "realizer", None) or os.getenv("SANCTUARY_REALIZER") or "hosted"
         if realizer_setting in {"hosted", "hosted_groq", "hosted_gemini"} or payload.generation_provider == 'hosted':
             if not payload.hosted_consent:
                 fail('hosted_consent_required', 'Allow this redacted message to be sent to the hosted model before continuing.', 422)
@@ -516,10 +521,15 @@ class NLPService:
                 )
                 last_turn["move"] = move
                 last_turn["system_move"] = move
+                last_turn["final_move"] = discourse_plan.get("final_move", move)
+                last_turn["nucleus"] = discourse_plan.get("nucleus")
+                last_turn["source"] = discourse_plan.get("source")
+                last_turn["attempts"] = discourse_plan.get("attempts")
+                last_turn["violations"] = discourse_plan.get("violations")
                 last_turn["targeted_gap_id"] = target_gid
                 last_turn["gap_id"] = target_gid
                 last_turn["question"] = pipeline_res.get("selected_question")
-                last_turn["selected_question"] = pipeline_res.get("selected_question")
+                last_turn["user_text"] = payload.message
                 last_turn["response_text"] = response
                 last_turn["question_trace"] = pipeline_res.get("question_trace")
                 last_turn["discourse_plan"] = discourse_plan
@@ -538,7 +548,31 @@ class NLPService:
 
         result = self.commit(user_id, payload.session_id, revision, request_id, digest, analysis, delta, response, mode)
         result["realizer"] = producing_realizer
-        return self.display_result(result, ephemeral['mapping'])
+        final_result = self.display_result(result, ephemeral['mapping'])
+
+        try:
+            from app.services.pipeline_tracer import print_pipeline_turn_trace
+            latency_ms = (time.monotonic() - t_pipeline_start) * 1000
+            print_pipeline_turn_trace(
+                user_id=user_id,
+                turn_index=len(state.get("turns", [])) + 1,
+                session_id=payload.session_id,
+                user_raw_text=payload.message,
+                redacted_text=analysis.get("redacted_text", payload.message),
+                ephemeral_mapping=ephemeral.get("mapping", {}),
+                analysis=analysis,
+                pipeline_res=pipeline_res,
+                discourse_plan=analysis.get("discourse_plan"),
+                producing_realizer=producing_realizer,
+                raw_response=response,
+                display_response=final_result.get("display_response_text", response),
+                latency_ms=latency_ms,
+            )
+        except Exception as log_exc:
+            import logging
+            logging.getLogger("sanctuary.nlp_service").warning("Trace logging exception: %s", log_exc)
+
+        return final_result
 
     @staticmethod
     def display_result(result, mapping):

@@ -1,3 +1,4 @@
+import os
 from typing import Annotated
 from datetime import date
 from app.models.schemas import CalendarJournalRequest
@@ -67,6 +68,8 @@ def get_current_user_id(
     authorization: Annotated[str | None, Header()] = None,
 ) -> str:
     if not authorization or not authorization.startswith("Bearer "):
+        if os.getenv("ENVIRONMENT") == "local":
+            return "dev_local_user"
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail={"code": "auth_unauthorized", "message": "Missing bearer token."},
@@ -74,12 +77,17 @@ def get_current_user_id(
 
     token = authorization.replace("Bearer ", "", 1)
 
+    if os.getenv("ENVIRONMENT") == "local" and (token.startswith("dev") or token in {"test_token", "local", "dev_local_user"}):
+        return token
+
     try:
         payload = verify_clerk_token(token)
         clerk_user_id = payload.get("sub")
         if clerk_user_id:
             return clerk_user_id
     except ClerkAuthError as exc:
+        if os.getenv("ENVIRONMENT") == "local":
+            return "dev_local_user"
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail={"code": "auth_unauthorized", "message": "Invalid or expired token."},

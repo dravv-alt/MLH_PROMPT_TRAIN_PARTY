@@ -26,9 +26,23 @@ from contextlib import asynccontextmanager
 
 @asynccontextmanager
 async def lifespan(application):
+    import os
+    import threading
     from app.services.nlp_service import get_nlp_service
     neural=get_nlp_service().neural
     neural.start()
+
+    def _prewarm_hosted():
+        try:
+            groq_key = os.getenv("GROQ_API_KEY", "").strip()
+            if groq_key:
+                from openai import OpenAI
+                client = OpenAI(api_key=groq_key, base_url=os.getenv("GROQ_BASE_URL", "https://api.groq.com/openai/v1"), timeout=5, max_retries=0)
+                client.models.list()
+        except Exception:
+            pass
+    threading.Thread(target=_prewarm_hosted, daemon=True).start()
+
     try:yield
     finally:neural.stop()
 

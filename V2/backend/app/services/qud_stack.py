@@ -83,6 +83,8 @@ def format_qud_question(gap: Dict[str, Any]) -> str:
     elif gtype == "unresolved_reference":
         return "Who was involved in that particular moment?"
     elif gtype == "counterfactual_obligation":
+        if str(pred).lower() in {"could", "would", "should", "might", "can", "wished", "wish", "if", "that", "must", "may"}:
+            return "What expectation was in place when that happened?"
         return f"What expectation was in place regarding {pred}?"
     elif gtype == "contrast_thin_arm":
         return "What was occurring on the other side of that contrast?"
